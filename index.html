@@ -14,6 +14,7 @@
       --card-bg: rgba(255, 255, 255, 0.03);
       --card-border: rgba(255, 255, 255, 0.08);
       --neon-blue: #00d2ff;
+      --neon-gold: #ffc400;
       --neon-purple: #a855f7;
       --rec-red: #ff2a2a;
       --text-main: #f8fafc;
@@ -40,7 +41,7 @@
       width: 650px;
       height: 650px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 210, 255, 0.18) 0%, rgba(168, 85, 247, 0.12) 40%, transparent 70%);
+      background: radial-gradient(circle, rgba(0, 210, 255, 0.18) 0%, rgba(255, 196, 0, 0.1) 30%, rgba(168, 85, 247, 0.08) 55%, transparent 70%);
       pointer-events: none;
       transform: translate(-50%, -50%);
       z-index: 0;
@@ -48,7 +49,7 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Ambient Dust Canvas */
+    /* Ambient Dust Canvas with Neon Golden & Cyan Particles */
     #particle-canvas {
       position: fixed;
       inset: 0;
@@ -528,33 +529,34 @@
     }
 
     /* =========================================================
-       ALBUM SPREAD FULL-RATIO CAROUSEL (4 FULL SPREADS, ZERO CROP)
+       FUTURISTIC NEON PHOTO REEL (NO BLACK BARS, DUAL NEON GLOW)
        ========================================================= */
     .photo-slider-section {
       position: relative;
       z-index: 1;
-      padding: 2rem 0 5rem;
+      padding: 2.5rem 0 6rem;
       overflow: hidden;
     }
 
     .reel-track-wrapper {
       width: 100%;
       overflow: hidden;
-      padding: 20px 0;
-      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      padding: 25px 0;
+      mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
     }
 
     .reel-track {
       display: flex;
-      gap: 30px;
+      align-items: center;
+      gap: 32px;
       width: max-content;
-      animation: reelLoop 24s linear infinite;
+      animation: reelLoop 26s linear infinite;
       will-change: transform;
       transform: translate3d(0, 0, 0);
     }
 
-    /* Clean stop when hovering */
+    /* Pause when mouse is over the slider */
     .reel-track-wrapper:hover .reel-track {
       animation-play-state: paused;
     }
@@ -564,30 +566,34 @@
       100% { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* Wide Panoramic Album Card (Holds the COMPLETE full spread) */
+    /* Clean Card: Zero Black Borders, Neon Cyan + Gold Edge Glow */
     .reel-card {
       position: relative;
-      flex: 0 0 680px;
-      aspect-ratio: 2.1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 260px;
       border-radius: 18px;
       overflow: hidden;
-      background: #090c13;
-      border: 1px solid var(--card-border);
+      border: 1px solid rgba(0, 210, 255, 0.45);
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.18), 0 0 35px rgba(255, 196, 0, 0.1);
       cursor: pointer;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease, box-shadow 0.35s ease;
       user-select: none;
+      flex-shrink: 0;
     }
     .reel-card:hover {
-      transform: translateY(-6px) scale(1.015);
-      border-color: rgba(0, 210, 255, 0.7);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 210, 255, 0.25);
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(255, 196, 0, 0.9);
+      box-shadow: 0 0 30px rgba(255, 196, 0, 0.45), 0 0 50px rgba(0, 210, 255, 0.35), 0 25px 50px rgba(0, 0, 0, 0.9);
     }
+    
+    /* Auto width based on image: NO LETTERBOX / NO BLACK FILLER */
     .reel-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background-color: #07090e;
+      height: 260px;
+      width: auto;
       display: block;
+      object-fit: cover;
     }
 
     /* Floating Like Popup: Appears on hover */
@@ -595,10 +601,10 @@
       position: absolute;
       top: 14px;
       right: 14px;
-      background: rgba(15, 20, 32, 0.7);
+      background: rgba(15, 20, 32, 0.75);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 196, 0, 0.5);
       border-radius: 999px;
       padding: 6px 14px;
       font-size: 0.85rem;
@@ -610,6 +616,7 @@
       opacity: 0;
       transform: translateY(-6px);
       transition: all 0.25s ease;
+      box-shadow: 0 0 15px rgba(255, 196, 0, 0.35);
       pointer-events: none;
     }
     .reel-card:hover .reel-like-badge {
@@ -640,7 +647,8 @@
       .photo-wrapper { order: -1; }
       .photo-container { max-width: 320px; }
       .insta-glass-card { width: 95%; }
-      .reel-card { flex: 0 0 340px; }
+      .reel-card { height: 190px; }
+      .reel-card img { height: 190px; }
       .reel-like-badge { opacity: 1; transform: translateY(0); }
     }
   </style>
@@ -807,50 +815,50 @@
       </div>
     </section>
 
-    <!-- Album Spread Full-Ratio Carousel (4 Full Complete Sheets) -->
+    <!-- Neon Photo Reel Slider (Zero Black Borders, Dual Neon Glow) -->
     <section class="photo-slider-section">
       <div class="reel-track-wrapper">
         <div class="reel-track">
 
-          <!-- 4 Full Complete Spreads -->
+          <!-- 4 Pure Album Spread Photos -->
           <div class="reel-card">
-            <img src="wedding-1.jpg" alt="Wedding Sheet 1">
+            <img src="wedding-1.jpg" alt="Spread 1">
             <div class="reel-like-badge">❤️ 4.8K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-2.jpg" alt="Wedding Sheet 2">
+            <img src="wedding-2.jpg" alt="Spread 2">
             <div class="reel-like-badge">❤️ 3.9K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-3.jpg" alt="Wedding Sheet 3">
+            <img src="wedding-3.jpg" alt="Spread 3">
             <div class="reel-like-badge">❤️ 5.1K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-4.jpg" alt="Wedding Sheet 4">
+            <img src="wedding-4.jpg" alt="Spread 4">
             <div class="reel-like-badge">❤️ 2.7K</div>
           </div>
 
           <!-- Seamless Loop Set -->
           <div class="reel-card">
-            <img src="wedding-1.jpg" alt="Wedding Sheet 1">
+            <img src="wedding-1.jpg" alt="Spread 1">
             <div class="reel-like-badge">❤️ 4.8K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-2.jpg" alt="Wedding Sheet 2">
+            <img src="wedding-2.jpg" alt="Spread 2">
             <div class="reel-like-badge">❤️ 3.9K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-3.jpg" alt="Wedding Sheet 3">
+            <img src="wedding-3.jpg" alt="Spread 3">
             <div class="reel-like-badge">❤️ 5.1K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-4.jpg" alt="Wedding Sheet 4">
+            <img src="wedding-4.jpg" alt="Spread 4">
             <div class="reel-like-badge">❤️ 2.7K</div>
           </div>
 
@@ -933,7 +941,7 @@
       glow.style.top = mouseY + 'px';
     });
 
-    // 6. Floating Ambient Dust Particle System
+    // 6. Floating Ambient Dust Particle System (Futuristic Cyan & Neon Gold)
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -945,17 +953,19 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    class DustParticle {
+    class FuturisticParticle {
       constructor() {
         this.reset();
       }
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedY = -(Math.random() * 0.4 + 0.1);
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.alpha = Math.random() * 0.4 + 0.1;
+        this.size = Math.random() * 2.2 + 0.6;
+        this.speedY = -(Math.random() * 0.45 + 0.1);
+        this.speedX = (Math.random() - 0.5) * 0.35;
+        this.alpha = Math.random() * 0.45 + 0.15;
+        // 40% chance of being futuristic neon gold, 60% neon cyan
+        this.isGold = Math.random() > 0.6;
       }
       update() {
         this.y += this.speedY;
@@ -968,17 +978,27 @@
         const dx = this.x - mouseX;
         const dy = this.y - mouseY;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        let boost = dist < 180 ? (1 - dist / 180) * 0.6 : 0;
+        let boost = dist < 200 ? (1 - dist / 200) * 0.6 : 0;
 
-        ctx.fillStyle = `rgba(0, 210, 255, ${this.alpha + boost})`;
+        if (this.isGold) {
+          ctx.fillStyle = `rgba(255, 196, 0, ${this.alpha + boost})`;
+          ctx.shadowColor = '#ffc400';
+          ctx.shadowBlur = 8;
+        } else {
+          ctx.fillStyle = `rgba(0, 210, 255, ${this.alpha + boost})`;
+          ctx.shadowColor = '#00d2ff';
+          ctx.shadowBlur = 6;
+        }
+
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size + (boost * 1.5), 0, Math.PI * 2);
         ctx.fill();
+        ctx.shadowBlur = 0; // reset
       }
     }
 
-    for (let i = 0; i < 45; i++) {
-      particles.push(new DustParticle());
+    for (let i = 0; i < 55; i++) {
+      particles.push(new FuturisticParticle());
     }
 
     function animateParticles() {
