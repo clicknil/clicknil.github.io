@@ -265,6 +265,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      border: none;
+      outline: none;
     }
     .btn-glow {
       background: linear-gradient(135deg, #00d2ff, #0084ff);
@@ -459,7 +461,7 @@
     }
 
     /* =========================================================
-       FUTURISTIC NEON PHOTO REEL (DIRECTLY ABOVE WHAT I DO)
+       FUTURISTIC NEON PHOTO REEL (PLACED DIRECTLY ABOVE WHAT I DO)
        ========================================================= */
     .photo-slider-section {
       position: relative;
@@ -649,6 +651,121 @@
       font-size: 0.9rem;
     }
 
+    /* =========================================================
+       IN-PAGE SHOWCASE MODAL (SAME WINDOW, ZOOM-OUT TO ZOOM-IN)
+       ========================================================= */
+    #work-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(7, 9, 14, 0.96);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      overflow-y: auto;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    #work-modal.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .modal-header-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 8%;
+      background: rgba(7, 9, 14, 0.85);
+      border-bottom: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+    }
+
+    .modal-close-btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 10px;
+      background: rgba(255, 42, 42, 0.1);
+      border: 1px solid rgba(255, 42, 42, 0.35);
+      color: #ff9e9e;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .modal-close-btn:hover {
+      background: rgba(255, 42, 42, 0.25);
+      border-color: #ff2a2a;
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .modal-intro {
+      text-align: center;
+      padding: 3rem 2rem 1.5rem;
+    }
+    .modal-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--neon-blue);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .modal-intro h2 {
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    /* Zoom-out to Zoom-in animation */
+    .modal-content-area {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 1rem 2rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+      transform: scale(0.92);
+      filter: blur(8px);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #work-modal.active .modal-content-area {
+      transform: scale(1);
+      filter: blur(0);
+    }
+
+    .modal-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .modal-card {
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1.5px solid rgba(0, 210, 255, 0.45);
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.16), 0 0 40px rgba(255, 196, 0, 0.1);
+      background: #090c13;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .modal-card:hover {
+      transform: scale(1.015);
+      border-color: rgba(255, 196, 0, 0.9);
+      box-shadow: 0 0 35px rgba(255, 196, 0, 0.45), 0 0 60px rgba(0, 210, 255, 0.35);
+    }
+    .modal-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* Mobile */
     @media (max-width: 900px) {
       .hero {
@@ -724,10 +841,10 @@
           Photographer, Cinematographer, Bengali Album Designer & Video Editor. Creator of <strong>Click Nil</strong>, Founder of <strong>Bodhuboron Wedding Photography</strong>, and Educator mentoring students across West Bengal in filmmaking & album design.
         </p>
 
-        <!-- CTA Buttons with WhatsApp Link & Work Tab Link -->
+        <!-- CTA Buttons: Open in same window & Clean WhatsApp message without emojis -->
         <div class="cta-row">
-          <a href="work.html" target="_blank" class="btn btn-glow">Explore My Work</a>
-          <a href="https://wa.me/917908872349?text=Hello%20Indranil%20%F0%9F%91%8B%20I%20checked%20your%20website%2C%20and%20I%20would%20love%20to%20connect%20with%20you%21%20%F0%9F%93%B8%E2%9C%A8" target="_blank" class="btn btn-outline">WhatsApp Me</a>
+          <button class="btn btn-glow" id="open-work-btn">Explore My Work</button>
+          <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20checked%20your%20website%2C%20I%20want%20to%20contact%20you" target="_blank" class="btn btn-outline">WhatsApp Me</a>
         </div>
       </div>
 
@@ -993,7 +1110,7 @@
       </div>
     </section>
 
-    <!-- Ventures Section ("What I Do") -->
+    <!-- Ventures Section ("What I Do" Section) -->
     <section class="ventures" id="ventures">
       <div class="section-header">
         <h2>What I Do</h2>
@@ -1022,7 +1139,7 @@
               Premium wedding photography & cinematic wedding films capturing authentic emotions, vibrant colors, and unforgettable moments.
             </p>
           </div>
-          <a href="https://wa.me/917908872349?text=Hello%20Indranil%20%F0%9F%91%8B%20I%20checked%20your%20website%2C%20and%20I%20would%20love%20to%20connect%20with%20you%21%20%F0%9F%93%B8%E2%9C%A8" target="_blank" class="venture-link">Book for Wedding &rarr;</a>
+          <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20checked%20your%20website%2C%20I%20want%20to%20contact%20you" target="_blank" class="venture-link">Book for Wedding &rarr;</a>
         </div>
 
         <!-- Workshops -->
@@ -1034,11 +1151,136 @@
               Mentoring students in professional Bengali wedding album design, Premiere Pro & DaVinci Resolve editing, lighting, and camera handling.
             </p>
           </div>
-          <a href="https://wa.me/917908872349?text=Hello%20Indranil%20%F0%9F%91%8B%20I%20checked%20your%20website%2C%20and%20I%20would%20love%20to%20connect%20with%20you%21%20%F0%9F%93%B8%E2%9C%A8" target="_blank" class="venture-link">Join Next Workshop &rarr;</a>
+          <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20checked%20your%20website%2C%20I%20want%20to%20contact%20you" target="_blank" class="venture-link">Join Next Workshop &rarr;</a>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- In-Page Full Showcase Modal (Same Window, Zoom-out to Zoom-in animation) -->
+  <div id="work-modal">
+    <div class="modal-header-bar">
+      <div class="brand-logo">
+        CLICK NIL <span style="opacity: 0.4;">/</span> <span class="sub">Album Showcase</span>
+      </div>
+      <button class="modal-close-btn" id="close-work-btn">✕ Close</button>
+    </div>
+
+    <div class="modal-intro">
+      <span class="modal-tag">// Bodhuboron Selected Works</span>
+      <h2>Featured Album Spreads</h2>
+    </div>
+
+    <div class="modal-content-area">
+      <!-- Spread 1 -->
+      <div class="modal-item">
+        <div class="modal-card">
+          <img src="wedding-1.jpg" alt="Album Spread 1">
+        </div>
+        <div class="reel-reactions-bar">
+          <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.8K</span>
+          <span class="reel-react-item"><span class="reel-comment">💬</span> 842</span>
+          <span class="reel-react-item"><span class="reel-share">🔁</span> 148</span>
+        </div>
+      </div>
+
+      <!-- Spread 2 -->
+      <div class="modal-item">
+        <div class="modal-card">
+          <img src="wedding-2.jpg" alt="Album Spread 2">
+        </div>
+        <div class="reel-reactions-bar">
+          <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.9K</span>
+          <span class="reel-react-item"><span class="reel-comment">💬</span> 916</span>
+          <span class="reel-react-item"><span class="reel-share">🔁</span> 212</span>
+        </div>
+      </div>
+
+      <!-- Spread 3 -->
+      <div class="modal-item">
+        <div class="modal-card">
+          <img src="wedding-3.jpg" alt="Album Spread 3">
+        </div>
+        <div class="reel-reactions-bar">
+          <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.1K</span>
+          <span class="reel-react-item"><span class="reel-comment">💬</span> 764</span>
+          <span class="reel-react-item"><span class="reel-share">🔁</span> 176</span>
+        </div>
+      </div>
+
+      <!-- Spread 4 -->
+      <div class="modal-item">
+        <div class="modal-card">
+          <img src="wedding-4.jpg" alt="Album Spread 4">
+        </div>
+        <div class="reel-reactions-bar">
+          <span class="reel-react-item"><span class="reel-heart">❤️</span> 2.7K</span>
+          <span class="reel-react-item"><span class="reel-comment">💬</span> 885</span>
+          <span class="reel-react-item"><span class="reel-share">🔁</span> 195</span>
+        </div>
+      </div>
+
+      <!-- Spread 5 -->
+      <div class="modal-item">
+        <div class="modal-card">
+          <img src="wedding-5.jpg" alt="Album Spread 5">
+        </div>
+        <div class="reel-reactions-bar">
+          <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.5K</span>
+          <span class="reel-react-item"><span class="reel-comment">💬</span> 812</span>
+          <span class="reel-react-item"><span class="reel-share">🔁</span> 164</span>
+        </div>
+      </div>
+
+      <!-- Spread 6 -->
+      <div class="modal-item">
+        <div class="modal-card">
+          <img src="wedding-6.jpg" alt="Album Spread 6">
+        </div>
+        <div class="reel-reactions-bar">
+          <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.8K</span>
+          <span class="reel-react-item"><span class="reel-comment">💬</span> 740</span>
+          <span class="reel-react-item"><span class="reel-share">🔁</span> 152</span>
+        </div>
+      </div>
+
+      <!-- Spread 7 -->
+      <div class="modal-item">
+        <div class="modal-card">
+          <img src="wedding-7.jpg" alt="Album Spread 7">
+        </div>
+        <div class="reel-reactions-bar">
+          <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.4K</span>
+          <span class="reel-react-item"><span class="reel-comment">💬</span> 935</span>
+          <span class="reel-react-item"><span class="reel-share">🔁</span> 220</span>
+        </div>
+      </div>
+
+      <!-- Spread 8 -->
+      <div class="modal-item">
+        <div class="modal-card">
+          <img src="wedding-8.jpg" alt="Album Spread 8">
+        </div>
+        <div class="reel-reactions-bar">
+          <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.1K</span>
+          <span class="reel-react-item"><span class="reel-comment">💬</span> 698</span>
+          <span class="reel-react-item"><span class="reel-share">🔁</span> 138</span>
+        </div>
+      </div>
+
+      <!-- Spread 9 -->
+      <div class="modal-item">
+        <div class="modal-card">
+          <img src="wedding-9.jpg" alt="Album Spread 9">
+        </div>
+        <div class="reel-reactions-bar">
+          <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.9K</span>
+          <span class="reel-react-item"><span class="reel-comment">💬</span> 870</span>
+          <span class="reel-react-item"><span class="reel-share">🔁</span> 184</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -1102,7 +1344,22 @@
       }
     });
 
-    // 5. Ambient Cursor Light Tracker
+    // 5. In-Page Full Showcase Modal Logic (Same Window)
+    const workModal = document.getElementById('work-modal');
+    const openWorkBtn = document.getElementById('open-work-btn');
+    const closeWorkBtn = document.getElementById('close-work-btn');
+
+    openWorkBtn.addEventListener('click', () => {
+      workModal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // prevent background scrolling
+    });
+
+    closeWorkBtn.addEventListener('click', () => {
+      workModal.classList.remove('active');
+      document.body.style.overflow = 'auto'; // restore background scrolling
+    });
+
+    // 6. Ambient Cursor Light Tracker
     const glow = document.getElementById('cursor-glow');
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -1114,7 +1371,7 @@
       glow.style.top = mouseY + 'px';
     });
 
-    // 6. Floating Ambient Dust Particle System (Futuristic Cyan & Neon Gold)
+    // 7. Floating Ambient Dust Particle System (Futuristic Cyan & Neon Gold)
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
