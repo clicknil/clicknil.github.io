@@ -14,11 +14,10 @@
       --card-bg: rgba(255, 255, 255, 0.03);
       --card-border: rgba(255, 255, 255, 0.08);
       --neon-blue: #00d2ff;
-      --neon-purple: #9d4edd;
       --rec-red: #ff2a2a;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --name-hue: 0deg; /* Default 0deg keeps the exact cyan-blue */
+      --name-hue: 0deg;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -89,7 +88,7 @@
       position: relative;
       z-index: 1;
       padding: 5rem 8% 4rem;
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
@@ -126,16 +125,16 @@
       50% { opacity: 0.25; transform: scale(0.85); }
     }
 
-    /* Hero Title */
-    h1.hero-title {
-      font-size: clamp(2.8rem, 6vw, 4.5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -1.5px;
-      margin-bottom: 0.5rem;
+    /* Small "Hi, I'm" */
+    .intro-small {
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      font-weight: 600;
+      color: #94a3b8;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.2rem;
     }
 
-    /* Indranil Name Block with Underline Slider */
+    /* Massive "Indranil" Container */
     .name-block {
       display: inline-flex;
       flex-direction: column;
@@ -145,56 +144,57 @@
       margin-bottom: 1.8rem;
     }
 
-    .ps-text-layer {
-      position: relative;
-      display: inline-block;
-    }
-    .ps-text-layer .gradient-text {
+    .big-name {
+      font-size: clamp(3.8rem, 8.5vw, 6.4rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -2.5px;
       color: #00d2ff;
-      text-shadow: 0 0 35px rgba(0, 210, 255, 0.4);
+      text-shadow: 0 0 45px rgba(0, 210, 255, 0.45);
+      display: inline-flex;
+      align-items: baseline;
     }
     .ps-cursor {
       display: inline-block;
-      width: 4px;
-      height: 0.85em;
+      width: clamp(4px, 0.8vw, 7px);
+      height: 0.8em;
       background-color: #00d2ff;
-      vertical-align: -0.05em;
-      margin-left: 4px;
+      margin-left: 6px;
       animation: blinkCursor 0.8s infinite;
-      box-shadow: 0 0 12px #00d2ff;
+      box-shadow: 0 0 15px #00d2ff;
     }
     @keyframes blinkCursor {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
 
-    /* Underline Slider */
+    /* Full Width Underline Slider */
     .underline-slider-container {
       width: 100%;
       display: flex;
       align-items: center;
-      margin-top: 4px;
+      margin-top: 10px;
     }
     .hue-slider {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
-      height: 4px;
+      height: 5px;
       border-radius: 999px;
       background: #00d2ff;
-      box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
       outline: none;
       cursor: pointer;
     }
     .hue-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: #ffffff;
       border: 2px solid #00d2ff;
-      box-shadow: 0 0 12px #00d2ff;
+      box-shadow: 0 0 14px #00d2ff;
       cursor: pointer;
       transition: transform 0.15s ease;
     }
@@ -202,12 +202,12 @@
       transform: scale(1.3);
     }
     .hue-slider::-moz-range-thumb {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: #ffffff;
       border: 2px solid #00d2ff;
-      box-shadow: 0 0 12px #00d2ff;
+      box-shadow: 0 0 14px #00d2ff;
       cursor: pointer;
     }
 
@@ -264,13 +264,13 @@
     .photo-card {
       position: relative;
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       aspect-ratio: 4/5;
-      border-radius: 24px;
+      border-radius: 28px;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       background: #11131a;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
     }
     .photo-card img {
       width: 100%;
@@ -286,28 +286,42 @@
     .photo-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0.2) 40%, transparent 60%);
+      background: linear-gradient(to top, rgba(6, 7, 10, 0.8) 0%, transparent 45%);
       pointer-events: none;
     }
-    .photo-badge {
+
+    /* Apple Glassmorphic Floating Bar */
+    .apple-glass-card {
       position: absolute;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-      padding: 12px 18px;
-      background: rgba(15, 18, 28, 0.85);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 14px;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      padding: 14px 18px;
+      border-radius: 20px;
+      background: rgba(18, 22, 34, 0.55);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
     }
-    .photo-badge p {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #fff;
+    .glass-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.3px;
     }
-    .photo-badge span {
-      font-size: 0.8rem;
+    /* Strictly Single Line for Mobile & Desktop */
+    .glass-sub {
+      font-size: clamp(0.68rem, 2.2vw, 0.82rem);
+      font-weight: 600;
       color: var(--neon-blue);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: 0.2px;
     }
 
     /* Ventures Section */
@@ -401,13 +415,14 @@
       .name-block { margin-left: auto; margin-right: auto; }
       .cta-row { justify-content: center; }
       .photo-wrapper { order: -1; }
-      .photo-card { max-width: 320px; margin: 0 auto; }
+      .photo-card { max-width: 330px; margin: 0 auto; }
+      .apple-glass-card { text-align: left; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Cursor Light Tracker -->
+  <!-- Ambient Cursor Light -->
   <div id="cursor-glow"></div>
 
   <!-- Header -->
@@ -426,15 +441,16 @@
           <span class="rec-dot"></span> Visual Director & Creator
         </div>
 
-        <h1 class="hero-title">Hi, I’m</h1>
+        <!-- Small intro -->
+        <div class="intro-small">Hi, I’m</div>
 
-        <!-- Indranil Name + Underline Slider in One Unified Element -->
+        <!-- Giant Indranil Name + Matching Full-Span Slider -->
         <div class="name-block">
-          <div class="ps-text-layer">
-            <span class="hero-title gradient-text" id="typewriter-text"></span><span class="ps-cursor" id="ps-cursor"></span>
+          <div class="big-name">
+            <span id="typewriter-text"></span><span class="ps-cursor" id="ps-cursor"></span>
           </div>
           <div class="underline-slider-container">
-            <input type="range" min="0" max="360" value="0" class="hue-slider" id="hue-picker" title="Drag to adjust light mood">
+            <input type="range" min="0" max="360" value="0" class="hue-slider" id="hue-picker" title="Slide to change colors">
           </div>
         </div>
 
@@ -448,14 +464,15 @@
         </div>
       </div>
 
-      <!-- Centerpiece Portrait -->
+      <!-- Centerpiece Portrait with Apple Liquid Glass Card -->
       <div class="photo-wrapper">
         <div class="photo-card">
           <img src="profile.jpg" alt="Indranil">
           <div class="photo-overlay"></div>
-          <div class="photo-badge">
-            <p>Indranil</p>
-            <span>Photographer | Graphics designer | Content creator</span>
+          
+          <div class="apple-glass-card">
+            <div class="glass-name">Indranil</div>
+            <div class="glass-sub">Photographer | Graphics designer | Content creator</div>
           </div>
         </div>
       </div>
