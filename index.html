@@ -458,83 +458,13 @@
       100% { opacity: 0; transform: translateY(-40px) scale(0.9); }
     }
 
-    /* Ventures Section */
-    .ventures {
-      position: relative;
-      z-index: 1;
-      padding: 5rem 8% 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
-    .section-header h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-    .section-header p {
-      color: var(--text-muted);
-      margin-top: 0.5rem;
-      font-size: 1.05rem;
-    }
-
-    .venture-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-    .venture-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 2.2rem;
-      backdrop-filter: blur(12px);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .venture-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(0, 210, 255, 0.4);
-      box-shadow: 0 15px 35px rgba(0, 210, 255, 0.1);
-    }
-    .venture-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1.25rem;
-    }
-    .venture-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 0.6rem;
-      color: #fff;
-    }
-    .venture-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-    .venture-link {
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--neon-blue);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
     /* =========================================================
-       FUTURISTIC NEON PHOTO REEL (REACTION BAR BELOW FRAME)
+       FUTURISTIC NEON PHOTO REEL (MOVED ABOVE WHAT I DO)
        ========================================================= */
     .photo-slider-section {
       position: relative;
       z-index: 1;
-      padding: 2.5rem 0 6rem;
+      padding: 1.5rem 0 3.5rem;
       overflow: hidden;
     }
 
@@ -642,6 +572,76 @@
       color: #ffc400;
     }
 
+    /* Ventures Section */
+    .ventures {
+      position: relative;
+      z-index: 1;
+      padding: 3rem 8% 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .section-header p {
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      font-size: 1.05rem;
+    }
+
+    .venture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .venture-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.2rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .venture-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 210, 255, 0.4);
+      box-shadow: 0 15px 35px rgba(0, 210, 255, 0.1);
+    }
+    .venture-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .venture-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+    .venture-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .venture-link {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--neon-blue);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     /* Footer */
     footer {
       position: relative;
@@ -684,7 +684,7 @@
     </a>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Main Hero Section -->
   <main>
     <section class="hero">
       <div class="hero-content">
@@ -787,53 +787,7 @@
       </div>
     </section>
 
-    <!-- Ventures Section -->
-    <section class="ventures" id="ventures">
-      <div class="section-header">
-        <h2>What I Do</h2>
-        <p>From YouTube tech reviews to wedding cinematography and workshops</p>
-      </div>
-
-      <div class="venture-grid">
-        <!-- Click Nil -->
-        <div class="venture-card">
-          <div>
-            <div class="venture-icon">🎥</div>
-            <h3 class="venture-title">Click Nil</h3>
-            <p class="venture-desc">
-              Tech reviews, camera setups (Sony & Canon), hands-on gear tests, and tutorials for upcoming creators and cinematographers.
-            </p>
-          </div>
-          <a href="https://youtube.com" target="_blank" class="venture-link">Visit YouTube Channel &rarr;</a>
-        </div>
-
-        <!-- Bodhuboron -->
-        <div class="venture-card">
-          <div>
-            <div class="venture-icon">💍</div>
-            <h3 class="venture-title">Bodhuboron</h3>
-            <p class="venture-desc">
-              Premium wedding photography & cinematic wedding films capturing authentic emotions, vibrant colors, and unforgettable moments.
-            </p>
-          </div>
-          <a href="https://wa.me/" target="_blank" class="venture-link">Book for Wedding &rarr;</a>
-        </div>
-
-        <!-- Workshops -->
-        <div class="venture-card">
-          <div>
-            <div class="venture-icon">🎓</div>
-            <h3 class="venture-title">Workshops & Academy</h3>
-            <p class="venture-desc">
-              Mentoring students in professional Bengali wedding album design, Premiere Pro & DaVinci Resolve editing, lighting, and camera handling.
-            </p>
-          </div>
-          <a href="https://wa.me/" target="_blank" class="venture-link">Join Next Workshop &rarr;</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Photo Reel with Reactions BELOW each frame (No face overlay) -->
+    <!-- Photo Reel with Reactions BELOW each frame (NOW PLACED DIRECTLY ABOVE WHAT I DO) -->
     <section class="photo-slider-section">
       <div class="reel-track-wrapper">
         <div class="reel-track">
@@ -931,6 +885,52 @@
             </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- Ventures Section ("What I Do" Section) -->
+    <section class="ventures" id="ventures">
+      <div class="section-header">
+        <h2>What I Do</h2>
+        <p>From YouTube tech reviews to wedding cinematography and workshops</p>
+      </div>
+
+      <div class="venture-grid">
+        <!-- Click Nil -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">🎥</div>
+            <h3 class="venture-title">Click Nil</h3>
+            <p class="venture-desc">
+              Tech reviews, camera setups (Sony & Canon), hands-on gear tests, and tutorials for upcoming creators and cinematographers.
+            </p>
+          </div>
+          <a href="https://youtube.com" target="_blank" class="venture-link">Visit YouTube Channel &rarr;</a>
+        </div>
+
+        <!-- Bodhuboron -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">💍</div>
+            <h3 class="venture-title">Bodhuboron</h3>
+            <p class="venture-desc">
+              Premium wedding photography & cinematic wedding films capturing authentic emotions, vibrant colors, and unforgettable moments.
+            </p>
+          </div>
+          <a href="https://wa.me/" target="_blank" class="venture-link">Book for Wedding &rarr;</a>
+        </div>
+
+        <!-- Workshops -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">🎓</div>
+            <h3 class="venture-title">Workshops & Academy</h3>
+            <p class="venture-desc">
+              Mentoring students in professional Bengali wedding album design, Premiere Pro & DaVinci Resolve editing, lighting, and camera handling.
+            </p>
+          </div>
+          <a href="https://wa.me/" target="_blank" class="venture-link">Join Next Workshop &rarr;</a>
         </div>
       </div>
     </section>
