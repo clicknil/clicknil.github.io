@@ -3,46 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CLICK NIL / Visual Artist — Indranil Pramanick</title>
-  <meta name="description" content="Portfolio of Indranil Pramanick — Photographer, Cinematographer, Bengali Album Designer & Video Editor. Creator of Click Nil, Founder of Bodhuboron.">
+  <title>Click Nil | Visual Artist</title>
+  <meta name="description" content="Official website of Indranil — Photographer, Graphics Designer, and Content Creator.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #07080b;
-      --card-bg: rgba(255, 255, 255, 0.04);
+      --bg: #07090e;
+      --card-bg: rgba(255, 255, 255, 0.03);
       --card-border: rgba(255, 255, 255, 0.08);
-      --accent: #00d2ff;
-      --accent-rgb: 0, 210, 255;
-      --text: #f3f4f6;
-      --text-muted: #9ca3af;
+      --neon-blue: #00d2ff;
+      --neon-purple: #a855f7;
       --rec-red: #ff2a2a;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --name-hue: 0deg;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background-color: var(--bg);
-      color: var(--text);
       font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
       overflow-x: hidden;
       line-height: 1.6;
+      position: relative;
     }
 
-    /* Ambient Cursor Spotlight */
+    /* Ambient Dynamic Mouse Spotlight */
     #cursor-glow {
       position: fixed;
       top: 0;
       left: 0;
-      width: 600px;
-      height: 600px;
+      width: 650px;
+      height: 650px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(var(--accent-rgb), 0.15) 0%, rgba(168, 85, 247, 0.08) 35%, transparent 70%);
+      background: radial-gradient(circle, rgba(0, 210, 255, 0.18) 0%, rgba(168, 85, 247, 0.12) 40%, transparent 70%);
       pointer-events: none;
       transform: translate(-50%, -50%);
       z-index: 0;
-      filter: blur(80px);
+      filter: blur(85px);
       transition: opacity 0.3s ease;
     }
 
@@ -54,368 +56,488 @@
       z-index: 0;
     }
 
-    /* Navigation Header */
+    /* Header */
     header {
-      position: relative;
-      z-index: 10;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1.8rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
+      padding: 1.25rem 8%;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 9, 14, 0.75);
+      border-bottom: 1px solid var(--card-border);
     }
-    .brand-title {
+    .brand-logo {
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 1.25rem;
-      font-weight: 900;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-logo .divider { color: var(--card-border); font-weight: 300; }
+    .brand-logo .sub {
+      font-size: 0.85rem;
+      color: var(--neon-blue);
+      font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .brand-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--accent);
-      background: rgba(var(--accent-rgb), 0.12);
-      border: 1px solid rgba(var(--accent-rgb), 0.3);
-      padding: 3px 8px;
-      border-radius: 6px;
-      letter-spacing: 1px;
     }
 
     /* Hero Section */
     .hero {
       position: relative;
-      z-index: 5;
-      max-width: 1200px;
+      z-index: 1;
+      padding: 5rem 8% 4rem;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 2.5rem 2rem 5rem;
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      align-items: center;
       gap: 3.5rem;
-      min-height: calc(100vh - 120px);
+      align-items: center;
     }
 
-    /* REC Indicator */
-    .rec-badge {
+    /* Recording Badge with Live Millisecond Timecode */
+    .hero-tag {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
-      background: rgba(255, 42, 42, 0.1);
-      border: 1px solid rgba(255, 42, 42, 0.35);
-      padding: 6px 14px;
+      gap: 10px;
+      padding: 0.45rem 1.1rem;
       border-radius: 999px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
+      background: rgba(255, 42, 42, 0.08);
+      border: 1px solid rgba(255, 42, 42, 0.3);
+      color: #fff;
+      font-size: 0.8rem;
       font-weight: 700;
-      letter-spacing: 1.5px;
-      margin-bottom: 1.4rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
     }
     .rec-dot {
-      width: 9px;
-      height: 9px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: var(--rec-red);
-      box-shadow: 0 0 10px var(--rec-red);
-      animation: recPulse 1.2s infinite ease-in-out;
+      box-shadow: 0 0 12px var(--rec-red), 0 0 22px rgba(255, 42, 42, 0.9);
+      animation: recBlink 1.2s infinite ease-in-out;
     }
-    @keyframes recPulse {
+    @keyframes recBlink {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.25; transform: scale(0.85); }
+      50% { opacity: 0.2; transform: scale(0.8); }
+    }
+    .rec-timer {
+      color: #ff9e9e;
+      font-weight: 600;
     }
 
-    /* Hero Headings */
-    .hero-pre {
-      font-size: clamp(2rem, 3.8vw, 3rem);
-      font-weight: 800;
+    /* Pure White "Hi, I'm" */
+    .intro-small {
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      font-weight: 700;
       color: #ffffff;
-      line-height: 1.1;
-      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.4rem;
     }
 
     /* Photoshop Bounding Box */
-    .ps-bounding-box {
+    .ps-bounding-box-wrap {
       position: relative;
-      display: inline-block;
-      margin-bottom: 1.6rem;
-      padding: 6px 18px 12px 10px;
-      border: 1.5px dashed rgba(var(--accent-rgb), 0.7);
-      box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.15);
+      display: inline-flex;
+      flex-direction: column;
+      padding: 16px 20px 14px 18px;
+      margin-bottom: 1.8rem;
+      filter: hue-rotate(var(--name-hue));
+      transition: filter 0.05s linear;
+    }
+    .ps-marquee-border {
+      position: absolute;
+      inset: 0;
+      border: 1.5px dashed var(--neon-blue);
       border-radius: 2px;
+      box-shadow: 0 0 14px rgba(0, 210, 255, 0.25), inset 0 0 14px rgba(0, 210, 255, 0.08);
+      pointer-events: none;
     }
     .ps-handle {
       position: absolute;
       width: 9px;
       height: 9px;
       background: #ffffff;
-      border: 1.5px solid var(--accent);
-      border-radius: 1px;
-      box-shadow: 0 0 6px var(--accent);
+      border: 1.5px solid var(--neon-blue);
+      box-shadow: 0 0 6px var(--neon-blue);
+      z-index: 2;
     }
-    .handle-tl { top: -5px; left: -5px; }
-    .handle-tc { top: -5px; left: calc(50% - 4.5px); }
-    .handle-tr { top: -5px; right: -5px; }
-    .handle-ml { top: calc(50% - 4.5px); left: -5px; }
-    .handle-mr { top: calc(50% - 4.5px); right: -5px; }
-    .handle-bl { bottom: -5px; left: -5px; }
-    .handle-bc { bottom: -5px; left: calc(50% - 4.5px); }
-    .handle-br { bottom: -5px; right: -5px; }
+    .ps-handle.tl { top: -5px; left: -5px; }
+    .ps-handle.tm { top: -5px; left: 50%; transform: translateX(-50%); }
+    .ps-handle.tr { top: -5px; right: -5px; }
+    .ps-handle.ml { top: 50%; left: -5px; transform: translateY(-50%); }
+    .ps-handle.mr { top: 50%; right: -5px; transform: translateY(-50%); }
+    .ps-handle.bl { bottom: -5px; left: -5px; }
+    .ps-handle.bm { bottom: -5px; left: 50%; transform: translateX(-50%); }
+    .ps-handle.br { bottom: -5px; right: -5px; }
 
-    .hero-name {
-      font-size: clamp(3.2rem, 6.5vw, 5.5rem);
+    /* Big Name */
+    .big-name {
+      font-size: clamp(3.6rem, 8.5vw, 6.2rem);
       font-weight: 900;
-      letter-spacing: -1.5px;
-      color: var(--accent);
-      line-height: 1.05;
+      line-height: 0.95;
+      letter-spacing: -2.5px;
+      color: var(--neon-blue);
+      text-shadow: 0 0 40px rgba(0, 210, 255, 0.45);
+      display: inline-flex;
+      align-items: baseline;
       position: relative;
-      display: inline-block;
+      z-index: 1;
     }
-    .typing-cursor {
+    .ps-cursor {
       display: inline-block;
-      width: 4px;
-      height: 0.9em;
-      background: var(--accent);
-      vertical-align: -0.08em;
-      margin-left: 2px;
-      animation: blink 0.9s infinite;
-      box-shadow: 0 0 10px var(--accent);
+      width: clamp(4px, 0.8vw, 7px);
+      height: 0.8em;
+      background-color: var(--neon-blue);
+      margin-left: 6px;
+      animation: blinkCursor 0.8s infinite;
+      box-shadow: 0 0 15px var(--neon-blue);
     }
-    @keyframes blink {
+    @keyframes blinkCursor {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
 
-    /* Color Mood Underline Slider */
-    .color-slider-container {
-      margin-top: 8px;
+    /* Underline Slider */
+    .underline-slider-container {
+      width: 100%;
       display: flex;
       align-items: center;
-      gap: 12px;
-      max-width: 260px;
+      margin-top: 14px;
     }
-    .color-slider {
+    .hue-slider {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
       height: 5px;
       border-radius: 999px;
-      background: linear-gradient(90deg, #00d2ff, #a855f7, #ff2a7a, #00ff88, #ffb800, #00d2ff);
+      background: var(--neon-blue);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
       outline: none;
       cursor: pointer;
     }
-    .color-slider::-webkit-slider-thumb {
+    .hue-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 15px;
-      height: 15px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: #ffffff;
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 10px var(--accent);
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 14px var(--neon-blue);
       cursor: pointer;
+      transition: transform 0.15s ease;
     }
+    .hue-slider::-webkit-slider-thumb:hover { transform: scale(1.3); }
 
     .hero-bio {
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       color: var(--text-muted);
-      max-width: 530px;
       margin-bottom: 2rem;
       line-height: 1.7;
-    }
-    .hero-bio strong {
-      color: #ffffff;
-      font-weight: 600;
+      max-width: 580px;
     }
 
-    /* CTAs */
-    .hero-cta-group {
+    .cta-row {
       display: flex;
-      flex-wrap: wrap;
       gap: 1rem;
+      flex-wrap: wrap;
     }
     .btn {
-      padding: 0.85rem 1.8rem;
+      padding: 0.9rem 2rem;
       border-radius: 12px;
       font-weight: 700;
       font-size: 0.95rem;
       text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.25s ease;
-      cursor: pointer;
     }
-    .btn-primary {
-      background: var(--accent);
-      color: #050608;
-      box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.4);
+    .btn-glow {
+      background: linear-gradient(135deg, #00d2ff, #0084ff);
+      color: #000;
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
     }
-    .btn-primary:hover {
+    .btn-glow:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 35px rgba(var(--accent-rgb), 0.65);
+      box-shadow: 0 0 35px rgba(0, 210, 255, 0.6);
     }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      color: #ffffff;
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
       border: 1px solid var(--card-border);
-      backdrop-filter: blur(12px);
     }
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
       border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
     }
 
-    /* Portrait & Floating Glass Elements */
-    .portrait-col {
+    /* Portrait Wrapper */
+    .photo-wrapper {
       position: relative;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
     }
-    .portrait-wrapper {
+    .photo-container {
       position: relative;
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       aspect-ratio: 4/5;
-      border-radius: 28px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: #11141c;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .portrait-wrapper img {
+    .photo-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: center top;
       display: block;
-      filter: contrast(1.04);
+      border-radius: 36px;
+      mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+      transition: transform 0.5s ease;
+      filter: drop-shadow(0 0 35px rgba(0, 210, 255, 0.15));
     }
-    .portrait-wrapper::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, #07080b 0%, rgba(7, 8, 11, 0.2) 35%, transparent 60%);
-      pointer-events: none;
+    .photo-container:hover img {
+      transform: scale(1.02);
     }
 
-    /* HUD Corner Marks */
-    .hud-corner {
+    /* Corner HUD Accents */
+    .hud-element {
       position: absolute;
-      width: 20px;
-      height: 20px;
-      border-color: var(--accent);
-      border-style: solid;
       pointer-events: none;
       z-index: 2;
     }
-    .hud-tl { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
-    .hud-br { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
+    .hud-bracket-tl {
+      top: 10px;
+      left: 10px;
+      width: 24px;
+      height: 24px;
+      border-top: 2px solid var(--neon-blue);
+      border-left: 2px solid var(--neon-blue);
+      filter: drop-shadow(0 0 8px var(--neon-blue));
+    }
+    .hud-bracket-br {
+      bottom: 60px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+      border-bottom: 2px solid var(--neon-purple);
+      border-right: 2px solid var(--neon-purple);
+      filter: drop-shadow(0 0 8px var(--neon-purple));
+    }
 
-    /* Apple Glass Followers Pill */
+    /* Oval Apple Glass Pill Bar Over Photo */
     .apple-glass-pill {
       position: absolute;
-      bottom: 60px;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 3;
-      padding: 9px 20px;
+      width: 86%;
+      padding: 10px 20px;
       border-radius: 999px;
-      background: rgba(18, 24, 38, 0.65);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      background: rgba(15, 20, 32, 0.45);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .pill-status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 8px var(--accent);
-    }
-
-    /* Apple Glass Instagram Action Bar */
-    .insta-glass-bar {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
       z-index: 3;
-      padding: 7px 18px;
-      border-radius: 999px;
-      background: rgba(12, 16, 26, 0.7);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 0.8rem;
-      font-weight: 700;
     }
-    .insta-stat {
+    .pill-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.2px;
+    }
+    .pill-followers {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--neon-blue);
+      letter-spacing: 0.5px;
       display: flex;
       align-items: center;
       gap: 6px;
-      color: #e5e7eb;
     }
-    .insta-heart-pulse {
-      display: inline-block;
-      animation: heartBeat 10s infinite ease-in-out;
-    }
-    @keyframes heartBeat {
-      0%, 88%, 100% { transform: scale(1); }
-      90% { transform: scale(1.4); }
-      93% { transform: scale(1); }
-      96% { transform: scale(1.3); }
+    .pill-followers .stat-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neon-blue);
+      box-shadow: 0 0 8px var(--neon-blue);
     }
 
-    /* What I Do Section */
-    .section-container {
+    /* Apple Glass Instagram Action Bar */
+    .insta-glass-card {
+      margin-top: 14px;
+      width: 90%;
+      max-width: 410px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      background: rgba(18, 24, 38, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
       position: relative;
-      z-index: 5;
+    }
+    .insta-left-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .insta-action-btn {
+      background: none;
+      border: none;
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 6px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .insta-action-btn:hover {
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .insta-action-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Auto Blinking / Pulsing Heart (10s Cycle) */
+    .pulsing-heart {
+      color: #ff2a5f !important;
+      animation: heartbeat 10s infinite ease-in-out;
+    }
+    @keyframes heartbeat {
+      0%, 95%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.5)); }
+      97% { transform: scale(1.3); filter: drop-shadow(0 0 14px rgba(255, 42, 95, 0.9)); }
+      99% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(255, 42, 95, 0.7)); }
+    }
+
+    /* Floating Heart Popup */
+    .floating-heart {
+      position: absolute;
+      top: -24px;
+      left: 20px;
+      color: #ff2a5f;
+      font-size: 1.5rem;
+      pointer-events: none;
+      animation: floatHeart 0.9s ease-out forwards;
+    }
+    @keyframes floatHeart {
+      0% { opacity: 0; transform: translateY(15px) scale(0.5); }
+      40% { opacity: 1; transform: translateY(-10px) scale(1.3); }
+      100% { opacity: 0; transform: translateY(-40px) scale(0.9); }
+    }
+
+    /* Ventures Section */
+    .ventures {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 8% 2rem;
       max-width: 1200px;
-      margin: 0 auto 3rem;
-      padding: 0 2rem;
+      margin: 0 auto;
     }
-    .section-title {
+    .section-header {
       text-align: center;
-      font-size: 2.6rem;
-      font-weight: 900;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.5px;
+      margin-bottom: 3.5rem;
     }
-    .section-sub {
-      text-align: center;
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .section-header p {
       color: var(--text-muted);
-      font-size: 1rem;
-      margin-bottom: 1rem;
+      margin-top: 0.5rem;
+      font-size: 1.05rem;
     }
 
-    /* =================================================================
-       CLEAN 4-PHOTO AUTO-SCROLL CAROUSEL WITH HOVER LIKE POPUP
-       ================================================================= */
-    .photoshoot-section {
+    .venture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .venture-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.2rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .venture-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 210, 255, 0.4);
+      box-shadow: 0 15px 35px rgba(0, 210, 255, 0.1);
+    }
+    .venture-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .venture-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+    .venture-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .venture-link {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--neon-blue);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* =========================================================
+       PHOTO REEL SLIDER (1 Photo per Card, Clean Loop, Same Ratio)
+       ========================================================= */
+    .photo-slider-section {
       position: relative;
-      z-index: 5;
-      padding: 1rem 0 6rem;
+      z-index: 1;
+      padding: 2rem 0 5rem;
       overflow: hidden;
     }
 
-    .marquee-wrapper {
-      position: relative;
+    .reel-track-wrapper {
       width: 100%;
       overflow: hidden;
       padding: 20px 0;
@@ -423,371 +545,386 @@
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
     }
 
-    /* GPU-accelerated marquee track (duplicated once for infinite loop) */
-    .marquee-track {
+    .reel-track {
       display: flex;
-      gap: 26px;
+      gap: 24px;
       width: max-content;
-      animation: smoothScroll 22s linear infinite;
+      animation: reelLoop 22s linear infinite;
       will-change: transform;
       transform: translate3d(0, 0, 0);
     }
 
-    /* Stopps the photos completely when hovering over the track or any photo */
-    .marquee-wrapper:hover .marquee-track {
+    /* Stops scrolling when mouse is over the photos */
+    .reel-track-wrapper:hover .reel-track {
       animation-play-state: paused;
     }
 
-    @keyframes smoothScroll {
+    @keyframes reelLoop {
       0% { transform: translate3d(0, 0, 0); }
       100% { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* Pure Clean Photo Card */
-    .photo-card {
+    /* 1 Photo Card - Same Ratio, Clean Border */
+    .reel-card {
       position: relative;
-      flex: 0 0 330px;
-      height: 480px;
+      flex: 0 0 320px;
+      aspect-ratio: 4 / 5.5;
       border-radius: 20px;
       overflow: hidden;
-      background: #11141d;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #0f131d;
+      border: 1px solid var(--card-border);
       cursor: pointer;
-      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       user-select: none;
     }
-    .photo-card:hover {
+    .reel-card:hover {
       transform: translateY(-6px) scale(1.02);
-      border-color: rgba(var(--accent-rgb), 0.7);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(var(--accent-rgb), 0.25);
+      border-color: rgba(0, 210, 255, 0.6);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 210, 255, 0.2);
     }
-
-    .photo-card img {
+    .reel-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.5s ease;
-    }
-    .photo-card:hover img {
-      transform: scale(1.05);
     }
 
-    /* Floating Apple Glass Like Badge (Pops up only on hover) */
-    .like-popup-badge {
+    /* Floating Like Popup: Appears only on hover */
+    .reel-like-badge {
       position: absolute;
-      top: 16px;
-      right: 16px;
-      background: rgba(10, 14, 24, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      top: 14px;
+      right: 14px;
+      background: rgba(15, 20, 32, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 999px;
-      padding: 7px 14px;
+      padding: 6px 14px;
       font-size: 0.85rem;
-      font-weight: 800;
+      font-weight: 700;
       color: #ffffff;
       display: flex;
       align-items: center;
       gap: 6px;
       opacity: 0;
-      transform: translateY(-8px) scale(0.9);
-      transition: all 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.2);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      transform: translateY(-6px);
+      transition: all 0.25s ease;
       pointer-events: none;
     }
-    .photo-card:hover .like-popup-badge {
+    .reel-card:hover .reel-like-badge {
       opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-    .heart-icon {
-      color: #ff3366;
-      filter: drop-shadow(0 0 6px rgba(255, 51, 102, 0.8));
+      transform: translateY(0);
     }
 
-    /* Fullscreen Modal Lightbox */
-    .lightbox-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(5, 6, 9, 0.95);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-    .lightbox-modal.active {
-      display: flex;
-      opacity: 1;
-    }
-    .lightbox-img-box {
+    /* Footer */
+    footer {
       position: relative;
-      max-width: 90vw;
-      max-height: 88vh;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(var(--accent-rgb), 0.2);
-    }
-    .lightbox-img-box img {
-      max-width: 90vw;
-      max-height: 88vh;
-      object-fit: contain;
-      display: block;
-    }
-    .lightbox-close-btn {
-      position: absolute;
-      top: 25px;
-      right: 30px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      cursor: pointer;
-      backdrop-filter: blur(12px);
-      transition: all 0.2s ease;
-      z-index: 1010;
-    }
-    .lightbox-close-btn:hover {
-      background: rgba(255, 42, 42, 0.8);
-      border-color: #ff2a2a;
+      z-index: 1;
+      padding: 3rem 8%;
+      text-align: center;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
 
-    @media (max-width: 950px) {
+    /* Mobile */
+    @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 2.5rem;
-        padding-top: 1rem;
+        padding-top: 3rem;
       }
-      .rec-badge { margin: 0 auto 1.4rem; }
-      .color-slider-container { margin: 10px auto 0; }
-      .hero-bio { margin-left: auto; margin-right: auto; }
-      .hero-cta-group { justify-content: center; }
-      .photo-card { flex: 0 0 270px; height: 390px; }
-      .like-popup-badge { opacity: 1; transform: translateY(0) scale(1); } /* visible on mobile tap */
+      .ps-bounding-box-wrap { margin-left: auto; margin-right: auto; }
+      .cta-row { justify-content: center; }
+      .photo-wrapper { order: -1; }
+      .photo-container { max-width: 320px; }
+      .insta-glass-card { width: 95%; }
+      .reel-card { flex: 0 0 260px; }
+      .reel-like-badge { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Ambient Cursor Spotlight & Canvas Particles -->
+  <!-- Ambient Cursor Glow & Canvas Dust -->
   <div id="cursor-glow"></div>
   <canvas id="particle-canvas"></canvas>
 
   <!-- Header -->
   <header>
-    <div class="brand-title">
-      <span>CLICK NIL</span>
-      <span class="brand-badge">VISUAL ARTIST</span>
-    </div>
+    <a href="#" class="brand-logo">
+      CLICK NIL <span class="divider">/</span> <span class="sub">Visual Artist</span>
+    </a>
   </header>
 
-  <!-- Main Hero Section (100% UNCHANGED) -->
-  <main class="hero">
-    <div>
-      <div class="rec-badge">
-        <span class="rec-dot"></span>
-        <span>REC <span id="camera-timer">00:00:00:00</span></span>
-      </div>
-
-      <div class="hero-pre">Hi, I’m</div>
-
-      <div class="ps-bounding-box" id="psBox">
-        <span class="ps-handle handle-tl"></span>
-        <span class="ps-handle handle-tc"></span>
-        <span class="ps-handle handle-tr"></span>
-        <span class="ps-handle handle-ml"></span>
-        <span class="ps-handle handle-mr"></span>
-        <span class="ps-handle handle-bl"></span>
-        <span class="ps-handle handle-bc"></span>
-        <span class="ps-handle handle-br"></span>
-
-        <h1 class="hero-name">
-          <span id="typewriter-name"></span><span class="typing-cursor"></span>
-        </h1>
-      </div>
-
-      <div class="color-slider-container">
-        <input type="range" min="0" max="360" value="190" class="color-slider" id="accentHueSlider" title="Drag to change mood color">
-      </div>
-
-      <p class="hero-bio">
-        Photographer, Cinematographer, Bengali Album Designer & Video Editor. Creator of <strong>Click Nil</strong>, Founder of <strong>Bodhuboron Wedding Photography</strong>, and Educator mentoring students across West Bengal in filmmaking & album design.
-      </p>
-
-      <div class="hero-cta-group">
-        <a href="#showcase" class="btn btn-primary">Explore My Work</a>
-        <a href="https://wa.me/" target="_blank" class="btn btn-secondary">WhatsApp Me</a>
-      </div>
-    </div>
-
-    <div class="portrait-col">
-      <div class="portrait-wrapper">
-        <div class="hud-corner hud-tl"></div>
-        <div class="hud-corner hud-br"></div>
-        <img src="profile.jpg" alt="Indranil Pramanick">
-
-        <div class="apple-glass-pill">
-          <span>Indranil</span>
-          <span class="pill-status-dot"></span>
-          <span>50K+ Followers</span>
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        
+        <!-- Live Recording Badge with Real Running Timecode -->
+        <div class="hero-tag">
+          <span class="rec-dot"></span>
+          <span>REC</span>
+          <span class="rec-timer" id="rec-timecode">00:00:00:00</span>
         </div>
 
-        <div class="insta-glass-bar">
-          <span class="insta-stat"><span class="insta-heart-pulse">❤️</span> 1.4M</span>
-          <span class="insta-stat">💬 163K</span>
-          <span class="insta-stat">🔁 23K</span>
-          <span style="opacity:0.6;">↗️</span>
-          <span style="opacity:0.6;">🔖</span>
+        <!-- Pure Crisp White "Hi, I'm" -->
+        <div class="intro-small">Hi, I’m</div>
+
+        <!-- Photoshop Transform Box -->
+        <div class="ps-bounding-box-wrap">
+          <div class="ps-marquee-border"></div>
+          
+          <!-- Transform Handles -->
+          <div class="ps-handle tl"></div>
+          <div class="ps-handle tm"></div>
+          <div class="ps-handle tr"></div>
+          <div class="ps-handle ml"></div>
+          <div class="ps-handle mr"></div>
+          <div class="ps-handle bl"></div>
+          <div class="ps-handle bm"></div>
+          <div class="ps-handle br"></div>
+
+          <!-- Big Name -->
+          <div class="big-name">
+            <span id="typewriter-text"></span><span class="ps-cursor" id="ps-cursor"></span>
+          </div>
+
+          <!-- Underline Hue Slider -->
+          <div class="underline-slider-container">
+            <input type="range" min="0" max="360" value="0" class="hue-slider" id="hue-picker" title="Adjust color mood">
+          </div>
+        </div>
+
+        <p class="hero-bio">
+          Photographer, Cinematographer, Bengali Album Designer & Video Editor. Creator of <strong>Click Nil</strong>, Founder of <strong>Bodhuboron Wedding Photography</strong>, and Educator mentoring students across West Bengal in filmmaking & album design.
+        </p>
+
+        <div class="cta-row">
+          <a href="#ventures" class="btn btn-glow">Explore My Work</a>
+          <a href="https://wa.me/" target="_blank" class="btn btn-outline">WhatsApp Me</a>
         </div>
       </div>
-    </div>
+
+      <!-- Seamless Feathered Portrait -->
+      <div class="photo-wrapper">
+        <div class="photo-container">
+          <img src="profile.jpg" alt="Indranil">
+
+          <!-- Clean HUD Brackets -->
+          <div class="hud-element hud-bracket-tl"></div>
+          <div class="hud-element hud-bracket-br"></div>
+
+          <!-- Oval Liquid Apple Glass Pill Bar Over Photo -->
+          <div class="apple-glass-pill">
+            <div class="pill-title">Indranil</div>
+            <div class="pill-followers">
+              <span class="stat-dot"></span> 50K+ Followers
+            </div>
+          </div>
+        </div>
+
+        <!-- Liquid Apple Glass Instagram Bar -->
+        <div class="insta-glass-card" id="insta-card">
+          <div class="insta-left-actions">
+            <!-- Heart Button with 1.4M (Pulsing every 10s) -->
+            <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span id="like-count">1.4M</span>
+            </button>
+
+            <!-- Comments: 163K -->
+            <button class="insta-action-btn" title="Comment">
+              <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+              <span>163K</span>
+            </button>
+
+            <!-- Repost / Share: 23K -->
+            <button class="insta-action-btn" title="Repost">
+              <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+              <span>23K</span>
+            </button>
+
+            <!-- Direct Share -->
+            <button class="insta-action-btn" title="Direct Share">
+              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+          </div>
+
+          <!-- Bookmark Right Action -->
+          <button class="insta-action-btn" title="Save">
+            <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ventures Section -->
+    <section class="ventures" id="ventures">
+      <div class="section-header">
+        <h2>What I Do</h2>
+        <p>From YouTube tech reviews to wedding cinematography and workshops</p>
+      </div>
+
+      <div class="venture-grid">
+        <!-- Click Nil -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">🎥</div>
+            <h3 class="venture-title">Click Nil</h3>
+            <p class="venture-desc">
+              Tech reviews, camera setups (Sony & Canon), hands-on gear tests, and tutorials for upcoming creators and cinematographers.
+            </p>
+          </div>
+          <a href="https://youtube.com" target="_blank" class="venture-link">Visit YouTube Channel &rarr;</a>
+        </div>
+
+        <!-- Bodhuboron -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">💍</div>
+            <h3 class="venture-title">Bodhuboron</h3>
+            <p class="venture-desc">
+              Premium wedding photography & cinematic wedding films capturing authentic emotions, vibrant colors, and unforgettable moments.
+            </p>
+          </div>
+          <a href="https://wa.me/" target="_blank" class="venture-link">Book for Wedding &rarr;</a>
+        </div>
+
+        <!-- Workshops -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">🎓</div>
+            <h3 class="venture-title">Workshops & Academy</h3>
+            <p class="venture-desc">
+              Mentoring students in professional Bengali wedding album design, Premiere Pro & DaVinci Resolve editing, lighting, and camera handling.
+            </p>
+          </div>
+          <a href="https://wa.me/" target="_blank" class="venture-link">Join Next Workshop &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Reel Slider (Exactly 4 Photos, Clean Loop, Same Ratio) -->
+    <section class="photo-slider-section">
+      <div class="reel-track-wrapper">
+        <div class="reel-track">
+
+          <!-- 4 Pure Photos -->
+          <div class="reel-card">
+            <img src="wedding-1.jpg" alt="Shoot 1">
+            <div class="reel-like-badge">❤️ 4.8K</div>
+          </div>
+
+          <div class="reel-card">
+            <img src="wedding-2.jpg" alt="Shoot 2">
+            <div class="reel-like-badge">❤️ 3.9K</div>
+          </div>
+
+          <div class="reel-card">
+            <img src="wedding-3.jpg" alt="Shoot 3">
+            <div class="reel-like-badge">❤️ 5.1K</div>
+          </div>
+
+          <div class="reel-card">
+            <img src="wedding-4.jpg" alt="Shoot 4">
+            <div class="reel-like-badge">❤️ 2.7K</div>
+          </div>
+
+          <!-- Seamless Loop Duplicate -->
+          <div class="reel-card">
+            <img src="wedding-1.jpg" alt="Shoot 1">
+            <div class="reel-like-badge">❤️ 4.8K</div>
+          </div>
+
+          <div class="reel-card">
+            <img src="wedding-2.jpg" alt="Shoot 2">
+            <div class="reel-like-badge">❤️ 3.9K</div>
+          </div>
+
+          <div class="reel-card">
+            <img src="wedding-3.jpg" alt="Shoot 3">
+            <div class="reel-like-badge">❤️ 5.1K</div>
+          </div>
+
+          <div class="reel-card">
+            <img src="wedding-4.jpg" alt="Shoot 4">
+            <div class="reel-like-badge">❤️ 2.7K</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- What I Do Section -->
-  <section class="section-container">
-    <h2 class="section-title">What I Do</h2>
-    <p class="section-sub">From YouTube tech reviews to wedding cinematography and workshops</p>
-  </section>
-
-  <!-- =================================================================
-       CLEAN 4-PHOTO AUTO-SCROLL CAROUSEL
-       ================================================================= -->
-  <section class="photoshoot-section" id="showcase">
-    <div class="marquee-wrapper">
-      <div class="marquee-track">
-
-        <!-- PHOTO 1 -->
-        <div class="photo-card" onclick="openLightbox('wedding-1.jpg')">
-          <img src="wedding-1.jpg" alt="Shoot 1" loading="eager">
-          <div class="like-popup-badge"><span class="heart-icon">❤️</span> 4.8K</div>
-        </div>
-
-        <!-- PHOTO 2 -->
-        <div class="photo-card" onclick="openLightbox('wedding-2.jpg')">
-          <img src="wedding-2.jpg" alt="Shoot 2" loading="eager">
-          <div class="like-popup-badge"><span class="heart-icon">❤️</span> 3.9K</div>
-        </div>
-
-        <!-- PHOTO 3 -->
-        <div class="photo-card" onclick="openLightbox('wedding-3.jpg')">
-          <img src="wedding-3.jpg" alt="Shoot 3" loading="eager">
-          <div class="like-popup-badge"><span class="heart-icon">❤️</span> 5.2K</div>
-        </div>
-
-        <!-- PHOTO 4 -->
-        <div class="photo-card" onclick="openLightbox('wedding-4.jpg')">
-          <img src="wedding-4.jpg" alt="Shoot 4" loading="eager">
-          <div class="like-popup-badge"><span class="heart-icon">❤️</span> 2.7K</div>
-        </div>
-
-        <!-- SEAMLESS SMOOTH LOOP DUPLICATE -->
-        <div class="photo-card" onclick="openLightbox('wedding-1.jpg')">
-          <img src="wedding-1.jpg" alt="Shoot 1" loading="eager">
-          <div class="like-popup-badge"><span class="heart-icon">❤️</span> 4.8K</div>
-        </div>
-
-        <div class="photo-card" onclick="openLightbox('wedding-2.jpg')">
-          <img src="wedding-2.jpg" alt="Shoot 2" loading="eager">
-          <div class="like-popup-badge"><span class="heart-icon">❤️</span> 3.9K</div>
-        </div>
-
-        <div class="photo-card" onclick="openLightbox('wedding-3.jpg')">
-          <img src="wedding-3.jpg" alt="Shoot 3" loading="eager">
-          <div class="like-popup-badge"><span class="heart-icon">❤️</span> 5.2K</div>
-        </div>
-
-        <div class="photo-card" onclick="openLightbox('wedding-4.jpg')">
-          <img src="wedding-4.jpg" alt="Shoot 4" loading="eager">
-          <div class="like-popup-badge"><span class="heart-icon">❤️</span> 2.7K</div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Fullscreen Modal Lightbox -->
-  <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
-    <button class="lightbox-close-btn" onclick="closeLightbox()">✕</button>
-    <div class="lightbox-img-box" onclick="event.stopPropagation()">
-      <img id="lightboxImage" src="" alt="Fullscreen preview">
-    </div>
-  </div>
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Click Nil • Indranil. Built with clean code on GitHub Pages.</p>
+  </footer>
 
   <script>
-    // 1. Live Millisecond Camera REC Timer
-    const recStart = Date.now();
-    const timerElem = document.getElementById("camera-timer");
-    function updateTimer() {
-      const elapsed = Date.now() - recStart;
+    // 1. Live Running REC Millisecond Timecode
+    const startTime = Date.now();
+    const timerElem = document.getElementById("rec-timecode");
+
+    function updateTimecode() {
+      const elapsed = Date.now() - startTime;
       const ms = Math.floor((elapsed % 1000) / 10).toString().padStart(2, '0');
-      const s = Math.floor((elapsed / 1000) % 60).toString().padStart(2, '0');
-      const m = Math.floor((elapsed / (1000 * 60)) % 60).toString().padStart(2, '0');
-      const h = Math.floor(elapsed / (1000 * 60 * 60)).toString().padStart(2, '0');
-      timerElem.textContent = `${h}:${m}:${s}:${ms}`;
-      requestAnimationFrame(updateTimer);
+      const sec = Math.floor((elapsed / 1000) % 60).toString().padStart(2, '0');
+      const min = Math.floor((elapsed / (1000 * 60)) % 60).toString().padStart(2, '0');
+      const hrs = Math.floor(elapsed / (1000 * 60 * 60)).toString().padStart(2, '0');
+      timerElem.textContent = `${hrs}:${min}:${sec}:${ms}`;
+      requestAnimationFrame(updateTimecode);
     }
-    requestAnimationFrame(updateTimer);
+    requestAnimationFrame(updateTimecode);
 
-    // 2. Indranil Typing Effect
-    const nameStr = "Indranil";
-    const typewriterElem = document.getElementById("typewriter-name");
-    let charIdx = 0;
-    let isDeleting = false;
+    // 2. Photoshop Typewriter Animation
+    const targetName = "Indranil";
+    const typewriterElement = document.getElementById("typewriter-text");
+    let charIndex = 0;
 
-    function typeLoop() {
-      if (!isDeleting) {
-        charIdx++;
-        typewriterElem.textContent = nameStr.substring(0, charIdx);
-        if (charIdx === nameStr.length) {
-          setTimeout(() => { isDeleting = true; typeLoop(); }, 4000);
-          return;
-        }
-      } else {
-        charIdx--;
-        typewriterElem.textContent = nameStr.substring(0, charIdx);
-        if (charIdx === 0) {
-          isDeleting = false;
-          setTimeout(typeLoop, 500);
-          return;
-        }
+    function typeChar() {
+      if (charIndex < targetName.length) {
+        typewriterElement.textContent += targetName.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeChar, 140);
       }
-      setTimeout(typeLoop, isDeleting ? 90 : 160);
     }
-    typeLoop();
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(typeChar, 400);
+    });
 
-    // 3. Color Mood Hue Slider
-    const slider = document.getElementById("accentHueSlider");
-    function updateColor(hue) {
-      const hsl = `hsl(${hue}, 100%, 50%)`;
-      document.documentElement.style.setProperty('--accent', hsl);
-      const h = hue / 60;
-      const c = 1;
-      const x = c * (1 - Math.abs((h % 2) - 1));
-      let r = 0, g = 0, b = 0;
-      if (h < 1) { r = c; g = x; }
-      else if (h < 2) { r = x; g = c; }
-      else if (h < 3) { g = c; b = x; }
-      else if (h < 4) { g = x; b = c; }
-      else if (h < 5) { r = x; b = c; }
-      else { r = c; b = x; }
-      document.documentElement.style.setProperty('--accent-rgb', `${Math.round(r*255)}, ${Math.round(g*255)}, ${Math.round(b*255)}`);
-    }
-    slider.addEventListener("input", (e) => updateColor(e.target.value));
+    // 3. Hue Slider Adjustments
+    const hueSlider = document.getElementById("hue-picker");
+    hueSlider.addEventListener("input", (e) => {
+      document.documentElement.style.setProperty('--name-hue', `${e.target.value}deg`);
+    });
 
-    // 4. Cursor Spotlight Follower
+    // 4. Interactive Like Button with Popup Heart
+    const likeBtn = document.getElementById('like-btn');
+    const instaCard = document.getElementById('insta-card');
+    const likeCountElem = document.getElementById('like-count');
+    let hasClicked = false;
+
+    likeBtn.addEventListener('click', () => {
+      if (!hasClicked) {
+        likeCountElem.textContent = '1.4M+';
+        hasClicked = true;
+
+        const heartPopup = document.createElement('div');
+        heartPopup.className = 'floating-heart';
+        heartPopup.textContent = '❤️';
+        instaCard.appendChild(heartPopup);
+        setTimeout(() => heartPopup.remove(), 900);
+      }
+    });
+
+    // 5. Ambient Cursor Light Tracker
     const glow = document.getElementById('cursor-glow');
-    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
@@ -795,24 +932,27 @@
       glow.style.top = mouseY + 'px';
     });
 
-    // 5. Floating Dust Particle Field
+    // 6. Floating Ambient Dust Particle System
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    function resize() {
+
+    function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-    window.addEventListener('resize', resize);
-    resize();
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-    class Particle {
-      constructor() { this.reset(); }
+    class DustParticle {
+      constructor() {
+        this.reset();
+      }
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.6;
-        this.speedY = -(Math.random() * 0.35 + 0.1);
+        this.size = Math.random() * 2 + 0.5;
+        this.speedY = -(Math.random() * 0.4 + 0.1);
         this.speedX = (Math.random() - 0.5) * 0.3;
         this.alpha = Math.random() * 0.4 + 0.1;
       }
@@ -827,36 +967,28 @@
         const dx = this.x - mouseX;
         const dy = this.y - mouseY;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        let boost = dist < 220 ? (1 - dist / 220) * 0.5 : 0;
-        ctx.fillStyle = `rgba(var(--accent-rgb), ${this.alpha + boost})`;
+        let boost = dist < 180 ? (1 - dist / 180) * 0.6 : 0;
+
+        ctx.fillStyle = `rgba(0, 210, 255, ${this.alpha + boost})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size + (boost * 1.5), 0, Math.PI * 2);
         ctx.fill();
       }
     }
-    for (let i = 0; i < 45; i++) particles.push(new Particle());
-    function animate() {
+
+    for (let i = 0; i < 45; i++) {
+      particles.push(new DustParticle());
+    }
+
+    function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(animate);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
     }
-    requestAnimationFrame(animate);
-
-    // 6. Lightbox Functions
-    const modal = document.getElementById("lightboxModal");
-    const modalImg = document.getElementById("lightboxImage");
-
-    function openLightbox(src) {
-      modalImg.src = src;
-      modal.classList.add("active");
-    }
-    function closeLightbox() {
-      modal.classList.remove("active");
-      modalImg.src = "";
-    }
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeLightbox();
-    });
+    requestAnimationFrame(animateParticles);
   </script>
 </body>
 </html>
