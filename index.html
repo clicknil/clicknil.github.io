@@ -528,7 +528,7 @@
     }
 
     /* =========================================================
-       PHOTO REEL SLIDER (1 Photo per Card, Clean Loop, Same Ratio)
+       ALBUM SPREAD FULL-RATIO CAROUSEL (4 FULL SPREADS, ZERO CROP)
        ========================================================= */
     .photo-slider-section {
       position: relative;
@@ -547,14 +547,14 @@
 
     .reel-track {
       display: flex;
-      gap: 24px;
+      gap: 30px;
       width: max-content;
-      animation: reelLoop 22s linear infinite;
+      animation: reelLoop 24s linear infinite;
       will-change: transform;
       transform: translate3d(0, 0, 0);
     }
 
-    /* Stops scrolling when mouse is over the photos */
+    /* Clean stop when hovering */
     .reel-track-wrapper:hover .reel-track {
       animation-play-state: paused;
     }
@@ -564,37 +564,38 @@
       100% { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* 1 Photo Card - Same Ratio, Clean Border */
+    /* Wide Panoramic Album Card (Holds the COMPLETE full spread) */
     .reel-card {
       position: relative;
-      flex: 0 0 320px;
-      aspect-ratio: 4 / 5.5;
-      border-radius: 20px;
+      flex: 0 0 680px;
+      aspect-ratio: 2.1 / 1;
+      border-radius: 18px;
       overflow: hidden;
-      background: #0f131d;
+      background: #090c13;
       border: 1px solid var(--card-border);
       cursor: pointer;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       user-select: none;
     }
     .reel-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      border-color: rgba(0, 210, 255, 0.6);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 210, 255, 0.2);
+      transform: translateY(-6px) scale(1.015);
+      border-color: rgba(0, 210, 255, 0.7);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 210, 255, 0.25);
     }
     .reel-card img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      background-color: #07090e;
       display: block;
     }
 
-    /* Floating Like Popup: Appears only on hover */
+    /* Floating Like Popup: Appears on hover */
     .reel-like-badge {
       position: absolute;
       top: 14px;
       right: 14px;
-      background: rgba(15, 20, 32, 0.65);
+      background: rgba(15, 20, 32, 0.7);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -639,7 +640,7 @@
       .photo-wrapper { order: -1; }
       .photo-container { max-width: 320px; }
       .insta-glass-card { width: 95%; }
-      .reel-card { flex: 0 0 260px; }
+      .reel-card { flex: 0 0 340px; }
       .reel-like-badge { opacity: 1; transform: translateY(0); }
     }
   </style>
@@ -806,50 +807,50 @@
       </div>
     </section>
 
-    <!-- Photo Reel Slider (Exactly 4 Photos, Clean Loop, Same Ratio) -->
+    <!-- Album Spread Full-Ratio Carousel (4 Full Complete Sheets) -->
     <section class="photo-slider-section">
       <div class="reel-track-wrapper">
         <div class="reel-track">
 
-          <!-- 4 Pure Photos -->
+          <!-- 4 Full Complete Spreads -->
           <div class="reel-card">
-            <img src="wedding-1.jpg" alt="Shoot 1">
+            <img src="wedding-1.jpg" alt="Wedding Sheet 1">
             <div class="reel-like-badge">❤️ 4.8K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-2.jpg" alt="Shoot 2">
+            <img src="wedding-2.jpg" alt="Wedding Sheet 2">
             <div class="reel-like-badge">❤️ 3.9K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-3.jpg" alt="Shoot 3">
+            <img src="wedding-3.jpg" alt="Wedding Sheet 3">
             <div class="reel-like-badge">❤️ 5.1K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-4.jpg" alt="Shoot 4">
+            <img src="wedding-4.jpg" alt="Wedding Sheet 4">
             <div class="reel-like-badge">❤️ 2.7K</div>
           </div>
 
-          <!-- Seamless Loop Duplicate -->
+          <!-- Seamless Loop Set -->
           <div class="reel-card">
-            <img src="wedding-1.jpg" alt="Shoot 1">
+            <img src="wedding-1.jpg" alt="Wedding Sheet 1">
             <div class="reel-like-badge">❤️ 4.8K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-2.jpg" alt="Shoot 2">
+            <img src="wedding-2.jpg" alt="Wedding Sheet 2">
             <div class="reel-like-badge">❤️ 3.9K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-3.jpg" alt="Shoot 3">
+            <img src="wedding-3.jpg" alt="Wedding Sheet 3">
             <div class="reel-like-badge">❤️ 5.1K</div>
           </div>
 
           <div class="reel-card">
-            <img src="wedding-4.jpg" alt="Shoot 4">
+            <img src="wedding-4.jpg" alt="Wedding Sheet 4">
             <div class="reel-like-badge">❤️ 2.7K</div>
           </div>
 
