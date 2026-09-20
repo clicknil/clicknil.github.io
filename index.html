@@ -430,15 +430,15 @@
       fill: currentColor;
     }
 
-    /* Auto Blinking / Pulsing Heart */
+    /* Auto Blinking / Pulsing Heart (10s Cycle) */
     .pulsing-heart {
       color: #ff2a5f !important;
-      animation: heartbeat 3s infinite ease-in-out;
+      animation: heartbeat 10s infinite ease-in-out;
     }
     @keyframes heartbeat {
-      0%, 85%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.5)); }
-      90% { transform: scale(1.3); filter: drop-shadow(0 0 14px rgba(255, 42, 95, 0.9)); }
-      95% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(255, 42, 95, 0.7)); }
+      0%, 95%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.5)); }
+      97% { transform: scale(1.3); filter: drop-shadow(0 0 14px rgba(255, 42, 95, 0.9)); }
+      99% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(255, 42, 95, 0.7)); }
     }
 
     /* Floating Heart Popup */
@@ -581,7 +581,7 @@
         <!-- Pure Crisp White "Hi, I'm" -->
         <div class="intro-small">Hi, I’m</div>
 
-        <!-- Photoshop Transform Box (No ruler line, No TYPE LAYER badge) -->
+        <!-- Photoshop Transform Box -->
         <div class="ps-bounding-box-wrap">
           <div class="ps-marquee-border"></div>
           
@@ -637,22 +637,22 @@
         <!-- Liquid Apple Glass Instagram Bar -->
         <div class="insta-glass-card" id="insta-card">
           <div class="insta-left-actions">
-            <!-- Heart Button with 1.4M (Pulsing every 3s) -->
+            <!-- Heart Button with 1.4M (Pulsing every 10s) -->
             <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
               <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               <span id="like-count">1.4M</span>
             </button>
 
-            <!-- Comments -->
+            <!-- Comments: 163K -->
             <button class="insta-action-btn" title="Comment">
               <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-              <span>163</span>
+              <span>163K</span>
             </button>
 
-            <!-- Repost / Share -->
+            <!-- Repost / Share: 23K -->
             <button class="insta-action-btn" title="Repost">
               <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
-              <span>23</span>
+              <span>23K</span>
             </button>
 
             <!-- Direct Share -->
