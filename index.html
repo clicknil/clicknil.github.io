@@ -3,35 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indranil Pramanick | Facebook Creator Hub</title>
-  <meta name="description" content="Official Facebook-style creator hub of Indranil Pramanick — Creator of Click Nil & Founder of Bodhuboron.">
+  <title>Click Nil | Visual Artist</title>
+  <meta name="description" content="Official website of Indranil — Photographer, Graphics Designer, and Content Creator.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #08090d;
-      --fb-card-bg: rgba(26, 31, 46, 0.65);
-      --fb-border: rgba(255, 255, 255, 0.1);
-      --fb-blue: #0866ff;
-      --neon-cyan: #00d2ff;
+      --bg: #07090e;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --neon-blue: #00d2ff;
       --neon-purple: #a855f7;
       --rec-red: #ff2a2a;
-      --text-main: #e4e6eb;
-      --text-muted: #b0b3b8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --name-hue: 0deg;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg);
       color: var(--text-main);
       overflow-x: hidden;
-      line-height: 1.5;
+      line-height: 1.6;
+      position: relative;
     }
 
-    /* Ambient Cursor Spotlight */
+    /* Ambient Dynamic Mouse Spotlight */
     #cursor-glow {
       position: fixed;
       top: 0;
@@ -39,7 +40,7 @@
       width: 650px;
       height: 650px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(8, 102, 255, 0.2) 0%, rgba(0, 210, 255, 0.12) 35%, transparent 70%);
+      background: radial-gradient(circle, rgba(0, 210, 255, 0.18) 0%, rgba(168, 85, 247, 0.12) 40%, transparent 70%);
       pointer-events: none;
       transform: translate(-50%, -50%);
       z-index: 0;
@@ -47,7 +48,7 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Dust Particle Canvas */
+    /* Ambient Dust Canvas */
     #particle-canvas {
       position: fixed;
       inset: 0;
@@ -55,728 +56,729 @@
       z-index: 0;
     }
 
-    /* Facebook Top Navigation Bar */
-    .fb-top-nav {
+    /* Header */
+    header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      height: 60px;
-      padding: 0 1.5rem;
-      background: rgba(14, 18, 28, 0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--fb-border);
+      z-index: 50;
       display: flex;
+      justify-content: flex-start;
       align-items: center;
-      justify-content: space-between;
+      padding: 1.25rem 8%;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 9, 14, 0.75);
+      border-bottom: 1px solid var(--card-border);
     }
-    .fb-nav-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .fb-logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0866ff, #00d2ff);
-      color: #fff;
-      font-size: 1.85rem;
-      font-weight: 900;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 15px rgba(8, 102, 255, 0.6);
-      text-decoration: none;
-    }
-    .fb-search-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--fb-border);
-      padding: 8px 16px;
-      border-radius: 999px;
-      width: 250px;
-    }
-    .fb-search-box input {
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #fff;
-      font-size: 0.9rem;
-      width: 100%;
-    }
-
-    .fb-nav-center {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .fb-tab-item {
-      padding: 10px 30px;
-      border-radius: 10px;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.2s ease;
+    .brand-logo {
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .fb-tab-item:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
-    .fb-tab-item.active {
-      color: var(--fb-blue);
-    }
-    .fb-tab-item.active::after {
-      content: '';
-      position: absolute;
-      bottom: -7px;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--fb-blue);
-      border-radius: 3px 3px 0 0;
-      box-shadow: 0 0 10px var(--fb-blue);
-    }
-
-    .fb-nav-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .fb-round-icon-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid var(--fb-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-decoration: none;
       color: #fff;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-    .fb-round-icon-btn:hover { background: rgba(255, 255, 255, 0.14); }
-
-    /* Page Container */
-    .fb-page-wrapper {
-      position: relative;
-      z-index: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding-bottom: 60px;
-    }
-
-    /* Futuristic Cover Photo */
-    .fb-cover-container {
-      position: relative;
-      height: 340px;
-      border-radius: 0 0 20px 20px;
-      overflow: hidden;
-      background: radial-gradient(circle at center, #162447 0%, #0c101c 70%, #06070a 100%);
-      border-bottom: 1px solid var(--fb-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .fb-cover-grid {
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(rgba(0, 210, 255, 0.1) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(0, 210, 255, 0.1) 1px, transparent 1px);
-      background-size: 40px 40px;
-      opacity: 0.7;
-    }
-    .fb-cover-content {
-      position: relative;
-      text-align: center;
-      z-index: 2;
-    }
-    .cover-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(255, 42, 42, 0.1);
-      border: 1px solid rgba(255, 42, 42, 0.35);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
+      gap: 10px;
+    }
+    .brand-logo .divider { color: var(--card-border); font-weight: 300; }
+    .brand-logo .sub {
+      font-size: 0.85rem;
+      color: var(--neon-blue);
+      font-weight: 600;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 10px;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 8% 4rem;
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    /* Recording Badge with Live Millisecond Timecode */
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      background: rgba(255, 42, 42, 0.08);
+      border: 1px solid rgba(255, 42, 42, 0.3);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
       font-family: 'JetBrains Mono', monospace;
     }
     .rec-dot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: var(--rec-red);
-      box-shadow: 0 0 10px var(--rec-red);
+      box-shadow: 0 0 12px var(--rec-red), 0 0 22px rgba(255, 42, 42, 0.9);
       animation: recBlink 1.2s infinite ease-in-out;
     }
     @keyframes recBlink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.2; transform: scale(0.8); }
     }
-    .fb-cover-content h1 {
-      font-size: clamp(2.2rem, 5vw, 3.4rem);
+    .rec-timer {
+      color: #ff9e9e;
+      font-weight: 600;
+    }
+
+    /* Pure White "Hi, I'm" */
+    .intro-small {
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    /* Photoshop Bounding Box */
+    .ps-bounding-box-wrap {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      padding: 16px 20px 14px 18px;
+      margin-bottom: 1.8rem;
+      filter: hue-rotate(var(--name-hue));
+      transition: filter 0.05s linear;
+    }
+    .ps-marquee-border {
+      position: absolute;
+      inset: 0;
+      border: 1.5px dashed var(--neon-blue);
+      border-radius: 2px;
+      box-shadow: 0 0 14px rgba(0, 210, 255, 0.25), inset 0 0 14px rgba(0, 210, 255, 0.08);
+      pointer-events: none;
+    }
+    .ps-handle {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      background: #ffffff;
+      border: 1.5px solid var(--neon-blue);
+      box-shadow: 0 0 6px var(--neon-blue);
+      z-index: 2;
+    }
+    .ps-handle.tl { top: -5px; left: -5px; }
+    .ps-handle.tm { top: -5px; left: 50%; transform: translateX(-50%); }
+    .ps-handle.tr { top: -5px; right: -5px; }
+    .ps-handle.ml { top: 50%; left: -5px; transform: translateY(-50%); }
+    .ps-handle.mr { top: 50%; right: -5px; transform: translateY(-50%); }
+    .ps-handle.bl { bottom: -5px; left: -5px; }
+    .ps-handle.bm { bottom: -5px; left: 50%; transform: translateX(-50%); }
+    .ps-handle.br { bottom: -5px; right: -5px; }
+
+    /* Big Name */
+    .big-name {
+      font-size: clamp(3.6rem, 8.5vw, 6.2rem);
       font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, #ffffff 0%, #00d2ff 60%, #0866ff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      line-height: 0.95;
+      letter-spacing: -2.5px;
+      color: var(--neon-blue);
+      text-shadow: 0 0 40px rgba(0, 210, 255, 0.45);
+      display: inline-flex;
+      align-items: baseline;
+      position: relative;
+      z-index: 1;
+    }
+    .ps-cursor {
+      display: inline-block;
+      width: clamp(4px, 0.8vw, 7px);
+      height: 0.8em;
+      background-color: var(--neon-blue);
+      margin-left: 6px;
+      animation: blinkCursor 0.8s infinite;
+      box-shadow: 0 0 15px var(--neon-blue);
+    }
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
-    /* Profile Header Section */
-    .fb-profile-header {
-      padding: 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-top: -65px;
-      margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 10;
-    }
-    .fb-profile-avatar-row {
-      display: flex;
-      align-items: flex-end;
-      gap: 24px;
-    }
-    .fb-avatar-ring {
-      position: relative;
-      width: 168px;
-      height: 168px;
-      border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(135deg, #0866ff, #00d2ff);
-      box-shadow: 0 8px 30px rgba(8, 102, 255, 0.4);
-    }
-    .fb-avatar-ring img {
+    /* Underline Slider */
+    .underline-slider-container {
       width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center top;
-      border: 4px solid #08090d;
-      display: block;
-    }
-
-    .fb-user-details {
-      padding-bottom: 10px;
-    }
-    .fb-name-verified {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 2rem;
-      font-weight: 800;
-      color: #fff;
+      margin-top: 14px;
     }
-    /* Meta Verified Blue Badge */
-    .verified-badge {
+    .hue-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--neon-blue);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+      outline: none;
+      cursor: pointer;
+    }
+    .hue-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 14px var(--neon-blue);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .hue-slider::-webkit-slider-thumb:hover { transform: scale(1.3); }
+
+    .hero-bio {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+      max-width: 580px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
       display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-glow {
+      background: linear-gradient(135deg, #00d2ff, #0084ff);
+      color: #000;
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+    }
+    .btn-glow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px rgba(0, 210, 255, 0.6);
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      border: 1px solid var(--card-border);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Portrait Wrapper */
+    .photo-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .photo-container {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 4/5;
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 22px;
-      height: 22px;
-      background: #0866ff;
-      border-radius: 50%;
-      color: #fff;
-      font-size: 13px;
-      box-shadow: 0 0 10px rgba(8, 102, 255, 0.7);
     }
-    .fb-stats-sub {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-top: 2px;
-    }
-
-    .fb-action-buttons {
-      display: flex;
-      gap: 10px;
-      padding-bottom: 10px;
-    }
-    .fb-btn {
-      padding: 9px 18px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .fb-btn-primary {
-      background: var(--fb-blue);
-      color: #fff;
-      box-shadow: 0 0 18px rgba(8, 102, 255, 0.45);
-    }
-    .fb-btn-primary:hover { background: #0056df; }
-    .fb-btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      border: 1px solid var(--fb-border);
-    }
-    .fb-btn-secondary:hover { background: rgba(255, 255, 255, 0.14); }
-
-    /* Feed Grid (Sidebar + Posts) */
-    .fb-main-grid {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 20px;
-      padding: 0 2rem;
-    }
-
-    /* Glassmorphic Facebook Cards */
-    .fb-card {
-      background: var(--fb-card-bg);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid var(--fb-border);
-      border-radius: 14px;
-      padding: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-      margin-bottom: 20px;
-    }
-    .fb-card h3 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-      color: #fff;
-    }
-
-    /* Intro Info Rows */
-    .fb-intro-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-      font-size: 0.92rem;
-      color: var(--text-main);
-    }
-    .fb-intro-item .icon {
-      font-size: 1.25rem;
-      width: 24px;
-      text-align: center;
-    }
-
-    /* Post Card */
-    .post-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
-    .post-author-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .post-author-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 2px solid var(--fb-blue);
+    .photo-container img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      object-position: center top;
+      display: block;
+      border-radius: 36px;
+      mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+      transition: transform 0.5s ease;
+      filter: drop-shadow(0 0 35px rgba(0, 210, 255, 0.15));
     }
-    .post-meta-name {
-      font-weight: 700;
+    .photo-container:hover img {
+      transform: scale(1.02);
+    }
+
+    /* Corner HUD Accents */
+    .hud-element {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .hud-bracket-tl {
+      top: 10px;
+      left: 10px;
+      width: 24px;
+      height: 24px;
+      border-top: 2px solid var(--neon-blue);
+      border-left: 2px solid var(--neon-blue);
+      filter: drop-shadow(0 0 8px var(--neon-blue));
+    }
+    .hud-bracket-br {
+      bottom: 60px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+      border-bottom: 2px solid var(--neon-purple);
+      border-right: 2px solid var(--neon-purple);
+      filter: drop-shadow(0 0 8px var(--neon-purple));
+    }
+
+    /* Oval Apple Glass Pill Bar Over Photo */
+    .apple-glass-pill {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 86%;
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: rgba(15, 20, 32, 0.45);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 3;
+    }
+    .pill-title {
+      font-size: 1.05rem;
+      font-weight: 800;
       color: #fff;
-      font-size: 0.95rem;
+      letter-spacing: -0.2px;
+    }
+    .pill-followers {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--neon-blue);
+      letter-spacing: 0.5px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .post-meta-time {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .post-content-text {
-      font-size: 1rem;
-      color: var(--text-main);
-      margin-bottom: 14px;
-      line-height: 1.6;
-    }
-
-    /* Interactive Post Image / Showcase */
-    .post-visual-frame {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--fb-border);
-      background: #101420;
-    }
-    .post-visual-frame img {
-      width: 100%;
-      max-height: 480px;
-      object-fit: cover;
-      display: block;
-    }
-    .post-visual-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 16px;
-      background: linear-gradient(to top, rgba(8, 9, 13, 0.9) 0%, transparent 100%);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-    .post-overlay-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--neon-cyan);
-      background: rgba(0, 210, 255, 0.15);
-      border: 1px solid var(--neon-cyan);
-      padding: 3px 8px;
-      border-radius: 4px;
-    }
-
-    /* Post Reactions Bar */
-    .post-stats-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 4px;
-      border-bottom: 1px solid var(--fb-border);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    .reactions-cluster {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .emoji-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
+    .pill-followers .stat-dot {
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      font-size: 11px;
+      background: var(--neon-blue);
+      box-shadow: 0 0 8px var(--neon-blue);
     }
 
-    /* Action Buttons (Like / Comment / Share) */
-    .post-action-bar {
+    /* Apple Glass Instagram Action Bar */
+    .insta-glass-card {
+      margin-top: 14px;
+      width: 90%;
+      max-width: 410px;
       display: flex;
-      justify-content: space-around;
-      padding-top: 6px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      background: rgba(18, 24, 38, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
       position: relative;
     }
-    .action-btn {
-      flex: 1;
-      padding: 8px;
-      border-radius: 8px;
+    .insta-left-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .insta-action-btn {
+      background: none;
       border: none;
-      background: transparent;
-      color: var(--text-muted);
+      color: #cbd5e1;
+      font-size: 0.88rem;
       font-weight: 600;
-      font-size: 0.9rem;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: background 0.2s, color 0.2s;
+      gap: 6px;
+      padding: 4px 6px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    .action-btn:hover {
-      background: rgba(255, 255, 255, 0.06);
+    .insta-action-btn:hover {
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .insta-action-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Auto Blinking / Pulsing Heart (10s Cycle) */
+    .pulsing-heart {
+      color: #ff2a5f !important;
+      animation: heartbeat 10s infinite ease-in-out;
+    }
+    @keyframes heartbeat {
+      0%, 95%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.5)); }
+      97% { transform: scale(1.3); filter: drop-shadow(0 0 14px rgba(255, 42, 95, 0.9)); }
+      99% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(255, 42, 95, 0.7)); }
+    }
+
+    /* Floating Heart Popup */
+    .floating-heart {
+      position: absolute;
+      top: -24px;
+      left: 20px;
+      color: #ff2a5f;
+      font-size: 1.5rem;
+      pointer-events: none;
+      animation: floatHeart 0.9s ease-out forwards;
+    }
+    @keyframes floatHeart {
+      0% { opacity: 0; transform: translateY(15px) scale(0.5); }
+      40% { opacity: 1; transform: translateY(-10px) scale(1.3); }
+      100% { opacity: 0; transform: translateY(-40px) scale(0.9); }
+    }
+
+    /* Ventures Section */
+    .ventures {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 8%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .section-header p {
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      font-size: 1.05rem;
+    }
+
+    .venture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .venture-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.2rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .venture-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 210, 255, 0.4);
+      box-shadow: 0 15px 35px rgba(0, 210, 255, 0.1);
+    }
+    .venture-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .venture-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
       color: #fff;
     }
-    .action-btn.active-like {
-      color: var(--fb-blue);
+    .venture-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .venture-link {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--neon-blue);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    /* Floating Facebook Reaction Tray on Hover */
-    .reaction-flyout {
-      position: absolute;
-      top: -46px;
-      left: 10px;
-      background: rgba(18, 24, 38, 0.92);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--fb-border);
-      border-radius: 999px;
-      padding: 5px 12px;
-      display: flex;
-      gap: 10px;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(10px) scale(0.9);
-      transition: all 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    }
-    .like-btn-container:hover .reaction-flyout {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0) scale(1);
-    }
-    .flyout-emoji {
-      font-size: 1.4rem;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-    }
-    .flyout-emoji:hover {
-      transform: scale(1.35);
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 3rem 8%;
+      text-align: center;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
 
-    /* Mobile Responsive */
+    /* Mobile */
     @media (max-width: 900px) {
-      .fb-nav-center, .fb-search-box { display: none; }
-      .fb-cover-container { height: 220px; }
-      .fb-profile-header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        margin-top: -60px;
-      }
-      .fb-profile-avatar-row {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
-      .fb-main-grid {
+      .hero {
         grid-template-columns: 1fr;
-        padding: 0 1rem;
+        text-align: center;
+        padding-top: 3rem;
       }
+      .ps-bounding-box-wrap { margin-left: auto; margin-right: auto; }
+      .cta-row { justify-content: center; }
+      .photo-wrapper { order: -1; }
+      .photo-container { max-width: 320px; }
+      .insta-glass-card { width: 95%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Futuristic Cursor Spotlight & Ambient Dust -->
+  <!-- Ambient Cursor Glow & Canvas Dust -->
   <div id="cursor-glow"></div>
   <canvas id="particle-canvas"></canvas>
 
-  <!-- Facebook Glass Header Bar -->
-  <nav class="fb-top-nav">
-    <div class="fb-nav-left">
-      <a href="#" class="fb-logo">f</a>
-      <div class="fb-search-box">
-        <span>🔍</span>
-        <input type="text" placeholder="Search Click Nil & Bodhuboron...">
-      </div>
-    </div>
+  <!-- Header -->
+  <header>
+    <a href="#" class="brand-logo">
+      CLICK NIL <span class="divider">/</span> <span class="sub">Visual Artist</span>
+    </a>
+  </header>
 
-    <!-- Center Facebook Tabs -->
-    <div class="fb-nav-center">
-      <div class="fb-tab-item active" title="Home">🏠</div>
-      <div class="fb-tab-item" title="Cinematography & Videos">📺</div>
-      <div class="fb-tab-item" title="Workshops & Courses">🎓</div>
-      <div class="fb-tab-item" title="Marketplace">🛍️</div>
-    </div>
-
-    <!-- Right Controls -->
-    <div class="fb-nav-right">
-      <div class="fb-round-icon-btn" title="Menu">⋮⋮⋮</div>
-      <div class="fb-round-icon-btn" title="Messenger">💬</div>
-      <div class="fb-round-icon-btn" title="Notifications">🔔</div>
-    </div>
-  </nav>
-
-  <!-- Page Wrapper -->
-  <div class="fb-page-wrapper">
-
-    <!-- High-Tech Facebook Cover Banner -->
-    <div class="fb-cover-container">
-      <div class="fb-cover-grid"></div>
-      <div class="fb-cover-content">
-        <div class="cover-badge">
-          <span class="rec-dot"></span> LIVE CREATOR STREAM
-        </div>
-        <h1>CLICK NIL / VISUAL ARTIST</h1>
-      </div>
-    </div>
-
-    <!-- Facebook Profile Info Header -->
-    <div class="fb-profile-header">
-      <div class="fb-profile-avatar-row">
-        <!-- Profile Picture with Story Neon Ring -->
-        <div class="fb-avatar-ring">
-          <img src="profile.jpg" alt="Indranil Pramanick">
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        
+        <!-- Live Recording Badge with Real Running Timecode -->
+        <div class="hero-tag">
+          <span class="rec-dot"></span>
+          <span>REC</span>
+          <span class="rec-timer" id="rec-timecode">00:00:00:00</span>
         </div>
 
-        <div class="fb-user-details">
-          <div class="fb-name-verified">
-            <span>Indranil Pramanick</span>
-            <!-- Meta Verified Blue Check Badge -->
-            <span class="verified-badge" title="Verified Visual Artist">✓</span>
+        <!-- Pure Crisp White "Hi, I'm" -->
+        <div class="intro-small">Hi, I’m</div>
+
+        <!-- Photoshop Transform Box -->
+        <div class="ps-bounding-box-wrap">
+          <div class="ps-marquee-border"></div>
+          
+          <!-- Transform Handles -->
+          <div class="ps-handle tl"></div>
+          <div class="ps-handle tm"></div>
+          <div class="ps-handle tr"></div>
+          <div class="ps-handle ml"></div>
+          <div class="ps-handle mr"></div>
+          <div class="ps-handle bl"></div>
+          <div class="ps-handle bm"></div>
+          <div class="ps-handle br"></div>
+
+          <!-- Big Name -->
+          <div class="big-name">
+            <span id="typewriter-text"></span><span class="ps-cursor" id="ps-cursor"></span>
           </div>
-          <div class="fb-stats-sub">50K+ followers • Creator of Click Nil • Bodhuboron</div>
+
+          <!-- Underline Hue Slider -->
+          <div class="underline-slider-container">
+            <input type="range" min="0" max="360" value="0" class="hue-slider" id="hue-picker" title="Adjust color mood">
+          </div>
+        </div>
+
+        <p class="hero-bio">
+          Photographer, Cinematographer, Bengali Album Designer & Video Editor. Creator of <strong>Click Nil</strong>, Founder of <strong>Bodhuboron Wedding Photography</strong>, and Educator mentoring students across West Bengal in filmmaking & album design.
+        </p>
+
+        <div class="cta-row">
+          <a href="#ventures" class="btn btn-glow">Explore My Work</a>
+          <a href="https://wa.me/" target="_blank" class="btn btn-outline">WhatsApp Me</a>
         </div>
       </div>
 
-      <!-- Action Buttons -->
-      <div class="fb-action-buttons">
-        <a href="https://wa.me/" target="_blank" class="fb-btn fb-btn-primary">
-          <span>💬 WhatsApp Me</span>
-        </a>
-        <button class="fb-btn fb-btn-secondary">
-          <span>➕ Follow</span>
-        </button>
-      </div>
-    </div>
+      <!-- Seamless Feathered Portrait -->
+      <div class="photo-wrapper">
+        <div class="photo-container">
+          <img src="profile.jpg" alt="Indranil">
 
-    <!-- Facebook Main Feed Layout -->
-    <main class="fb-main-grid">
+          <!-- Clean HUD Brackets -->
+          <div class="hud-element hud-bracket-tl"></div>
+          <div class="hud-element hud-bracket-br"></div>
 
-      <!-- Left Sidebar: Intro Card -->
-      <aside>
-        <div class="fb-card">
-          <h3>Intro</h3>
-          <div class="fb-intro-item">
-            <span class="icon">💼</span>
-            <div>Founder & Lead Cinematographer at <strong>Bodhuboron Wedding Photography</strong></div>
-          </div>
-          <div class="fb-intro-item">
-            <span class="icon">🎥</span>
-            <div>Creator & Gear Reviewer at <strong>Click Nil</strong> (Sony & Canon setups)</div>
-          </div>
-          <div class="fb-intro-item">
-            <span class="icon">🎓</span>
-            <div>Conducts workshops in <strong>Bengali Album Design & Video Editing</strong></div>
-          </div>
-          <div class="fb-intro-item">
-            <span class="icon">📍</span>
-            <div>Based in <strong>West Bengal, India</strong></div>
-          </div>
-          <div class="fb-intro-item">
-            <span class="icon">⏱️</span>
-            <div>Session Timecode: <strong id="fb-timer">00:00:00</strong></div>
+          <!-- Oval Liquid Apple Glass Pill Bar Over Photo -->
+          <div class="apple-glass-pill">
+            <div class="pill-title">Indranil</div>
+            <div class="pill-followers">
+              <span class="stat-dot"></span> 50K+ Followers
+            </div>
           </div>
         </div>
-      </aside>
 
-      <!-- Right Column: Interactive Post -->
-      <section>
-        <div class="fb-card">
-          <!-- Post Header -->
-          <div class="post-header">
-            <div class="post-author-row">
-              <img src="profile.jpg" alt="Indranil" class="post-author-avatar">
-              <div>
-                <div class="post-meta-name">
-                  Indranil Pramanick
-                  <span class="verified-badge" style="width:16px; height:16px; font-size:10px;">✓</span>
-                </div>
-                <div class="post-meta-time">Just now • 🌐 Public</div>
-              </div>
-            </div>
-            <div style="color: var(--text-muted); cursor:pointer; font-size:1.2rem;">•••</div>
-          </div>
-
-          <!-- Post Copy -->
-          <div class="post-content-text">
-            Capturing emotions, shaping cinematic lights, and mentoring the next generation of creative visual artists. Welcome to my official Facebook Creator portfolio!
-          </div>
-
-          <!-- Post Media Frame -->
-          <div class="post-visual-frame">
-            <img src="profile.jpg" alt="Featured Shot">
-            <div class="post-visual-overlay">
-              <span class="post-overlay-tag">PRO COLOR LOG-C // 4K 10-BIT</span>
-            </div>
-          </div>
-
-          <!-- Reactions Count Bar -->
-          <div class="post-stats-row">
-            <div class="reactions-cluster">
-              <span class="emoji-pill" style="background:#0866ff;">👍</span>
-              <span class="emoji-pill" style="background:#fa3e3e;">❤️</span>
-              <span class="emoji-pill" style="background:#f7b125;">😮</span>
-              <span id="fb-like-counter" style="margin-left:4px; font-weight:600; color:#fff;">1.4M</span>
-            </div>
-            <div>
-              <span>163K Comments</span> • <span>23K Shares</span>
-            </div>
-          </div>
-
-          <!-- Like / Comment / Share Action Bar -->
-          <div class="post-action-bar">
-            <!-- Like Button with Hover Reaction Flyout -->
-            <div class="like-btn-container" style="flex:1; display:flex;">
-              <div class="reaction-flyout">
-                <span class="flyout-emoji" onclick="selectReaction('👍')">👍</span>
-                <span class="flyout-emoji" onclick="selectReaction('❤️')">❤️</span>
-                <span class="flyout-emoji" onclick="selectReaction('😮')">😮</span>
-                <span class="flyout-emoji" onclick="selectReaction('🔥')">🔥</span>
-              </div>
-              <button class="action-btn" id="fb-like-action-btn" onclick="toggleLike()">
-                <span id="fb-like-icon">👍</span> <span id="fb-like-text">Like</span>
-              </button>
-            </div>
-
-            <button class="action-btn">
-              <span>💬</span> Comment
+        <!-- Liquid Apple Glass Instagram Bar -->
+        <div class="insta-glass-card" id="insta-card">
+          <div class="insta-left-actions">
+            <!-- Heart Button with 1.4M (Pulsing every 10s) -->
+            <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span id="like-count">1.4M</span>
             </button>
 
-            <button class="action-btn">
-              <span>↗️</span> Share
+            <!-- Comments: 163K -->
+            <button class="insta-action-btn" title="Comment">
+              <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+              <span>163K</span>
+            </button>
+
+            <!-- Repost / Share: 23K -->
+            <button class="insta-action-btn" title="Repost">
+              <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+              <span>23K</span>
+            </button>
+
+            <!-- Direct Share -->
+            <button class="insta-action-btn" title="Direct Share">
+              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
             </button>
           </div>
-        </div>
-      </section>
 
-    </main>
-  </div>
+          <!-- Bookmark Right Action -->
+          <button class="insta-action-btn" title="Save">
+            <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ventures Section -->
+    <section class="ventures" id="ventures">
+      <div class="section-header">
+        <h2>What I Do</h2>
+        <p>From YouTube tech reviews to wedding cinematography and workshops</p>
+      </div>
+
+      <div class="venture-grid">
+        <!-- Click Nil -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">🎥</div>
+            <h3 class="venture-title">Click Nil</h3>
+            <p class="venture-desc">
+              Tech reviews, camera setups (Sony & Canon), hands-on gear tests, and tutorials for upcoming creators and cinematographers.
+            </p>
+          </div>
+          <a href="https://youtube.com" target="_blank" class="venture-link">Visit YouTube Channel &rarr;</a>
+        </div>
+
+        <!-- Bodhuboron -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">💍</div>
+            <h3 class="venture-title">Bodhuboron</h3>
+            <p class="venture-desc">
+              Premium wedding photography & cinematic wedding films capturing authentic emotions, vibrant colors, and unforgettable moments.
+            </p>
+          </div>
+          <a href="https://wa.me/" target="_blank" class="venture-link">Book for Wedding &rarr;</a>
+        </div>
+
+        <!-- Workshops -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">🎓</div>
+            <h3 class="venture-title">Workshops & Academy</h3>
+            <p class="venture-desc">
+              Mentoring students in professional Bengali wedding album design, Premiere Pro & DaVinci Resolve editing, lighting, and camera handling.
+            </p>
+          </div>
+          <a href="https://wa.me/" target="_blank" class="venture-link">Join Next Workshop &rarr;</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Click Nil • Indranil. Built with clean code on GitHub Pages.</p>
+  </footer>
 
   <script>
-    // 1. Session Running Timer
+    // 1. Live Running REC Millisecond Timecode
     const startTime = Date.now();
-    const timerElem = document.getElementById("fb-timer");
-    function updateFbTime() {
+    const timerElem = document.getElementById("rec-timecode");
+
+    function updateTimecode() {
       const elapsed = Date.now() - startTime;
+      const ms = Math.floor((elapsed % 1000) / 10).toString().padStart(2, '0');
       const sec = Math.floor((elapsed / 1000) % 60).toString().padStart(2, '0');
       const min = Math.floor((elapsed / (1000 * 60)) % 60).toString().padStart(2, '0');
       const hrs = Math.floor(elapsed / (1000 * 60 * 60)).toString().padStart(2, '0');
-      timerElem.textContent = `${hrs}:${min}:${sec}`;
-      requestAnimationFrame(updateFbTime);
+      timerElem.textContent = `${hrs}:${min}:${sec}:${ms}`;
+      requestAnimationFrame(updateTimecode);
     }
-    requestAnimationFrame(updateFbTime);
+    requestAnimationFrame(updateTimecode);
 
-    // 2. Facebook Like Button & Flyout Logic
-    let isLiked = false;
-    const likeActionBtn = document.getElementById('fb-like-action-btn');
-    const likeIcon = document.getElementById('fb-like-icon');
-    const likeText = document.getElementById('fb-like-text');
-    const counter = document.getElementById('fb-like-counter');
+    // 2. Photoshop Typewriter Animation
+    const targetName = "Indranil";
+    const typewriterElement = document.getElementById("typewriter-text");
+    let charIndex = 0;
 
-    function toggleLike() {
-      isLiked = !isLiked;
-      if (isLiked) {
-        likeActionBtn.classList.add('active-like');
-        likeIcon.textContent = '👍';
-        likeText.textContent = 'Liked';
-        counter.textContent = '1.4M+';
-      } else {
-        likeActionBtn.classList.remove('active-like');
-        likeText.textContent = 'Like';
+    function typeChar() {
+      if (charIndex < targetName.length) {
+        typewriterElement.textContent += targetName.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeChar, 140);
       }
     }
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(typeChar, 400);
+    });
 
-    function selectReaction(emoji) {
-      likeActionBtn.classList.add('active-like');
-      likeIcon.textContent = emoji;
-      likeText.textContent = 'Reacted';
-      counter.textContent = '1.4M+';
-      isLiked = true;
-    }
+    // 3. Hue Slider Adjustments
+    const hueSlider = document.getElementById("hue-picker");
+    hueSlider.addEventListener("input", (e) => {
+      document.documentElement.style.setProperty('--name-hue', `${e.target.value}deg`);
+    });
 
-    // 3. Ambient Cursor Spotlight Tracker
+    // 4. Interactive Like Button with Popup Heart
+    const likeBtn = document.getElementById('like-btn');
+    const instaCard = document.getElementById('insta-card');
+    const likeCountElem = document.getElementById('like-count');
+    let hasClicked = false;
+
+    likeBtn.addEventListener('click', () => {
+      if (!hasClicked) {
+        likeCountElem.textContent = '1.4M+';
+        hasClicked = true;
+
+        const heartPopup = document.createElement('div');
+        heartPopup.className = 'floating-heart';
+        heartPopup.textContent = '❤️';
+        instaCard.appendChild(heartPopup);
+        setTimeout(() => heartPopup.remove(), 900);
+      }
+    });
+
+    // 5. Ambient Cursor Light Tracker
     const glow = document.getElementById('cursor-glow');
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -788,7 +790,7 @@
       glow.style.top = mouseY + 'px';
     });
 
-    // 4. Floating Dust Particle Background
+    // 6. Floating Ambient Dust Particle System
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -801,14 +803,16 @@
     resizeCanvas();
 
     class DustParticle {
-      constructor() { this.reset(); }
+      constructor() {
+        this.reset();
+      }
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.size = Math.random() * 2 + 0.5;
-        this.speedY = -(Math.random() * 0.35 + 0.1);
-        this.speedX = (Math.random() - 0.5) * 0.25;
-        this.alpha = Math.random() * 0.35 + 0.1;
+        this.speedY = -(Math.random() * 0.4 + 0.1);
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.alpha = Math.random() * 0.4 + 0.1;
       }
       update() {
         this.y += this.speedY;
@@ -821,7 +825,7 @@
         const dx = this.x - mouseX;
         const dy = this.y - mouseY;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        let boost = dist < 200 ? (1 - dist / 200) * 0.5 : 0;
+        let boost = dist < 180 ? (1 - dist / 180) * 0.6 : 0;
 
         ctx.fillStyle = `rgba(0, 210, 255, ${this.alpha + boost})`;
         ctx.beginPath();
@@ -830,13 +834,16 @@
       }
     }
 
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 45; i++) {
       particles.push(new DustParticle());
     }
 
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
       requestAnimationFrame(animateParticles);
     }
     requestAnimationFrame(animateParticles);
