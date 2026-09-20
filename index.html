@@ -48,7 +48,7 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Interactive Ambient Dust Canvas */
+    /* Ambient Dust Canvas */
     #particle-canvas {
       position: fixed;
       inset: 0;
@@ -56,7 +56,7 @@
       z-index: 0;
     }
 
-    /* Clean Header */
+    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -89,7 +89,7 @@
       text-transform: uppercase;
     }
 
-    /* Hero Layout */
+    /* Hero Section */
     .hero {
       position: relative;
       z-index: 1;
@@ -102,7 +102,7 @@
       align-items: center;
     }
 
-    /* REC Badge with Running Timecode */
+    /* Recording Badge with Live Millisecond Timecode */
     .hero-tag {
       display: inline-flex;
       align-items: center;
@@ -136,25 +136,25 @@
       font-weight: 600;
     }
 
+    /* Pure White "Hi, I'm" */
     .intro-small {
       font-size: clamp(1.4rem, 2.5vw, 1.85rem);
-      font-weight: 600;
-      color: #94a3b8;
+      font-weight: 700;
+      color: #ffffff;
       letter-spacing: -0.5px;
       margin-bottom: 0.4rem;
     }
 
-    /* Photoshop Bounding Box & Ruler Guides */
+    /* Photoshop Bounding Box */
     .ps-bounding-box-wrap {
       position: relative;
       display: inline-flex;
       flex-direction: column;
-      padding: 18px 24px 14px 20px;
+      padding: 16px 20px 14px 18px;
       margin-bottom: 1.8rem;
       filter: hue-rotate(var(--name-hue));
       transition: filter 0.05s linear;
     }
-    /* Dashed Marquee Outline */
     .ps-marquee-border {
       position: absolute;
       inset: 0;
@@ -162,12 +162,7 @@
       border-radius: 2px;
       box-shadow: 0 0 14px rgba(0, 210, 255, 0.25), inset 0 0 14px rgba(0, 210, 255, 0.08);
       pointer-events: none;
-      animation: marqueeWalk 12s linear infinite;
     }
-    @keyframes marqueeWalk {
-      to { stroke-dashoffset: 100; }
-    }
-    /* Transform Nodes / Anchors */
     .ps-handle {
       position: absolute;
       width: 9px;
@@ -186,31 +181,7 @@
     .ps-handle.bm { bottom: -5px; left: 50%; transform: translateX(-50%); }
     .ps-handle.br { bottom: -5px; right: -5px; }
 
-    /* Top Ruler Ticks */
-    .ps-ruler-top {
-      position: absolute;
-      top: -14px;
-      left: 10px;
-      right: 10px;
-      height: 6px;
-      background-image: repeating-linear-gradient(to right, rgba(0, 210, 255, 0.6) 0, rgba(0, 210, 255, 0.6) 1px, transparent 1px, transparent 10px);
-      pointer-events: none;
-    }
-    .ps-tag-label {
-      position: absolute;
-      top: -24px;
-      right: 0;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      background: rgba(0, 210, 255, 0.15);
-      border: 1px solid var(--neon-blue);
-      color: var(--neon-blue);
-      padding: 1px 6px;
-      border-radius: 2px;
-      letter-spacing: 1px;
-    }
-
-    /* Giant Name inside Box */
+    /* Big Name */
     .big-name {
       font-size: clamp(3.6rem, 8.5vw, 6.2rem);
       font-weight: 900;
@@ -313,7 +284,7 @@
       border-color: rgba(255, 255, 255, 0.2);
     }
 
-    /* Seamless Portrait Wrapper (No Harsh Borders) */
+    /* Portrait Wrapper */
     .photo-wrapper {
       position: relative;
       display: flex;
@@ -329,7 +300,6 @@
       align-items: center;
       justify-content: center;
     }
-    /* Feathered Fade Edges */
     .photo-container img {
       width: 100%;
       height: 100%;
@@ -346,7 +316,7 @@
       transform: scale(1.02);
     }
 
-    /* Futuristic HUD & Photoshop Vectors around Image */
+    /* Corner HUD Accents */
     .hud-element {
       position: absolute;
       pointer-events: none;
@@ -370,39 +340,8 @@
       border-right: 2px solid var(--neon-purple);
       filter: drop-shadow(0 0 8px var(--neon-purple));
     }
-    .hud-crosshair {
-      top: 25%;
-      right: -8px;
-      width: 18px;
-      height: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--neon-blue);
-      font-size: 14px;
-      opacity: 0.8;
-      animation: spinCross 10s linear infinite;
-    }
-    @keyframes spinCross {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .hud-vector-path {
-      position: absolute;
-      top: 8%;
-      right: 15px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--neon-blue);
-      letter-spacing: 1px;
-      opacity: 0.75;
-      background: rgba(0, 210, 255, 0.08);
-      padding: 3px 8px;
-      border-radius: 4px;
-      border: 1px solid rgba(0, 210, 255, 0.2);
-    }
 
-    /* Oval Clear Apple Glass Bar Over Photo */
+    /* Oval Apple Glass Pill Bar Over Photo */
     .apple-glass-pill {
       position: absolute;
       bottom: 24px;
@@ -444,58 +383,76 @@
       box-shadow: 0 0 8px var(--neon-blue);
     }
 
-    /* Instagram-Style Interactive Social Bar Below Photo */
-    .insta-actions-bar {
+    /* Apple Glass Instagram Action Bar */
+    .insta-glass-card {
       margin-top: 14px;
-      width: 88%;
-      max-width: 400px;
+      width: 90%;
+      max-width: 410px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
+      padding: 10px 18px;
+      background: rgba(18, 24, 38, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
       position: relative;
     }
-    .insta-btn-group {
+    .insta-left-actions {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
-    .insta-btn {
+    .insta-action-btn {
       background: none;
       border: none;
-      color: #fff;
-      font-size: 1.25rem;
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s, color 0.2s;
       display: flex;
       align-items: center;
       gap: 6px;
+      padding: 4px 6px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    .insta-btn:hover { transform: scale(1.15); }
-    .insta-btn.liked { color: #ff2a5f; }
-    .like-counter {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #e2e8f0;
-      letter-spacing: 0.2px;
+    .insta-action-btn:hover {
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .insta-action-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
 
-    /* Floating Heart Popup Animation */
+    /* Auto Blinking / Pulsing Heart */
+    .pulsing-heart {
+      color: #ff2a5f !important;
+      animation: heartbeat 3s infinite ease-in-out;
+    }
+    @keyframes heartbeat {
+      0%, 85%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.5)); }
+      90% { transform: scale(1.3); filter: drop-shadow(0 0 14px rgba(255, 42, 95, 0.9)); }
+      95% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(255, 42, 95, 0.7)); }
+    }
+
+    /* Floating Heart Popup */
     .floating-heart {
       position: absolute;
-      top: -30px;
-      left: 28px;
+      top: -24px;
+      left: 20px;
       color: #ff2a5f;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       pointer-events: none;
-      animation: floatUp 0.9s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+      animation: floatHeart 0.9s ease-out forwards;
     }
-    @keyframes floatUp {
-      0% { opacity: 0; transform: translateY(15px) scale(0.4); }
+    @keyframes floatHeart {
+      0% { opacity: 0; transform: translateY(15px) scale(0.5); }
       40% { opacity: 1; transform: translateY(-10px) scale(1.3); }
       100% { opacity: 0; transform: translateY(-40px) scale(0.9); }
     }
@@ -592,6 +549,7 @@
       .cta-row { justify-content: center; }
       .photo-wrapper { order: -1; }
       .photo-container { max-width: 320px; }
+      .insta-glass-card { width: 95%; }
     }
   </style>
 </head>
@@ -620,13 +578,12 @@
           <span class="rec-timer" id="rec-timecode">00:00:00:00</span>
         </div>
 
+        <!-- Pure Crisp White "Hi, I'm" -->
         <div class="intro-small">Hi, I’m</div>
 
-        <!-- Photoshop Active Text Bounding Box with Rulers & Handles -->
+        <!-- Photoshop Transform Box (No ruler line, No TYPE LAYER badge) -->
         <div class="ps-bounding-box-wrap">
           <div class="ps-marquee-border"></div>
-          <div class="ps-ruler-top"></div>
-          <div class="ps-tag-label">TYPE LAYER</div>
           
           <!-- Transform Handles -->
           <div class="ps-handle tl"></div>
@@ -645,7 +602,7 @@
 
           <!-- Underline Hue Slider -->
           <div class="underline-slider-container">
-            <input type="range" min="0" max="360" value="0" class="hue-slider" id="hue-picker" title="Adjust color hue">
+            <input type="range" min="0" max="360" value="0" class="hue-slider" id="hue-picker" title="Adjust color mood">
           </div>
         </div>
 
@@ -659,18 +616,16 @@
         </div>
       </div>
 
-      <!-- Seamless Feathered Portrait with HUD & Instagram Interaction -->
+      <!-- Seamless Feathered Portrait -->
       <div class="photo-wrapper">
         <div class="photo-container">
           <img src="profile.jpg" alt="Indranil">
 
-          <!-- Photoshop / Vector HUD Lines -->
+          <!-- Clean HUD Brackets -->
           <div class="hud-element hud-bracket-tl"></div>
           <div class="hud-element hud-bracket-br"></div>
-          <div class="hud-element hud-crosshair">✛</div>
-          <div class="hud-element hud-vector-path">NODE 24.8° // LOG-C</div>
 
-          <!-- Oval Liquid Apple Glass Pill Bar -->
+          <!-- Oval Liquid Apple Glass Pill Bar Over Photo -->
           <div class="apple-glass-pill">
             <div class="pill-title">Indranil</div>
             <div class="pill-followers">
@@ -679,16 +634,37 @@
           </div>
         </div>
 
-        <!-- Instagram Style Interaction Bar -->
-        <div class="insta-actions-bar" id="insta-bar">
-          <div class="insta-btn-group">
-            <button class="insta-btn" id="like-btn" title="Like">
-              <span id="heart-icon">🤍</span>
+        <!-- Liquid Apple Glass Instagram Bar -->
+        <div class="insta-glass-card" id="insta-card">
+          <div class="insta-left-actions">
+            <!-- Heart Button with 1.4M (Pulsing every 3s) -->
+            <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span id="like-count">1.4M</span>
             </button>
-            <button class="insta-btn" title="Comment">💬</button>
-            <button class="insta-btn" title="Share">↗️</button>
+
+            <!-- Comments -->
+            <button class="insta-action-btn" title="Comment">
+              <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+              <span>163</span>
+            </button>
+
+            <!-- Repost / Share -->
+            <button class="insta-action-btn" title="Repost">
+              <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+              <span>23</span>
+            </button>
+
+            <!-- Direct Share -->
+            <button class="insta-action-btn" title="Direct Share">
+              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
           </div>
-          <div class="like-counter" id="like-counter-text">1.4M Likes</div>
+
+          <!-- Bookmark Right Action -->
+          <button class="insta-action-btn" title="Save">
+            <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+          </button>
         </div>
       </div>
     </section>
@@ -777,7 +753,7 @@
       setTimeout(typeChar, 400);
     });
 
-    // 3. Hue Slider adjustments
+    // 3. Hue Slider Adjustments
     const hueSlider = document.getElementById("hue-picker");
     hueSlider.addEventListener("input", (e) => {
       document.documentElement.style.setProperty('--name-hue', `${e.target.value}deg`);
@@ -785,25 +761,20 @@
 
     // 4. Interactive Like Button with Popup Heart
     const likeBtn = document.getElementById('like-btn');
-    const heartIcon = document.getElementById('heart-icon');
-    const instaBar = document.getElementById('insta-bar');
-    let isLiked = false;
+    const instaCard = document.getElementById('insta-card');
+    const likeCountElem = document.getElementById('like-count');
+    let hasClicked = false;
 
     likeBtn.addEventListener('click', () => {
-      isLiked = !isLiked;
-      if (isLiked) {
-        heartIcon.textContent = '❤️';
-        likeBtn.classList.add('liked');
+      if (!hasClicked) {
+        likeCountElem.textContent = '1.4M+';
+        hasClicked = true;
 
-        // Create floating heart popup
         const heartPopup = document.createElement('div');
         heartPopup.className = 'floating-heart';
         heartPopup.textContent = '❤️';
-        instaBar.appendChild(heartPopup);
+        instaCard.appendChild(heartPopup);
         setTimeout(() => heartPopup.remove(), 900);
-      } else {
-        heartIcon.textContent = '🤍';
-        likeBtn.classList.remove('liked');
       }
     });
 
@@ -851,7 +822,6 @@
         if (this.x > canvas.width) this.x = 0;
       }
       draw() {
-        // Distance check from mouse to brighten particles near cursor
         const dx = this.x - mouseX;
         const dy = this.y - mouseY;
         const dist = Math.sqrt(dx * dx + dy * dy);
