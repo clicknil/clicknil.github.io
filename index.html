@@ -364,21 +364,10 @@
     }
 
     @keyframes photoShine10s {
-      0% {
-        left: -80%;
-        opacity: 0;
-      }
-      8% {
-        opacity: 1;
-      }
-      18% {
-        left: 150%;
-        opacity: 0;
-      }
-      100% {
-        left: 150%;
-        opacity: 0;
-      }
+      0% { left: -80%; opacity: 0; }
+      8% { opacity: 1; }
+      18% { left: 150%; opacity: 0; }
+      100% { left: 150%; opacity: 0; }
     }
 
     /* Corner HUD Accents */
@@ -448,7 +437,7 @@
       box-shadow: 0 0 8px var(--neon-blue);
     }
 
-    /* Fixed Instagram Action Bar: Even, Balanced Spacing */
+    /* Fixed Instagram Action Bar */
     .insta-glass-card {
       margin-top: 14px;
       width: 92%;
@@ -731,7 +720,9 @@
       color: #ffc400;
     }
 
-    /* Ventures Section ("What I Do") */
+    /* =========================================================
+       VENTURES SECTION: BALANCED 4-CARD SYMMETRICAL GRID (2x2)
+       ========================================================= */
     .ventures {
       position: relative;
       z-index: 1;
@@ -741,7 +732,7 @@
     }
     .section-header {
       text-align: center;
-      margin-bottom: 3.5rem;
+      margin-bottom: 3rem;
     }
     .section-header h2 {
       font-size: clamp(2rem, 4vw, 3rem);
@@ -754,16 +745,17 @@
       font-size: 1.05rem;
     }
 
+    /* 2x2 Grid for computer for visual balance */
     .venture-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8rem;
     }
     .venture-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 20px;
-      padding: 2.2rem;
+      padding: 2rem;
       backdrop-filter: blur(12px);
       transition: all 0.3s ease;
       display: flex;
@@ -771,34 +763,64 @@
       justify-content: space-between;
     }
     .venture-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-5px);
       border-color: rgba(0, 210, 255, 0.4);
       box-shadow: 0 15px 35px rgba(0, 210, 255, 0.1);
     }
     .venture-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1.25rem;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
     }
     .venture-title {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 700;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       color: #fff;
     }
     .venture-desc {
       color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.92rem;
+      margin-bottom: 1.2rem;
       line-height: 1.6;
     }
     .venture-link {
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--neon-blue);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      transition: gap 0.2s ease;
+    }
+    .venture-link:hover {
+      gap: 9px;
+      color: #fff;
+    }
+
+    /* Brand Badges inside 4th Box */
+    .brand-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 1.2rem;
+    }
+    .brand-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: rgba(0, 210, 255, 0.08);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      color: var(--neon-blue);
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+    }
+    .venture-card:hover .brand-tag {
+      background: rgba(255, 196, 0, 0.1);
+      border-color: rgba(255, 196, 0, 0.4);
+      color: var(--neon-gold);
     }
 
     /* Footer */
@@ -1026,7 +1048,7 @@
     }
 
     /* =========================================================
-       MOBILE OPTIMIZATIONS: PROPORTIONAL PHOTO & BALANCED ACTIONS
+       MOBILE OPTIMIZATIONS
        ========================================================= */
     @media (max-width: 900px) {
       .hero {
@@ -1038,7 +1060,6 @@
       .ps-bounding-box-wrap { margin-left: auto; margin-right: auto; }
       .cta-row { justify-content: center; }
       
-      /* Keeps photo above, but scales it down proportionally so Indranil box is in view */
       .photo-wrapper { 
         order: -1; 
         margin-bottom: 0.5rem;
@@ -1051,7 +1072,6 @@
         border-radius: 24px;
       }
       
-      /* Compact Apple Glass Pill on Mobile */
       .apple-glass-pill {
         bottom: 12px;
         padding: 6px 14px;
@@ -1060,7 +1080,6 @@
       .pill-title { font-size: 0.88rem; }
       .pill-followers { font-size: 0.72rem; }
 
-      /* Balanced action bar on mobile with no wide gaps */
       .insta-glass-card { 
         width: 88%; 
         max-width: 260px;
@@ -1081,7 +1100,34 @@
         height: 14px;
       }
 
-      /* Reel card & Timeline adjustments */
+      /* Single column on mobile with compact padding to save vertical space */
+      .ventures {
+        padding: 2rem 5% 3.5rem;
+      }
+      .section-header {
+        margin-bottom: 1.8rem;
+      }
+      .venture-grid {
+        grid-template-columns: 1fr;
+        gap: 1.1rem;
+      }
+      .venture-card {
+        padding: 1.3rem;
+        border-radius: 16px;
+      }
+      .venture-icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.6rem;
+      }
+      .venture-title {
+        font-size: 1.18rem;
+        margin-bottom: 0.4rem;
+      }
+      .venture-desc {
+        font-size: 0.86rem;
+        margin-bottom: 1rem;
+      }
+
       .reel-card { height: 185px; }
       .reel-card img { height: 185px; }
       .reel-reactions-bar { padding: 5px 14px; font-size: 0.76rem; gap: 12px; }
@@ -1187,11 +1233,11 @@
           </div>
         </div>
 
-        <!-- Balanced Liquid Apple Glass Instagram Bar (Zero Congestion, Even Spacing) -->
+        <!-- Balanced Liquid Apple Glass Instagram Bar -->
         <div class="insta-glass-card" id="insta-card">
           <div class="insta-actions-row">
             <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
-              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               <span id="like-count">1.4M</span>
             </button>
 
@@ -1420,15 +1466,15 @@
       </div>
     </section>
 
-    <!-- Ventures Section ("What I Do" Section) -->
+    <!-- Ventures Section ("What I Do" Section) with balanced 2x2 Grid -->
     <section class="ventures" id="ventures">
       <div class="section-header">
         <h2>What I Do</h2>
-        <p>From YouTube tech reviews to wedding cinematography and workshops</p>
+        <p>From YouTube tech reviews to wedding cinematography, workshops & brand collaborations</p>
       </div>
 
       <div class="venture-grid">
-        <!-- Click Nil -->
+        <!-- 1. Click Nil -->
         <div class="venture-card">
           <div>
             <div class="venture-icon">🎥</div>
@@ -1437,10 +1483,10 @@
               Tech reviews, camera setups (Sony & Canon), hands-on gear tests, and tutorials for upcoming creators and cinematographers.
             </p>
           </div>
-          <a href="https://youtube.com" target="_blank" class="venture-link">Visit YouTube Channel &rarr;</a>
+          <a href="https://www.youtube.com/@Click-Nil" target="_blank" class="venture-link">Visit YouTube Channel &rarr;</a>
         </div>
 
-        <!-- Bodhuboron -->
+        <!-- 2. Bodhuboron -->
         <div class="venture-card">
           <div>
             <div class="venture-icon">💍</div>
@@ -1449,10 +1495,10 @@
               Premium wedding photography & cinematic wedding films capturing authentic emotions, vibrant colors, and unforgettable moments.
             </p>
           </div>
-          <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20checked%20your%20website%2C%20I%20want%20to%20contact%20you" target="_blank" class="venture-link">Book for Wedding &rarr;</a>
+          <a href="https://www.instagram.com/bodhuboron.in/" target="_blank" class="venture-link">Book for Wedding &rarr;</a>
         </div>
 
-        <!-- Workshops -->
+        <!-- 3. Workshops & Academy -->
         <div class="venture-card">
           <div>
             <div class="venture-icon">🎓</div>
@@ -1461,7 +1507,29 @@
               Mentoring students in professional Bengali wedding album design, Premiere Pro & DaVinci Resolve editing, lighting, and camera handling.
             </p>
           </div>
-          <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20checked%20your%20website%2C%20I%20want%20to%20contact%20you" target="_blank" class="venture-link">Join Next Workshop &rarr;</a>
+          <a href="https://www.facebook.com/clicknilofficial/" target="_blank" class="venture-link">Join Next Workshop &rarr;</a>
+        </div>
+
+        <!-- 4. Brand Collaborations (New 4th Box) -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">🤝</div>
+            <h3 class="venture-title">Brand Collaborations</h3>
+            <p class="venture-desc">
+              Official gear tester, reviewer, and creative content producer for industry-leading imaging and cinema equipment brands.
+            </p>
+            <div class="brand-pills-wrap">
+              <span class="brand-tag">SONY</span>
+              <span class="brand-tag">CANON</span>
+              <span class="brand-tag">NIKON</span>
+              <span class="brand-tag">GODOX</span>
+              <span class="brand-tag">NISI</span>
+              <span class="brand-tag">SAMYANG</span>
+              <span class="brand-tag">KODAK</span>
+              <span class="brand-tag">PROGRADE</span>
+            </div>
+          </div>
+          <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20collaborate%20with%20you" target="_blank" class="venture-link">Collaborate with Me &rarr;</a>
         </div>
       </div>
     </section>
@@ -1597,7 +1665,7 @@
         this.life = 1.0;
         this.decay = Math.random() * 0.025 + 0.018;
 
-        const flamePalette = ['#ffffff', '#fff275', '#ffc000', '#ff8800', '#ff3b00'];
+        const flamePalette = ['#ffffff', '#fff275', '#ffc400', '#ff8800', '#ff3b00'];
         this.color = flamePalette[Math.floor(Math.random() * flamePalette.length)];
       }
 
