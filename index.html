@@ -57,7 +57,7 @@
       z-index: 0;
     }
 
-    /* FULL-SCREEN REALISTIC FIRE PARTICLES CANVAS (Triggered on Playhead Drag) */
+    /* FULL-SCREEN REALISTIC FIRE PARTICLES CANVAS */
     #drag-fire-canvas {
       position: fixed;
       inset: 0;
@@ -65,7 +65,7 @@
       z-index: 9998;
     }
 
-    /* Header */
+    /* Header with Verified Badge to the left of CLICK NIL */
     header {
       position: sticky;
       top: 0;
@@ -87,7 +87,20 @@
       color: #fff;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
+    }
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neon-blue);
+      filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.85));
+      line-height: 1;
+    }
+    .verified-badge svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
     }
     .brand-logo .divider { color: var(--card-border); font-weight: 300; }
     .brand-logo .sub {
@@ -295,7 +308,7 @@
       border-color: rgba(255, 255, 255, 0.2);
     }
 
-    /* Portrait Wrapper */
+    /* Portrait Wrapper with 10-Second Futuristic Shine Beam */
     .photo-wrapper {
       position: relative;
       display: flex;
@@ -310,6 +323,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 36px;
+      overflow: hidden;
     }
     .photo-container img {
       width: 100%;
@@ -327,11 +342,50 @@
       transform: scale(1.02);
     }
 
+    /* 10-Second Luminous Laser Shine Overlay across portrait */
+    .photo-shine-sweep {
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(
+        90deg, 
+        transparent 0%, 
+        rgba(0, 210, 255, 0.15) 30%, 
+        rgba(255, 255, 255, 0.65) 50%, 
+        rgba(255, 196, 0, 0.25) 70%, 
+        transparent 100%
+      );
+      transform: rotate(28deg);
+      pointer-events: none;
+      z-index: 2;
+      animation: photoShine10s 10s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes photoShine10s {
+      0% {
+        left: -80%;
+        opacity: 0;
+      }
+      8% {
+        opacity: 1;
+      }
+      18% {
+        left: 150%;
+        opacity: 0;
+      }
+      100% {
+        left: 150%;
+        opacity: 0;
+      }
+    }
+
     /* Corner HUD Accents */
     .hud-element {
       position: absolute;
       pointer-events: none;
-      z-index: 2;
+      z-index: 3;
     }
     .hud-bracket-tl {
       top: 10px;
@@ -369,7 +423,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 3;
+      z-index: 4;
     }
     .pill-title {
       font-size: 1.05rem;
@@ -394,15 +448,15 @@
       box-shadow: 0 0 8px var(--neon-blue);
     }
 
-    /* Instagram Action Bar */
+    /* Fixed Instagram Action Bar: Even, Balanced Spacing */
     .insta-glass-card {
       margin-top: 14px;
-      width: 95%;
-      max-width: 450px;
+      width: 92%;
+      max-width: 440px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 18px;
+      padding: 10px 16px;
       background: rgba(18, 24, 38, 0.55);
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 20px;
@@ -411,11 +465,12 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
       position: relative;
     }
-    .insta-left-actions {
+    .insta-actions-row {
       display: flex;
       align-items: center;
-      gap: 12px;
-      flex-wrap: nowrap;
+      justify-content: space-between;
+      width: 100%;
+      gap: 8px;
     }
     .insta-action-btn {
       background: none;
@@ -442,11 +497,6 @@
       width: 18px;
       height: 18px;
       fill: currentColor;
-    }
-    .save-action-btn {
-      margin-left: auto;
-      padding-left: 8px;
-      flex-shrink: 0;
     }
 
     /* Auto Blinking / Pulsing Heart */
@@ -763,7 +813,7 @@
     }
 
     /* =========================================================
-       SHOWCASE MODAL: LUXURY ROYAL TYPOGRAPHY & FLUID SHIMMER
+       SHOWCASE MODAL: LUXURY ROYAL TYPOGRAPHY
        ========================================================= */
     #work-modal {
       position: fixed;
@@ -847,7 +897,6 @@
       max-width: 100%;
     }
 
-    /* Royal Majestic "PICTORICAL" */
     .pictorical-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2.4rem, 7.8vw, 4.8rem);
@@ -856,7 +905,6 @@
       text-transform: uppercase;
       white-space: nowrap;
       display: block;
-      /* Diamond liquid-silver with subtle cyan/gold refraction */
       background: linear-gradient(110deg, #ffffff 0%, #e2e8f0 20%, #a5f3fc 40%, #ffffff 50%, #fde68a 60%, #e2e8f0 80%, #ffffff 100%);
       background-size: 250% auto;
       -webkit-background-clip: text;
@@ -877,7 +925,6 @@
       100% { transform: translateY(-4px); }
     }
 
-    /* Royal Crisp Ivory White "PREMIUM WEDDING ALBUM" with Needle Dividers */
     .pictorical-sub-wrap {
       display: inline-flex;
       align-items: center;
@@ -978,33 +1025,63 @@
       100% { transform: scale(1); border-color: rgba(0, 210, 255, 0.4); }
     }
 
-    /* Mobile Responsive */
+    /* =========================================================
+       MOBILE OPTIMIZATIONS: PROPORTIONAL PHOTO & BALANCED ACTIONS
+       ========================================================= */
     @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
         text-align: center;
-        padding-top: 3rem;
+        padding-top: 1.8rem;
+        gap: 1.5rem;
       }
       .ps-bounding-box-wrap { margin-left: auto; margin-right: auto; }
       .cta-row { justify-content: center; }
-      .photo-wrapper { order: -1; }
-      .photo-container { max-width: 320px; }
-      .insta-glass-card { 
-        width: 98%; 
-        padding: 8px 12px;
+      
+      /* Keeps photo above, but scales it down proportionally so Indranil box is in view */
+      .photo-wrapper { 
+        order: -1; 
+        margin-bottom: 0.5rem;
       }
-      .insta-left-actions {
-        gap: 8px;
+      .photo-container { 
+        max-width: 215px; 
+        border-radius: 24px;
+      }
+      .photo-container img {
+        border-radius: 24px;
+      }
+      
+      /* Compact Apple Glass Pill on Mobile */
+      .apple-glass-pill {
+        bottom: 12px;
+        padding: 6px 14px;
+        width: 88%;
+      }
+      .pill-title { font-size: 0.88rem; }
+      .pill-followers { font-size: 0.72rem; }
+
+      /* Balanced action bar on mobile with no wide gaps */
+      .insta-glass-card { 
+        width: 88%; 
+        max-width: 260px;
+        padding: 6px 10px;
+        margin-top: 10px;
+        border-radius: 14px;
+      }
+      .insta-actions-row {
+        gap: 4px;
       }
       .insta-action-btn {
-        font-size: 0.78rem;
-        gap: 4px;
-        padding: 3px 4px;
+        font-size: 0.72rem;
+        gap: 3px;
+        padding: 2px 3px;
       }
       .insta-action-btn svg {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
       }
+
+      /* Reel card & Timeline adjustments */
       .reel-card { height: 185px; }
       .reel-card img { height: 185px; }
       .reel-reactions-bar { padding: 5px 14px; font-size: 0.76rem; gap: 12px; }
@@ -1028,9 +1105,12 @@
   <!-- FULL-SCREEN DRAG FIRE SPARKS CANVAS -->
   <canvas id="drag-fire-canvas"></canvas>
 
-  <!-- Header -->
+  <!-- Header with Verified Badge to the left of CLICK NIL -->
   <header>
     <a href="#" class="brand-logo">
+      <span class="verified-badge" title="Verified Visual Artist">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      </span>
       CLICK NIL <span class="divider">/</span> <span class="sub">Visual Artist</span>
     </a>
   </header>
@@ -1086,10 +1166,13 @@
         </div>
       </div>
 
-      <!-- Seamless Feathered Portrait -->
+      <!-- Proportional Portrait with 10s Laser Shine Sweep -->
       <div class="photo-wrapper">
         <div class="photo-container">
           <img src="profile.jpg" alt="Indranil">
+
+          <!-- 10-Second Futuristic Shine Beam -->
+          <div class="photo-shine-sweep"></div>
 
           <!-- Clean HUD Brackets -->
           <div class="hud-element hud-bracket-tl"></div>
@@ -1104,9 +1187,9 @@
           </div>
         </div>
 
-        <!-- Liquid Apple Glass Instagram Bar -->
+        <!-- Balanced Liquid Apple Glass Instagram Bar (Zero Congestion, Even Spacing) -->
         <div class="insta-glass-card" id="insta-card">
-          <div class="insta-left-actions">
+          <div class="insta-actions-row">
             <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
               <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               <span id="like-count">1.4M</span>
@@ -1125,11 +1208,11 @@
             <button class="insta-action-btn" title="Direct Share">
               <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
             </button>
-          </div>
 
-          <button class="insta-action-btn save-action-btn" title="Save">
-            <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
-          </button>
+            <button class="insta-action-btn" title="Save">
+              <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -1390,12 +1473,15 @@
 
     <div class="modal-header-bar">
       <div class="brand-logo">
+        <span class="verified-badge" title="Verified Visual Artist">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </span>
         CLICK NIL <span style="opacity: 0.4;">/</span> <span class="sub">Album Showcase</span>
       </div>
       <button class="neon-cross-btn" id="close-work-btn" title="Close">✕</button>
     </div>
 
-    <!-- Pictorical Header with Royal Diamond Silver & Ivory White Subtitle -->
+    <!-- Royal Typography Header -->
     <div class="pictorical-header">
       <div class="pictorical-title-wrap">
         <h2 class="pictorical-title">PICTORICAL</h2>
@@ -1483,7 +1569,7 @@
     });
 
     // =========================================================
-    // 5. FULL-SCREEN REALISTIC FIRE EMBER SPARKS SYSTEM (DRAG TRIGGER)
+    // 5. FULL-SCREEN VELOCITY-BASED FIRE SPARKS
     // =========================================================
     const fireCanvas = document.getElementById('drag-fire-canvas');
     const fireCtx = fireCanvas.getContext('2d');
@@ -1499,11 +1585,9 @@
     class FullScreenSpark {
       constructor(originX, originY, velocity) {
         const speedMagnitude = Math.abs(velocity);
-        // Positioned around cursor with dynamic spread
         this.x = originX + (Math.random() - 0.5) * (speedMagnitude * 3 + 20);
         this.y = originY + (Math.random() - 0.5) * 30;
 
-        // Emitter physics: explodes opposite to drag direction & ascends upwards
         const angle = Math.atan2(-Math.random() * 5 - 2, -velocity * 0.4 + (Math.random() - 0.5) * 6);
         const burstSpeed = Math.random() * (speedMagnitude * 0.45 + 3) + 2;
 
@@ -1513,23 +1597,15 @@
         this.life = 1.0;
         this.decay = Math.random() * 0.025 + 0.018;
 
-        // Realistic incandescent fire colors: brilliant white core, golden flame, deep orange embers
-        const flamePalette = [
-          '#ffffff', // White hot core
-          '#fff275', // Supernova yellow
-          '#ffc000', // Saffron gold
-          '#ff8800', // Bright orange
-          '#ff3b00'  // Crimson flare
-        ];
+        const flamePalette = ['#ffffff', '#fff275', '#ffc000', '#ff8800', '#ff3b00'];
         this.color = flamePalette[Math.floor(Math.random() * flamePalette.length)];
       }
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
-        // Gravity & air drag
         this.vx *= 0.96;
-        this.vy -= 0.08; // upward thermal lift
+        this.vy -= 0.08;
         this.size *= 0.97;
         this.life -= this.decay;
       }
@@ -1549,7 +1625,6 @@
 
     function spawnFullScreenSparks(x, y, velocity) {
       const speedMagnitude = Math.abs(velocity);
-      // Dynamic count: slow drag = 2 to 4 embers; fast drag = up to 28 fiery sparks
       const count = Math.min(28, Math.max(2, Math.floor(speedMagnitude * 1.4)));
       for (let i = 0; i < count; i++) {
         fullScreenSparks.push(new FullScreenSpark(x, y, velocity));
@@ -1636,7 +1711,6 @@
       currentScroll = ratio * halfWidth;
       updateCarouselPosition();
 
-      // Calculate speed & trigger full-screen fire particles
       const velocity = clientX - lastClientX;
       lastClientX = clientX;
       spawnFullScreenSparks(clientX, clientY, velocity);
@@ -1735,7 +1809,7 @@
       glow.style.top = mouseY + 'px';
     });
 
-    // 9. Background & Modal Particle Systems (Futuristic Cyan & Neon Gold)
+    // 9. Background & Modal Particle Systems
     const mainCanvas = document.getElementById('particle-canvas');
     const modalCanvas = document.getElementById('modal-particle-canvas');
 
