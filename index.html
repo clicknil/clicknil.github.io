@@ -1,1234 +1,439 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CLICK NIL / STUDIO | Futuristic Cinema & Visual Optics</title>
-  <meta name="description" content="Click Nil Studio — Crafting cinematic worlds, anamorphic optics, high-end cinematography, and visual storytelling." />
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            cinema: {
-              black: '#05070d',
-              dark: '#090d16',
-              cyan: '#00f2fe',
-              violet: '#7928ca',
-              magenta: '#ff0080',
-              amber: '#ffaa00',
-              crimson: '#ff0055'
-            }
-          },
-          fontFamily: {
-            display: ['"Space Grotesk"', 'sans-serif'],
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace']
-          },
-          animation: {
-            'flare-pulse': 'flarePulse 6s ease-in-out infinite',
-            'radar': 'radarSweep 4s linear infinite',
-            'float': 'floatAnim 5s ease-in-out infinite',
-            'scanline': 'scanline 8s linear infinite'
-          },
-          keyframes: {
-            flarePulse: {
-              '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-              '50%': { opacity: '0.8', transform: 'scale(1.15)' }
-            },
-            floatAnim: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-10px)' }
-            },
-            scanline: {
-              '0%': { transform: 'translateY(-100%)' },
-              '100%': { transform: 'translateY(1000%)' }
-            }
-          }
-        }
-      }
-    };
-  </script>
-
-  <!-- Google Fonts -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indranil Pramanick | Visual Artist, Cinematographer & Mentor</title>
+  <meta name="description" content="Official website of Indranil Pramanick — Creator of Click Nil, Founder of Bodhuboron, Cinematographer and Workshop Mentor.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Plus+Jakarta+Sans:wght@300;400;500;700;800&family=Space+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --bg: #06070a;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --neon-blue: #00d2ff;
+      --neon-purple: #9d4edd;
+      --neon-amber: #ff9e00;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      background-color: #05070d;
-      color: #f1f5f9;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
       overflow-x: hidden;
-      selection-background-color: #00f2fe;
+      line-height: 1.6;
+      position: relative;
     }
-    ::selection {
-      background: #00f2fe;
-      color: #05070d;
-    }
-    /* Dynamic Anamorphic Ambient Glow (Scroll & Mouse reactive) */
-    #ambient-lighting {
+
+    /* Ambient Dynamic Mouse Beam */
+    #cursor-glow {
       position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
-      mix-blend-mode: screen;
-      opacity: 0.8;
-    }
-    /* Dynamic Cursor Light Spot */
-    #cursor-light {
-      position: fixed;
-      width: 450px;
-      height: 450px;
+      top: 0;
+      left: 0;
+      width: 600px;
+      height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(121, 40, 202, 0.08) 40%, transparent 70%);
+      background: radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, rgba(157, 78, 221, 0.1) 40%, transparent 70%);
       pointer-events: none;
       transform: translate(-50%, -50%);
-      z-index: 2;
-      transition: opacity 0.3s ease, transform 0.08s ease-out;
-      will-change: left, top;
+      z-index: 0;
+      filter: blur(80px);
+      transition: opacity 0.3s ease;
     }
-    /* Glassmorphism & Cyber borders */
-    .glass-panel {
-      background: rgba(10, 15, 29, 0.65);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 8%;
+      backdrop-filter: blur(16px);
+      background: rgba(6, 7, 10, 0.7);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .brand-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand-logo span { color: var(--neon-blue); }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 2rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 8% 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      background: rgba(0, 210, 255, 0.08);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      color: var(--neon-blue);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--neon-blue);
+      box-shadow: 0 0 10px var(--neon-blue);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    h1.hero-title {
+      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.25rem;
+    }
+    h1.hero-title .highlight {
+      background: linear-gradient(135deg, #00d2ff 0%, #9d4edd 50%, #ff9e00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .hero-bio {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-glow {
+      background: linear-gradient(135deg, #00d2ff, #0084ff);
+      color: #000;
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+    }
+    .btn-glow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px rgba(0, 210, 255, 0.6);
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      border: 1px solid var(--card-border);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Profile Photo Frame */
+    .photo-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .photo-card {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 4/5;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #11131a;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
     }
-    .glass-border-glow {
-      position: relative;
-      transition: all 0.35s ease;
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.5s ease;
+      display: block;
     }
-    .glass-border-glow:hover {
-      border-color: rgba(0, 242, 254, 0.5);
-      box-shadow: 0 0 35px rgba(0, 242, 254, 0.25), inset 0 0 20px rgba(0, 242, 254, 0.1);
-      transform: translateY(-4px);
+    .photo-card:hover img {
+      transform: scale(1.03);
     }
-    /* Horizontal Anamorphic Lens Flare Beam */
-    .anamorphic-flare {
+    .photo-overlay {
       position: absolute;
-      width: 140%;
-      height: 2px;
-      left: -20%;
-      top: 50%;
-      background: linear-gradient(90deg, transparent 0%, rgba(0, 242, 254, 0) 20%, rgba(0, 242, 254, 0.85) 50%, rgba(121, 40, 202, 0.8) 65%, transparent 100%);
-      filter: blur(1px);
-      box-shadow: 0 0 16px rgba(0, 242, 254, 0.8);
+      inset: 0;
+      background: linear-gradient(to top, rgba(6, 7, 10, 0.85) 0%, transparent 60%);
       pointer-events: none;
     }
-    /* HUD Corner Brackets */
-    .hud-bracket-tl {
+    .photo-badge {
       position: absolute;
-      top: 8px;
-      left: 8px;
-      width: 12px;
-      height: 12px;
-      border-top: 2px solid #00f2fe;
-      border-left: 2px solid #00f2fe;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      padding: 12px 18px;
+      background: rgba(15, 18, 28, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
     }
-    .hud-bracket-br {
-      position: absolute;
-      bottom: 8px;
-      right: 8px;
-      width: 12px;
-      height: 12px;
-      border-bottom: 2px solid #00f2fe;
-      border-right: 2px solid #00f2fe;
+    .photo-badge p {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
     }
-    /* Text Gradient Gradients */
-    .text-glow-cyan {
-      background: linear-gradient(135deg, #ffffff 10%, #00f2fe 70%, #4facfe 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+    .photo-badge span {
+      font-size: 0.8rem;
+      color: var(--neon-blue);
     }
-    .text-glow-gradient {
-      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 40%, #ff0080 80%, #ffaa00 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+
+    /* Pillars / Ventures Section */
+    .ventures {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 8%;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    /* Video Reel Aspect Ratio Container */
-    .cinema-frame {
-      aspect-ratio: 2.39 / 1; /* Anamorphic ratio */
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
     }
-    @media (max-width: 640px) {
-      .cinema-frame {
-        aspect-ratio: 16 / 9;
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .section-header p {
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      font-size: 1.05rem;
+    }
+
+    .venture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .venture-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.2rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .venture-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 210, 255, 0.4);
+      box-shadow: 0 15px 35px rgba(0, 210, 255, 0.1);
+    }
+    .venture-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .venture-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: #fff;
+    }
+    .venture-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .venture-link {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--neon-blue);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 3rem 8%;
+      text-align: center;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 3rem;
       }
+      .cta-row { justify-content: center; }
+      .photo-wrapper { order: -1; }
+      .photo-card { max-width: 320px; margin: 0 auto; }
+      .nav-links { display: none; }
     }
   </style>
 </head>
-<body class="relative min-h-screen">
+<body>
 
-  <!-- Dynamic Anamorphic Lighting Engine (Changes color as you scroll) -->
-  <div id="ambient-lighting"></div>
+  <!-- Futuristic Ambient Glow Follows Mouse -->
+  <div id="cursor-glow"></div>
 
-  <!-- Mouse Light Tracker -->
-  <div id="cursor-light"></div>
-
-  <!-- Canvas Particles for Cinematic Floating Dust & Starfield -->
-  <canvas id="cinema-canvas" class="fixed inset-0 pointer-events-none z-[2]"></canvas>
-
-  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl border-b border-white/5 bg-[#05070d]/80" id="main-nav">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      
-      <!-- Brand Aperture Logo -->
-      <a href="#" class="flex items-center space-x-3 group">
-        <div class="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-cinema-cyan/20 via-cinema-violet/30 to-cinema-magenta/20 border border-cinema-cyan/40 flex items-center justify-center group-hover:border-cinema-cyan transition-all duration-300 shadow-[0_0_15px_rgba(0,242,254,0.3)]">
-          <!-- Aperture SVG Icon -->
-          <svg class="w-6 h-6 text-cinema-cyan transition-transform duration-500 group-hover:rotate-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
-            <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
-            <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
-            <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
-            <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
-            <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
-          </svg>
-          <span class="absolute -bottom-1 -right-1 w-2 h-2 rounded-full bg-cinema-cyan animate-ping"></span>
-        </div>
-        <div>
-          <span class="font-display font-black text-xl tracking-wider text-white block">CLICK NIL <span class="text-cinema-cyan font-light">/ STUDIO</span></span>
-          <span class="text-[9px] font-mono tracking-[0.25em] text-gray-400 block -mt-1">ANAMORPHIC OPTICS &bull; 8K RAW</span>
-        </div>
-      </a>
-
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center space-x-8 text-xs font-mono tracking-widest text-gray-300 uppercase">
-        <a href="#showreel" class="hover:text-cinema-cyan transition-colors flex items-center gap-1.5">
-          <span class="text-cinema-cyan">01.</span> Showreel
-        </a>
-        <a href="#projects" class="hover:text-cinema-cyan transition-colors flex items-center gap-1.5">
-          <span class="text-cinema-cyan">02.</span> Projects
-        </a>
-        <a href="#optics" class="hover:text-cinema-cyan transition-colors flex items-center gap-1.5">
-          <span class="text-cinema-cyan">03.</span> Optical Lab
-        </a>
-        <a href="#services" class="hover:text-cinema-cyan transition-colors flex items-center gap-1.5">
-          <span class="text-cinema-cyan">04.</span> Production
-        </a>
-        <a href="#contact" class="hover:text-cinema-cyan transition-colors flex items-center gap-1.5">
-          <span class="text-cinema-cyan">05.</span> Initiate
-        </a>
-      </nav>
-
-      <!-- Audio Telemetry & Quick CTA -->
-      <div class="hidden sm:flex items-center space-x-4">
-        <!-- Interactive Sound Engine Toggle -->
-        <button id="sound-btn" onclick="toggleAtmosphereAudio()" class="px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 hover:border-cinema-cyan text-gray-300 hover:text-white font-mono text-[11px] flex items-center gap-2 transition-all">
-          <i data-lucide="volume-2" id="sound-icon" class="w-4 h-4 text-cinema-cyan"></i>
-          <span id="sound-label">ATMOSPHERE: OFF</span>
-        </button>
-
-        <a href="https://wa.me/?text=Hello%20Click%20Nil%20Studio!%20I%20want%20to%20collaborate%20on%20a%20cinematic%20film%20project." target="_blank" class="px-4 py-2 rounded-xl text-xs font-bold font-mono tracking-wider bg-gradient-to-r from-cinema-cyan to-cinema-violet text-black hover:opacity-90 transition-all shadow-[0_0_20px_rgba(0,242,254,0.4)] flex items-center gap-2">
-          <span>BOOK REEL</span>
-          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-        </a>
-      </div>
-
-      <!-- Mobile Menu Button -->
-      <button id="mobile-toggle-btn" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white border border-white/10">
-        <i data-lucide="menu" class="w-6 h-6"></i>
-      </button>
-    </div>
-
-    <!-- Mobile Dropdown -->
-    <div id="mobile-menu-drawer" class="hidden md:hidden glass-panel border-t border-white/10 p-6 space-y-4 font-mono text-sm">
-      <a href="#showreel" class="block text-gray-300 hover:text-cinema-cyan">01. SHOWREEL</a>
-      <a href="#projects" class="block text-gray-300 hover:text-cinema-cyan">02. PROJECTS</a>
-      <a href="#optics" class="block text-gray-300 hover:text-cinema-cyan">03. OPTICAL LAB</a>
-      <a href="#services" class="block text-gray-300 hover:text-cinema-cyan">04. PRODUCTION</a>
-      <a href="#contact" class="block text-gray-300 hover:text-cinema-cyan">05. INITIATE</a>
-      <div class="pt-4 border-t border-white/10 flex flex-col gap-3">
-        <button onclick="toggleAtmosphereAudio()" class="w-full py-2.5 rounded-lg border border-cinema-cyan/30 text-cinema-cyan text-xs">
-          TOGGLE ATMOSPHERIC SYNTH
-        </button>
-        <a href="https://wa.me/?text=Hello%20Click%20Nil%20Studio!%20Let%20us%20talk%20project." target="_blank" class="w-full py-2.5 text-center rounded-lg bg-cinema-cyan text-black font-bold text-xs">
-          WHATSAPP PRODUCER
-        </a>
-      </div>
-    </div>
+  <!-- Header -->
+  <header>
+    <a href="#" class="brand-logo">INDRANIL <span>PRAMANICK</span></a>
+    <nav class="nav-links">
+      <a href="#ventures">Ventures</a>
+      <a href="#about">About</a>
+      <a href="https://wa.me/" target="_blank">Contact</a>
+    </nav>
   </header>
 
-  <section id="showreel" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-      
-      <!-- Top Cyber Pill Badge -->
-      <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full glass-panel border border-cinema-cyan/30 text-xs font-mono text-cinema-cyan mb-8 animate-float">
-        <span class="w-2 h-2 rounded-full bg-cinema-cyan animate-ping"></span>
-        <span class="tracking-widest">OPTICAL APERTURE 1.33X // SONY FX CINEMA LINE</span>
-        <span class="text-white/20">|</span>
-        <span class="text-white">REEL 2026 EDITION</span>
-      </div>
-
-      <!-- Main Headline with Lens Flare Accent -->
-      <div class="relative max-w-5xl mx-auto mb-6">
-        <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] uppercase">
-          CRAFTING CINEMATIC WORLDS. <br/>
-          <span class="text-glow-cyan">FUTURE OPTICS.</span>
+  <!-- Hero Section with Photo & Identity -->
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="live-dot"></span> Visual Director & Creator
+        </div>
+        <h1 class="hero-title">
+          Hi, I’m <span class="highlight">Indranil</span>.
         </h1>
-        <p class="mt-6 text-base sm:text-xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed">
-          We blend vintage anamorphic glass, cutting-edge 10-bit color grading, and visionary visual direction to give stories an unmistakable, futuristic cinematic soul.
+        <p class="hero-bio">
+          Photographer, Cinematographer, Bengali Album Designer & Video Editor. Creator of <strong>Click Nil</strong>, Founder of <strong>Bodhuboron Wedding Photography</strong>, and Educator mentoring students across West Bengal in filmmaking & album design.
         </p>
-      </div>
-
-      <!-- Primary Action Row -->
-      <div class="flex flex-wrap items-center justify-center gap-4 mt-8 mb-16">
-        <button onclick="openVideoPlayer('epic')" class="px-8 py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest text-black bg-cinema-cyan hover:bg-white transition-all shadow-[0_0_30px_rgba(0,242,254,0.45)] flex items-center gap-3 group">
-          <i data-lucide="play" class="w-4 h-4 fill-black group-hover:scale-125 transition-transform"></i>
-          <span>PLAY FULL 4K SHOWREEL</span>
-        </button>
-
-        <a href="#projects" class="px-8 py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest text-gray-200 glass-panel border border-white/20 hover:border-cinema-cyan transition-all flex items-center gap-2">
-          <i data-lucide="layers" class="w-4 h-4 text-cinema-cyan"></i>
-          <span>EXPLORE ARCHIVE</span>
-        </a>
-      </div>
-
-      <div class="relative max-w-5xl mx-auto">
-        <!-- Horizontal Anamorphic Flare -->
-        <div class="anamorphic-flare"></div>
-        
-        <!-- Curved Monitor Bezel Container -->
-        <div class="relative glass-panel rounded-3xl p-3 sm:p-5 border border-cinema-cyan/30 shadow-[0_0_60px_rgba(0,242,254,0.15)] group overflow-hidden">
-          
-          <!-- Cyber HUD Overlay Elements -->
-          <div class="hud-bracket-tl"></div>
-          <div class="hud-bracket-br"></div>
-          
-          <div class="flex items-center justify-between px-4 py-2 border-b border-white/10 text-xs font-mono text-gray-400 mb-2">
-            <div class="flex items-center space-x-3">
-              <span class="inline-block w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
-              <span class="text-white font-semibold">REC [RAW-LOG 8192 x 3432]</span>
-            </div>
-            <div class="flex items-center space-x-4">
-              <span>FPS: 23.976</span>
-              <span>SHUTTER: 1/48</span>
-              <span class="text-cinema-cyan">ISO: 800</span>
-              <span class="hidden sm:inline text-cinema-magenta">WB: 5600K</span>
-            </div>
-          </div>
-
-          <!-- Video / Animated Cinematic Viewport -->
-          <div class="relative cinema-frame rounded-2xl overflow-hidden bg-black flex items-center justify-center cursor-pointer" onclick="openVideoPlayer('epic')">
-            
-            <!-- Live WebGL / Canvas Simulated Cyber Cinematic Loop -->
-            <canvas id="hero-video-sim" class="w-full h-full object-cover"></canvas>
-            
-            <!-- Vignette & Letterbox Shadow Gradients -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60 pointer-events-none"></div>
-            
-            <!-- Center Play Trigger Ring -->
-            <div class="absolute z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full border border-cinema-cyan/40 bg-black/60 backdrop-blur-md flex items-center justify-center text-white group-hover:scale-110 group-hover:border-cinema-cyan group-hover:shadow-[0_0_30px_rgba(0,242,254,0.6)] transition-all duration-300">
-              <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-cinema-cyan to-cinema-violet flex items-center justify-center shadow-lg">
-                <i data-lucide="play" class="w-6 h-6 text-black fill-black ml-1"></i>
-              </div>
-            </div>
-
-            <!-- Bottom Floating Telemetry Overlay -->
-            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none text-left z-10">
-              <div>
-                <span class="text-[10px] font-mono uppercase tracking-widest text-cinema-cyan bg-black/70 px-2 py-0.5 rounded border border-cinema-cyan/40">MASTER SEQUENCE #09</span>
-                <p class="text-sm sm:text-base font-bold text-white mt-1">NEO-CALCUTTA 2077 // SPEC DIRECTORS CUT</p>
-              </div>
-              <div class="text-right font-mono text-[11px] text-gray-300 hidden sm:block">
-                <span>AUDIO CH1: -12dB</span><br/>
-                <span class="text-cinema-cyan">LUT: CLICK_NIL_KODAK_CYBER_V4</span>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Cinema Player Control Bar Simulation -->
-          <div class="mt-3 px-2 flex items-center justify-between text-xs font-mono text-gray-400">
-            <span class="text-cinema-cyan">01:48 / 03:22</span>
-            <div class="flex-1 mx-4 h-1 bg-gray-800 rounded-full overflow-hidden">
-              <div class="w-1/2 h-full bg-gradient-to-r from-cinema-cyan to-cinema-magenta rounded-full"></div>
-            </div>
-            <div class="flex items-center space-x-3 text-white">
-              <span class="hover:text-cinema-cyan cursor-pointer" onclick="toggleAtmosphereAudio()">AUDIO FX</span>
-              <span class="hover:text-cinema-cyan cursor-pointer" onclick="openVideoPlayer('epic')">EXPAND [F]</span>
-            </div>
-          </div>
-
+        <div class="cta-row">
+          <a href="#ventures" class="btn btn-glow">Explore My Work</a>
+          <a href="https://wa.me/" target="_blank" class="btn btn-outline">WhatsApp Me</a>
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <section id="projects" class="py-24 relative z-10 border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
-        <div>
-          <span class="text-xs font-mono uppercase tracking-[0.25em] text-cinema-cyan block mb-2">// SELECTED WORKS</span>
-          <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white uppercase tracking-tight">
-            PROJECT ARCHIVES
-          </h2>
+      <!-- Centerpiece Portrait -->
+      <div class="photo-wrapper">
+        <div class="photo-card">
+          <img src="profile.jpg" alt="Indranil Pramanick">
+          <div class="photo-overlay"></div>
+          <div class="photo-badge">
+            <p>Indranil Pramanick</p>
+            <span>Visual Storyteller & Creator</span>
+          </div>
         </div>
-        <p class="text-gray-400 text-sm max-w-md mt-4 md:mt-0 font-light">
-          Each project is shot with custom color science, tailored lighting schemes, and cinematic anamorphic framing.
-        </p>
+      </div>
+    </section>
+
+    <!-- Ventures Section -->
+    <section class="ventures" id="ventures">
+      <div class="section-header">
+        <h2>What I Do</h2>
+        <p>From YouTube tech reviews to wedding cinematography and workshops</p>
       </div>
 
-      <!-- Project Filter Badges -->
-      <div class="flex flex-wrap gap-2 mb-10">
-        <button onclick="filterProjects('all')" class="filter-btn active px-4 py-1.5 rounded-lg font-mono text-xs uppercase tracking-wider bg-cinema-cyan text-black font-bold transition-all">All Works</button>
-        <button onclick="filterProjects('cinematic')" class="filter-btn px-4 py-1.5 rounded-lg font-mono text-xs uppercase tracking-wider glass-panel text-gray-400 hover:text-white transition-all">Cinematography</button>
-        <button onclick="filterProjects('commercial')" class="filter-btn px-4 py-1.5 rounded-lg font-mono text-xs uppercase tracking-wider glass-panel text-gray-400 hover:text-white transition-all">Commercials</button>
-        <button onclick="filterProjects('music')" class="filter-btn px-4 py-1.5 rounded-lg font-mono text-xs uppercase tracking-wider glass-panel text-gray-400 hover:text-white transition-all">Music Videos</button>
-      </div>
-
-      <!-- 3D Interactive Project Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-        
-        <!-- Project Card 1: Cyber City Nightscape -->
-        <div class="project-item cinematic tilt-card glass-panel rounded-2xl overflow-hidden glass-border-glow group p-4 cursor-pointer" onclick="openVideoPlayer('neon-city')">
-          <div class="relative aspect-video rounded-xl overflow-hidden bg-black/90 mb-4">
-            <!-- Simulated Animated Canvas Reel -->
-            <canvas id="reel-canvas-1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></canvas>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-            
-            <div class="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/70 border border-cinema-cyan/40 text-[10px] font-mono text-cinema-cyan">
-              ANAMORPHIC 50MM
-            </div>
-            
-            <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-cinema-cyan/20 border border-cinema-cyan flex items-center justify-center text-cinema-cyan group-hover:bg-cinema-cyan group-hover:text-black transition-colors">
-              <i data-lucide="play" class="w-4 h-4 fill-current ml-0.5"></i>
-            </div>
-          </div>
-          <div class="space-y-1">
-            <span class="text-[10px] font-mono text-cinema-cyan uppercase tracking-wider">Sci-Fi Short Film</span>
-            <h3 class="font-display font-bold text-lg text-white group-hover:text-cinema-cyan transition-colors">CHRONOS: ECHOES OF 2084</h3>
-            <p class="text-xs text-gray-400 leading-relaxed">High-contrast neon reflections shot under wet streets with custom blue horizontal streaks.</p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-gray-400">
-            <span>DIRECTOR & DOP</span>
-            <span class="text-white">4K DCI LOG</span>
-          </div>
-        </div>
-
-        <!-- Project Card 2: High Velocity Action Chase -->
-        <div class="project-item commercial tilt-card glass-panel rounded-2xl overflow-hidden glass-border-glow group p-4 cursor-pointer" onclick="openVideoPlayer('velocity')">
-          <div class="relative aspect-video rounded-xl overflow-hidden bg-black/90 mb-4">
-            <canvas id="reel-canvas-2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></canvas>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-            
-            <div class="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/70 border border-cinema-amber/40 text-[10px] font-mono text-cinema-amber">
-              GIMBAL RIG &bull; 120 FPS
-            </div>
-
-            <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-cinema-amber/20 border border-cinema-amber flex items-center justify-center text-cinema-amber group-hover:bg-cinema-amber group-hover:text-black transition-colors">
-              <i data-lucide="play" class="w-4 h-4 fill-current ml-0.5"></i>
-            </div>
-          </div>
-          <div class="space-y-1">
-            <span class="text-[10px] font-mono text-cinema-amber uppercase tracking-wider">Automotive Commercial</span>
-            <h3 class="font-display font-bold text-lg text-white group-hover:text-cinema-amber transition-colors">KINETIC OVERDRIVE</h3>
-            <p class="text-xs text-gray-400 leading-relaxed">High-speed tracking vehicle pursuit with high-shutter kinetic motion blur and dynamic audio staging.</p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-gray-400">
-            <span>COLOR GRADED IN DA VINCI</span>
-            <span class="text-white">ACES CC</span>
-          </div>
-        </div>
-
-        <!-- Project Card 3: Anamorphic Portrait Music Reel -->
-        <div class="project-item music tilt-card glass-panel rounded-2xl overflow-hidden glass-border-glow group p-4 cursor-pointer" onclick="openVideoPlayer('neon-soul')">
-          <div class="relative aspect-video rounded-xl overflow-hidden bg-black/90 mb-4">
-            <canvas id="reel-canvas-3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"></canvas>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-            
-            <div class="absolute top-3 left-3 px-2 py-0.5 rounded bg-black/70 border border-cinema-magenta/40 text-[10px] font-mono text-cinema-magenta">
-              VINTAGE RUSSIAN GLASS
-            </div>
-
-            <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-cinema-magenta/20 border border-cinema-magenta flex items-center justify-center text-cinema-magenta group-hover:bg-cinema-magenta group-hover:text-black transition-colors">
-              <i data-lucide="play" class="w-4 h-4 fill-current ml-0.5"></i>
-            </div>
-          </div>
-          <div class="space-y-1">
-            <span class="text-[10px] font-mono text-cinema-magenta uppercase tracking-wider">Official Music Video</span>
-            <h3 class="font-display font-bold text-lg text-white group-hover:text-cinema-magenta transition-colors">OBSIDIAN REFLECTIONS</h3>
-            <p class="text-xs text-gray-400 leading-relaxed">Dreamy haze, swirling swirly bokeh, deep ultraviolet shadows and intimate character portraits.</p>
-          </div>
-          <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-gray-400">
-            <span>HAZE & TUBE LIGHTING</span>
-            <span class="text-white">KODAK 2383 PRINT</span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <section id="optics" class="py-24 relative z-10 bg-[#060a14]/60 border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-mono uppercase tracking-[0.25em] text-cinema-cyan block mb-2">// TECHNICAL BENCHMARKS</span>
-        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-          OPTICAL MASTERY & COLOR SCIENCE
-        </h2>
-        <p class="mt-4 text-gray-400 text-sm">
-          True cinema is not just pressing record. It is deliberate photon manipulation, lens aberration control, and color hierarchy.
-        </p>
-      </div>
-
-      <!-- Specs HUD Matrix -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- Spec 1 -->
-        <div class="glass-panel p-6 rounded-2xl border border-white/10 relative overflow-hidden group hover:border-cinema-cyan/50 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-cinema-cyan/10 border border-cinema-cyan/30 flex items-center justify-center text-cinema-cyan mb-4">
-            <i data-lucide="aperture" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] font-mono text-cinema-cyan uppercase">GLASS ARSENAL</span>
-          <h3 class="font-display font-bold text-xl text-white mt-1">1.33x & 2x Anamorphic</h3>
-          <p class="text-xs text-gray-400 mt-2">Organic horizontal blue streak flares, oval out-of-focus highlights, and extreme field-of-view perspective.</p>
-          <div class="mt-4 text-[10px] font-mono text-gray-500">T2.0 - T2.8 APERTURE RANGE</div>
-        </div>
-
-        <!-- Spec 2 -->
-        <div class="glass-panel p-6 rounded-2xl border border-white/10 relative overflow-hidden group hover:border-cinema-violet/50 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-cinema-violet/10 border border-cinema-violet/30 flex items-center justify-center text-cinema-violet mb-4">
-            <i data-lucide="palette" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] font-mono text-cinema-violet uppercase">COLOR WORKFLOW</span>
-          <h3 class="font-display font-bold text-xl text-white mt-1">10-Bit S-Log3 & RAW</h3>
-          <p class="text-xs text-gray-400 mt-2">15+ stops of dynamic range preserved for highlights roll-off that mimics 35mm film stock emulsion.</p>
-          <div class="mt-4 text-[10px] font-mono text-gray-500">ACES & DAVINCI YRGB COLOR</div>
-        </div>
-
-        <!-- Spec 3 -->
-        <div class="glass-panel p-6 rounded-2xl border border-white/10 relative overflow-hidden group hover:border-cinema-amber/50 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-cinema-amber/10 border border-cinema-amber/30 flex items-center justify-center text-cinema-amber mb-4">
-            <i data-lucide="sun" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] font-mono text-cinema-amber uppercase">ILLUMINATION</span>
-          <h3 class="font-display font-bold text-xl text-white mt-1">High-Output RGBWW</h3>
-          <p class="text-xs text-gray-400 mt-2">Bi-color COB punch, wireless DMX pixel tubes, and custom atmosphere haze diffusion for beam projection.</p>
-          <div class="mt-4 text-[10px] font-mono text-gray-500">CRI 97+ / TLCI 98 COLOR FIDELITY</div>
-        </div>
-
-        <!-- Spec 4 -->
-        <div class="glass-panel p-6 rounded-2xl border border-white/10 relative overflow-hidden group hover:border-cinema-crimson/50 transition-all">
-          <div class="w-10 h-10 rounded-xl bg-cinema-crimson/10 border border-cinema-crimson/30 flex items-center justify-center text-cinema-crimson mb-4">
-            <i data-lucide="cpu" class="w-5 h-5"></i>
-          </div>
-          <span class="text-[10px] font-mono text-cinema-crimson uppercase">SOUND DESIGN</span>
-          <h3 class="font-display font-bold text-xl text-white mt-1">3D Spatial Synthesis</h3>
-          <p class="text-xs text-gray-400 mt-2">Custom sub-bass impact drops, atmospheric synth pads, and tactile Foley design crafted in-house.</p>
-          <div class="mt-4 text-[10px] font-mono text-gray-500">24-BIT 96KHZ MASTERING</div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <section id="services" class="py-24 relative z-10 border-t border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-mono uppercase tracking-[0.25em] text-cinema-cyan block mb-2">// PRODUCTION MATRIX</span>
-        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-          COLLABORATION FORMATS
-        </h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <!-- Service 1 -->
-        <div class="glass-panel rounded-3xl p-8 border border-white/10 flex flex-col justify-between glass-border-glow">
+      <div class="venture-grid">
+        <!-- Card 1: Click Nil -->
+        <div class="venture-card">
           <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono text-cinema-cyan uppercase">TIER 01</span>
-              <span class="text-xs font-mono text-gray-500">READY-TO-AIR</span>
-            </div>
-            <h3 class="font-display text-2xl font-bold text-white mb-2">Cinematic Brand Reel</h3>
-            <p class="text-xs text-gray-400 leading-relaxed mb-6">
-              Designed for luxury labels, hospitality, automobiles, and visionary founders needing immediate visual prestige.
+            <div class="venture-icon">🎥</div>
+            <h3 class="venture-title">Click Nil</h3>
+            <p class="venture-desc">
+              Tech reviews, camera setups (Sony & Canon), hands-on gear tests, and tutorials for upcoming creators and cinematographers.
             </p>
-            <ul class="space-y-3 text-xs text-gray-300 font-mono">
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-cyan"></i>
-                <span>1-Day Anamorphic Cinema Shoot</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-cyan"></i>
-                <span>Custom Kodak Film Print Color Grade</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-cyan"></i>
-                <span>4K Master + 9:16 Vertical Cuts</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-cyan"></i>
-                <span>Licensed Cinematic Score</span>
-              </li>
-            </ul>
           </div>
-          <div class="mt-8 pt-6 border-t border-white/5">
-            <a href="https://wa.me/?text=Hello%20Click%20Nil!%20I%20am%20interested%20in%20the%20Brand%20Reel%20package." target="_blank" class="block w-full text-center py-3 rounded-xl border border-cinema-cyan/50 text-cinema-cyan hover:bg-cinema-cyan hover:text-black font-mono text-xs font-bold transition-all">
-              ENQUIRE ON WHATSAPP &rarr;
-            </a>
-          </div>
+          <a href="https://youtube.com" target="_blank" class="venture-link">Visit YouTube Channel &rarr;</a>
         </div>
 
-        <!-- Service 2 (Featured) -->
-        <div class="glass-panel rounded-3xl p-8 border-2 border-cinema-cyan relative flex flex-col justify-between shadow-[0_0_50px_rgba(0,242,254,0.2)] bg-[#090e1d]/90 scale-105 z-20">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full bg-cinema-cyan text-black font-mono text-[10px] font-bold uppercase tracking-wider shadow">
-            FLAGSHIP STUDIO WORK
-          </div>
+        <!-- Card 2: Bodhuboron -->
+        <div class="venture-card">
           <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono text-cinema-cyan uppercase">TIER 02</span>
-              <span class="text-xs font-mono text-cinema-cyan">DIRECTOR'S SPECIAL</span>
-            </div>
-            <h3 class="font-display text-2xl font-bold text-white mb-2">Narrative & Music Video</h3>
-            <p class="text-xs text-gray-300 leading-relaxed mb-6">
-              Full creative direction from moodboards, storyboard styling, lighting department choreography, and sound design.
+            <div class="venture-icon">💍</div>
+            <h3 class="venture-title">Bodhuboron</h3>
+            <p class="venture-desc">
+              Premium wedding photography & cinematic wedding films capturing authentic emotions, vibrant colors, and unforgettable moments.
             </p>
-            <ul class="space-y-3 text-xs text-gray-200 font-mono">
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-cyan"></i>
-                <span>Full Concept & Treatment Script</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-cyan"></i>
-                <span>Multi-cam Anamorphic Production</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-cyan"></i>
-                <span>Atmospheric Haze & Precision RGBFX</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-cyan"></i>
-                <span>Custom Spatial Sound Design Mix</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-cyan"></i>
-                <span>Full DCI 4K + Teaser Reel Suite</span>
-              </li>
-            </ul>
           </div>
-          <div class="mt-8 pt-6 border-t border-white/10">
-            <a href="https://wa.me/?text=Hello%20Click%20Nil!%20I%20want%20to%20produce%20a%20Narrative%20or%20Music%20Video." target="_blank" class="block w-full text-center py-3.5 rounded-xl bg-gradient-to-r from-cinema-cyan to-cinema-violet text-black font-mono text-xs font-bold uppercase tracking-wider hover:opacity-90 shadow-lg shadow-cinema-cyan/30 transition-all">
-              COMMISSION PROJECT &rarr;
-            </a>
-          </div>
+          <a href="https://wa.me/" target="_blank" class="venture-link">Book for Wedding &rarr;</a>
         </div>
 
-        <!-- Service 3 -->
-        <div class="glass-panel rounded-3xl p-8 border border-white/10 flex flex-col justify-between glass-border-glow">
+        <!-- Card 3: Workshops & Mentorship -->
+        <div class="venture-card">
           <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono text-cinema-magenta uppercase">TIER 03</span>
-              <span class="text-xs font-mono text-gray-500">ACADEMY & MENTORSHIP</span>
-            </div>
-            <h3 class="font-display text-2xl font-bold text-white mb-2">Masterclass & Training</h3>
-            <p class="text-xs text-gray-400 leading-relaxed mb-6">
-              1-on-1 and intensive cohort workshops on lighting physics, camera rigs, DaVinci Resolve color science, and storytelling.
+            <div class="venture-icon">🎓</div>
+            <h3 class="venture-title">Workshops & Academy</h3>
+            <p class="venture-desc">
+              Mentoring students in professional Bengali wedding album design, Premiere Pro & DaVinci Resolve editing, lighting, and camera handling.
             </p>
-            <ul class="space-y-3 text-xs text-gray-300 font-mono">
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-magenta"></i>
-                <span>Hands-on Camera & Gimbal Operations</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-magenta"></i>
-                <span>Lighting Placement & Falloff Physics</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-magenta"></i>
-                <span>Color Node Tree Mastery (DaVinci)</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <i data-lucide="check" class="w-4 h-4 text-cinema-magenta"></i>
-                <span>Exclusive Click Nil LUT & Asset Pack</span>
-              </li>
-            </ul>
           </div>
-          <div class="mt-8 pt-6 border-t border-white/5">
-            <a href="https://wa.me/?text=Hello%20Click%20Nil!%20I%20am%20interested%20in%20joining%20the%20Cinematography%20Masterclass." target="_blank" class="block w-full text-center py-3 rounded-xl border border-cinema-magenta/50 text-cinema-magenta hover:bg-cinema-magenta hover:text-black font-mono text-xs font-bold transition-all">
-              RESERVE WORKSHOP SEAT &rarr;
-            </a>
-          </div>
+          <a href="https://wa.me/" target="_blank" class="venture-link">Join Next Workshop &rarr;</a>
         </div>
-
       </div>
+    </section>
+  </main>
 
-    </div>
-  </section>
-
-  <section id="contact" class="py-24 relative z-10 bg-black/70 border-t border-white/5">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="relative rounded-3xl p-8 sm:p-14 overflow-hidden glass-panel border border-cinema-cyan/30 shadow-[0_0_80px_rgba(0,242,254,0.1)]">
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          
-          <!-- Left Info Column -->
-          <div class="lg:col-span-6 space-y-6">
-            <div class="inline-flex items-center gap-2 text-xs font-mono text-cinema-cyan uppercase">
-              <span class="w-2 h-2 rounded-full bg-cinema-cyan animate-ping"></span>
-              TRANSMISSION LINK OPEN
-            </div>
-            <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-white tracking-tight uppercase">
-              READY TO IGNITE YOUR NEXT FILM?
-            </h2>
-            <p class="text-sm text-gray-300 font-light leading-relaxed">
-              Whether you are an artist with a track, a brand with a mission, or a director building a world — we bring cinematic weight to your concept.
-            </p>
-
-            <div class="space-y-4 pt-4 border-t border-white/10 font-mono text-xs text-gray-300">
-              <div class="flex items-center gap-3">
-                <i data-lucide="map-pin" class="w-4 h-4 text-cinema-cyan"></i>
-                <span>Based in Kolkata / Available for Worldwide Productions</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <i data-lucide="mail" class="w-4 h-4 text-cinema-cyan"></i>
-                <span>production@clicknil.com</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
-                <span>Direct Line: Instant WhatsApp Response</span>
-              </div>
-            </div>
-
-            <!-- Instant WhatsApp Button -->
-            <div class="pt-2">
-              <a href="https://wa.me/?text=Hi%20Click%20Nil,%20I%20am%20interested%20in%20working%20together%20on%20a%20cinematic%20project." target="_blank" class="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold font-mono text-xs transition-all shadow-[0_0_20px_rgba(16,185,129,0.35)]">
-                <i data-lucide="message-square" class="w-4 h-4"></i>
-                <span>START WHATSAPP CHAT</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Right Contact Form Column -->
-          <div class="lg:col-span-6">
-            <form onsubmit="handleContactSubmission(event)" class="glass-panel p-6 sm:p-8 rounded-2xl border border-white/10 space-y-4">
-              <div>
-                <label class="block text-xs font-mono text-gray-300 uppercase mb-1">Your Name / Production Label</label>
-                <input type="text" required placeholder="Christopher Nolan" class="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-cinema-cyan" />
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-mono text-gray-300 uppercase mb-1">Email</label>
-                  <input type="email" required placeholder="contact@studio.com" class="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-cinema-cyan" />
-                </div>
-                <div>
-                  <label class="block text-xs font-mono text-gray-300 uppercase mb-1">Phone / WhatsApp</label>
-                  <input type="text" required placeholder="+91 98765 43210" class="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-cinema-cyan" />
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-xs font-mono text-gray-300 uppercase mb-1">Project Genre</label>
-                <select class="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cinema-cyan">
-                  <option>Cinematic Brand Commercial</option>
-                  <option>Music Video Production</option>
-                  <option>Narrative Short / Feature</option>
-                  <option>Fashion & Editorial Shoot</option>
-                  <option>Color Grading & Post Production</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-xs font-mono text-gray-300 uppercase mb-1">Vision / Notes</label>
-                <textarea rows="3" placeholder="Describe the vibe, references, shoot timeline..." class="w-full bg-black/60 border border-white/15 rounded-xl px-4 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-cinema-cyan"></textarea>
-              </div>
-
-              <button type="submit" class="w-full py-3.5 rounded-xl bg-cinema-cyan text-black font-mono text-xs font-bold uppercase tracking-widest hover:bg-white transition-all shadow-[0_0_25px_rgba(0,242,254,0.4)]">
-                TRANSMIT PROPOSAL &rarr;
-              </button>
-            </form>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <footer class="py-12 border-t border-white/5 bg-[#030509] relative z-10 text-xs font-mono text-gray-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-      <div class="flex items-center space-x-3">
-        <span class="font-display font-bold text-white tracking-wider">CLICK NIL / STUDIO</span>
-        <span>&bull;</span>
-        <span>OPTICAL LAB 2026</span>
-      </div>
-
-      <!-- Social Channels -->
-      <div class="flex items-center space-x-6 text-gray-400">
-        <a href="https://instagram.com" target="_blank" class="hover:text-cinema-magenta transition-colors flex items-center gap-1">
-          <i data-lucide="instagram" class="w-4 h-4"></i>
-          <span>INSTAGRAM</span>
-        </a>
-        <a href="https://youtube.com" target="_blank" class="hover:text-cinema-crimson transition-colors flex items-center gap-1">
-          <i data-lucide="youtube" class="w-4 h-4"></i>
-          <span>YOUTUBE</span>
-        </a>
-        <a href="https://facebook.com" target="_blank" class="hover:text-cinema-cyan transition-colors flex items-center gap-1">
-          <i data-lucide="facebook" class="w-4 h-4"></i>
-          <span>FACEBOOK</span>
-        </a>
-      </div>
-
-      <p>© 2026 Click Nil. All rights reserved.</p>
-    </div>
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Indranil Pramanick • Click Nil • Bodhuboron. Built with clean code on GitHub Pages.</p>
   </footer>
 
-  <div id="video-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl transition-opacity duration-300">
-    <div class="relative w-full max-w-5xl glass-panel rounded-3xl border border-cinema-cyan/40 p-4 overflow-hidden shadow-[0_0_100px_rgba(0,242,254,0.3)]">
-      
-      <!-- Close Button -->
-      <button onclick="closeVideoPlayer()" class="absolute top-4 right-4 z-20 text-gray-400 hover:text-white p-2 rounded-lg bg-black/60 border border-white/10">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <!-- Video Modal Header -->
-      <div class="flex items-center justify-between px-4 py-2 border-b border-white/10 mb-4 text-xs font-mono text-cinema-cyan">
-        <span id="modal-project-title">CLICK NIL // 4K ANAMORPHIC MASTER REEL</span>
-        <span class="text-gray-400">DCI SCOPE 2.39:1 &bull; 24 FPS</span>
-      </div>
-
-      <!-- Video Screen Frame -->
-      <div class="relative cinema-frame rounded-2xl overflow-hidden bg-black flex items-center justify-center">
-        <!-- Interactive High-Res Canvas Player -->
-        <canvas id="modal-cinema-canvas" class="w-full h-full object-cover"></canvas>
-        
-        <!-- Live Play Overlay Indicator -->
-        <div class="absolute bottom-4 left-4 font-mono text-xs bg-black/70 px-3 py-1.5 rounded-lg border border-cinema-cyan/40 text-cinema-cyan flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-          <span>STREAMING ACTIVE &bull; SPATIAL STEREO ENABLED</span>
-        </div>
-      </div>
-
-      <!-- Action Footer -->
-      <div class="mt-4 flex items-center justify-between px-2 font-mono text-xs text-gray-400">
-        <span>Press ESC to close viewport</span>
-        <a href="https://wa.me/?text=Hey%20Click%20Nil,%20I%20just%20watched%20your%20showreel%20and%20loved%20the%20lighting.%20Let's%20talk." target="_blank" class="px-4 py-2 rounded-lg bg-cinema-cyan text-black font-bold hover:bg-white transition-all">
-          BOOK THIS LOOK &rarr;
-        </a>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Notification Toast Box -->
-  <div id="toast-box" class="fixed bottom-8 right-8 z-50 hidden glass-panel border border-cinema-cyan p-4 rounded-xl shadow-2xl font-mono text-xs text-white flex items-center gap-3">
-    <i data-lucide="check-circle" class="w-5 h-5 text-cinema-cyan"></i>
-    <span id="toast-message">Action confirmed.</span>
-  </div>
-
   <script>
-    // Initialize icons
-    lucide.createIcons();
-
-    // Mobile Drawer Toggle
-    const mobileBtn = document.getElementById('mobile-toggle-btn');
-    const mobileDrawer = document.getElementById('mobile-menu-drawer');
-    mobileBtn.addEventListener('click', () => {
-      mobileDrawer.classList.toggle('hidden');
-    });
-
-    // 1. DYNAMIC SCROLL LIGHTING ENGINE
-    // Shifts background gradients from teal/cyan -> ultraviolet -> amber gold -> deep crimson
-    const ambientLighting = document.getElementById('ambient-lighting');
-    
-    function updateScrollLighting() {
-      const scrollY = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = Math.min(Math.max(scrollY / (docHeight || 1), 0), 1);
-
-      if (scrollPercent < 0.25) {
-        // Stage 1: Cyber Cyan & Deep Teal
-        ambientLighting.style.background = `
-          radial-gradient(circle at 20% 30%, rgba(0, 242, 254, 0.22) 0%, transparent 50%),
-          radial-gradient(circle at 80% 40%, rgba(121, 40, 202, 0.20) 0%, transparent 55%),
-          radial-gradient(circle at 50% 85%, rgba(6, 182, 212, 0.15) 0%, transparent 60%)
-        `;
-      } else if (scrollPercent < 0.55) {
-        // Stage 2: Anamorphic Violet & Neon Magenta
-        ambientLighting.style.background = `
-          radial-gradient(circle at 75% 25%, rgba(255, 0, 128, 0.25) 0%, transparent 50%),
-          radial-gradient(circle at 25% 65%, rgba(121, 40, 202, 0.28) 0%, transparent 55%),
-          radial-gradient(circle at 85% 85%, rgba(0, 242, 254, 0.18) 0%, transparent 60%)
-        `;
-      } else if (scrollPercent < 0.80) {
-        // Stage 3: Warm Amber / Sunset Gold / Tangerine
-        ambientLighting.style.background = `
-          radial-gradient(circle at 30% 20%, rgba(255, 170, 0, 0.25) 0%, transparent 50%),
-          radial-gradient(circle at 80% 60%, rgba(255, 0, 85, 0.22) 0%, transparent 55%),
-          radial-gradient(circle at 50% 90%, rgba(121, 40, 202, 0.15) 0%, transparent 60%)
-        `;
-      } else {
-        // Stage 4: Deep Crimson & Infrared Cinema Glow
-        ambientLighting.style.background = `
-          radial-gradient(circle at 50% 20%, rgba(255, 0, 85, 0.3) 0%, transparent 50%),
-          radial-gradient(circle at 20% 80%, rgba(255, 80, 0, 0.2) 0%, transparent 55%),
-          radial-gradient(circle at 80% 70%, rgba(121, 40, 202, 0.2) 0%, transparent 60%)
-        `;
-      }
-    }
-    window.addEventListener('scroll', updateScrollLighting, { passive: true });
-    updateScrollLighting();
-
-    // 2. MOUSE TRACKER LIGHT
-    const cursorLight = document.getElementById('cursor-light');
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let currentX = mouseX;
-    let currentY = mouseY;
-
+    // Smooth futuristic cursor glow follower
+    const glow = document.getElementById('cursor-glow');
     window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
     });
-
-    function renderCursor() {
-      currentX += (mouseX - currentX) * 0.12;
-      currentY += (mouseY - currentY) * 0.12;
-      cursorLight.style.left = `${currentX}px`;
-      cursorLight.style.top = `${currentY}px`;
-      requestAnimationFrame(renderCursor);
-    }
-    renderCursor();
-
-    // 3. BACKGROUND CANVAS FOR ATMOSPHERIC STARFIELD & CINEMATIC DUST
-    const bgCanvas = document.getElementById('cinema-canvas');
-    const bgCtx = bgCanvas.getContext('2d');
-    let bgParticles = [];
-
-    function resizeBgCanvas() {
-      bgCanvas.width = window.innerWidth;
-      bgCanvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeBgCanvas);
-    resizeBgCanvas();
-
-    for (let i = 0; i < 65; i++) {
-      bgParticles.push({
-        x: Math.random() * bgCanvas.width,
-        y: Math.random() * bgCanvas.height,
-        size: Math.random() * 1.8 + 0.3,
-        speedX: (Math.random() - 0.5) * 0.2,
-        speedY: (Math.random() - 0.5) * 0.25,
-        opacity: Math.random() * 0.5 + 0.1
-      });
-    }
-
-    function animateBgParticles() {
-      bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
-      bgParticles.forEach(p => {
-        p.x += p.speedX;
-        p.y += p.speedY;
-        if (p.x < 0) p.x = bgCanvas.width;
-        if (p.x > bgCanvas.width) p.x = 0;
-        if (p.y < 0) p.y = bgCanvas.height;
-        if (p.y > bgCanvas.height) p.y = 0;
-
-        bgCtx.fillStyle = `rgba(0, 242, 254, ${p.opacity})`;
-        bgCtx.beginPath();
-        bgCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        bgCtx.fill();
-      });
-      requestAnimationFrame(animateBgParticles);
-    }
-    animateBgParticles();
-
-    // 4. PROCEDURAL HIGH-TECH CINEMATIC VIDEO SIMULATORS
-    // Generates glowing cyber visuals in canvas so user doesn't need external video bandwidth
-    function initVideoSimulator(canvasId, type) {
-      const c = document.getElementById(canvasId);
-      if (!c) return;
-      const ctx = c.getContext('2d');
-      c.width = 640;
-      c.height = 360;
-      let t = 0;
-
-      function renderFrame() {
-        t += 0.02;
-        ctx.fillStyle = '#05070d';
-        ctx.fillRect(0, 0, c.width, c.height);
-
-        if (type === 'hero' || type === 'modal') {
-          // Futuristic Cyberpunk Highway & Skyline Perspective
-          const horizon = c.height * 0.55;
-
-          // Sky gradient
-          const skyGrad = ctx.createLinearGradient(0, 0, 0, horizon);
-          skyGrad.addColorStop(0, '#040714');
-          skyGrad.addColorStop(1, '#1b0933');
-          ctx.fillStyle = skyGrad;
-          ctx.fillRect(0, 0, c.width, horizon);
-
-          // Moving grid floor
-          ctx.strokeStyle = 'rgba(0, 242, 254, 0.4)';
-          ctx.lineWidth = 1;
-          for (let i = -c.width; i < c.width * 2; i += 40) {
-            ctx.beginPath();
-            ctx.moveTo(c.width / 2, horizon);
-            ctx.lineTo(i, c.height);
-            ctx.stroke();
-          }
-
-          // Horizontal grid scan
-          for (let y = horizon; y < c.height; y += (y - horizon) * 0.25 + 4) {
-            const offsetY = (y + (t * 20) % 20);
-            ctx.beginPath();
-            ctx.moveTo(0, offsetY);
-            ctx.lineTo(c.width, offsetY);
-            ctx.strokeStyle = `rgba(0, 242, 254, ${(offsetY - horizon) / (c.height - horizon) * 0.5})`;
-            ctx.stroke();
-          }
-
-          // Cyber Monoliths / Neon Buildings
-          for (let b = 0; b < 10; b++) {
-            const bx = ((b * 75 + Math.sin(b) * 20) + t * 4) % (c.width + 100) - 50;
-            const bw = 30 + (b % 3) * 15;
-            const bh = 50 + ((b * 27) % 90);
-            ctx.fillStyle = b % 2 === 0 ? 'rgba(0, 242, 254, 0.25)' : 'rgba(255, 0, 128, 0.25)';
-            ctx.fillRect(bx, horizon - bh, bw, bh);
-            ctx.strokeStyle = b % 2 === 0 ? '#00f2fe' : '#ff0080';
-            ctx.strokeRect(bx, horizon - bh, bw, bh);
-          }
-
-          // Central Anamorphic Light Beam Flare
-          const flareGrad = ctx.createRadialGradient(c.width / 2, horizon, 5, c.width / 2, horizon, 200);
-          flareGrad.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
-          flareGrad.addColorStop(0.2, 'rgba(0, 242, 254, 0.7)');
-          flareGrad.addColorStop(0.8, 'rgba(121, 40, 202, 0.3)');
-          flareGrad.addColorStop(1, 'transparent');
-          ctx.fillStyle = flareGrad;
-          ctx.beginPath();
-          ctx.arc(c.width / 2, horizon, 160, 0, Math.PI * 2);
-          ctx.fill();
-
-          // Horizontal anamorphic streak
-          ctx.fillStyle = 'rgba(0, 242, 254, 0.9)';
-          ctx.fillRect(0, horizon - 1, c.width, 2);
-
-        } else if (type === 'neon-city') {
-          // Rain streaks & Neon reflections
-          ctx.fillStyle = '#090717';
-          ctx.fillRect(0, 0, c.width, c.height);
-
-          for (let i = 0; i < 40; i++) {
-            const rx = (i * 24 + t * 50) % c.width;
-            const ry = (i * 37 + t * 300) % c.height;
-            ctx.fillStyle = 'rgba(0, 242, 254, 0.6)';
-            ctx.fillRect(rx, ry, 1, 16);
-          }
-          // Neon sign glow
-          ctx.fillStyle = 'rgba(255, 0, 128, 0.4)';
-          ctx.font = 'bold 28px "Space Grotesk"';
-          ctx.fillText('CLICK NIL // SHADOWS', 80, 180 + Math.sin(t * 3) * 6);
-
-        } else if (type === 'velocity') {
-          // High speed motion lines
-          for (let i = 0; i < 50; i++) {
-            const y = (i * 9 + t * 40) % c.height;
-            const len = Math.random() * 150 + 50;
-            const x = Math.random() * c.width;
-            ctx.strokeStyle = i % 2 === 0 ? 'rgba(255, 170, 0, 0.7)' : 'rgba(255, 255, 255, 0.6)';
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            ctx.lineTo(x + len, y);
-            ctx.stroke();
-          }
-
-        } else if (type === 'neon-soul') {
-          // Ultraviolet bokeh bubbles
-          for (let i = 0; i < 14; i++) {
-            const bx = (Math.sin(t + i) * 120) + c.width / 2;
-            const by = (Math.cos(t * 0.8 + i) * 70) + c.height / 2;
-            const rad = 25 + Math.sin(t + i) * 15;
-            const g = ctx.createRadialGradient(bx, by, 2, bx, by, rad);
-            g.addColorStop(0, 'rgba(255, 0, 128, 0.7)');
-            g.addColorStop(1, 'transparent');
-            ctx.fillStyle = g;
-            ctx.beginPath();
-            ctx.arc(bx, by, rad, 0, Math.PI * 2);
-            ctx.fill();
-          }
-        }
-
-        requestAnimationFrame(renderFrame);
-      }
-      renderFrame();
-    }
-
-    initVideoSimulator('hero-video-sim', 'hero');
-    initVideoSimulator('reel-canvas-1', 'neon-city');
-    initVideoSimulator('reel-canvas-2', 'velocity');
-    initVideoSimulator('reel-canvas-3', 'neon-soul');
-
-    // 5. 3D TILT CARDS
-    document.querySelectorAll('.tilt-card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const rotX = ((y - rect.height / 2) / (rect.height / 2)) * -8;
-        const rotY = ((x - rect.width / 2) / (rect.width / 2)) * 8;
-        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
-      });
-    });
-
-    // 6. VIDEO MODAL PLAYER
-    const videoModal = document.getElementById('video-modal');
-    let modalSimStarted = false;
-
-    function openVideoPlayer(projectId) {
-      videoModal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-      
-      const titleEl = document.getElementById('modal-project-title');
-      if (projectId === 'epic') titleEl.textContent = 'MASTER REEL 2026 // DIRECTORS 4K CUT';
-      if (projectId === 'neon-city') titleEl.textContent = 'CHRONOS: ECHOES OF 2084 // SCENE #03';
-      if (projectId === 'velocity') titleEl.textContent = 'KINETIC OVERDRIVE // 120 FPS HIGH SPEED';
-      if (projectId === 'neon-soul') titleEl.textContent = 'OBSIDIAN REFLECTIONS // 4K MUSIC VIDEO';
-
-      if (!modalSimStarted) {
-        initVideoSimulator('modal-cinema-canvas', 'modal');
-        modalSimStarted = true;
-      }
-    }
-
-    function closeVideoPlayer() {
-      videoModal.classList.add('hidden');
-      document.body.style.overflow = 'auto';
-    }
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeVideoPlayer();
-    });
-
-    videoModal.addEventListener('click', (e) => {
-      if (e.target === videoModal) closeVideoPlayer();
-    });
-
-    // 7. AMBIENT SYNTH AUDIO (WEB AUDIO API - ZERO EXTERNAL ASSET NEEDED)
-    let audioCtx = null;
-    let isAudioPlaying = false;
-    let osc1, osc2, gainNode;
-
-    function toggleAtmosphereAudio() {
-      const soundBtn = document.getElementById('sound-btn');
-      const soundLabel = document.getElementById('sound-label');
-      const soundIcon = document.getElementById('sound-icon');
-
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-
-      if (!isAudioPlaying) {
-        // Create futuristic blade-runner style cinematic drone
-        osc1 = audioCtx.createOscillator();
-        osc2 = audioCtx.createOscillator();
-        gainNode = audioCtx.createGain();
-
-        osc1.type = 'sawtooth';
-        osc1.frequency.setValueAtTime(55, audioCtx.currentTime); // A1 note sub
-
-        osc2.type = 'sine';
-        osc2.frequency.setValueAtTime(110.5, audioCtx.currentTime); // Slight detune for shimmer
-
-        gainNode.gain.setValueAtTime(0.01, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 3);
-
-        osc1.connect(gainNode);
-        osc2.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        osc1.start();
-        osc2.start();
-
-        isAudioPlaying = true;
-        soundLabel.textContent = 'ATMOSPHERE: ON';
-        soundBtn.classList.add('border-cinema-cyan', 'text-white', 'shadow-[0_0_15px_rgba(0,242,254,0.4)]');
-        showToast('Atmospheric cinematic synth initialized.');
-      } else {
-        if (gainNode) {
-          gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
-          setTimeout(() => {
-            if (osc1) osc1.stop();
-            if (osc2) osc2.stop();
-          }, 800);
-        }
-        isAudioPlaying = false;
-        soundLabel.textContent = 'ATMOSPHERE: OFF';
-        soundBtn.classList.remove('border-cinema-cyan', 'text-white', 'shadow-[0_0_15px_rgba(0,242,254,0.4)]');
-        showToast('Atmospheric audio paused.');
-      }
-    }
-
-    // 8. PROJECT FILTER LOGIC
-    function filterProjects(category) {
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.remove('bg-cinema-cyan', 'text-black', 'font-bold');
-        b.classList.add('glass-panel', 'text-gray-400');
-      });
-      event.target.classList.remove('glass-panel', 'text-gray-400');
-      event.target.classList.add('bg-cinema-cyan', 'text-black', 'font-bold');
-
-      const items = document.querySelectorAll('.project-item');
-      items.forEach(item => {
-        if (category === 'all' || item.classList.contains(category)) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    }
-
-    // Toast alert helper (Replaces intrusive alert())
-    function showToast(msg) {
-      const toast = document.getElementById('toast-box');
-      const text = document.getElementById('toast-message');
-      text.textContent = msg;
-      toast.classList.remove('hidden');
-      setTimeout(() => {
-        toast.classList.add('hidden');
-      }, 3500);
-    }
-
-    function handleContactSubmission(e) {
-      e.preventDefault();
-      showToast('Transmission received! Click Nil team will review your concept within 24 hours.');
-      e.target.reset();
-    }
   </script>
 </body>
 </html>
