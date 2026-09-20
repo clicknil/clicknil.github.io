@@ -529,7 +529,7 @@
     }
 
     /* =========================================================
-       FUTURISTIC NEON PHOTO REEL (NO BLACK BARS, DUAL NEON GLOW)
+       FUTURISTIC NEON PHOTO REEL (REACTION BAR BELOW FRAME)
        ========================================================= */
     .photo-slider-section {
       position: relative;
@@ -541,14 +541,14 @@
     .reel-track-wrapper {
       width: 100%;
       overflow: hidden;
-      padding: 25px 0;
+      padding: 20px 0;
       mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
     }
 
     .reel-track {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 32px;
       width: max-content;
       animation: reelLoop 26s linear infinite;
@@ -566,7 +566,17 @@
       100% { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* Clean Card: Zero Black Borders, Neon Cyan + Gold Edge Glow */
+    /* Entire Unit: Photo on Top + React Bar Underneath */
+    .reel-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    /* Clean Card: Zero Black Borders, Neon Cyan + Gold Edge Glow, Pure Photo */
     .reel-card {
       position: relative;
       display: flex;
@@ -579,16 +589,13 @@
       box-shadow: 0 0 20px rgba(0, 210, 255, 0.18), 0 0 35px rgba(255, 196, 0, 0.1);
       cursor: pointer;
       transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease, box-shadow 0.35s ease;
-      user-select: none;
-      flex-shrink: 0;
     }
-    .reel-card:hover {
-      transform: translateY(-8px) scale(1.02);
+    .reel-unit:hover .reel-card {
+      transform: translateY(-6px) scale(1.02);
       border-color: rgba(255, 196, 0, 0.9);
       box-shadow: 0 0 30px rgba(255, 196, 0, 0.45), 0 0 50px rgba(0, 210, 255, 0.35), 0 25px 50px rgba(0, 0, 0, 0.9);
     }
     
-    /* Auto width based on image: NO LETTERBOX / NO BLACK FILLER */
     .reel-card img {
       height: 260px;
       width: auto;
@@ -596,32 +603,43 @@
       object-fit: cover;
     }
 
-    /* Floating Like Popup: Appears on hover */
-    .reel-like-badge {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: rgba(15, 20, 32, 0.75);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 196, 0, 0.5);
+    /* Apple Glass Reaction Bar Placed BELOW the Frame */
+    .reel-reactions-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 6px 18px;
       border-radius: 999px;
-      padding: 6px 14px;
-      font-size: 0.85rem;
+      background: rgba(15, 20, 32, 0.65);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-size: 0.82rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #e2e8f0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+      transition: all 0.25s ease;
+    }
+    .reel-unit:hover .reel-reactions-bar {
+      border-color: rgba(0, 210, 255, 0.4);
+      box-shadow: 0 8px 25px rgba(0, 210, 255, 0.25);
+    }
+
+    .reel-react-item {
       display: flex;
       align-items: center;
-      gap: 6px;
-      opacity: 0;
-      transform: translateY(-6px);
-      transition: all 0.25s ease;
-      box-shadow: 0 0 15px rgba(255, 196, 0, 0.35);
-      pointer-events: none;
+      gap: 5px;
+      white-space: nowrap;
     }
-    .reel-card:hover .reel-like-badge {
-      opacity: 1;
-      transform: translateY(0);
+    .reel-heart {
+      color: #ff2a5f;
+      filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.6));
+    }
+    .reel-comment {
+      color: #00d2ff;
+    }
+    .reel-share {
+      color: #ffc400;
     }
 
     /* Footer */
@@ -647,9 +665,9 @@
       .photo-wrapper { order: -1; }
       .photo-container { max-width: 320px; }
       .insta-glass-card { width: 95%; }
-      .reel-card { height: 190px; }
-      .reel-card img { height: 190px; }
-      .reel-like-badge { opacity: 1; transform: translateY(0); }
+      .reel-card { height: 185px; }
+      .reel-card img { height: 185px; }
+      .reel-reactions-bar { padding: 5px 14px; font-size: 0.76rem; gap: 12px; }
     }
   </style>
 </head>
@@ -815,51 +833,102 @@
       </div>
     </section>
 
-    <!-- Neon Photo Reel Slider (Zero Black Borders, Dual Neon Glow) -->
+    <!-- Photo Reel with Reactions BELOW each frame (No face overlay) -->
     <section class="photo-slider-section">
       <div class="reel-track-wrapper">
         <div class="reel-track">
 
-          <!-- 4 Pure Album Spread Photos -->
-          <div class="reel-card">
-            <img src="wedding-1.jpg" alt="Spread 1">
-            <div class="reel-like-badge">❤️ 4.8K</div>
+          <!-- SPREAD 1 -->
+          <div class="reel-unit">
+            <div class="reel-card">
+              <img src="wedding-1.jpg" alt="Spread 1">
+            </div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.8K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 842</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 148</span>
+            </div>
           </div>
 
-          <div class="reel-card">
-            <img src="wedding-2.jpg" alt="Spread 2">
-            <div class="reel-like-badge">❤️ 3.9K</div>
+          <!-- SPREAD 2 -->
+          <div class="reel-unit">
+            <div class="reel-card">
+              <img src="wedding-2.jpg" alt="Spread 2">
+            </div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.9K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 916</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 212</span>
+            </div>
           </div>
 
-          <div class="reel-card">
-            <img src="wedding-3.jpg" alt="Spread 3">
-            <div class="reel-like-badge">❤️ 5.1K</div>
+          <!-- SPREAD 3 -->
+          <div class="reel-unit">
+            <div class="reel-card">
+              <img src="wedding-3.jpg" alt="Spread 3">
+            </div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.1K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 764</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 176</span>
+            </div>
           </div>
 
-          <div class="reel-card">
-            <img src="wedding-4.jpg" alt="Spread 4">
-            <div class="reel-like-badge">❤️ 2.7K</div>
+          <!-- SPREAD 4 -->
+          <div class="reel-unit">
+            <div class="reel-card">
+              <img src="wedding-4.jpg" alt="Spread 4">
+            </div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 2.7K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 885</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 195</span>
+            </div>
           </div>
 
-          <!-- Seamless Loop Set -->
-          <div class="reel-card">
-            <img src="wedding-1.jpg" alt="Spread 1">
-            <div class="reel-like-badge">❤️ 4.8K</div>
+          <!-- SEAMLESS LOOP DUPLICATE -->
+          <div class="reel-unit">
+            <div class="reel-card">
+              <img src="wedding-1.jpg" alt="Spread 1">
+            </div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.8K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 842</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 148</span>
+            </div>
           </div>
 
-          <div class="reel-card">
-            <img src="wedding-2.jpg" alt="Spread 2">
-            <div class="reel-like-badge">❤️ 3.9K</div>
+          <div class="reel-unit">
+            <div class="reel-card">
+              <img src="wedding-2.jpg" alt="Spread 2">
+            </div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.9K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 916</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 212</span>
+            </div>
           </div>
 
-          <div class="reel-card">
-            <img src="wedding-3.jpg" alt="Spread 3">
-            <div class="reel-like-badge">❤️ 5.1K</div>
+          <div class="reel-unit">
+            <div class="reel-card">
+              <img src="wedding-3.jpg" alt="Spread 3">
+            </div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.1K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 764</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 176</span>
+            </div>
           </div>
 
-          <div class="reel-card">
-            <img src="wedding-4.jpg" alt="Spread 4">
-            <div class="reel-like-badge">❤️ 2.7K</div>
+          <div class="reel-unit">
+            <div class="reel-card">
+              <img src="wedding-4.jpg" alt="Spread 4">
+            </div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 2.7K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 885</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 195</span>
+            </div>
           </div>
 
         </div>
@@ -964,7 +1033,6 @@
         this.speedY = -(Math.random() * 0.45 + 0.1);
         this.speedX = (Math.random() - 0.5) * 0.35;
         this.alpha = Math.random() * 0.45 + 0.15;
-        // 40% chance of being futuristic neon gold, 60% neon cyan
         this.isGold = Math.random() > 0.6;
       }
       update() {
@@ -993,7 +1061,7 @@
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size + (boost * 1.5), 0, Math.PI * 2);
         ctx.fill();
-        ctx.shadowBlur = 0; // reset
+        ctx.shadowBlur = 0;
       }
     }
 
