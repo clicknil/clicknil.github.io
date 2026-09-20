@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indranil Pramanick | Visual Artist, Cinematographer & Mentor</title>
+  <title>Click Nil | Visual Artist</title>
   <meta name="description" content="Official website of Indranil Pramanick — Creator of Click Nil, Founder of Bodhuboron, Cinematographer and Workshop Mentor.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +16,7 @@
       --neon-blue: #00d2ff;
       --neon-purple: #9d4edd;
       --neon-amber: #ff9e00;
+      --rec-red: #ff2a2a;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
     }
@@ -47,13 +48,13 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Header */
+    /* Clean Header */
     header {
       position: sticky;
       top: 0;
       z-index: 50;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
       padding: 1.25rem 8%;
       backdrop-filter: blur(16px);
@@ -63,21 +64,25 @@
     .brand-logo {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: 1px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
       text-decoration: none;
       color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
-    .brand-logo span { color: var(--neon-blue); }
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      margin-left: 2rem;
-      font-size: 0.95rem;
+    .brand-logo .divider {
+      color: var(--card-border);
+      font-weight: 300;
+    }
+    .brand-logo .sub {
+      font-size: 0.85rem;
+      color: var(--neon-blue);
       font-weight: 600;
-      transition: color 0.2s;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
-    .nav-links a:hover { color: #fff; }
 
     /* Hero Section */
     .hero {
@@ -92,32 +97,33 @@
       align-items: center;
     }
 
+    /* Camera Rec Style Badge */
     .hero-tag {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 0.4rem 1rem;
+      gap: 10px;
+      padding: 0.45rem 1.1rem;
       border-radius: 999px;
-      background: rgba(0, 210, 255, 0.08);
-      border: 1px solid rgba(0, 210, 255, 0.3);
-      color: var(--neon-blue);
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 1px;
+      background: rgba(255, 42, 42, 0.08);
+      border: 1px solid rgba(255, 42, 42, 0.3);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       margin-bottom: 1.5rem;
     }
-    .live-dot {
-      width: 8px;
-      height: 8px;
+    .rec-dot {
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: var(--neon-blue);
-      box-shadow: 0 0 10px var(--neon-blue);
-      animation: pulse 2s infinite;
+      background: var(--rec-red);
+      box-shadow: 0 0 12px var(--rec-red), 0 0 20px rgba(255, 42, 42, 0.8);
+      animation: recBlink 1.2s infinite ease-in-out;
     }
-    @keyframes pulse {
+    @keyframes recBlink {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
+      50% { opacity: 0.25; transform: scale(0.85); }
     }
 
     h1.hero-title {
@@ -232,7 +238,7 @@
       color: var(--neon-blue);
     }
 
-    /* Pillars / Ventures Section */
+    /* Ventures Section */
     .ventures {
       position: relative;
       z-index: 1;
@@ -324,31 +330,28 @@
       .cta-row { justify-content: center; }
       .photo-wrapper { order: -1; }
       .photo-card { max-width: 320px; margin: 0 auto; }
-      .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Futuristic Ambient Glow Follows Mouse -->
+  <!-- Ambient Glow Follows Mouse -->
   <div id="cursor-glow"></div>
 
-  <!-- Header -->
+  <!-- Header: Cleaned up with Click Nil | Visual Artist -->
   <header>
-    <a href="#" class="brand-logo">INDRANIL <span>PRAMANICK</span></a>
-    <nav class="nav-links">
-      <a href="#ventures">Ventures</a>
-      <a href="#about">About</a>
-      <a href="https://wa.me/" target="_blank">Contact</a>
-    </nav>
+    <a href="#" class="brand-logo">
+      CLICK NIL <span class="divider">/</span> <span class="sub">Visual Artist</span>
+    </a>
   </header>
 
-  <!-- Hero Section with Photo & Identity -->
+  <!-- Hero Section -->
   <main>
     <section class="hero">
       <div class="hero-content">
+        <!-- Rec Style Red Dot -->
         <div class="hero-tag">
-          <span class="live-dot"></span> Visual Director & Creator
+          <span class="rec-dot"></span> Visual Director & Creator
         </div>
         <h1 class="hero-title">
           Hi, I’m <span class="highlight">Indranil</span>.
@@ -424,11 +427,10 @@
 
   <!-- Footer -->
   <footer>
-    <p>© 2026 Indranil Pramanick • Click Nil • Bodhuboron. Built with clean code on GitHub Pages.</p>
+    <p>© 2026 Click Nil • Indranil Pramanick. Built with clean code on GitHub Pages.</p>
   </footer>
 
   <script>
-    // Smooth futuristic cursor glow follower
     const glow = document.getElementById('cursor-glow');
     window.addEventListener('mousemove', (e) => {
       glow.style.left = e.clientX + 'px';
