@@ -18,7 +18,7 @@
       --rec-red: #ff2a2a;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --name-hue: 190deg; /* Dynamic Hue controlled by slider */
+      --name-hue: 0deg; /* Default 0deg keeps the exact cyan-blue */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -111,7 +111,7 @@
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
     .rec-dot {
       width: 10px;
@@ -126,93 +126,89 @@
       50% { opacity: 0.25; transform: scale(0.85); }
     }
 
-    /* Role Subtitle */
-    .hero-role {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--neon-blue);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-
-    /* Photoshop Typewriter Header */
+    /* Hero Title */
     h1.hero-title {
       font-size: clamp(2.8rem, 6vw, 4.5rem);
       font-weight: 900;
       line-height: 1.1;
       letter-spacing: -1.5px;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Indranil Name Block with Underline Slider */
+    .name-block {
+      display: inline-flex;
+      flex-direction: column;
+      width: fit-content;
+      filter: hue-rotate(var(--name-hue));
+      transition: filter 0.05s linear;
+      margin-bottom: 1.8rem;
     }
 
     .ps-text-layer {
       position: relative;
       display: inline-block;
-      filter: hue-rotate(var(--name-hue));
-      transition: filter 0.05s linear;
     }
     .ps-text-layer .gradient-text {
-      background: linear-gradient(135deg, #00d2ff 0%, #9d4edd 50%, #ff007f 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #00d2ff;
+      text-shadow: 0 0 35px rgba(0, 210, 255, 0.4);
     }
     .ps-cursor {
       display: inline-block;
       width: 4px;
       height: 0.85em;
-      background-color: var(--neon-blue);
+      background-color: #00d2ff;
       vertical-align: -0.05em;
       margin-left: 4px;
       animation: blinkCursor 0.8s infinite;
+      box-shadow: 0 0 12px #00d2ff;
     }
     @keyframes blinkCursor {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
 
-    /* Dynamic Hue Slider Control */
-    .color-slider-wrapper {
-      display: inline-flex;
+    /* Underline Slider */
+    .underline-slider-container {
+      width: 100%;
+      display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 0.5rem 1rem;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--card-border);
-      border-radius: 999px;
-      margin-bottom: 1.75rem;
-      backdrop-filter: blur(10px);
-    }
-    .color-slider-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--text-muted);
-      font-weight: 700;
+      margin-top: 4px;
     }
     .hue-slider {
       -webkit-appearance: none;
       appearance: none;
-      width: 140px;
-      height: 8px;
+      width: 100%;
+      height: 4px;
       border-radius: 999px;
-      background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+      background: #00d2ff;
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
       outline: none;
       cursor: pointer;
     }
     .hue-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       background: #ffffff;
-      border: 2px solid #000;
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      border: 2px solid #00d2ff;
+      box-shadow: 0 0 12px #00d2ff;
       cursor: pointer;
       transition: transform 0.15s ease;
     }
     .hue-slider::-webkit-slider-thumb:hover {
-      transform: scale(1.2);
+      transform: scale(1.3);
+    }
+    .hue-slider::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #00d2ff;
+      box-shadow: 0 0 12px #00d2ff;
+      cursor: pointer;
     }
 
     .hero-bio {
@@ -259,7 +255,7 @@
       border-color: rgba(255, 255, 255, 0.2);
     }
 
-    /* Profile Photo Frame */
+    /* Profile Photo Card */
     .photo-wrapper {
       position: relative;
       display: flex;
@@ -290,8 +286,28 @@
     .photo-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(6, 7, 10, 0.75) 0%, transparent 50%);
+      background: linear-gradient(to top, rgba(6, 7, 10, 0.85) 0%, rgba(6, 7, 10, 0.2) 40%, transparent 60%);
       pointer-events: none;
+    }
+    .photo-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      padding: 12px 18px;
+      background: rgba(15, 18, 28, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+    }
+    .photo-badge p {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .photo-badge span {
+      font-size: 0.8rem;
+      color: var(--neon-blue);
     }
 
     /* Ventures Section */
@@ -382,7 +398,7 @@
         text-align: center;
         padding-top: 3rem;
       }
-      .color-slider-wrapper { margin-left: auto; margin-right: auto; }
+      .name-block { margin-left: auto; margin-right: auto; }
       .cta-row { justify-content: center; }
       .photo-wrapper { order: -1; }
       .photo-card { max-width: 320px; margin: 0 auto; }
@@ -410,21 +426,16 @@
           <span class="rec-dot"></span> Visual Director & Creator
         </div>
 
-        <!-- Clean Subtitle for Roles -->
-        <div class="hero-role">Photographer | Graphics Designer | Content Creator</div>
+        <h1 class="hero-title">Hi, I’m</h1>
 
-        <!-- Photoshop Typewriter Animated Title -->
-        <h1 class="hero-title">
-          Hi, I’m 
-          <span class="ps-text-layer">
-            <span class="gradient-text" id="typewriter-text"></span><span class="ps-cursor" id="ps-cursor"></span>
-          </span>
-        </h1>
-
-        <!-- Real-time Hue Color Slider -->
-        <div class="color-slider-wrapper">
-          <span class="color-slider-label">🎨 Color Mood</span>
-          <input type="range" min="0" max="360" value="0" class="hue-slider" id="hue-picker" title="Slide to change name colors">
+        <!-- Indranil Name + Underline Slider in One Unified Element -->
+        <div class="name-block">
+          <div class="ps-text-layer">
+            <span class="hero-title gradient-text" id="typewriter-text"></span><span class="ps-cursor" id="ps-cursor"></span>
+          </div>
+          <div class="underline-slider-container">
+            <input type="range" min="0" max="360" value="0" class="hue-slider" id="hue-picker" title="Drag to adjust light mood">
+          </div>
         </div>
 
         <p class="hero-bio">
@@ -437,11 +448,15 @@
         </div>
       </div>
 
-      <!-- Centerpiece Portrait (Clean frame) -->
+      <!-- Centerpiece Portrait -->
       <div class="photo-wrapper">
         <div class="photo-card">
           <img src="profile.jpg" alt="Indranil">
           <div class="photo-overlay"></div>
+          <div class="photo-badge">
+            <p>Indranil</p>
+            <span>Photographer | Graphics designer | Content creator</span>
+          </div>
         </div>
       </div>
     </section>
@@ -511,12 +526,11 @@
         setTimeout(typeChar, 140);
       }
     }
-    // Start typing shortly after page load
     window.addEventListener("DOMContentLoaded", () => {
       setTimeout(typeChar, 300);
     });
 
-    // 2. Interactive Hue Slider to adjust "Indranil" colors dynamically
+    // 2. Underline Slider Shifts Name & Line Color Together
     const hueSlider = document.getElementById("hue-picker");
     hueSlider.addEventListener("input", (e) => {
       document.documentElement.style.setProperty('--name-hue', `${e.target.value}deg`);
