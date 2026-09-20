@@ -7,7 +7,7 @@
   <meta name="description" content="Official website of Indranil — Photographer, Graphics Designer, and Content Creator.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #07090e;
@@ -461,7 +461,7 @@
     }
 
     /* =========================================================
-       FUTURISTIC NEON PHOTO REEL (PLACED DIRECTLY ABOVE WHAT I DO)
+       FUTURISTIC NEON PHOTO REEL (DIRECTLY ABOVE WHAT I DO)
        ========================================================= */
     .photo-slider-section {
       position: relative;
@@ -652,19 +652,20 @@
     }
 
     /* =========================================================
-       IN-PAGE SHOWCASE MODAL (SAME WINDOW, ZOOM-OUT TO ZOOM-IN)
+       UPDATED IN-PAGE SHOWCASE: "Pictorical", Minimum Gap,
+       Neon ✕ Cross Close, and 7-Second Pop-up Pulse
        ========================================================= */
     #work-modal {
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: rgba(7, 9, 14, 0.96);
+      background: rgba(7, 9, 14, 0.97);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
       overflow-y: auto;
       display: none;
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.35s ease;
     }
 
     #work-modal.active {
@@ -679,91 +680,141 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 8%;
-      background: rgba(7, 9, 14, 0.85);
+      padding: 1.1rem 6%;
+      background: rgba(7, 9, 14, 0.88);
       border-bottom: 1px solid var(--card-border);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
     }
 
-    .modal-close-btn {
-      padding: 0.6rem 1.4rem;
-      border-radius: 10px;
-      background: rgba(255, 42, 42, 0.1);
-      border: 1px solid rgba(255, 42, 42, 0.35);
-      color: #ff9e9e;
+    /* Pure Neon Glowing Cross (✕) Close Button */
+    .neon-cross-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 42, 60, 0.12);
+      border: 1.5px solid rgba(255, 42, 60, 0.65);
+      color: #ff3b56;
+      font-size: 1.25rem;
       font-weight: 700;
-      font-size: 0.88rem;
       cursor: pointer;
-      transition: all 0.25s ease;
-    }
-    .modal-close-btn:hover {
-      background: rgba(255, 42, 42, 0.25);
-      border-color: #ff2a2a;
-      color: #fff;
-      transform: translateY(-1px);
-    }
-
-    .modal-intro {
-      text-align: center;
-      padding: 3rem 2rem 1.5rem;
-    }
-    .modal-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--neon-blue);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      display: block;
-    }
-    .modal-intro h2 {
-      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-
-    /* Zoom-out to Zoom-in animation */
-    .modal-content-area {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 1rem 2rem 5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 3.5rem;
-      transform: scale(0.92);
-      filter: blur(8px);
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    #work-modal.active .modal-content-area {
-      transform: scale(1);
-      filter: blur(0);
-    }
-
-    .modal-item {
-      display: flex;
-      flex-direction: column;
+      display: inline-flex;
       align-items: center;
-      gap: 14px;
+      justify-content: center;
+      box-shadow: 0 0 16px rgba(255, 42, 60, 0.35);
+      transition: all 0.25s ease;
+      line-height: 1;
     }
+    .neon-cross-btn:hover {
+      background: rgba(255, 42, 60, 0.3);
+      border-color: #ff3b56;
+      color: #fff;
+      transform: scale(1.12) rotate(90deg);
+      box-shadow: 0 0 25px rgba(255, 42, 60, 0.7);
+    }
+
+    /* Stylish Animated "Pictorical" Header */
+    .pictorical-header {
+      text-align: center;
+      padding: 2.2rem 1.5rem 1rem;
+    }
+
+    .pictorical-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.6rem, 7vw, 4.4rem);
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      display: inline-block;
+      background: linear-gradient(135deg, #00d2ff 0%, #ffffff 40%, #ffc400 85%, #00d2ff 100%);
+      background-size: 250% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pictoricalShimmer 6s ease infinite, pictoricalFloat 3.5s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 25px rgba(0, 210, 255, 0.45));
+      margin-bottom: 4px;
+    }
+
+    @keyframes pictoricalShimmer {
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 0% center; }
+    }
+    @keyframes pictoricalFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-4px); }
+    }
+
+    .pictorical-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      color: var(--neon-blue);
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+    /* Minimal Gap Gallery Layout */
+    .modal-content-area {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.8rem 1.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 18px; /* Minimum Gap */
+    }
+
+    /* Initial Pop-Up Reveal for Individual Photos */
     .modal-card {
       width: 100%;
-      border-radius: 18px;
+      border-radius: 16px;
       overflow: hidden;
-      border: 1.5px solid rgba(0, 210, 255, 0.45);
-      box-shadow: 0 0 25px rgba(0, 210, 255, 0.16), 0 0 40px rgba(255, 196, 0, 0.1);
-      background: #090c13;
-      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      border: 1.5px solid rgba(0, 210, 255, 0.4);
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.15), 0 0 35px rgba(255, 196, 0, 0.08);
+      background: #080b11;
+      transform: scale(0.94);
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.2, 1), 
+                  opacity 0.5s ease, 
+                  border-color 0.35s ease, 
+                  box-shadow 0.35s ease;
     }
+
+    /* Pop-up state applied when opened */
+    #work-modal.active .modal-card.popped {
+      transform: scale(1);
+      opacity: 1;
+    }
+
     .modal-card:hover {
-      transform: scale(1.015);
+      transform: scale(1.015) !important;
       border-color: rgba(255, 196, 0, 0.9);
-      box-shadow: 0 0 35px rgba(255, 196, 0, 0.45), 0 0 60px rgba(0, 210, 255, 0.35);
+      box-shadow: 0 0 30px rgba(255, 196, 0, 0.4), 0 0 55px rgba(0, 210, 255, 0.3);
     }
+
     .modal-card img {
       width: 100%;
       height: auto;
       display: block;
+    }
+
+    /* 7-Second Ambient Pulse/Pop Animation */
+    .modal-card.pulse-pop {
+      animation: popPulse7s 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes popPulse7s {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.025);
+        border-color: rgba(255, 196, 0, 0.95);
+        box-shadow: 0 0 35px rgba(255, 196, 0, 0.55), 0 0 65px rgba(0, 210, 255, 0.4);
+      }
+      100% {
+        transform: scale(1);
+        border-color: rgba(0, 210, 255, 0.4);
+      }
     }
 
     /* Mobile */
@@ -781,6 +832,13 @@
       .reel-card { height: 185px; }
       .reel-card img { height: 185px; }
       .reel-reactions-bar { padding: 5px 14px; font-size: 0.76rem; gap: 12px; }
+      .modal-content-area {
+        padding: 0.5rem 1rem 4rem;
+        gap: 14px; /* Minimum Gap on Phone */
+      }
+      .pictorical-title {
+        font-size: 2.3rem;
+      }
     }
   </style>
 </head>
@@ -841,7 +899,7 @@
           Photographer, Cinematographer, Bengali Album Designer & Video Editor. Creator of <strong>Click Nil</strong>, Founder of <strong>Bodhuboron Wedding Photography</strong>, and Educator mentoring students across West Bengal in filmmaking & album design.
         </p>
 
-        <!-- CTA Buttons: Open in same window & Clean WhatsApp message without emojis -->
+        <!-- CTA Buttons -->
         <div class="cta-row">
           <button class="btn btn-glow" id="open-work-btn">Explore My Work</button>
           <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20checked%20your%20website%2C%20I%20want%20to%20contact%20you" target="_blank" class="btn btn-outline">WhatsApp Me</a>
@@ -869,31 +927,26 @@
         <!-- Liquid Apple Glass Instagram Bar -->
         <div class="insta-glass-card" id="insta-card">
           <div class="insta-left-actions">
-            <!-- Heart Button with 1.4M (Pulsing every 10s) -->
             <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
               <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
               <span id="like-count">1.4M</span>
             </button>
 
-            <!-- Comments: 163K -->
             <button class="insta-action-btn" title="Comment">
               <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
               <span>163K</span>
             </button>
 
-            <!-- Repost / Share: 23K -->
             <button class="insta-action-btn" title="Repost">
               <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
               <span>23K</span>
             </button>
 
-            <!-- Direct Share -->
             <button class="insta-action-btn" title="Direct Share">
               <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
             </button>
           </div>
 
-          <!-- Bookmark Right Action -->
           <button class="insta-action-btn" title="Save">
             <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
           </button>
@@ -1157,128 +1210,35 @@
     </section>
   </main>
 
-  <!-- In-Page Full Showcase Modal (Same Window, Zoom-out to Zoom-in animation) -->
+  <!-- =========================================================
+       IN-PAGE SHOWCASE MODAL
+       ========================================================= -->
   <div id="work-modal">
     <div class="modal-header-bar">
       <div class="brand-logo">
         CLICK NIL <span style="opacity: 0.4;">/</span> <span class="sub">Album Showcase</span>
       </div>
-      <button class="modal-close-btn" id="close-work-btn">✕ Close</button>
+      <!-- Pure Glowing Neon Cross Button -->
+      <button class="neon-cross-btn" id="close-work-btn" title="Close">✕</button>
     </div>
 
-    <div class="modal-intro">
-      <span class="modal-tag">// Bodhuboron Selected Works</span>
-      <h2>Featured Album Spreads</h2>
+    <!-- Stylish Animated "Pictorical" Header -->
+    <div class="pictorical-header">
+      <h2 class="pictorical-title">Pictorical</h2>
+      <div class="pictorical-sub">Curated Bengali Wedding Album Spreads</div>
     </div>
 
+    <!-- Minimal Gap Grid (No Reaction Pills, Pop-Up Animated) -->
     <div class="modal-content-area">
-      <!-- Spread 1 -->
-      <div class="modal-item">
-        <div class="modal-card">
-          <img src="wedding-1.jpg" alt="Album Spread 1">
-        </div>
-        <div class="reel-reactions-bar">
-          <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.8K</span>
-          <span class="reel-react-item"><span class="reel-comment">💬</span> 842</span>
-          <span class="reel-react-item"><span class="reel-share">🔁</span> 148</span>
-        </div>
-      </div>
-
-      <!-- Spread 2 -->
-      <div class="modal-item">
-        <div class="modal-card">
-          <img src="wedding-2.jpg" alt="Album Spread 2">
-        </div>
-        <div class="reel-reactions-bar">
-          <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.9K</span>
-          <span class="reel-react-item"><span class="reel-comment">💬</span> 916</span>
-          <span class="reel-react-item"><span class="reel-share">🔁</span> 212</span>
-        </div>
-      </div>
-
-      <!-- Spread 3 -->
-      <div class="modal-item">
-        <div class="modal-card">
-          <img src="wedding-3.jpg" alt="Album Spread 3">
-        </div>
-        <div class="reel-reactions-bar">
-          <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.1K</span>
-          <span class="reel-react-item"><span class="reel-comment">💬</span> 764</span>
-          <span class="reel-react-item"><span class="reel-share">🔁</span> 176</span>
-        </div>
-      </div>
-
-      <!-- Spread 4 -->
-      <div class="modal-item">
-        <div class="modal-card">
-          <img src="wedding-4.jpg" alt="Album Spread 4">
-        </div>
-        <div class="reel-reactions-bar">
-          <span class="reel-react-item"><span class="reel-heart">❤️</span> 2.7K</span>
-          <span class="reel-react-item"><span class="reel-comment">💬</span> 885</span>
-          <span class="reel-react-item"><span class="reel-share">🔁</span> 195</span>
-        </div>
-      </div>
-
-      <!-- Spread 5 -->
-      <div class="modal-item">
-        <div class="modal-card">
-          <img src="wedding-5.jpg" alt="Album Spread 5">
-        </div>
-        <div class="reel-reactions-bar">
-          <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.5K</span>
-          <span class="reel-react-item"><span class="reel-comment">💬</span> 812</span>
-          <span class="reel-react-item"><span class="reel-share">🔁</span> 164</span>
-        </div>
-      </div>
-
-      <!-- Spread 6 -->
-      <div class="modal-item">
-        <div class="modal-card">
-          <img src="wedding-6.jpg" alt="Album Spread 6">
-        </div>
-        <div class="reel-reactions-bar">
-          <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.8K</span>
-          <span class="reel-react-item"><span class="reel-comment">💬</span> 740</span>
-          <span class="reel-react-item"><span class="reel-share">🔁</span> 152</span>
-        </div>
-      </div>
-
-      <!-- Spread 7 -->
-      <div class="modal-item">
-        <div class="modal-card">
-          <img src="wedding-7.jpg" alt="Album Spread 7">
-        </div>
-        <div class="reel-reactions-bar">
-          <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.4K</span>
-          <span class="reel-react-item"><span class="reel-comment">💬</span> 935</span>
-          <span class="reel-react-item"><span class="reel-share">🔁</span> 220</span>
-        </div>
-      </div>
-
-      <!-- Spread 8 -->
-      <div class="modal-item">
-        <div class="modal-card">
-          <img src="wedding-8.jpg" alt="Album Spread 8">
-        </div>
-        <div class="reel-reactions-bar">
-          <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.1K</span>
-          <span class="reel-react-item"><span class="reel-comment">💬</span> 698</span>
-          <span class="reel-react-item"><span class="reel-share">🔁</span> 138</span>
-        </div>
-      </div>
-
-      <!-- Spread 9 -->
-      <div class="modal-item">
-        <div class="modal-card">
-          <img src="wedding-9.jpg" alt="Album Spread 9">
-        </div>
-        <div class="reel-reactions-bar">
-          <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.9K</span>
-          <span class="reel-react-item"><span class="reel-comment">💬</span> 870</span>
-          <span class="reel-react-item"><span class="reel-share">🔁</span> 184</span>
-        </div>
-      </div>
+      <div class="modal-card"><img src="wedding-1.jpg" alt="Pictorical 1"></div>
+      <div class="modal-card"><img src="wedding-2.jpg" alt="Pictorical 2"></div>
+      <div class="modal-card"><img src="wedding-3.jpg" alt="Pictorical 3"></div>
+      <div class="modal-card"><img src="wedding-4.jpg" alt="Pictorical 4"></div>
+      <div class="modal-card"><img src="wedding-5.jpg" alt="Pictorical 5"></div>
+      <div class="modal-card"><img src="wedding-6.jpg" alt="Pictorical 6"></div>
+      <div class="modal-card"><img src="wedding-7.jpg" alt="Pictorical 7"></div>
+      <div class="modal-card"><img src="wedding-8.jpg" alt="Pictorical 8"></div>
+      <div class="modal-card"><img src="wedding-9.jpg" alt="Pictorical 9"></div>
     </div>
   </div>
 
@@ -1344,19 +1304,43 @@
       }
     });
 
-    // 5. In-Page Full Showcase Modal Logic (Same Window)
+    // 5. In-Page Full Showcase Modal Logic (Pop-Up Open + 7-Second Pop Pulse)
     const workModal = document.getElementById('work-modal');
     const openWorkBtn = document.getElementById('open-work-btn');
     const closeWorkBtn = document.getElementById('close-work-btn');
+    const modalCards = document.querySelectorAll('.modal-card');
+    let pulseTimer = null;
+
+    function triggerPopPulse() {
+      modalCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('pulse-pop');
+          setTimeout(() => card.classList.remove('pulse-pop'), 750);
+        }, index * 90); // cascading pop wave
+      });
+    }
 
     openWorkBtn.addEventListener('click', () => {
       workModal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // prevent background scrolling
+      document.body.style.overflow = 'hidden';
+
+      // Smooth initial pop-in sequence
+      modalCards.forEach((card, idx) => {
+        card.classList.remove('popped');
+        setTimeout(() => {
+          card.classList.add('popped');
+        }, 120 + idx * 70);
+      });
+
+      // Repeat pop-up animation every 7 seconds
+      clearInterval(pulseTimer);
+      pulseTimer = setInterval(triggerPopPulse, 7000);
     });
 
     closeWorkBtn.addEventListener('click', () => {
       workModal.classList.remove('active');
-      document.body.style.overflow = 'auto'; // restore background scrolling
+      document.body.style.overflow = 'auto';
+      clearInterval(pulseTimer);
     });
 
     // 6. Ambient Cursor Light Tracker
