@@ -7,7 +7,7 @@
   <meta name="description" content="Official website of Indranil — Photographer, Graphics Designer, and Content Creator.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #07090e;
@@ -55,6 +55,14 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
+    }
+
+    /* FULL-SCREEN REALISTIC FIRE PARTICLES CANVAS (Triggered on Playhead Drag) */
+    #drag-fire-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
     }
 
     /* Header */
@@ -386,13 +394,11 @@
       box-shadow: 0 0 8px var(--neon-blue);
     }
 
-    /* =========================================================
-       FIXED: ROOMY INSTAGRAM ACTION BAR (NO CONGESTION)
-       ========================================================= */
+    /* Instagram Action Bar */
     .insta-glass-card {
       margin-top: 14px;
       width: 95%;
-      max-width: 450px; /* Expanded from 410px for zero congestion */
+      max-width: 450px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -440,10 +446,10 @@
     .save-action-btn {
       margin-left: auto;
       padding-left: 8px;
-      flex-shrink: 0; /* Ensures save icon is NEVER crushed or crowded */
+      flex-shrink: 0;
     }
 
-    /* Auto Blinking / Pulsing Heart (10s Cycle) */
+    /* Auto Blinking / Pulsing Heart */
     .pulsing-heart {
       color: #ff2a5f !important;
       animation: heartbeat 10s infinite ease-in-out;
@@ -480,7 +486,6 @@
       overflow: hidden;
     }
 
-    /* Premiere Pro Timeline Container with extra top room so badge is NEVER cut */
     .pr-timeline-container {
       max-width: 1200px;
       margin: 0 auto 1.4rem;
@@ -501,7 +506,6 @@
       box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
-    /* Premiere Pro Timeline Markings */
     .pr-ticks {
       position: absolute;
       inset: 0;
@@ -534,7 +538,7 @@
       background: rgba(255, 255, 255, 0.08);
     }
 
-    /* Premiere Pro Blue Playhead / CTI with Fire Emitter Anchor */
+    /* Premiere Pro Blue Playhead */
     .pr-playhead {
       position: absolute;
       top: -12px;
@@ -568,7 +572,6 @@
       box-shadow: 0 0 10px #00d2ff, 0 0 18px rgba(0, 210, 255, 0.85);
     }
 
-    /* Perfectly Visible Scrubber Timecode Display */
     .pr-scrub-indicator {
       position: absolute;
       top: -30px;
@@ -587,16 +590,7 @@
       box-shadow: 0 0 14px rgba(0, 210, 255, 0.65), inset 0 0 8px rgba(0, 210, 255, 0.2);
     }
 
-    /* Futuristic Yellow Fire / Spark Particle Canvas on the Timeline */
-    #spark-canvas {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 12;
-      overflow: visible;
-    }
-
-    /* Carousel Wrapper */
+    /* Carousel Track */
     .reel-track-wrapper {
       width: 100%;
       overflow: hidden;
@@ -769,7 +763,7 @@
     }
 
     /* =========================================================
-       SHOWCASE MODAL
+       SHOWCASE MODAL: LUXURY ROYAL TYPOGRAPHY & FLUID SHIMMER
        ========================================================= */
     #work-modal {
       position: fixed;
@@ -839,54 +833,87 @@
       position: relative;
       z-index: 10;
       text-align: center;
-      padding: 2.2rem 1.2rem 1rem;
+      padding: 2.5rem 1.2rem 1.4rem;
       width: 100%;
       max-width: 100%;
       overflow: hidden;
     }
 
     .pictorical-title-wrap {
-      display: inline-block;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
       position: relative;
       max-width: 100%;
     }
 
+    /* Royal Majestic "PICTORICAL" */
     .pictorical-title {
-      font-family: 'Cinzel Decorative', 'Cinzel', serif;
-      font-size: clamp(1.85rem, 5.8vw, 3.8rem);
-      font-weight: 900;
-      letter-spacing: clamp(1px, 0.4vw, 3px);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 7.8vw, 4.8rem);
+      font-weight: 700;
+      letter-spacing: clamp(4px, 1.2vw, 10px);
       text-transform: uppercase;
       white-space: nowrap;
       display: block;
-      background: linear-gradient(135deg, #00d2ff 0%, #ffffff 40%, #ffc400 75%, #00d2ff 100%);
-      background-size: 200% auto;
+      /* Diamond liquid-silver with subtle cyan/gold refraction */
+      background: linear-gradient(110deg, #ffffff 0%, #e2e8f0 20%, #a5f3fc 40%, #ffffff 50%, #fde68a 60%, #e2e8f0 80%, #ffffff 100%);
+      background-size: 250% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: pictoricalShimmer 5s ease infinite, pictoricalFloat 3.5s ease-in-out infinite alternate;
-      filter: drop-shadow(0 0 25px rgba(0, 210, 255, 0.5));
-      margin-bottom: 6px;
+      animation: royalDiamondShine 7s ease infinite, royalFloat 4s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.45)) drop-shadow(0 0 45px rgba(0, 210, 255, 0.3));
+      line-height: 1.05;
+      margin-bottom: 12px;
     }
 
-    @keyframes pictoricalShimmer {
+    @keyframes royalDiamondShine {
       0% { background-position: 0% center; }
       50% { background-position: 100% center; }
       100% { background-position: 0% center; }
     }
-    @keyframes pictoricalFloat {
+    @keyframes royalFloat {
       0% { transform: translateY(0); }
-      100% { transform: translateY(-3px); }
+      100% { transform: translateY(-4px); }
+    }
+
+    /* Royal Crisp Ivory White "PREMIUM WEDDING ALBUM" with Needle Dividers */
+    .pictorical-sub-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 2px;
+    }
+
+    .royal-needle {
+      width: clamp(20px, 4vw, 45px);
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255, 196, 0, 0.9), transparent);
+      box-shadow: 0 0 8px rgba(255, 196, 0, 0.8);
     }
 
     .pictorical-sub {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.72rem, 1.9vw, 0.88rem);
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.72rem, 1.8vw, 0.86rem);
       font-weight: 700;
-      letter-spacing: clamp(2px, 0.5vw, 4px);
-      color: var(--neon-gold);
-      text-shadow: 0 0 10px rgba(255, 196, 0, 0.6);
+      letter-spacing: clamp(3.5px, 0.9vw, 6px);
+      color: #ffffff;
       text-transform: uppercase;
-      display: block;
+      white-space: nowrap;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.75), 0 0 24px rgba(255, 196, 0, 0.5);
+      animation: royalSubPulse 3.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes royalSubPulse {
+      0% {
+        opacity: 0.88;
+        letter-spacing: clamp(3.5px, 0.9vw, 6px);
+      }
+      100% {
+        opacity: 1;
+        letter-spacing: clamp(4.5px, 1.1vw, 7.5px);
+        text-shadow: 0 0 18px rgba(255, 255, 255, 0.95), 0 0 35px rgba(255, 196, 0, 0.7);
+      }
     }
 
     .modal-content-area {
@@ -988,6 +1015,7 @@
       .pr-playhead-line { height: 40px; }
       .pr-scrub-indicator { font-size: 0.65rem; padding: 2px 7px; top: -26px; }
       .pr-tick-time { font-size: 0.58rem; }
+      .pictorical-sub-wrap { gap: 10px; }
     }
   </style>
 </head>
@@ -996,6 +1024,9 @@
   <!-- Ambient Cursor Glow & Canvas Dust -->
   <div id="cursor-glow"></div>
   <canvas id="particle-canvas"></canvas>
+
+  <!-- FULL-SCREEN DRAG FIRE SPARKS CANVAS -->
+  <canvas id="drag-fire-canvas"></canvas>
 
   <!-- Header -->
   <header>
@@ -1073,7 +1104,7 @@
           </div>
         </div>
 
-        <!-- Liquid Apple Glass Instagram Bar (Fully Spaced, Zero Congestion) -->
+        <!-- Liquid Apple Glass Instagram Bar -->
         <div class="insta-glass-card" id="insta-card">
           <div class="insta-left-actions">
             <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
@@ -1096,7 +1127,6 @@
             </button>
           </div>
 
-          <!-- Bookmark / Save Button with dedicated margin & no shrink -->
           <button class="insta-action-btn save-action-btn" title="Save">
             <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
           </button>
@@ -1107,13 +1137,9 @@
     <!-- PREMIERE PRO TIMELINE & REEL SLIDER -->
     <section class="photo-slider-section">
       
-      <!-- Premiere Pro Timeline Bar (Never Cut) with Futuristic Fire Particle Canvas -->
       <div class="pr-timeline-container">
         <div class="pr-timeline-ruler" id="timeline-ruler">
           
-          <!-- Yellow Fire Sparks Particle Canvas for Playhead Drag -->
-          <canvas id="spark-canvas"></canvas>
-
           <!-- Ruler Markings -->
           <div class="pr-ticks">
             <div class="pr-tick-mark"><span class="pr-tick-time">00:00:00</span><div class="pr-tick-line"></div></div>
@@ -1129,7 +1155,7 @@
             <div class="pr-tick-mark"><span class="pr-tick-time">00:00:25</span><div class="pr-tick-line"></div></div>
           </div>
 
-          <!-- Premiere Pro Blue Playhead CTI (Clear, Uncut) -->
+          <!-- Premiere Pro Blue Playhead CTI -->
           <div class="pr-playhead" id="playhead">
             <div class="pr-scrub-indicator" id="scrub-time">00:00:00:00</div>
             <div class="pr-playhead-head"></div>
@@ -1369,11 +1395,15 @@
       <button class="neon-cross-btn" id="close-work-btn" title="Close">✕</button>
     </div>
 
-    <!-- Pictorical Header with "PREMIUM WEDDING ALBUM" -->
+    <!-- Pictorical Header with Royal Diamond Silver & Ivory White Subtitle -->
     <div class="pictorical-header">
       <div class="pictorical-title-wrap">
         <h2 class="pictorical-title">PICTORICAL</h2>
-        <span class="pictorical-sub">PREMIUM WEDDING ALBUM</span>
+        <div class="pictorical-sub-wrap">
+          <div class="royal-needle"></div>
+          <span class="pictorical-sub">PREMIUM WEDDING ALBUM</span>
+          <div class="royal-needle"></div>
+        </div>
       </div>
     </div>
 
@@ -1453,7 +1483,94 @@
     });
 
     // =========================================================
-    // 5. PREMIERE PRO TIMELINE WITH YELLOW FIRE DRAG SPARK SYSTEM
+    // 5. FULL-SCREEN REALISTIC FIRE EMBER SPARKS SYSTEM (DRAG TRIGGER)
+    // =========================================================
+    const fireCanvas = document.getElementById('drag-fire-canvas');
+    const fireCtx = fireCanvas.getContext('2d');
+    let fullScreenSparks = [];
+
+    function resizeFireCanvas() {
+      fireCanvas.width = window.innerWidth;
+      fireCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeFireCanvas);
+    resizeFireCanvas();
+
+    class FullScreenSpark {
+      constructor(originX, originY, velocity) {
+        const speedMagnitude = Math.abs(velocity);
+        // Positioned around cursor with dynamic spread
+        this.x = originX + (Math.random() - 0.5) * (speedMagnitude * 3 + 20);
+        this.y = originY + (Math.random() - 0.5) * 30;
+
+        // Emitter physics: explodes opposite to drag direction & ascends upwards
+        const angle = Math.atan2(-Math.random() * 5 - 2, -velocity * 0.4 + (Math.random() - 0.5) * 6);
+        const burstSpeed = Math.random() * (speedMagnitude * 0.45 + 3) + 2;
+
+        this.vx = Math.cos(angle) * burstSpeed;
+        this.vy = Math.sin(angle) * burstSpeed;
+        this.size = Math.random() * 3.8 + 1.2;
+        this.life = 1.0;
+        this.decay = Math.random() * 0.025 + 0.018;
+
+        // Realistic incandescent fire colors: brilliant white core, golden flame, deep orange embers
+        const flamePalette = [
+          '#ffffff', // White hot core
+          '#fff275', // Supernova yellow
+          '#ffc000', // Saffron gold
+          '#ff8800', // Bright orange
+          '#ff3b00'  // Crimson flare
+        ];
+        this.color = flamePalette[Math.floor(Math.random() * flamePalette.length)];
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        // Gravity & air drag
+        this.vx *= 0.96;
+        this.vy -= 0.08; // upward thermal lift
+        this.size *= 0.97;
+        this.life -= this.decay;
+      }
+
+      draw() {
+        fireCtx.save();
+        fireCtx.globalAlpha = Math.max(0, this.life);
+        fireCtx.fillStyle = this.color;
+        fireCtx.shadowColor = '#ffae00';
+        fireCtx.shadowBlur = 12;
+        fireCtx.beginPath();
+        fireCtx.arc(this.x, this.y, Math.max(0.2, this.size), 0, Math.PI * 2);
+        fireCtx.fill();
+        fireCtx.restore();
+      }
+    }
+
+    function spawnFullScreenSparks(x, y, velocity) {
+      const speedMagnitude = Math.abs(velocity);
+      // Dynamic count: slow drag = 2 to 4 embers; fast drag = up to 28 fiery sparks
+      const count = Math.min(28, Math.max(2, Math.floor(speedMagnitude * 1.4)));
+      for (let i = 0; i < count; i++) {
+        fullScreenSparks.push(new FullScreenSpark(x, y, velocity));
+      }
+    }
+
+    function animateFireCanvas() {
+      fireCtx.clearRect(0, 0, fireCanvas.width, fireCanvas.height);
+      for (let i = fullScreenSparks.length - 1; i >= 0; i--) {
+        fullScreenSparks[i].update();
+        fullScreenSparks[i].draw();
+        if (fullScreenSparks[i].life <= 0) {
+          fullScreenSparks.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(animateFireCanvas);
+    }
+    requestAnimationFrame(animateFireCanvas);
+
+    // =========================================================
+    // 6. TIMELINE CAROUSEL SCRUBBING & DRAGGING
     // =========================================================
     const track = document.getElementById('reel-track');
     const trackWrapper = document.getElementById('reel-track-wrapper');
@@ -1461,72 +1578,6 @@
     const playhead = document.getElementById('playhead');
     const scrubTime = document.getElementById('scrub-time');
 
-    // Fire Sparks Canvas
-    const sparkCanvas = document.getElementById('spark-canvas');
-    const sparkCtx = sparkCanvas.getContext('2d');
-    let fireSparks = [];
-
-    function resizeSparkCanvas() {
-      sparkCanvas.width = ruler.clientWidth;
-      sparkCanvas.height = ruler.clientHeight;
-    }
-    window.addEventListener('resize', resizeSparkCanvas);
-    resizeSparkCanvas();
-
-    class FireSpark {
-      constructor(x, y, speedX) {
-        this.x = x;
-        this.y = y;
-        this.vx = -speedX * 0.4 + (Math.random() - 0.5) * 5.5;
-        this.vy = -(Math.random() * 4.5 + 1.2);
-        this.size = Math.random() * 3.5 + 1.5;
-        this.life = 1.0;
-        this.decay = Math.random() * 0.04 + 0.025;
-        const colors = ['#ffe600', '#ffae00', '#ff6a00', '#ffffff', '#ffcc00'];
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.vx *= 0.94;
-        this.vy *= 0.94;
-        this.size *= 0.96;
-        this.life -= this.decay;
-      }
-      draw() {
-        sparkCtx.save();
-        sparkCtx.globalAlpha = Math.max(0, this.life);
-        sparkCtx.fillStyle = this.color;
-        sparkCtx.shadowColor = '#ffb700';
-        sparkCtx.shadowBlur = 10;
-        sparkCtx.beginPath();
-        sparkCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        sparkCtx.fill();
-        sparkCtx.restore();
-      }
-    }
-
-    function emitFireSparks(x, y, velocityX) {
-      const count = Math.min(10, Math.max(3, Math.abs(velocityX) * 1.5));
-      for (let i = 0; i < count; i++) {
-        fireSparks.push(new FireSpark(x, y, velocityX));
-      }
-    }
-
-    function animateFireSparks() {
-      sparkCtx.clearRect(0, 0, sparkCanvas.width, sparkCanvas.height);
-      for (let i = fireSparks.length - 1; i >= 0; i--) {
-        fireSparks[i].update();
-        fireSparks[i].draw();
-        if (fireSparks[i].life <= 0) {
-          fireSparks.splice(i, 1);
-        }
-      }
-      requestAnimationFrame(animateFireSparks);
-    }
-    requestAnimationFrame(animateFireSparks);
-
-    // Timeline Drag & Follow Logic
     let currentScroll = 0;
     let isDragging = false;
     let isHovering = false;
@@ -1576,6 +1627,8 @@
     function scrubFromEvent(e) {
       const rect = ruler.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
       let ratio = (clientX - rect.left) / rect.width;
       ratio = Math.max(0, Math.min(1, ratio));
 
@@ -1583,10 +1636,10 @@
       currentScroll = ratio * halfWidth;
       updateCarouselPosition();
 
+      // Calculate speed & trigger full-screen fire particles
       const velocity = clientX - lastClientX;
       lastClientX = clientX;
-      const playheadX = ratio * sparkCanvas.width;
-      emitFireSparks(playheadX, 16, velocity);
+      spawnFullScreenSparks(clientX, clientY, velocity);
     }
 
     ruler.addEventListener('mousedown', (e) => {
@@ -1622,7 +1675,7 @@
     });
 
     // =========================================================
-    // 6. IN-PAGE SHOWCASE MODAL LOGIC
+    // 7. IN-PAGE SHOWCASE MODAL LOGIC
     // =========================================================
     const workModal = document.getElementById('work-modal');
     const openWorkBtn = document.getElementById('open-work-btn');
@@ -1670,7 +1723,7 @@
       clearInterval(pulseTimer);
     });
 
-    // 7. Ambient Cursor Light Tracker
+    // 8. Ambient Cursor Light Tracker
     const glow = document.getElementById('cursor-glow');
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -1682,7 +1735,7 @@
       glow.style.top = mouseY + 'px';
     });
 
-    // 8. Background & Modal Particle Systems (Futuristic Cyan & Neon Gold)
+    // 9. Background & Modal Particle Systems (Futuristic Cyan & Neon Gold)
     const mainCanvas = document.getElementById('particle-canvas');
     const modalCanvas = document.getElementById('modal-particle-canvas');
 
