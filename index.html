@@ -6,7 +6,7 @@
   <title>Click Nil | Visual Artist</title>
   <meta name="description" content="Official website of Indranil — Photographer, Graphics Designer, and Content Creator.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -386,17 +386,19 @@
       box-shadow: 0 0 8px var(--neon-blue);
     }
 
-    /* Apple Glass Instagram Action Bar */
+    /* =========================================================
+       FIXED: ROOMY INSTAGRAM ACTION BAR (NO CONGESTION)
+       ========================================================= */
     .insta-glass-card {
       margin-top: 14px;
-      width: 90%;
-      max-width: 410px;
+      width: 95%;
+      max-width: 450px; /* Expanded from 410px for zero congestion */
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px 18px;
-      background: rgba(18, 24, 38, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(18, 24, 38, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 20px;
       backdrop-filter: blur(24px) saturate(180%);
       -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -406,22 +408,25 @@
     .insta-left-actions {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
+      flex-wrap: nowrap;
     }
     .insta-action-btn {
       background: none;
       border: none;
       color: #cbd5e1;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       padding: 4px 6px;
       border-radius: 8px;
       transition: all 0.2s ease;
       font-family: 'Plus Jakarta Sans', sans-serif;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .insta-action-btn:hover {
       color: #fff;
@@ -431,6 +436,11 @@
       width: 18px;
       height: 18px;
       fill: currentColor;
+    }
+    .save-action-btn {
+      margin-left: auto;
+      padding-left: 8px;
+      flex-shrink: 0; /* Ensures save icon is NEVER crushed or crowded */
     }
 
     /* Auto Blinking / Pulsing Heart (10s Cycle) */
@@ -466,28 +476,28 @@
     .photo-slider-section {
       position: relative;
       z-index: 1;
-      padding: 1.5rem 0 3.5rem;
+      padding: 2.2rem 0 3.5rem;
       overflow: hidden;
     }
 
-    /* Premiere Pro Timeline Bar */
+    /* Premiere Pro Timeline Container with extra top room so badge is NEVER cut */
     .pr-timeline-container {
       max-width: 1200px;
-      margin: 0 auto 1.2rem;
-      padding: 0 4%;
+      margin: 0 auto 1.4rem;
+      padding: 40px 4% 0;
+      position: relative;
     }
 
     .pr-timeline-ruler {
       position: relative;
       width: 100%;
       height: 48px;
-      background: rgba(14, 18, 27, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(14, 18, 27, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 12px;
       backdrop-filter: blur(16px);
       cursor: pointer;
       user-select: none;
-      overflow: visible;
       box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
@@ -524,57 +534,66 @@
       background: rgba(255, 255, 255, 0.08);
     }
 
-    /* Premiere Pro Blue Playhead / CTI */
+    /* Premiere Pro Blue Playhead / CTI with Fire Emitter Anchor */
     .pr-playhead {
       position: absolute;
-      top: -6px;
+      top: -12px;
       left: 0%;
       transform: translateX(-50%);
-      width: 22px;
-      height: 60px;
+      width: 24px;
+      height: 64px;
       pointer-events: auto;
       cursor: grab;
-      z-index: 10;
+      z-index: 15;
       transition: none;
     }
     .pr-playhead:active {
       cursor: grabbing;
     }
-    /* Playhead Head (Triangle & Badge) */
     .pr-playhead-head {
-      width: 18px;
-      height: 16px;
+      width: 20px;
+      height: 18px;
       background: #0084ff;
       margin: 0 auto;
       clip-path: polygon(0% 0%, 100% 0%, 100% 65%, 50% 100%, 0% 65%);
-      box-shadow: 0 0 12px #00d2ff;
+      box-shadow: 0 0 14px #00d2ff;
       border: 1px solid #70c4ff;
+      position: relative;
     }
-    /* Vertical red laser line */
     .pr-playhead-line {
-      width: 2px;
-      height: 44px;
+      width: 2.5px;
+      height: 48px;
       background: #00d2ff;
       margin: 0 auto;
-      box-shadow: 0 0 8px #00d2ff, 0 0 15px rgba(0, 210, 255, 0.8);
+      box-shadow: 0 0 10px #00d2ff, 0 0 18px rgba(0, 210, 255, 0.85);
     }
 
-    /* Live Scrubber Timecode Display */
+    /* Perfectly Visible Scrubber Timecode Display */
     .pr-scrub-indicator {
       position: absolute;
-      top: -28px;
+      top: -30px;
+      left: 50%;
       transform: translateX(-50%);
-      background: rgba(0, 132, 255, 0.2);
-      border: 1px solid #00d2ff;
-      padding: 2px 8px;
-      border-radius: 6px;
+      background: rgba(8, 22, 38, 0.95);
+      border: 1.5px solid #00d2ff;
+      padding: 3px 10px;
+      border-radius: 7px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-size: 0.74rem;
+      font-weight: 800;
       color: #00d2ff;
       white-space: nowrap;
       pointer-events: none;
-      box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+      box-shadow: 0 0 14px rgba(0, 210, 255, 0.65), inset 0 0 8px rgba(0, 210, 255, 0.2);
+    }
+
+    /* Futuristic Yellow Fire / Spark Particle Canvas on the Timeline */
+    #spark-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 12;
+      overflow: visible;
     }
 
     /* Carousel Wrapper */
@@ -861,11 +880,12 @@
 
     .pictorical-sub {
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(0.68rem, 1.8vw, 0.82rem);
-      letter-spacing: clamp(1px, 0.3vw, 2.5px);
-      color: var(--neon-blue);
+      font-size: clamp(0.72rem, 1.9vw, 0.88rem);
+      font-weight: 700;
+      letter-spacing: clamp(2px, 0.5vw, 4px);
+      color: var(--neon-gold);
+      text-shadow: 0 0 10px rgba(255, 196, 0, 0.6);
       text-transform: uppercase;
-      opacity: 0.85;
       display: block;
     }
 
@@ -931,7 +951,7 @@
       100% { transform: scale(1); border-color: rgba(0, 210, 255, 0.4); }
     }
 
-    /* Mobile */
+    /* Mobile Responsive */
     @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
@@ -942,15 +962,32 @@
       .cta-row { justify-content: center; }
       .photo-wrapper { order: -1; }
       .photo-container { max-width: 320px; }
-      .insta-glass-card { width: 95%; }
+      .insta-glass-card { 
+        width: 98%; 
+        padding: 8px 12px;
+      }
+      .insta-left-actions {
+        gap: 8px;
+      }
+      .insta-action-btn {
+        font-size: 0.78rem;
+        gap: 4px;
+        padding: 3px 4px;
+      }
+      .insta-action-btn svg {
+        width: 16px;
+        height: 16px;
+      }
       .reel-card { height: 185px; }
       .reel-card img { height: 185px; }
       .reel-reactions-bar { padding: 5px 14px; font-size: 0.76rem; gap: 12px; }
       .modal-content-area { padding: 0.4rem 0.8rem 4rem; gap: 12px; }
-      .pr-timeline-ruler { height: 42px; }
-      .pr-playhead { height: 52px; }
-      .pr-playhead-line { height: 38px; }
-      .pr-tick-time { font-size: 0.6rem; }
+      .pr-timeline-container { padding: 36px 3% 0; }
+      .pr-timeline-ruler { height: 44px; }
+      .pr-playhead { height: 56px; top: -10px; }
+      .pr-playhead-line { height: 40px; }
+      .pr-scrub-indicator { font-size: 0.65rem; padding: 2px 7px; top: -26px; }
+      .pr-tick-time { font-size: 0.58rem; }
     }
   </style>
 </head>
@@ -1036,7 +1073,7 @@
           </div>
         </div>
 
-        <!-- Liquid Apple Glass Instagram Bar -->
+        <!-- Liquid Apple Glass Instagram Bar (Fully Spaced, Zero Congestion) -->
         <div class="insta-glass-card" id="insta-card">
           <div class="insta-left-actions">
             <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
@@ -1059,7 +1096,8 @@
             </button>
           </div>
 
-          <button class="insta-action-btn" title="Save">
+          <!-- Bookmark / Save Button with dedicated margin & no shrink -->
+          <button class="insta-action-btn save-action-btn" title="Save">
             <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
           </button>
         </div>
@@ -1069,10 +1107,13 @@
     <!-- PREMIERE PRO TIMELINE & REEL SLIDER -->
     <section class="photo-slider-section">
       
-      <!-- Premiere Pro Timeline Bar with Interactive Scrubber Playhead -->
+      <!-- Premiere Pro Timeline Bar (Never Cut) with Futuristic Fire Particle Canvas -->
       <div class="pr-timeline-container">
         <div class="pr-timeline-ruler" id="timeline-ruler">
           
+          <!-- Yellow Fire Sparks Particle Canvas for Playhead Drag -->
+          <canvas id="spark-canvas"></canvas>
+
           <!-- Ruler Markings -->
           <div class="pr-ticks">
             <div class="pr-tick-mark"><span class="pr-tick-time">00:00:00</span><div class="pr-tick-line"></div></div>
@@ -1088,7 +1129,7 @@
             <div class="pr-tick-mark"><span class="pr-tick-time">00:00:25</span><div class="pr-tick-line"></div></div>
           </div>
 
-          <!-- Premiere Pro Blue Playhead CTI -->
+          <!-- Premiere Pro Blue Playhead CTI (Clear, Uncut) -->
           <div class="pr-playhead" id="playhead">
             <div class="pr-scrub-indicator" id="scrub-time">00:00:00:00</div>
             <div class="pr-playhead-head"></div>
@@ -1328,10 +1369,11 @@
       <button class="neon-cross-btn" id="close-work-btn" title="Close">✕</button>
     </div>
 
+    <!-- Pictorical Header with "PREMIUM WEDDING ALBUM" -->
     <div class="pictorical-header">
       <div class="pictorical-title-wrap">
         <h2 class="pictorical-title">PICTORICAL</h2>
-        <span class="pictorical-sub">Curated Bengali Wedding Album Spreads</span>
+        <span class="pictorical-sub">PREMIUM WEDDING ALBUM</span>
       </div>
     </div>
 
@@ -1411,7 +1453,7 @@
     });
 
     // =========================================================
-    // 5. PREMIERE PRO SCRUBBABLE TIMELINE & SYNCED CAROUSEL
+    // 5. PREMIERE PRO TIMELINE WITH YELLOW FIRE DRAG SPARK SYSTEM
     // =========================================================
     const track = document.getElementById('reel-track');
     const trackWrapper = document.getElementById('reel-track-wrapper');
@@ -1419,18 +1461,84 @@
     const playhead = document.getElementById('playhead');
     const scrubTime = document.getElementById('scrub-time');
 
+    // Fire Sparks Canvas
+    const sparkCanvas = document.getElementById('spark-canvas');
+    const sparkCtx = sparkCanvas.getContext('2d');
+    let fireSparks = [];
+
+    function resizeSparkCanvas() {
+      sparkCanvas.width = ruler.clientWidth;
+      sparkCanvas.height = ruler.clientHeight;
+    }
+    window.addEventListener('resize', resizeSparkCanvas);
+    resizeSparkCanvas();
+
+    class FireSpark {
+      constructor(x, y, speedX) {
+        this.x = x;
+        this.y = y;
+        this.vx = -speedX * 0.4 + (Math.random() - 0.5) * 5.5;
+        this.vy = -(Math.random() * 4.5 + 1.2);
+        this.size = Math.random() * 3.5 + 1.5;
+        this.life = 1.0;
+        this.decay = Math.random() * 0.04 + 0.025;
+        const colors = ['#ffe600', '#ffae00', '#ff6a00', '#ffffff', '#ffcc00'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vx *= 0.94;
+        this.vy *= 0.94;
+        this.size *= 0.96;
+        this.life -= this.decay;
+      }
+      draw() {
+        sparkCtx.save();
+        sparkCtx.globalAlpha = Math.max(0, this.life);
+        sparkCtx.fillStyle = this.color;
+        sparkCtx.shadowColor = '#ffb700';
+        sparkCtx.shadowBlur = 10;
+        sparkCtx.beginPath();
+        sparkCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        sparkCtx.fill();
+        sparkCtx.restore();
+      }
+    }
+
+    function emitFireSparks(x, y, velocityX) {
+      const count = Math.min(10, Math.max(3, Math.abs(velocityX) * 1.5));
+      for (let i = 0; i < count; i++) {
+        fireSparks.push(new FireSpark(x, y, velocityX));
+      }
+    }
+
+    function animateFireSparks() {
+      sparkCtx.clearRect(0, 0, sparkCanvas.width, sparkCanvas.height);
+      for (let i = fireSparks.length - 1; i >= 0; i--) {
+        fireSparks[i].update();
+        fireSparks[i].draw();
+        if (fireSparks[i].life <= 0) {
+          fireSparks.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(animateFireSparks);
+    }
+    requestAnimationFrame(animateFireSparks);
+
+    // Timeline Drag & Follow Logic
     let currentScroll = 0;
     let isDragging = false;
     let isHovering = false;
-    const speed = 1.0; // Smooth scrolling speed
+    let lastClientX = 0;
+    const autoSpeed = 1.0;
 
     function getHalfWidth() {
       return track.scrollWidth / 2;
     }
 
-    // Convert scrub position (0 to 1) into a realistic Premiere timecode (00:00:00:00 to 00:00:30:00)
     function formatTimecode(progress) {
-      const totalFrames = Math.floor(progress * 30 * 25); // 25 fps base
+      const totalFrames = Math.floor(progress * 30 * 25);
       const frames = (totalFrames % 25).toString().padStart(2, '0');
       const seconds = Math.floor((totalFrames / 25) % 60).toString().padStart(2, '0');
       const minutes = Math.floor(totalFrames / (25 * 60)).toString().padStart(2, '0');
@@ -1447,17 +1555,15 @@
         }
         track.style.transform = `translate3d(-${currentScroll}px, 0, 0)`;
 
-        // Sync timeline playhead position
         const progress = (currentScroll % halfWidth) / halfWidth;
         playhead.style.left = `${progress * 100}%`;
         scrubTime.textContent = formatTimecode(progress);
       }
     }
 
-    // Auto-scroll loop
     function timelineLoop() {
       if (!isDragging && !isHovering) {
-        currentScroll += speed;
+        currentScroll += autoSpeed;
         updateCarouselPosition();
       }
       requestAnimationFrame(timelineLoop);
@@ -1467,7 +1573,6 @@
     trackWrapper.addEventListener('mouseenter', () => { isHovering = true; });
     trackWrapper.addEventListener('mouseleave', () => { isHovering = false; });
 
-    // Scrubbing via Playhead / Timeline Click or Drag
     function scrubFromEvent(e) {
       const rect = ruler.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -1477,10 +1582,16 @@
       const halfWidth = getHalfWidth();
       currentScroll = ratio * halfWidth;
       updateCarouselPosition();
+
+      const velocity = clientX - lastClientX;
+      lastClientX = clientX;
+      const playheadX = ratio * sparkCanvas.width;
+      emitFireSparks(playheadX, 16, velocity);
     }
 
     ruler.addEventListener('mousedown', (e) => {
       isDragging = true;
+      lastClientX = e.clientX;
       scrubFromEvent(e);
     });
 
@@ -1494,9 +1605,9 @@
       isDragging = false;
     });
 
-    // Touch Support for Mobile
     ruler.addEventListener('touchstart', (e) => {
       isDragging = true;
+      lastClientX = e.touches[0].clientX;
       scrubFromEvent(e);
     }, { passive: true });
 
@@ -1511,7 +1622,7 @@
     });
 
     // =========================================================
-    // 6. In-Page Full Showcase Modal Logic
+    // 6. IN-PAGE SHOWCASE MODAL LOGIC
     // =========================================================
     const workModal = document.getElementById('work-modal');
     const openWorkBtn = document.getElementById('open-work-btn');
