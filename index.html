@@ -342,7 +342,6 @@
       transform: scale(1.02);
     }
 
-    /* 10-Second Luminous Laser Shine Overlay across portrait */
     .photo-shine-sweep {
       position: absolute;
       top: -50%;
@@ -488,7 +487,6 @@
       fill: currentColor;
     }
 
-    /* Perfect Heart Pulse & Hover */
     .pulsing-heart {
       color: #ff2a5f !important;
       animation: heartbeat 10s infinite ease-in-out;
@@ -503,7 +501,6 @@
       99% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(255, 42, 95, 0.7)); }
     }
 
-    /* Floating Heart Popup */
     .floating-heart {
       position: absolute;
       top: -24px;
@@ -581,7 +578,6 @@
       background: rgba(255, 255, 255, 0.08);
     }
 
-    /* Premiere Pro Blue Playhead */
     .pr-playhead {
       position: absolute;
       top: -12px;
@@ -633,7 +629,6 @@
       box-shadow: 0 0 14px rgba(0, 210, 255, 0.65), inset 0 0 8px rgba(0, 210, 255, 0.2);
     }
 
-    /* Carousel Track */
     .reel-track-wrapper {
       width: 100%;
       overflow: hidden;
@@ -730,7 +725,7 @@
     .ventures {
       position: relative;
       z-index: 1;
-      padding: 3rem 8% 5rem;
+      padding: 3rem 8% 4.5rem;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -801,7 +796,6 @@
       color: #fff;
     }
 
-    /* Brand Badges inside 4th Box */
     .brand-pills-wrap {
       display: flex;
       flex-wrap: wrap;
@@ -826,6 +820,181 @@
       color: var(--neon-gold);
     }
 
+    /* =========================================================
+       NEW: SCISSORS CUT ANIMATION & PHOTOGRAPHERS AREA
+       ========================================================= */
+    .cut-transition-container {
+      position: relative;
+      width: 100%;
+      height: 70px;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0 0;
+    }
+
+    /* Animated dashed cut line appearing from right to left */
+    .cut-dashed-line {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 0%;
+      height: 2px;
+      border-top: 2.5px dashed #ffffff;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
+      transform: translateY(-50%);
+      transition: width 1.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* White Scissors Moving from Right to Left with Snapping Action */
+    .scissors-icon {
+      position: absolute;
+      top: 50%;
+      right: -40px;
+      transform: translateY(-50%) scaleX(-1);
+      font-size: 2.2rem;
+      color: #ffffff;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(0, 210, 255, 0.8));
+      pointer-events: none;
+      z-index: 10;
+      transition: right 1.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.2s ease;
+    }
+
+    .cut-transition-container.cutting .cut-dashed-line {
+      width: 100%;
+    }
+
+    .cut-transition-container.cutting .scissors-icon {
+      right: calc(100% - 30px);
+      animation: scissorSnap 0.22s infinite ease-in-out alternate;
+    }
+
+    @keyframes scissorSnap {
+      0% { transform: translateY(-50%) scaleX(-1) rotate(-8deg); }
+      100% { transform: translateY(-50%) scaleX(-1) rotate(14deg); }
+    }
+
+    /* Photographers Area: Distinct Rich Navy / Cosmic Obsidian Atmosphere */
+    .photographers-arena {
+      position: relative;
+      z-index: 1;
+      padding: 4.5rem 8% 6rem;
+      background: radial-gradient(ellipse at 50% 20%, rgba(13, 27, 42, 0.85) 0%, rgba(5, 8, 14, 0.98) 75%);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .photographers-arena.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .arena-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .arena-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #00d2ff;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .arena-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -1px;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.35);
+    }
+    .arena-header p {
+      color: #94a3b8;
+      font-size: 1.05rem;
+      margin-top: 0.6rem;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .arena-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .arena-card {
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(0, 210, 255, 0.25);
+      border-radius: 20px;
+      padding: 2.2rem 1.8rem;
+      backdrop-filter: blur(16px);
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .arena-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #00d2ff, #a855f7);
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+    .arena-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 196, 0, 0.7);
+      box-shadow: 0 15px 40px rgba(0, 210, 255, 0.15), 0 0 25px rgba(255, 196, 0, 0.1);
+    }
+    .arena-card:hover::before {
+      opacity: 1;
+      background: linear-gradient(90deg, #ffc400, #00d2ff);
+    }
+
+    .arena-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1.2rem;
+    }
+    .arena-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+    .arena-desc {
+      color: #94a3b8;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .arena-badge {
+      align-self: flex-start;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
     /* Footer */
     footer {
       position: relative;
@@ -835,6 +1004,7 @@
       border-top: 1px solid var(--card-border);
       color: var(--text-muted);
       font-size: 0.9rem;
+      background: #05080e;
     }
 
     /* =========================================================
@@ -922,7 +1092,6 @@
       max-width: 100%;
     }
 
-    /* Royal Majestic "PICTORICAL" */
     .pictorical-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2.4rem, 7.8vw, 4.8rem);
@@ -951,7 +1120,6 @@
       100% { transform: translateY(-4px); }
     }
 
-    /* Royal Crisp Ivory White "PREMIUM WEDDING ALBUM" with Needle Dividers */
     .pictorical-sub-wrap {
       display: inline-flex;
       align-items: center;
@@ -1106,7 +1274,7 @@
       }
 
       .ventures {
-        padding: 2rem 5% 3.5rem;
+        padding: 2rem 5% 2.5rem;
       }
       .section-header {
         margin-bottom: 1.8rem;
@@ -1130,6 +1298,14 @@
       .venture-desc {
         font-size: 0.86rem;
         margin-bottom: 1rem;
+      }
+
+      .arena-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .photographers-arena {
+        padding: 3rem 5% 4rem;
       }
 
       .reel-card { height: 185px; }
@@ -1221,14 +1397,11 @@
         <div class="photo-container">
           <img src="profile.jpg" alt="Indranil">
 
-          <!-- 10-Second Futuristic Shine Beam -->
           <div class="photo-shine-sweep"></div>
 
-          <!-- Clean HUD Brackets -->
           <div class="hud-element hud-bracket-tl"></div>
           <div class="hud-element hud-bracket-br"></div>
 
-          <!-- Oval Liquid Apple Glass Pill Bar Over Photo -->
           <div class="apple-glass-pill">
             <div class="pill-title">Indranil</div>
             <div class="pill-followers">
@@ -1241,7 +1414,6 @@
         <div class="insta-glass-card" id="insta-card">
           <div class="insta-actions-row">
             
-            <!-- Real Heart Icon (Precision Instagram Curved SVG) -->
             <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
               <svg viewBox="0 0 24 24">
                 <path d="M12 21.35C5.14 15.24 2 12.09 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.59-3.14 6.74-10 12.85z"/>
@@ -1277,7 +1449,6 @@
       <div class="pr-timeline-container">
         <div class="pr-timeline-ruler" id="timeline-ruler">
           
-          <!-- Ruler Markings -->
           <div class="pr-ticks">
             <div class="pr-tick-mark"><span class="pr-tick-time">00:00:00</span><div class="pr-tick-line"></div></div>
             <div class="pr-tick-mark"><div class="pr-tick-line sub"></div></div>
@@ -1292,7 +1463,6 @@
             <div class="pr-tick-mark"><span class="pr-tick-time">00:00:25</span><div class="pr-tick-line"></div></div>
           </div>
 
-          <!-- Premiere Pro Blue Playhead CTI -->
           <div class="pr-playhead" id="playhead">
             <div class="pr-scrub-indicator" id="scrub-time">00:00:00:00</div>
             <div class="pr-playhead-head"></div>
@@ -1541,6 +1711,54 @@
         </div>
       </div>
     </section>
+
+    <!-- SCISSORS CUT ANIMATION DIVIDER (Right to Left Cut) -->
+    <div class="cut-transition-container" id="cut-divider">
+      <div class="cut-dashed-line"></div>
+      <div class="scissors-icon">✂</div>
+    </div>
+
+    <!-- NEW: PHOTOGRAPHERS ARENA / CREATOR'S SUITE (Distinct Theme) -->
+    <section class="photographers-arena" id="photographers-arena">
+      <div class="arena-header">
+        <span class="arena-tag">// Professional Creators Suite</span>
+        <h2>Photographers Arena</h2>
+        <p>A dedicated creative workspace featuring curated optical rigs, lighting setups, and color profiles designed for modern visual storytellers.</p>
+      </div>
+
+      <div class="arena-grid">
+        <!-- Card 1 -->
+        <div class="arena-card">
+          <div>
+            <div class="arena-icon">🔍</div>
+            <h3 class="arena-title">Camera & Optics Lab</h3>
+            <p class="arena-desc">Full-frame mirrorless camera rigs, prime cine lenses, and ND filtration systems fine-tuned for high dynamic range capture.</p>
+          </div>
+          <span class="arena-badge">Sony & Canon Cine</span>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="arena-card">
+          <div>
+            <div class="arena-icon">💡</div>
+            <h3 class="arena-title">Lighting & Studio Craft</h3>
+            <p class="arena-desc">Mastering directional modifiers, dual-rim godox strobes, and ambient cinematic wedding lighting configurations.</p>
+          </div>
+          <span class="arena-badge">Lighting Masterclass</span>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="arena-card">
+          <div>
+            <div class="arena-icon">🎨</div>
+            <h3 class="arena-title">Color Grading & LUTs</h3>
+            <p class="arena-desc">Custom 10-bit Log conversion LUTs and Bengali wedding color presets crafted for true-to-life skin tones.</p>
+          </div>
+          <span class="arena-badge">Creative Color Suite</span>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- IN-PAGE SHOWCASE MODAL -->
@@ -1557,7 +1775,6 @@
       <button class="neon-cross-btn" id="close-work-btn" title="Close">✕</button>
     </div>
 
-    <!-- Royal Typography Header -->
     <div class="pictorical-header">
       <div class="pictorical-title-wrap">
         <h2 class="pictorical-title">PICTORICAL</h2>
@@ -1579,14 +1796,12 @@
       <div class="modal-card"><img src="wedding-7.jpg" alt="Pictorical 7"></div>
       <div class="modal-card"><img src="wedding-8.jpg" alt="Pictorical 8"></div>
       <div class="modal-card"><img src="wedding-9.jpg" alt="Pictorical 9"></div>
-      <div class="modal-card"><img src="wedding-10.jpg" alt="Pictorical 10"></div>
-      <div class="modal-card"><img src="wedding-11.jpg" alt="Pictorical 11"></div>
     </div>
   </div>
 
   <!-- Footer -->
   <footer>
-    <p>© 2017 Click Nil • Bodhuboron </p>
+    <p>© 2026 Click Nil • Indranil. Built with clean code on GitHub Pages.</p>
   </footer>
 
   <script>
@@ -1827,7 +2042,28 @@
     });
 
     // =========================================================
-    // 7. IN-PAGE SHOWCASE MODAL LOGIC
+    // 7. SCISSORS CUT ANIMATION ON SCROLL
+    // =========================================================
+    const cutDivider = document.getElementById('cut-divider');
+    const photographersArena = document.getElementById('photographers-arena');
+
+    const cutObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          cutDivider.classList.add('cutting');
+          setTimeout(() => {
+            photographersArena.classList.add('revealed');
+          }, 1100);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    if (cutDivider) {
+      cutObserver.observe(cutDivider);
+    }
+
+    // =========================================================
+    // 8. IN-PAGE SHOWCASE MODAL LOGIC
     // =========================================================
     const workModal = document.getElementById('work-modal');
     const openWorkBtn = document.getElementById('open-work-btn');
@@ -1875,7 +2111,7 @@
       clearInterval(pulseTimer);
     });
 
-    // 8. Ambient Cursor Light Tracker
+    // 9. Ambient Cursor Light Tracker
     const glow = document.getElementById('cursor-glow');
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -1887,7 +2123,7 @@
       glow.style.top = mouseY + 'px';
     });
 
-    // 9. Background & Modal Particle Systems
+    // 10. Background & Modal Particle Systems
     const mainCanvas = document.getElementById('particle-canvas');
     const modalCanvas = document.getElementById('modal-particle-canvas');
 
