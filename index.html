@@ -427,6 +427,8 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .pill-followers .stat-dot {
       width: 6px;
@@ -1609,13 +1611,22 @@
         border-radius: 24px;
       }
       
+      /* Fixed 50K+ Followers on phone so both name and followers stay on one line */
       .apple-glass-pill {
-        bottom: 12px;
-        padding: 6px 14px;
-        width: 88%;
+        bottom: 10px;
+        padding: 6px 12px;
+        width: 94%;
+        box-sizing: border-box;
       }
-      .pill-title { font-size: 0.88rem; }
-      .pill-followers { font-size: 0.72rem; }
+      .pill-title { 
+        font-size: 0.82rem; 
+        white-space: nowrap; 
+      }
+      .pill-followers { 
+        font-size: 0.68rem; 
+        white-space: nowrap; 
+        flex-shrink: 0;
+      }
 
       .insta-glass-card { 
         width: 88%; 
@@ -1806,7 +1817,7 @@
         <div class="insta-glass-card" id="insta-card">
           <div class="insta-actions-row">
             
-          <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
+            <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
               <svg viewBox="0 0 24 24" style="width: 17px; height: 17px; min-width: 17px; flex-shrink: 0; display: block;">
                 <path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/>
               </svg>
