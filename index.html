@@ -1,2842 +1,2841 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Click Nil | Visual Artist</title>
-  <meta name="description" content="Official website of Indranil — Photographer, Graphics Designer, and Content Creator.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #07090e;
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --neon-blue: #00d2ff;
-      --neon-gold: #ffc400;
-      --rec-red: #ff2a2a;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --name-hue: 0deg;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg);
-      color: var(--text-main);
-      overflow-x: hidden;
-      line-height: 1.6;
-      position: relative;
-    }
-
-    /* Ambient Dynamic Mouse Spotlight */
-    #cursor-glow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 650px;
-      height: 650px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 210, 255, 0.18) 0%, rgba(255, 196, 0, 0.1) 30%, transparent 70%);
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      z-index: 0;
-      filter: blur(85px);
-      transition: opacity 0.3s ease;
-    }
-
-    /* Ambient Dust Canvas with Neon Golden & Cyan Particles */
-    #particle-canvas {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* FULL-SCREEN REALISTIC FIRE PARTICLES CANVAS */
-    #drag-fire-canvas {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9998;
-    }
-
-    /* Header with Verified Badge to the left of CLICK NIL */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 1.25rem 8%;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      background: rgba(7, 9, 14, 0.75);
-      border-bottom: 1px solid var(--card-border);
-    }
-    .brand-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-decoration: none;
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-    }
-    .verified-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--neon-blue);
-      filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.85));
-      line-height: 1;
-    }
-    .verified-badge svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
-    .brand-logo .divider { color: var(--card-border); font-weight: 300; }
-    .brand-logo .sub {
-      font-size: 0.85rem;
-      color: var(--neon-blue);
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    /* Hero Section */
-    .hero {
-      position: relative;
-      z-index: 1;
-      padding: 5rem 8% 4rem;
-      max-width: 1240px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 3.5rem;
-      align-items: center;
-    }
-
-    /* Recording Badge with Live Millisecond Timecode */
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0.45rem 1.1rem;
-      border-radius: 999px;
-      background: rgba(255, 42, 42, 0.08);
-      border: 1px solid rgba(255, 42, 42, 0.3);
-      color: #fff;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      margin-bottom: 1.25rem;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .rec-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--rec-red);
-      box-shadow: 0 0 12px var(--rec-red), 0 0 22px rgba(255, 42, 42, 0.9);
-      animation: recBlink 1.2s infinite ease-in-out;
-    }
-    @keyframes recBlink {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.2; transform: scale(0.8); }
-    }
-    .rec-timer {
-      color: #ff9e9e;
-      font-weight: 600;
-    }
-
-    /* Pure White "Hi, I'm" */
-    .intro-small {
-      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.5px;
-      margin-bottom: 0.4rem;
-    }
-
-    /* Photoshop Bounding Box */
-    .ps-bounding-box-wrap {
-      position: relative;
-      display: inline-flex;
-      flex-direction: column;
-      padding: 16px 20px 14px 18px;
-      margin-bottom: 1.8rem;
-      filter: hue-rotate(var(--name-hue));
-      transition: filter 0.05s linear;
-    }
-    .ps-marquee-border {
-      position: absolute;
-      inset: 0;
-      border: 1.5px dashed var(--neon-blue);
-      border-radius: 2px;
-      box-shadow: 0 0 14px rgba(0, 210, 255, 0.25), inset 0 0 14px rgba(0, 210, 255, 0.08);
-      pointer-events: none;
-    }
-    .ps-handle {
-      position: absolute;
-      width: 9px;
-      height: 9px;
-      background: #ffffff;
-      border: 1.5px solid var(--neon-blue);
-      box-shadow: 0 0 6px var(--neon-blue);
-      z-index: 2;
-    }
-    .ps-handle.tl { top: -5px; left: -5px; }
-    .ps-handle.tm { top: -5px; left: 50%; transform: translateX(-50%); }
-    .ps-handle.tr { top: -5px; right: -5px; }
-    .ps-handle.ml { top: 50%; left: -5px; transform: translateY(-50%); }
-    .ps-handle.mr { top: 50%; right: -5px; transform: translateY(-50%); }
-    .ps-handle.bl { bottom: -5px; left: -5px; }
-    .ps-handle.bm { bottom: -5px; left: 50%; transform: translateX(-50%); }
-    .ps-handle.br { bottom: -5px; right: -5px; }
-
-    /* Big Name */
-    .big-name {
-      font-size: clamp(3.6rem, 8.5vw, 6.2rem);
-      font-weight: 900;
-      line-height: 0.95;
-      letter-spacing: -2.5px;
-      color: var(--neon-blue);
-      text-shadow: 0 0 40px rgba(0, 210, 255, 0.45);
-      display: inline-flex;
-      align-items: baseline;
-      position: relative;
-      z-index: 1;
-    }
-    .ps-cursor {
-      display: inline-block;
-      width: clamp(4px, 0.8vw, 7px);
-      height: 0.8em;
-      background-color: var(--neon-blue);
-      margin-left: 6px;
-      animation: blinkCursor 0.8s infinite;
-      box-shadow: 0 0 15px var(--neon-blue);
-    }
-    @keyframes blinkCursor {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    /* Underline Slider */
-    .underline-slider-container {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      margin-top: 14px;
-    }
-    .hue-slider {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 5px;
-      border-radius: 999px;
-      background: var(--neon-blue);
-      box-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
-      outline: none;
-      cursor: pointer;
-    }
-    .hue-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 2px solid var(--neon-blue);
-      box-shadow: 0 0 14px var(--neon-blue);
-      cursor: pointer;
-      transition: transform 0.15s ease;
-    }
-    .hue-slider::-webkit-slider-thumb:h { transform: scale(1.3); }
-
-    .hero-bio {
-      font-size: 1.08rem;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-      line-height: 1.7;
-      max-width: 580px;
-    }
-
-    .cta-row {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .btn {
-      padding: 0.9rem 2rem;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: none;
-      outline: none;
-    }
-    .btn-glow {
-      background: linear-gradient(135deg, #00d2ff, #0084ff);
-      color: #000;
-      box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
-    }
-    .btn-glow:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 35px rgba(0, 210, 255, 0.6);
-    }
-    .btn-outline {
-      background: rgba(255, 255, 255, 0.04);
-      color: #fff;
-      border: 1px solid var(--card-border);
-    }
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Portrait Wrapper with 10-Second Futuristic Shine Beam */
-    .photo-wrapper {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .photo-container {
-      position: relative;
-      width: 100%;
-      max-width: 440px;
-      aspect-ratio: 4/5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 36px;
-      overflow: hidden;
-    }
-    .photo-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-      border-radius: 36px;
-      mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
-      -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
-      transition: transform 0.5s ease;
-      filter: drop-shadow(0 0 35px rgba(0, 210, 255, 0.15));
-    }
-    .photo-container:hover img {
-      transform: scale(1.02);
-    }
-
-    .photo-shine-sweep {
-      position: absolute;
-      top: -50%;
-      left: -60%;
-      width: 40%;
-      height: 200%;
-      background: linear-gradient(
-        90deg, 
-        transparent 0%, 
-        rgba(0, 210, 255, 0.15) 30%, 
-        rgba(255, 255, 255, 0.65) 50%, 
-        rgba(255, 196, 0, 0.25) 70%, 
-        transparent 100%
-      );
-      transform: rotate(28deg);
-      pointer-events: none;
-      z-index: 2;
-      animation: photoShine10s 10s infinite cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    @keyframes photoShine10s {
-      0% { left: -80%; opacity: 0; }
-      8% { opacity: 1; }
-      18% { left: 150%; opacity: 0; }
-      100% { left: 150%; opacity: 0; }
-    }
-
-    /* Corner HUD Accents */
-    .hud-element {
-      position: absolute;
-      pointer-events: none;
-      z-index: 3;
-    }
-    .hud-bracket-tl {
-      top: 10px;
-      left: 10px;
-      width: 24px;
-      height: 24px;
-      border-top: 2px solid var(--neon-blue);
-      border-left: 2px solid var(--neon-blue);
-      filter: drop-shadow(0 0 8px var(--neon-blue));
-    }
-    .hud-bracket-br {
-      bottom: 60px;
-      right: 10px;
-      width: 24px;
-      height: 24px;
-      border-bottom: 2px solid var(--neon-blue);
-      border-right: 2px solid var(--neon-blue);
-      filter: drop-shadow(0 0 8px var(--neon-blue));
-    }
-
-    /* Oval Apple Glass Pill Bar Over Photo */
-    .apple-glass-pill {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 86%;
-      padding: 10px 20px;
-      border-radius: 999px;
-      background: rgba(15, 20, 32, 0.45);
-      backdrop-filter: blur(28px) saturate(200%);
-      -webkit-backdrop-filter: blur(28px) saturate(200%);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 4;
-    }
-    .pill-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.2px;
-    }
-    .pill-followers {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--neon-blue);
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .pill-followers .stat-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--neon-blue);
-      box-shadow: 0 0 8px var(--neon-blue);
-    }
-
-    /* Fixed Instagram Action Bar */
-    .insta-glass-card {
-      margin-top: 14px;
-      width: 92%;
-      max-width: 440px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px;
-      background: rgba(18, 24, 38, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 20px;
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
-      position: relative;
-    }
-    .insta-actions-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      gap: 8px;
-    }
-    .insta-action-btn {
-      background: none;
-      border: none;
-      color: #cbd5e1;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 4px 6px;
-      border-radius: 8px;
-      transition: all 0.2s ease;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .insta-action-btn:hover {
-      color: #fff;
-      transform: translateY(-1px);
-    }
-    .insta-action-btn svg {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-    }
-
-    .pulsing-heart {
-      color: #ff2a5f !important;
-      animation: heartbeat 10s infinite ease-in-out;
-    }
-    .pulsing-heart svg {
-      width: 18px !important;
-      height: 18px !important;
-      min-width: 18px !important;
-      min-height: 18px !important;
-      fill: #ff2a5f !important;
-      flex-shrink: 0 !important;
-      filter: drop-shadow(0 0 6px rgba(255, 42, 95, 0.85));
-    }
-    @keyframes heartbeat {
-      0%, 95%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.5)); }
-      97% { transform: scale(1.25); filter: drop-shadow(0 0 14px rgba(255, 42, 95, 0.95)); }
-      99% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(255, 42, 95, 0.7)); }
-    }
-
-    .floating-heart {
-      position: absolute;
-      top: -24px;
-      left: 20px;
-      color: #ff2a5f;
-      font-size: 1.5rem;
-      pointer-events: none;
-      animation: floatHeart 0.9s ease-out forwards;
-    }
-    @keyframes floatHeart {
-      0% { opacity: 0; transform: translateY(15px) scale(0.5); }
-      40% { opacity: 1; transform: translateY(-10px) scale(1.3); }
-      100% { opacity: 0; transform: translateY(-40px) scale(0.9); }
-    }
-
-    /* =========================================================
-       PREMIERE PRO TIMELINE & REEL CAROUSEL SECTION
-       ========================================================= */
-    .photo-slider-section {
-      position: relative;
-      z-index: 1;
-      padding: 2.2rem 0 3.5rem;
-      overflow: hidden;
-    }
-
-    .pr-timeline-container {
-      max-width: 1200px;
-      margin: 0 auto 1.4rem;
-      padding: 40px 4% 0;
-      position: relative;
-    }
-
-    .pr-timeline-ruler {
-      position: relative;
-      width: 100%;
-      height: 48px;
-      background: rgba(14, 18, 27, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 12px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      cursor: pointer;
-      user-select: none;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.5);
-    }
-
-    .pr-ticks {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding: 0 20px 6px;
-      pointer-events: none;
-    }
-    .pr-tick-mark {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-    }
-    .pr-tick-time {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      font-weight: 600;
-      color: #64748b;
-      letter-spacing: 0.5px;
-    }
-    .pr-tick-line {
-      width: 1.5px;
-      height: 10px;
-      background: rgba(255, 255, 255, 0.15);
-    }
-    .pr-tick-line.sub {
-      height: 5px;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .pr-playhead {
-      position: absolute;
-      top: -12px;
-      left: 0%;
-      transform: translateX(-50%);
-      width: 24px;
-      height: 64px;
-      pointer-events: auto;
-      cursor: grab;
-      z-index: 15;
-      transition: none;
-    }
-    .pr-playhead:active {
-      cursor: grabbing;
-    }
-    .pr-playhead-head {
-      width: 20px;
-      height: 18px;
-      background: #0084ff;
-      margin: 0 auto;
-      clip-path: polygon(0% 0%, 100% 0%, 100% 65%, 50% 100%, 0% 65%);
-      box-shadow: 0 0 14px #00d2ff;
-      border: 1px solid #70c4ff;
-      position: relative;
-    }
-    .pr-playhead-line {
-      width: 2.5px;
-      height: 48px;
-      background: #00d2ff;
-      margin: 0 auto;
-      box-shadow: 0 0 10px #00d2ff, 0 0 18px rgba(0, 210, 255, 0.85);
-    }
-
-    .pr-scrub-indicator {
-      position: absolute;
-      top: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(8, 22, 38, 0.95);
-      border: 1.5px solid #00d2ff;
-      padding: 3px 10px;
-      border-radius: 7px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.74rem;
-      font-weight: 800;
-      color: #00d2ff;
-      white-space: nowrap;
-      pointer-events: none;
-      box-shadow: 0 0 14px rgba(0, 210, 255, 0.65), inset 0 0 8px rgba(0, 210, 255, 0.2);
-    }
-
-    .reel-track-wrapper {
-      width: 100%;
-      overflow: hidden;
-      padding: 16px 0 20px;
-      mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
-    }
-
-    .reel-track {
-      display: flex;
-      align-items: flex-start;
-      gap: 32px;
-      width: max-content;
-      will-change: transform;
-      transform: translate3d(0, 0, 0);
-    }
-
-    .reel-unit {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-      user-select: none;
-    }
-
-    .reel-card {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 260px;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(0, 210, 255, 0.45);
-      box-shadow: 0 0 20px rgba(0, 210, 255, 0.18), 0 0 35px rgba(255, 196, 0, 0.1);
-      cursor: pointer;
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease, box-shadow 0.35s ease;
-    }
-    .reel-unit:hover .reel-card {
-      transform: translateY(-6px) scale(1.02);
-      border-color: rgba(255, 196, 0, 0.9);
-      box-shadow: 0 0 30px rgba(255, 196, 0, 0.45), 0 0 50px rgba(0, 210, 255, 0.35), 0 25px 50px rgba(0, 0, 0, 0.9);
-    }
-    
-    .reel-card img {
-      height: 260px;
-      width: auto;
-      display: block;
-      object-fit: cover;
-    }
-
-    .reel-reactions-bar {
-      display: inline-flex;
-      align-items: center;
-      gap: 16px;
-      padding: 6px 18px;
-      border-radius: 999px;
-      background: rgba(15, 20, 32, 0.65);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: #e2e8f0;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
-      transition: all 0.25s ease;
-    }
-    .reel-unit:hover .reel-reactions-bar {
-      border-color: rgba(0, 210, 255, 0.4);
-      box-shadow: 0 8px 25px rgba(0, 210, 255, 0.25);
-    }
-
-    .reel-react-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      white-space: nowrap;
-    }
-    .reel-heart {
-      color: #ff2a5f;
-      filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.6));
-    }
-    .reel-comment {
-      color: #00d2ff;
-    }
-    .reel-share {
-      color: #ffc400;
-    }
-
-    /* =========================================================
-       VENTURES SECTION: BALANCED 4-CARD SYMMETRICAL GRID (2x2)
-       ========================================================= */
-    .ventures {
-      position: relative;
-      z-index: 1;
-      padding: 3rem 8% 4rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    .section-header h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-    .section-header p {
-      color: var(--text-muted);
-      margin-top: 0.5rem;
-      font-size: 1.05rem;
-    }
-
-    .venture-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.8rem;
-    }
-    .venture-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 2rem;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .venture-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(0, 210, 255, 0.4);
-      box-shadow: 0 15px 35px rgba(0, 210, 255, 0.1);
-    }
-    .venture-icon {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-    }
-    .venture-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: #fff;
-    }
-    .venture-desc {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      margin-bottom: 1.2rem;
-      line-height: 1.6;
-    }
-    .venture-link {
-      font-weight: 700;
-      font-size: 0.88rem;
-      color: var(--neon-blue);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: gap 0.2s ease;
-    }
-    .venture-link:hover {
-      gap: 9px;
-      color: #fff;
-    }
-
-    .brand-pills-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-bottom: 1.2rem;
-    }
-    .brand-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 6px;
-      background: rgba(0, 210, 255, 0.08);
-      border: 1px solid rgba(0, 210, 255, 0.3);
-      color: var(--neon-blue);
-      letter-spacing: 0.5px;
-      transition: all 0.2s ease;
-    }
-    .venture-card:hover .brand-tag {
-      background: rgba(255, 196, 0, 0.1);
-      border-color: rgba(255, 196, 0, 0.4);
-      color: var(--neon-gold);
-    }
-
-    /* =========================================================
-       SCISSORS CUT & TORN SEPARATION ANIMATION
-       ========================================================= */
-    .cut-transition-wrapper {
-      position: relative;
-      width: 100%;
-      height: 90px;
-      overflow: visible;
-      display: flex;
-      align-items: center;
-      z-index: 20;
-    }
-
-    .cut-dashed-line {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      width: 0%;
-      height: 2px;
-      border-top: 2px dashed rgba(255, 255, 255, 0.85);
-      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.95));
-      transform: translateY(-50%);
-      transition: width 3.2s cubic-bezier(0.2, 0.85, 0.35, 1);
-    }
-
-    .scissors-svg-wrapper {
-      position: absolute;
-      top: 50%;
-      right: -60px;
-      width: 46px;
-      height: 46px;
-      transform: translateY(-50%) scaleX(-1);
-      color: #ffffff;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(0, 210, 255, 0.7));
-      pointer-events: none;
-      z-index: 25;
-      opacity: 1;
-      transition: right 3.2s cubic-bezier(0.2, 0.85, 0.35, 1), opacity 0.5s ease 3.3s;
-    }
-    .scissors-svg-wrapper svg {
-      width: 100%;
-      height: 100%;
-      fill: currentColor;
-    }
-
-    .cut-transition-wrapper.cutting .cut-dashed-line {
-      width: 100%;
-    }
-
-    .cut-transition-wrapper.cutting .scissors-svg-wrapper {
-      right: calc(100% - 20px);
-      opacity: 0;
-      animation: scissorBladeSnip 0.32s infinite ease-in-out alternate;
-    }
-
-    @keyframes scissorBladeSnip {
-      0% { transform: translateY(-50%) scaleX(-1) rotate(-8deg); }
-      100% { transform: translateY(-50%) scaleX(-1) rotate(12deg); }
-    }
-
-    /* =========================================================
-       EXCLUSIVE LIGHT STUDIO THEME (TORN CANVAS BELOW CUT)
-       ========================================================= */
-    .light-studio-section {
-      position: relative;
-      z-index: 10;
-      background: radial-gradient(ellipse at 50% -10%, #ffffff 0%, #f8fafc 45%, #f1f5f9 100%);
-      color: #0f172a;
-      padding: 5.5rem 8% 7rem;
-      box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.8);
-      border-top: 1px solid rgba(255, 255, 255, 0.6);
-      transition: all 0.8s ease;
-      overflow: hidden;
-    }
-
-    .torn-edge {
-      position: absolute;
-      top: -1px;
-      left: 0;
-      width: 100%;
-      height: 8px;
-      background: linear-gradient(135deg, transparent 33.333%, rgba(255, 255, 255, 0.8) 33.333%, rgba(255, 255, 255, 0.8) 66.666%, transparent 66.666%), 
-                  linear-gradient(45deg, transparent 33.333%, rgba(255, 255, 255, 0.8) 33.333%, rgba(255, 255, 255, 0.8) 66.666%, transparent 66.666%);
-      background-size: 16px 32px;
-    }
-
-    .studio-hero-title-wrap {
-      text-align: center;
-      max-width: 1100px;
-      margin: 0 auto 2.5rem;
-      transform-origin: center center;
-      will-change: transform, opacity;
-      transition: transform 0.1s linear;
-    }
-
-    .studio-script-for {
-      font-family: 'Caveat', cursive;
-      font-size: clamp(2.2rem, 4.4vw, 3.5rem);
-      font-weight: 700;
-      color: #0284c7;
-      display: block;
-      margin-bottom: -8px;
-      letter-spacing: 1.5px;
-      text-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);
-    }
-
-    .studio-main-heading {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.4rem, 6.2vw, 5.2rem);
-      font-weight: 900;
-      color: #090d16;
-      line-height: 1.05;
-      letter-spacing: -2px;
-      text-transform: uppercase;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .studio-sub-caption {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.02rem;
-      font-weight: 600;
-      color: #475569;
-      margin-top: 1.2rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* =========================================================
-       TWO-COLUMN DESK: LEFT FLIP CLOCK & RIGHT SPIRAL CALENDAR
-       ========================================================= */
-    .studio-desk-stage {
-      max-width: 1180px;
-      margin: 2.5rem auto 5rem;
-      display: grid;
-      grid-template-columns: 1fr 1.35fr;
-      gap: 2.5rem;
-      align-items: stretch;
-    }
-
-    .desk-clock-card {
-      background: #ffffff;
-      border-radius: 24px;
-      border: 1px solid #e2e8f0;
-      padding: 2.2rem;
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-    }
-    .desk-clock-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-    .live-clock-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.74rem;
-      font-weight: 800;
-      color: #0284c7;
-      background: #e0f2fe;
-      border: 1px solid #bae6fd;
-      padding: 4px 12px;
-      border-radius: 999px;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .live-clock-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #0284c7;
-      animation: clockBlink 1s infinite alternate;
-    }
-    @keyframes clockBlink {
-      0% { opacity: 0.3; }
-      100% { opacity: 1; }
-    }
-
-    .today-date-banner {
-      margin: 0.5rem 0 1.5rem;
-    }
-    .today-day-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: #0f172a;
-      line-height: 1.1;
-    }
-    .today-full-str {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #64748b;
-      margin-top: 4px;
-    }
-
-    .desk-flip-display {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: #090d16;
-      padding: 18px 12px;
-      border-radius: 18px;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4), 0 10px 25px rgba(0, 0, 0, 0.15);
-      margin-bottom: 1.2rem;
-    }
-    .desk-flip-tile {
-      width: 58px;
-      height: 66px;
-      background: #111827;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .desk-flip-tile::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      width: 100%;
-      height: 1px;
-      background: rgba(0, 0, 0, 0.7);
-    }
-    .tile-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 2.1rem;
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1;
-      text-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
-    }
-    .tile-colon {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: #00d2ff;
-      animation: colonPulse 1s infinite alternate;
-    }
-    @keyframes colonPulse {
-      0% { opacity: 0.2; }
-      100% { opacity: 1; }
-    }
-    .desk-clock-foot {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      text-align: center;
-      font-weight: 600;
-    }
-
-    .spiral-calendar-wrapper {
-      position: relative;
-      background: #ffffff;
-      border-radius: 24px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
-      padding: 42px 2rem 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow: hidden;
-      perspective: 800px;
-    }
-
-    .spiral-rings-track {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 36px;
-      background: #f1f5f9;
-      border-bottom: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 0 20px;
-    }
-    .spiral-ring {
-      width: 10px;
-      height: 22px;
-      background: linear-gradient(90deg, #94a3b8, #ffffff, #64748b);
-      border-radius: 999px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-    }
-
-    .spiral-nav-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.2rem;
-    }
-    .spiral-month-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: #0f172a;
-      letter-spacing: -0.5px;
-    }
-    .spiral-year-pill {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: #ea580c;
-      background: #fff7ed;
-      border: 1px solid #ffedd5;
-      padding: 4px 10px;
-      border-radius: 8px;
-    }
-
-    .flip-btn-group {
-      display: flex;
-      gap: 6px;
-    }
-    .cal-nav-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      border: 1px solid #e2e8f0;
-      background: #f8fafc;
-      color: #0f172a;
-      font-size: 1rem;
-      font-weight: 800;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-    .cal-nav-btn:hover {
-      background: #0f172a;
-      color: #ffffff;
-      border-color: #0f172a;
-    }
-
-    .calendar-sheet {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 1.4rem;
-      border: 1px dashed #cbd5e1;
-      transform-origin: top center;
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
-    }
-    .calendar-sheet.turning {
-      transform: rotateX(85deg);
-      opacity: 0;
-    }
-
-    .dates-lead-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: #64748b;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .dates-lead-label::before {
-      content: '📅';
-      font-size: 0.85rem;
-    }
-
-    .calendar-summary-line {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 1.2rem;
-      padding: 10px 14px;
-      background: #f8fafc;
-      border-radius: 10px;
-      border-left: 3px solid #ea580c;
-    }
-    .summary-month-name {
-      color: #ea580c;
-      font-weight: 800;
-    }
-    .summary-dash {
-      color: #94a3b8;
-      margin: 0 4px;
-    }
-
-    .dates-chips-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 1.4rem;
-    }
-    .date-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      background: #ffffff;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: #0f172a;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-    }
-    .date-chip:hover {
-      background: #0f172a;
-      color: #ffffff;
-      border-color: #0f172a;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.15);
-    }
-    .date-chip .chip-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #16a34a;
-    }
-
-    .spiral-card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 1rem;
-      font-size: 0.82rem;
-      color: #64748b;
-      font-weight: 600;
-    }
-    .spiral-quick-book {
-      font-weight: 800;
-      color: #ea580c;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: gap 0.2s ease;
-    }
-    .spiral-quick-book:hover {
-      gap: 8px;
-    }
-
-    /* Studio Grid Cards */
-    .studio-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .studio-card {
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      border-radius: 22px;
-      padding: 2.5rem 2rem;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-      position: relative;
-    }
-    .studio-card:hover {
-      transform: translateY(-8px);
-      background: #ffffff;
-      border-color: #0284c7;
-      box-shadow: 0 20px 45px rgba(2, 132, 199, 0.16), 0 2px 8px rgba(0, 0, 0, 0.06);
-    }
-    .studio-card-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1.2rem;
-    }
-    .studio-card-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 0.6rem;
-      letter-spacing: -0.5px;
-    }
-    .studio-card-desc {
-      color: #475569;
-      font-size: 0.94rem;
-      line-height: 1.65;
-      margin-bottom: 1.6rem;
-    }
-    .studio-card-badge {
-      align-self: flex-start;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.76rem;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      color: #0284c7;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-
-    /* Light Studio Footer */
-    .studio-footer {
-      position: relative;
-      z-index: 10;
-      padding: 3.5rem 8%;
-      text-align: center;
-      border-top: 1px solid rgba(15, 23, 42, 0.1);
-      color: #64748b;
-      font-size: 0.92rem;
-      background: #f1f5f9;
-    }
-
-    /* =========================================================
-       SHOWCASE MODAL: LUXURY ROYAL TYPOGRAPHY
-       ========================================================= */
-    #work-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(7, 9, 14, 0.97);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      overflow-y: auto;
-      display: none;
-      opacity: 0;
-      transition: opacity 0.35s ease;
-    }
-
-    #work-modal.active {
-      display: block;
-      opacity: 1;
-    }
-
-    #modal-particle-canvas {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .modal-header-bar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.1rem 6%;
-      background: rgba(7, 9, 14, 0.88);
-      border-bottom: 1px solid var(--card-border);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-    }
-
-    .neon-cross-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255, 42, 60, 0.12);
-      border: 1.5px solid rgba(255, 42, 60, 0.65);
-      color: #ff3b56;
-      font-size: 1.25rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 16px rgba(255, 42, 60, 0.35);
-      transition: all 0.25s ease;
-      line-height: 1;
-    }
-    .neon-cross-btn:hover {
-      background: rgba(255, 42, 60, 0.3);
-      border-color: #ff3b56;
-      color: #fff;
-      transform: scale(1.12) rotate(90deg);
-      box-shadow: 0 0 25px rgba(255, 42, 60, 0.7);
-    }
-
-    .pictorical-header {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      padding: 2.5rem 1.2rem 1.4rem;
-      width: 100%;
-      max-width: 100%;
-      overflow: hidden;
-    }
-
-    .pictorical-title-wrap {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      max-width: 100%;
-    }
-
-    .pictorical-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 7.8vw, 4.8rem);
-      font-weight: 700;
-      letter-spacing: clamp(4px, 1.2vw, 10px);
-      text-transform: uppercase;
-      white-space: nowrap;
-      display: block;
-      background: linear-gradient(110deg, #ffffff 0%, #e2e8f0 20%, #a5f3fc 40%, #ffffff 50%, #fde68a 60%, #e2e8f0 80%, #ffffff 100%);
-      background-size: 250% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: royalDiamondShine 7s ease infinite, royalFloat 4s ease-in-out infinite alternate;
-      filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.45)) drop-shadow(0 0 45px rgba(0, 210, 255, 0.3));
-      line-height: 1.05;
-      margin-bottom: 12px;
-    }
-
-    @keyframes royalDiamondShine {
-      0% { background-position: 0% center; }
-      50% { background-position: 100% center; }
-      100% { background-position: 0% center; }
-    }
-    @keyframes royalFloat {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-4px); }
-    }
-
-    .pictorical-sub-wrap {
-      display: inline-flex;
-      align-items: center;
-      gap: 16px;
-      margin-top: 2px;
-    }
-
-    .royal-needle {
-      width: clamp(20px, 4vw, 45px);
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(255, 196, 0, 0.9), transparent);
-      box-shadow: 0 0 8px rgba(255, 196, 0, 0.8);
-    }
-
-    .pictorical-sub {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(0.72rem, 1.8vw, 0.86rem);
-      font-weight: 700;
-      letter-spacing: clamp(3.5px, 0.9vw, 6px);
-      color: #ffffff;
-      text-transform: uppercase;
-      white-space: nowrap;
-      text-shadow: 0 0 12px rgba(255, 255, 255, 0.75), 0 0 24px rgba(255, 196, 0, 0.5);
-      animation: royalSubPulse 3.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes royalSubPulse {
-      0% {
-        opacity: 0.88;
-        letter-spacing: clamp(3.5px, 0.9vw, 6px);
-      }
-      100% {
-        opacity: 1;
-        letter-spacing: clamp(4.5px, 1.1vw, 7.5px);
-        text-shadow: 0 0 18px rgba(255, 255, 255, 0.95), 0 0 35px rgba(255, 196, 0, 0.7);
-      }
-    }
-
-    .modal-content-area {
-      position: relative;
-      z-index: 10;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0.8rem 1.5rem 5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .modal-card {
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1.5px solid rgba(0, 210, 255, 0.4);
-      box-shadow: 0 0 20px rgba(0, 210, 255, 0.15), 0 0 35px rgba(255, 196, 0, 0.08);
-      background: #080b11;
-      transform: scale(0.94);
-      opacity: 0;
-      transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.2, 1), 
-                  opacity 0.5s ease, 
-                  border-color 0.4s ease, 
-                  box-shadow 0.4s ease;
-    }
-
-    #work-modal.active .modal-card.popped {
-      transform: scale(1);
-      opacity: 1;
-    }
-
-    .modal-card:hover {
-      transform: scale(1.015) !important;
-      border-color: rgba(255, 196, 0, 0.95);
-      box-shadow: 0 0 35px rgba(255, 196, 0, 0.5), 0 0 65px rgba(0, 210, 255, 0.4);
-    }
-
-    .modal-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .modal-card.auto-glowing {
-      border-color: rgba(255, 196, 0, 0.95) !important;
-      box-shadow: 0 0 35px rgba(255, 196, 0, 0.55), 0 0 65px rgba(0, 210, 255, 0.45) !important;
-      transform: scale(1.02) !important;
-    }
-
-    .modal-card.pulse-pop {
-      animation: popPulse7s 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    @keyframes popPulse7s {
-      0% { transform: scale(1); }
-      50% {
-        transform: scale(1.025);
-        border-color: rgba(255, 196, 0, 0.95);
-        box-shadow: 0 0 40px rgba(255, 196, 0, 0.55), 0 0 70px rgba(0, 210, 255, 0.45);
-      }
-      100% { transform: scale(1); border-color: rgba(0, 210, 255, 0.4); }
-    }
-
-    /* =========================================================
-       ULTRA-SMOOTH MOBILE OPTIMIZATIONS (ZERO JITTER / ZERO LAG)
-       ========================================================= */
-    @media (max-width: 900px) {
-      /* 1. Turn off invisible mouse circle on phones to save GPU */
-      #cursor-glow {
-        display: none !important;
-      }
-
-      /* 2. Lighten backdrop filters to butter-smooth 8px with hardware acceleration */
-      header,
-      .apple-glass-pill,
-      .insta-glass-card,
-      .venture-card,
-      .reel-reactions-bar,
-      .studio-card,
-      .desk-clock-card,
-      .spiral-calendar-wrapper {
-        backdrop-filter: blur(8px) !important;
-        -webkit-backdrop-filter: blur(8px) !important;
-        transform: translateZ(0); /* Hardware accelerate rendering */
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding-top: 1.8rem;
-        gap: 1.5rem;
-      }
-      .ps-bounding-box-wrap { margin-left: auto; margin-right: auto; }
-      .cta-row { justify-content: center; }
-      
-      .photo-wrapper { 
-        order: -1; 
-        margin-bottom: 0.5rem;
-      }
-      .photo-container { 
-      max-width: 220px; 
-      border-radius: 24px;
-    }
-    .photo-container img {
-      border-radius: 24px;
-    }
-    
-    .apple-glass-pill {
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 6px 12px;
-      width: 90%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-sizing: border-box;
-    }
-    .pill-title { 
-      font-size: 0.78rem; 
-      white-space: nowrap; 
-      font-weight: 800;
-    }
-    .pill-followers { 
-      font-size: 0.65rem; 
-      white-space: nowrap; 
-      flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-    }
-
-      .insta-glass-card { 
-        width: 88%; 
-        max-width: 260px;
-        padding: 6px 10px;
-        margin-top: 10px;
-        border-radius: 14px;
-      }
-      .insta-actions-row {
-        gap: 4px;
-      }
-      .insta-action-btn {
-        font-size: 0.72rem;
-        gap: 3px;
-        padding: 2px 3px;
-      }
-      .insta-action-btn svg {
-        width: 14px;
-        height: 14px;
-      }
-
-      .ventures {
-        padding: 2rem 5% 2rem;
-      }
-      .section-header {
-        margin-bottom: 1.8rem;
-      }
-      .venture-grid {
-        grid-template-columns: 1fr;
-        gap: 1.1rem;
-      }
-      .venture-card {
-        padding: 1.3rem;
-        border-radius: 16px;
-      }
-      .venture-icon {
-        font-size: 1.8rem;
-        margin-bottom: 0.6rem;
-      }
-      .venture-title {
-        font-size: 1.18rem;
-        margin-bottom: 0.4rem;
-      }
-      .venture-desc {
-        font-size: 0.86rem;
-        margin-bottom: 1rem;
-      }
-
-      /* Light Studio Mobile Layout */
-      .light-studio-section {
-        padding: 3.5rem 5% 4rem;
-      }
-      .studio-desk-stage {
-        grid-template-columns: 1fr;
-        gap: 1.8rem;
-        margin: 1.8rem auto 3.5rem;
-      }
-      .desk-flip-tile {
-        width: 48px;
-        height: 56px;
-      }
-      .tile-num {
-        font-size: 1.7rem;
-      }
-      .spiral-month-title {
-        font-size: 1.5rem;
-      }
-      .calendar-summary-line {
-        font-size: 1.05rem;
-      }
-      .date-chip {
-        font-size: 0.85rem;
-        padding: 6px 10px;
-      }
-
-      .studio-grid {
-        grid-template-columns: 1fr;
-        gap: 1.4rem;
-      }
-      .studio-card {
-        padding: 1.8rem 1.5rem;
-        border-radius: 18px;
-      }
-
-      .reel-card { height: 185px; }
-      .reel-card img { height: 185px; }
-      .reel-reactions-bar { padding: 5px 14px; font-size: 0.76rem; gap: 12px; }
-      .modal-content-area { padding: 0.4rem 0.8rem 4rem; gap: 12px; }
-      .pr-timeline-container { padding: 36px 3% 0; }
-      .pr-timeline-ruler { height: 44px; }
-      .pr-playhead { height: 56px; top: -10px; }
-      .pr-playhead-line { height: 40px; }
-      .pr-scrub-indicator { font-size: 0.65rem; padding: 2px 7px; top: -26px; }
-      .pr-tick-time { font-size: 0.58rem; }
-      .pictorical-sub-wrap { gap: 10px; }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click Nil | Visual Artist</title>
+  <meta name="description" content="Official website of Indranil — Photographer, Graphics Designer, and Content Creator.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --neon-blue: #00d2ff;
+      --neon-gold: #ffc400;
+      --rec-red: #ff2a2a;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --name-hue: 0deg;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* Ambient Dynamic Mouse Spotlight */
+    #cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 650px;
+      height: 650px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 210, 255, 0.18) 0%, rgba(255, 196, 0, 0.1) 30%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      filter: blur(85px);
+      transition: opacity 0.3s ease;
+    }
+
+    /* Ambient Dust Canvas with Neon Golden & Cyan Particles */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* FULL-SCREEN REALISTIC FIRE PARTICLES CANVAS */
+    #drag-fire-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* Header with Verified Badge to the left of CLICK NIL */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 1.25rem 8%;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(7, 9, 14, 0.75);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .brand-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neon-blue);
+      filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.85));
+      line-height: 1;
+    }
+    .verified-badge svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+    .brand-logo .divider { color: var(--card-border); font-weight: 300; }
+    .brand-logo .sub {
+      font-size: 0.85rem;
+      color: var(--neon-blue);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 8% 4rem;
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    /* Recording Badge with Live Millisecond Timecode */
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.45rem 1.1rem;
+      border-radius: 999px;
+      background: rgba(255, 42, 42, 0.08);
+      border: 1px solid rgba(255, 42, 42, 0.3);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .rec-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--rec-red);
+      box-shadow: 0 0 12px var(--rec-red), 0 0 22px rgba(255, 42, 42, 0.9);
+      animation: recBlink 1.2s infinite ease-in-out;
+    }
+    @keyframes recBlink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.2; transform: scale(0.8); }
+    }
+    .rec-timer {
+      color: #ff9e9e;
+      font-weight: 600;
+    }
+
+    /* Pure White "Hi, I'm" */
+    .intro-small {
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    /* Photoshop Bounding Box */
+    .ps-bounding-box-wrap {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      padding: 16px 20px 14px 18px;
+      margin-bottom: 1.8rem;
+      filter: hue-rotate(var(--name-hue));
+      transition: filter 0.05s linear;
+    }
+    .ps-marquee-border {
+      position: absolute;
+      inset: 0;
+      border: 1.5px dashed var(--neon-blue);
+      border-radius: 2px;
+      box-shadow: 0 0 14px rgba(0, 210, 255, 0.25), inset 0 0 14px rgba(0, 210, 255, 0.08);
+      pointer-events: none;
+    }
+    .ps-handle {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      background: #ffffff;
+      border: 1.5px solid var(--neon-blue);
+      box-shadow: 0 0 6px var(--neon-blue);
+      z-index: 2;
+    }
+    .ps-handle.tl { top: -5px; left: -5px; }
+    .ps-handle.tm { top: -5px; left: 50%; transform: translateX(-50%); }
+    .ps-handle.tr { top: -5px; right: -5px; }
+    .ps-handle.ml { top: 50%; left: -5px; transform: translateY(-50%); }
+    .ps-handle.mr { top: 50%; right: -5px; transform: translateY(-50%); }
+    .ps-handle.bl { bottom: -5px; left: -5px; }
+    .ps-handle.bm { bottom: -5px; left: 50%; transform: translateX(-50%); }
+    .ps-handle.br { bottom: -5px; right: -5px; }
+
+    /* Big Name */
+    .big-name {
+      font-size: clamp(3.6rem, 8.5vw, 6.2rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -2.5px;
+      color: var(--neon-blue);
+      text-shadow: 0 0 40px rgba(0, 210, 255, 0.45);
+      display: inline-flex;
+      align-items: baseline;
+      position: relative;
+      z-index: 1;
+    }
+    .ps-cursor {
+      display: inline-block;
+      width: clamp(4px, 0.8vw, 7px);
+      height: 0.8em;
+      background-color: var(--neon-blue);
+      margin-left: 6px;
+      animation: blinkCursor 0.8s infinite;
+      box-shadow: 0 0 15px var(--neon-blue);
+    }
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Underline Slider */
+    .underline-slider-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-top: 14px;
+    }
+    .hue-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--neon-blue);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+      outline: none;
+      cursor: pointer;
+    }
+    .hue-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--neon-blue);
+      box-shadow: 0 0 14px var(--neon-blue);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .hue-slider::-webkit-slider-thumb:h { transform: scale(1.3); }
+
+    .hero-bio {
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+      max-width: 580px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      outline: none;
+    }
+    .btn-glow {
+      background: linear-gradient(135deg, #00d2ff, #0084ff);
+      color: #000;
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+    }
+    .btn-glow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px rgba(0, 210, 255, 0.6);
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      border: 1px solid var(--card-border);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Portrait Wrapper with 10-Second Futuristic Shine Beam */
+    .photo-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .photo-container {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 4/5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 36px;
+      overflow: hidden;
+    }
+    .photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border-radius: 36px;
+      mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
+      transition: transform 0.5s ease;
+      filter: drop-shadow(0 0 35px rgba(0, 210, 255, 0.15));
+    }
+    .photo-container:hover img {
+      transform: scale(1.02);
+    }
+
+    .photo-shine-sweep {
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(
+        90deg, 
+        transparent 0%, 
+        rgba(0, 210, 255, 0.15) 30%, 
+        rgba(255, 255, 255, 0.65) 50%, 
+        rgba(255, 196, 0, 0.25) 70%, 
+        transparent 100%
+      );
+      transform: rotate(28deg);
+      pointer-events: none;
+      z-index: 2;
+      animation: photoShine10s 10s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes photoShine10s {
+      0% { left: -80%; opacity: 0; }
+      8% { opacity: 1; }
+      18% { left: 150%; opacity: 0; }
+      100% { left: 150%; opacity: 0; }
+    }
+
+    /* Corner HUD Accents */
+    .hud-element {
+      position: absolute;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .hud-bracket-tl {
+      top: 10px;
+      left: 10px;
+      width: 24px;
+      height: 24px;
+      border-top: 2px solid var(--neon-blue);
+      border-left: 2px solid var(--neon-blue);
+      filter: drop-shadow(0 0 8px var(--neon-blue));
+    }
+    .hud-bracket-br {
+      bottom: 60px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+      border-bottom: 2px solid var(--neon-blue);
+      border-right: 2px solid var(--neon-blue);
+      filter: drop-shadow(0 0 8px var(--neon-blue));
+    }
+
+    /* Oval Apple Glass Pill Bar Over Photo */
+    .apple-glass-pill {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 86%;
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: rgba(15, 20, 32, 0.45);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 4;
+    }
+    .pill-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.2px;
+    }
+    .pill-followers {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--neon-blue);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .pill-followers .stat-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--neon-blue);
+      box-shadow: 0 0 8px var(--neon-blue);
+    }
+
+    /* Fixed Instagram Action Bar */
+    .insta-glass-card {
+      margin-top: 14px;
+      width: 92%;
+      max-width: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: rgba(18, 24, 38, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 20px;
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      position: relative;
+    }
+    .insta-actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 8px;
+    }
+    .insta-action-btn {
+      background: none;
+      border: none;
+      color: #cbd5e1;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 6px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .insta-action-btn:hover {
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .insta-action-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .pulsing-heart {
+      color: #ff2a5f !important;
+      animation: heartbeat 10s infinite ease-in-out;
+    }
+    .pulsing-heart svg {
+      width: 18px !important;
+      height: 18px !important;
+      min-width: 18px !important;
+      min-height: 18px !important;
+      fill: #ff2a5f !important;
+      flex-shrink: 0 !important;
+      filter: drop-shadow(0 0 6px rgba(255, 42, 95, 0.85));
+    }
+    @keyframes heartbeat {
+      0%, 95%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.5)); }
+      97% { transform: scale(1.25); filter: drop-shadow(0 0 14px rgba(255, 42, 95, 0.95)); }
+      99% { transform: scale(1.1); filter: drop-shadow(0 0 8px rgba(255, 42, 95, 0.7)); }
+    }
+
+    .floating-heart {
+      position: absolute;
+      top: -24px;
+      left: 20px;
+      color: #ff2a5f;
+      font-size: 1.5rem;
+      pointer-events: none;
+      animation: floatHeart 0.9s ease-out forwards;
+    }
+    @keyframes floatHeart {
+      0% { opacity: 0; transform: translateY(15px) scale(0.5); }
+      40% { opacity: 1; transform: translateY(-10px) scale(1.3); }
+      100% { opacity: 0; transform: translateY(-40px) scale(0.9); }
+    }
+
+    /* =========================================================
+       PREMIERE PRO TIMELINE & REEL CAROUSEL SECTION
+       ========================================================= */
+    .photo-slider-section {
+      position: relative;
+      z-index: 1;
+      padding: 2.2rem 0 3.5rem;
+      overflow: hidden;
+    }
+
+    .pr-timeline-container {
+      max-width: 1200px;
+      margin: 0 auto 1.4rem;
+      padding: 40px 4% 0;
+      position: relative;
+    }
+
+    .pr-timeline-ruler {
+      position: relative;
+      width: 100%;
+      height: 48px;
+      background: rgba(14, 18, 27, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      cursor: pointer;
+      user-select: none;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .pr-ticks {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 20px 6px;
+      pointer-events: none;
+    }
+    .pr-tick-mark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+    .pr-tick-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #64748b;
+      letter-spacing: 0.5px;
+    }
+    .pr-tick-line {
+      width: 1.5px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .pr-tick-line.sub {
+      height: 5px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .pr-playhead {
+      position: absolute;
+      top: -12px;
+      left: 0%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 64px;
+      pointer-events: auto;
+      cursor: grab;
+      z-index: 15;
+      transition: none;
+    }
+    .pr-playhead:active {
+      cursor: grabbing;
+    }
+    .pr-playhead-head {
+      width: 20px;
+      height: 18px;
+      background: #0084ff;
+      margin: 0 auto;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 65%, 50% 100%, 0% 65%);
+      box-shadow: 0 0 14px #00d2ff;
+      border: 1px solid #70c4ff;
+      position: relative;
+    }
+    .pr-playhead-line {
+      width: 2.5px;
+      height: 48px;
+      background: #00d2ff;
+      margin: 0 auto;
+      box-shadow: 0 0 10px #00d2ff, 0 0 18px rgba(0, 210, 255, 0.85);
+    }
+
+    .pr-scrub-indicator {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(8, 22, 38, 0.95);
+      border: 1.5px solid #00d2ff;
+      padding: 3px 10px;
+      border-radius: 7px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: #00d2ff;
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 0 14px rgba(0, 210, 255, 0.65), inset 0 0 8px rgba(0, 210, 255, 0.2);
+    }
+
+    .reel-track-wrapper {
+      width: 100%;
+      overflow: hidden;
+      padding: 16px 0 20px;
+      mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+    }
+
+    .reel-track {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+      width: max-content;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .reel-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .reel-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 260px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 210, 255, 0.45);
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.18), 0 0 35px rgba(255, 196, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .reel-unit:hover .reel-card {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(255, 196, 0, 0.9);
+      box-shadow: 0 0 30px rgba(255, 196, 0, 0.45), 0 0 50px rgba(0, 210, 255, 0.35), 0 25px 50px rgba(0, 0, 0, 0.9);
+    }
+    
+    .reel-card img {
+      height: 260px;
+      width: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .reel-reactions-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: rgba(15, 20, 32, 0.65);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+      transition: all 0.25s ease;
+    }
+    .reel-unit:hover .reel-reactions-bar {
+      border-color: rgba(0, 210, 255, 0.4);
+      box-shadow: 0 8px 25px rgba(0, 210, 255, 0.25);
+    }
+
+    .reel-react-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .reel-heart {
+      color: #ff2a5f;
+      filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.6));
+    }
+    .reel-comment {
+      color: #00d2ff;
+    }
+    .reel-share {
+      color: #ffc400;
+    }
+
+    /* =========================================================
+       VENTURES SECTION: BALANCED 4-CARD SYMMETRICAL GRID (2x2)
+       ========================================================= */
+    .ventures {
+      position: relative;
+      z-index: 1;
+      padding: 3rem 8% 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .section-header p {
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      font-size: 1.05rem;
+    }
+
+    .venture-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8rem;
+    }
+    .venture-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .venture-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 210, 255, 0.4);
+      box-shadow: 0 15px 35px rgba(0, 210, 255, 0.1);
+    }
+    .venture-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    .venture-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .venture-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
+    }
+    .venture-link {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--neon-blue);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s ease;
+    }
+    .venture-link:hover {
+      gap: 9px;
+      color: #fff;
+    }
+
+    .brand-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 1.2rem;
+    }
+    .brand-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: rgba(0, 210, 255, 0.08);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      color: var(--neon-blue);
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+    }
+    .venture-card:hover .brand-tag {
+      background: rgba(255, 196, 0, 0.1);
+      border-color: rgba(255, 196, 0, 0.4);
+      color: var(--neon-gold);
+    }
+
+    /* =========================================================
+       SCISSORS CUT & TORN SEPARATION ANIMATION
+       ========================================================= */
+    .cut-transition-wrapper {
+      position: relative;
+      width: 100%;
+      height: 90px;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .cut-dashed-line {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 0%;
+      height: 2px;
+      border-top: 2px dashed rgba(255, 255, 255, 0.85);
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.95));
+      transform: translateY(-50%);
+      transition: width 3.2s cubic-bezier(0.2, 0.85, 0.35, 1);
+    }
+
+    .scissors-svg-wrapper {
+      position: absolute;
+      top: 50%;
+      right: -60px;
+      width: 46px;
+      height: 46px;
+      transform: translateY(-50%) scaleX(-1);
+      color: #ffffff;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(0, 210, 255, 0.7));
+      pointer-events: none;
+      z-index: 25;
+      opacity: 1;
+      transition: right 3.2s cubic-bezier(0.2, 0.85, 0.35, 1), opacity 0.5s ease 3.3s;
+    }
+    .scissors-svg-wrapper svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+
+    .cut-transition-wrapper.cutting .cut-dashed-line {
+      width: 100%;
+    }
+
+    .cut-transition-wrapper.cutting .scissors-svg-wrapper {
+      right: calc(100% - 20px);
+      opacity: 0;
+      animation: scissorBladeSnip 0.32s infinite ease-in-out alternate;
+    }
+
+    @keyframes scissorBladeSnip {
+      0% { transform: translateY(-50%) scaleX(-1) rotate(-8deg); }
+      100% { transform: translateY(-50%) scaleX(-1) rotate(12deg); }
+    }
+
+    /* =========================================================
+       EXCLUSIVE LIGHT STUDIO THEME (TORN CANVAS BELOW CUT)
+       ========================================================= */
+    .light-studio-section {
+      position: relative;
+      z-index: 10;
+      background: radial-gradient(ellipse at 50% -10%, #ffffff 0%, #f8fafc 45%, #f1f5f9 100%);
+      color: #0f172a;
+      padding: 5.5rem 8% 7rem;
+      box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.8);
+      border-top: 1px solid rgba(255, 255, 255, 0.6);
+      transition: all 0.8s ease;
+      overflow: hidden;
+    }
+
+    .torn-edge {
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(135deg, transparent 33.333%, rgba(255, 255, 255, 0.8) 33.333%, rgba(255, 255, 255, 0.8) 66.666%, transparent 66.666%), 
+                  linear-gradient(45deg, transparent 33.333%, rgba(255, 255, 255, 0.8) 33.333%, rgba(255, 255, 255, 0.8) 66.666%, transparent 66.666%);
+      background-size: 16px 32px;
+    }
+
+    .studio-hero-title-wrap {
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto 2.5rem;
+      transform-origin: center center;
+      will-change: transform, opacity;
+      transition: transform 0.1s linear;
+    }
+
+    .studio-script-for {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2.2rem, 4.4vw, 3.5rem);
+      font-weight: 700;
+      color: #0284c7;
+      display: block;
+      margin-bottom: -8px;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);
+    }
+
+    .studio-main-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.4rem, 6.2vw, 5.2rem);
+      font-weight: 900;
+      color: #090d16;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .studio-sub-caption {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #475569;
+      margin-top: 1.2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* =========================================================
+       TWO-COLUMN DESK: LEFT FLIP CLOCK & RIGHT SPIRAL CALENDAR
+       ========================================================= */
+    .studio-desk-stage {
+      max-width: 1180px;
+      margin: 2.5rem auto 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 2.5rem;
+      align-items: stretch;
+    }
+
+    .desk-clock-card {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid #e2e8f0;
+      padding: 2.2rem;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .desk-clock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .live-clock-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: #0284c7;
+      background: #e0f2fe;
+      border: 1px solid #bae6fd;
+      padding: 4px 12px;
+      border-radius: 999px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .live-clock-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0284c7;
+      animation: clockBlink 1s infinite alternate;
+    }
+    @keyframes clockBlink {
+      0% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+
+    .today-date-banner {
+      margin: 0.5rem 0 1.5rem;
+    }
+    .today-day-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.1;
+    }
+    .today-full-str {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .desk-flip-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #090d16;
+      padding: 18px 12px;
+      border-radius: 18px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4), 0 10px 25px rgba(0, 0, 0, 0.15);
+      margin-bottom: 1.2rem;
+    }
+    .desk-flip-tile {
+      width: 58px;
+      height: 66px;
+      background: #111827;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .desk-flip-tile::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.7);
+    }
+    .tile-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+      text-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+    }
+    .tile-colon {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #00d2ff;
+      animation: colonPulse 1s infinite alternate;
+    }
+    @keyframes colonPulse {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+    .desk-clock-foot {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .spiral-calendar-wrapper {
+      position: relative;
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+      padding: 42px 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      perspective: 800px;
+    }
+
+    .spiral-rings-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 36px;
+      background: #f1f5f9;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 20px;
+    }
+    .spiral-ring {
+      width: 10px;
+      height: 22px;
+      background: linear-gradient(90deg, #94a3b8, #ffffff, #64748b);
+      border-radius: 999px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .spiral-nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+    .spiral-month-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+    }
+    .spiral-year-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #ea580c;
+      background: #fff7ed;
+      border: 1px solid #ffedd5;
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    .flip-btn-group {
+      display: flex;
+      gap: 6px;
+    }
+    .cal-nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      color: #0f172a;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .cal-nav-btn:hover {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+
+    .calendar-sheet {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 1.4rem;
+      border: 1px dashed #cbd5e1;
+      transform-origin: top center;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
+    }
+    .calendar-sheet.turning {
+      transform: rotateX(85deg);
+      opacity: 0;
+    }
+
+    .dates-lead-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #64748b;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dates-lead-label::before {
+      content: '📅';
+      font-size: 0.85rem;
+    }
+
+    .calendar-summary-line {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 1.2rem;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border-radius: 10px;
+      border-left: 3px solid #ea580c;
+    }
+    .summary-month-name {
+      color: #ea580c;
+      font-weight: 800;
+    }
+    .summary-dash {
+      color: #94a3b8;
+      margin: 0 4px;
+    }
+
+    .dates-chips-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1.4rem;
+    }
+    .date-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #0f172a;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+    .date-chip:hover {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.15);
+    }
+    .date-chip .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #16a34a;
+    }
+
+    .spiral-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .spiral-quick-book {
+      font-weight: 800;
+      color: #ea580c;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s ease;
+    }
+    .spiral-quick-book:hover {
+      gap: 8px;
+    }
+
+    /* Studio Grid Cards */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .studio-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 22px;
+      padding: 2.5rem 2rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+    }
+    .studio-card:hover {
+      transform: translateY(-8px);
+      background: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 20px 45px rgba(2, 132, 199, 0.16), 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    .studio-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .studio-card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.5px;
+    }
+    .studio-card-desc {
+      color: #475569;
+      font-size: 0.94rem;
+      line-height: 1.65;
+      margin-bottom: 1.6rem;
+    }
+    .studio-card-badge {
+      align-self: flex-start;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: #0284c7;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Light Studio Footer */
+    .studio-footer {
+      position: relative;
+      z-index: 10;
+      padding: 3.5rem 8%;
+      text-align: center;
+      border-top: 1px solid rgba(15, 23, 42, 0.1);
+      color: #64748b;
+      font-size: 0.92rem;
+      background: #f1f5f9;
+    }
+
+    /* =========================================================
+       SHOWCASE MODAL: LUXURY ROYAL TYPOGRAPHY
+       ========================================================= */
+    #work-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(7, 9, 14, 0.97);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      overflow-y: auto;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    #work-modal.active {
+      display: block;
+      opacity: 1;
+    }
+
+    #modal-particle-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .modal-header-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 6%;
+      background: rgba(7, 9, 14, 0.88);
+      border-bottom: 1px solid var(--card-border);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .neon-cross-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 42, 60, 0.12);
+      border: 1.5px solid rgba(255, 42, 60, 0.65);
+      color: #ff3b56;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 16px rgba(255, 42, 60, 0.35);
+      transition: all 0.25s ease;
+      line-height: 1;
+    }
+    .neon-cross-btn:hover {
+      background: rgba(255, 42, 60, 0.3);
+      border-color: #ff3b56;
+      color: #fff;
+      transform: scale(1.12) rotate(90deg);
+      box-shadow: 0 0 25px rgba(255, 42, 60, 0.7);
+    }
+
+    .pictorical-header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 2.5rem 1.2rem 1.4rem;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .pictorical-title-wrap {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      max-width: 100%;
+    }
+
+    .pictorical-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 7.8vw, 4.8rem);
+      font-weight: 700;
+      letter-spacing: clamp(4px, 1.2vw, 10px);
+      text-transform: uppercase;
+      white-space: nowrap;
+      display: block;
+      background: linear-gradient(110deg, #ffffff 0%, #e2e8f0 20%, #a5f3fc 40%, #ffffff 50%, #fde68a 60%, #e2e8f0 80%, #ffffff 100%);
+      background-size: 250% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: royalDiamondShine 7s ease infinite, royalFloat 4s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.45)) drop-shadow(0 0 45px rgba(0, 210, 255, 0.3));
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    @keyframes royalDiamondShine {
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 0% center; }
+    }
+    @keyframes royalFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-4px); }
+    }
+
+    .pictorical-sub-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 2px;
+    }
+
+    .royal-needle {
+      width: clamp(20px, 4vw, 45px);
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255, 196, 0, 0.9), transparent);
+      box-shadow: 0 0 8px rgba(255, 196, 0, 0.8);
+    }
+
+    .pictorical-sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.72rem, 1.8vw, 0.86rem);
+      font-weight: 700;
+      letter-spacing: clamp(3.5px, 0.9vw, 6px);
+      color: #ffffff;
+      text-transform: uppercase;
+      white-space: nowrap;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.75), 0 0 24px rgba(255, 196, 0, 0.5);
+      animation: royalSubPulse 3.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes royalSubPulse {
+      0% {
+        opacity: 0.88;
+        letter-spacing: clamp(3.5px, 0.9vw, 6px);
+      }
+      100% {
+        opacity: 1;
+        letter-spacing: clamp(4.5px, 1.1vw, 7.5px);
+        text-shadow: 0 0 18px rgba(255, 255, 255, 0.95), 0 0 35px rgba(255, 196, 0, 0.7);
+      }
+    }
+
+    .modal-content-area {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.8rem 1.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .modal-card {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1.5px solid rgba(0, 210, 255, 0.4);
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.15), 0 0 35px rgba(255, 196, 0, 0.08);
+      background: #080b11;
+      transform: scale(0.94);
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.2, 1), 
+                  opacity 0.5s ease, 
+                  border-color 0.4s ease, 
+                  box-shadow 0.4s ease;
+    }
+
+    #work-modal.active .modal-card.popped {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .modal-card:hover {
+      transform: scale(1.015) !important;
+      border-color: rgba(255, 196, 0, 0.95);
+      box-shadow: 0 0 35px rgba(255, 196, 0, 0.5), 0 0 65px rgba(0, 210, 255, 0.4);
+    }
+
+    .modal-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .modal-card.auto-glowing {
+      border-color: rgba(255, 196, 0, 0.95) !important;
+      box-shadow: 0 0 35px rgba(255, 196, 0, 0.55), 0 0 65px rgba(0, 210, 255, 0.45) !important;
+      transform: scale(1.02) !important;
+    }
+
+    .modal-card.pulse-pop {
+      animation: popPulse7s 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes popPulse7s {
+      0% { transform: scale(1); }
+      50% {
+        transform: scale(1.025);
+        border-color: rgba(255, 196, 0, 0.95);
+        box-shadow: 0 0 40px rgba(255, 196, 0, 0.55), 0 0 70px rgba(0, 210, 255, 0.45);
+      }
+      100% { transform: scale(1); border-color: rgba(0, 210, 255, 0.4); }
+    }
+
+    /* =========================================================
+       ULTRA-SMOOTH MOBILE OPTIMIZATIONS (ZERO JITTER / ZERO LAG)
+       ========================================================= */
+    @media (max-width: 900px) {
+      /* 1. Turn off invisible mouse circle on phones to save GPU */
+      #cursor-glow {
+        display: none !important;
+      }
+
+      /* 2. Lighten backdrop filters to butter-smooth 8px with hardware acceleration */
+      header,
+      .apple-glass-pill,
+      .insta-glass-card,
+      .venture-card,
+      .reel-reactions-bar,
+      .studio-card,
+      .desk-clock-card,
+      .spiral-calendar-wrapper {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+        transform: translateZ(0); /* Hardware accelerate rendering */
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 1.8rem;
+        gap: 1.5rem;
+      }
+      .ps-bounding-box-wrap { margin-left: auto; margin-right: auto; }
+      .cta-row { justify-content: center; }
+      
+      .photo-wrapper { 
+        order: -1; 
+        margin-bottom: 0.5rem;
+      }
+      .photo-container { 
+      max-width: 220px; 
+      border-radius: 24px;
+    }
+    .photo-container img {
+      border-radius: 24px;
+    }
+    
+    .apple-glass-pill {
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 12px;
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    .pill-title { 
+      font-size: 0.78rem; 
+      white-space: nowrap; 
+      font-weight: 800;
+    }
+    .pill-followers { 
+      font-size: 0.65rem; 
+      white-space: nowrap; 
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+      .insta-glass-card { 
+        width: 88%; 
+        max-width: 260px;
+        padding: 6px 10px;
+        margin-top: 10px;
+        border-radius: 14px;
+      }
+      .insta-actions-row {
+        gap: 4px;
+      }
+      .insta-action-btn {
+        font-size: 0.72rem;
+        gap: 3px;
+        padding: 2px 3px;
+      }
+      .insta-action-btn svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .ventures {
+        padding: 2rem 5% 2rem;
+      }
+      .section-header {
+        margin-bottom: 1.8rem;
+      }
+      .venture-grid {
+        grid-template-columns: 1fr;
+        gap: 1.1rem;
+      }
+      .venture-card {
+        padding: 1.3rem;
+        border-radius: 16px;
+      }
+      .venture-icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.6rem;
+      }
+      .venture-title {
+        font-size: 1.18rem;
+        margin-bottom: 0.4rem;
+      }
+      .venture-desc {
+        font-size: 0.86rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Light Studio Mobile Layout */
+      .light-studio-section {
+        padding: 3.5rem 5% 4rem;
+      }
+      .studio-desk-stage {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+        margin: 1.8rem auto 3.5rem;
+      }
+      .desk-flip-tile {
+        width: 48px;
+        height: 56px;
+      }
+      .tile-num {
+        font-size: 1.7rem;
+      }
+      .spiral-month-title {
+        font-size: 1.5rem;
+      }
+      .calendar-summary-line {
+        font-size: 1.05rem;
+      }
+      .date-chip {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+      }
+
+      .studio-grid {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+      }
+      .studio-card {
+        padding: 1.8rem 1.5rem;
+        border-radius: 18px;
+      }
+
+      .reel-card { height: 185px; }
+      .reel-card img { height: 185px; }
+      .reel-reactions-bar { padding: 5px 14px; font-size: 0.76rem; gap: 12px; }
+      .modal-content-area { padding: 0.4rem 0.8rem 4rem; gap: 12px; }
+      .pr-timeline-container { padding: 36px 3% 0; }
+      .pr-timeline-ruler { height: 44px; }
+      .pr-playhead { height: 56px; top: -10px; }
+      .pr-playhead-line { height: 40px; }
+      .pr-scrub-indicator { font-size: 0.65rem; padding: 2px 7px; top: -26px; }
+      .pr-tick-time { font-size: 0.58rem; }
+      .pictorical-sub-wrap { gap: 10px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Ambient Cursor Glow & Canvas Dust -->
-  <div id="cursor-glow"></div>
-  <canvas id="particle-canvas"></canvas>
-
-  <!-- FULL-SCREEN DRAG FIRE SPARKS CANVAS -->
-  <canvas id="drag-fire-canvas"></canvas>
-
-  <!-- Header with Verified Badge to the left of CLICK NIL -->
-  <header>
-    <a href="#" class="brand-logo">
-      <span class="verified-badge" title="Verified Visual Artist">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-      </span>
-      CLICK NIL <span class="divider">/</span> <span class="sub">Visual Artist</span>
-    </a>
-  </header>
-
-  <!-- Main Hero Section -->
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        
-        <!-- Live Recording Badge with Real Running Timecode -->
-        <div class="hero-tag">
-          <span class="rec-dot"></span>
-          <span>REC</span>
-          <span class="rec-timer" id="rec-timecode">00:00:00:00</span>
-        </div>
-
-        <!-- Pure Crisp White "Hi, I'm" -->
-        <div class="intro-small">Hi, I’m</div>
-
-        <!-- Photoshop Transform Box -->
-        <div class="ps-bounding-box-wrap">
-          <div class="ps-marquee-border"></div>
-          
-          <!-- Transform Handles -->
-          <div class="ps-handle tl"></div>
-          <div class="ps-handle tm"></div>
-          <div class="ps-handle tr"></div>
-          <div class="ps-handle ml"></div>
-          <div class="ps-handle mr"></div>
-          <div class="ps-handle bl"></div>
-          <div class="ps-handle bm"></div>
-          <div class="ps-handle br"></div>
-
-          <!-- Big Name -->
-          <div class="big-name">
-            <span id="typewriter-text"></span><span class="ps-cursor" id="ps-cursor"></span>
-          </div>
-
-          <!-- Underline Hue Slider -->
-          <div class="underline-slider-container">
-            <input type="range" min="0" max="360" value="0" class="hue-slider" id="hue-picker" title="Adjust color mood">
-          </div>
-        </div>
-
-        <p class="hero-bio">
-          Photographer, Cinematographer, Bengali Album Designer & Video Editor. Creator of <strong>Click Nil</strong>, Founder of <strong>Bodhuboron Wedding Photography</strong>, and Educator mentoring students across West Bengal in filmmaking & album design.
-        </p>
-
-        <!-- CTA Buttons -->
-        <div class="cta-row">
-          <button class="btn btn-glow" id="open-work-btn">Explore My Work</button>
-          <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20checked%20your%20website%2C%20I%20want%20to%20contact%20you" target="_blank" class="btn btn-outline">WhatsApp Me</a>
-        </div>
-      </div>
-
-      <!-- Proportional Portrait with 10s Laser Shine Sweep -->
-      <div class="photo-wrapper">
-        <div class="photo-container">
-          <img src="profile.jpg" alt="Indranil">
-
-          <div class="photo-shine-sweep"></div>
-
-          <div class="hud-element hud-bracket-tl"></div>
-          <div class="hud-element hud-bracket-br"></div>
-
-          <div class="apple-glass-pill">
-            <div class="pill-title">Indranil</div>
-            <div class="pill-followers">
-              <span class="stat-dot"></span> 50K+ Followers
-            </div>
-          </div>
-        </div>
-
-        <!-- Balanced Liquid Apple Glass Instagram Bar with SHARP REAL HEART SVG -->
-        <div class="insta-glass-card" id="insta-card">
-          <div class="insta-actions-row">
-            
-            <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
-              <svg viewBox="0 0 24 24" style="width: 17px; height: 17px; min-width: 17px; flex-shrink: 0; display: block;">
-                <path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/>
-              </svg>
-              <span id="like-count">1.4M</span>
-            </button>
-
-            <button class="insta-action-btn" title="Comment">
-              <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-              <span>163K</span>
-            </button>
-
-            <button class="insta-action-btn" title="Repost">
-              <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
-              <span>23K</span>
-            </button>
-
-            <button class="insta-action-btn" title="Direct Share">
-              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-            </button>
-
-            <button class="insta-action-btn" title="Save">
-              <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PREMIERE PRO TIMELINE & REEL SLIDER -->
-    <section class="photo-slider-section">
-      
-      <div class="pr-timeline-container">
-        <div class="pr-timeline-ruler" id="timeline-ruler">
-          
-          <div class="pr-ticks">
-            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:00</span><div class="pr-tick-line"></div></div>
-            <div class="pr-tick-mark"><div class="pr-tick-line sub"></div></div>
-            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:05</span><div class="pr-tick-line"></div></div>
-            <div class="pr-tick-mark"><div class="pr-tick-line sub"></div></div>
-            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:10</span><div class="pr-tick-line"></div></div>
-            <div class="pr-tick-mark"><div class="pr-tick-line sub"></div></div>
-            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:15</span><div class="pr-tick-line"></div></div>
-            <div class="pr-tick-mark"><div class="pr-tick-line sub"></div></div>
-            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:20</span><div class="pr-tick-line"></div></div>
-            <div class="pr-tick-mark"><div class="pr-tick-line sub"></div></div>
-            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:25</span><div class="pr-tick-line"></div></div>
-          </div>
-
-          <div class="pr-playhead" id="playhead">
-            <div class="pr-scrub-indicator" id="scrub-time">00:00:00:00</div>
-            <div class="pr-playhead-head"></div>
-            <div class="pr-playhead-line"></div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Carousel Track -->
-      <div class="reel-track-wrapper" id="reel-track-wrapper">
-        <div class="reel-track" id="reel-track">
-
-          <!-- SET 1: Photos 1 to 9 -->
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-1.jpg" alt="Spread 1"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.8K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 842</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 148</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-2.jpg" alt="Spread 2"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.9K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 916</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 212</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-3.jpg" alt="Spread 3"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.1K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 764</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 176</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-4.jpg" alt="Spread 4"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 2.7K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 885</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 195</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-5.jpg" alt="Spread 5"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.5K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 812</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 164</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-6.jpg" alt="Spread 6"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.8K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 740</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 152</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-7.jpg" alt="Spread 7"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.4K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 935</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 220</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-8.jpg" alt="Spread 8"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.1K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 698</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 138</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-9.jpg" alt="Spread 9"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.9K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 870</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 184</span>
-            </div>
-          </div>
-
-          <!-- SET 2: Duplicate Set for Seamless Loop -->
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-1.jpg" alt="Spread 1"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.8K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 842</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 148</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-2.jpg" alt="Spread 2"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.9K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 916</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 212</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-3.jpg" alt="Spread 3"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.1K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 764</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 176</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-4.jpg" alt="Spread 4"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 2.7K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 885</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 195</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-5.jpg" alt="Spread 5"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.5K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 812</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 164</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-6.jpg" alt="Spread 6"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.8K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 740</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 152</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-7.jpg" alt="Spread 7"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.4K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 935</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 220</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-8.jpg" alt="Spread 8"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.1K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 698</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 138</span>
-            </div>
-          </div>
-
-          <div class="reel-unit">
-            <div class="reel-card"><img src="wedding-9.jpg" alt="Spread 9"></div>
-            <div class="reel-reactions-bar">
-              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.9K</span>
-              <span class="reel-react-item"><span class="reel-comment">💬</span> 870</span>
-              <span class="reel-react-item"><span class="reel-share">🔁</span> 184</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Ventures Section with balanced 2x2 Grid -->
-    <section class="ventures" id="ventures">
-      <div class="section-header">
-        <h2>What I Do</h2>
-        <p>From YouTube tech reviews to wedding cinematography, workshops & brand collaborations</p>
-      </div>
-
-      <div class="venture-grid">
-        <!-- 1. Click Nil -->
-        <div class="venture-card">
-          <div>
-            <div class="venture-icon">🎥</div>
-            <h3 class="venture-title">Click Nil</h3>
-            <p class="venture-desc">
-              Tech reviews, camera setups (Sony & Canon), hands-on gear tests, and tutorials for upcoming creators and cinematographers.
-            </p>
-          </div>
-          <a href="https://www.youtube.com/@Click-Nil" target="_blank" class="venture-link">Visit YouTube Channel &rarr;</a>
-        </div>
-
-        <!-- 2. Bodhuboron -->
-        <div class="venture-card">
-          <div>
-            <div class="venture-icon">💍</div>
-            <h3 class="venture-title">Bodhuboron</h3>
-            <p class="venture-desc">
-              Premium wedding photography & cinematic wedding films capturing authentic emotions, vibrant colors, and unforgettable moments.
-            </p>
-          </div>
-          <a href="https://www.instagram.com/bodhuboron.in/" target="_blank" class="venture-link">Book for Wedding &rarr;</a>
-        </div>
-
-        <!-- 3. Workshops & Academy -->
-        <div class="venture-card">
-          <div>
-            <div class="venture-icon">🎓</div>
-            <h3 class="venture-title">Workshops & Academy</h3>
-            <p class="venture-desc">
-              Mentoring students in professional Bengali wedding album design, Premiere Pro & DaVinci Resolve editing, lighting, and camera handling.
-            </p>
-          </div>
-          <a href="https://www.facebook.com/clicknilofficial/" target="_blank" class="venture-link">Join Next Workshop &rarr;</a>
-        </div>
-
-        <!-- 4. Brand Collaborations -->
-        <div class="venture-card">
-          <div>
-            <div class="venture-icon">🤝</div>
-            <h3 class="venture-title">Brand Collaborations</h3>
-            <p class="venture-desc">
-              Official gear tester, reviewer, and creative content producer for industry-leading imaging and cinema equipment brands.
-            </p>
-            <div class="brand-pills-wrap">
-              <span class="brand-tag">SONY</span>
-              <span class="brand-tag">CANON</span>
-              <span class="brand-tag">NIKON</span>
-              <span class="brand-tag">GODOX</span>
-              <span class="brand-tag">NISI</span>
-              <span class="brand-tag">SAMYANG</span>
-              <span class="brand-tag">KODAK</span>
-              <span class="brand-tag">PROGRADE</span>
-            </div>
-          </div>
-          <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20collaborate%20with%20you" target="_blank" class="venture-link">Collaborate with Me &rarr;</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- SCISSORS CUT ANIMATION DIVIDER (Right to Left Cut with Smooth Exit) -->
-    <div class="cut-transition-wrapper" id="cut-divider">
-      <div class="cut-dashed-line"></div>
-      
-      <!-- Authentic Sharp Vector Scissors -->
-      <div class="scissors-svg-wrapper">
-        <svg viewBox="0 0 24 24">
-          <path d="M9.64 7.64c.23-.5.36-1.05.36-1.64 0-2.21-1.79-4-4-4S2 3.79 2 6s1.79 4 4 4c.59 0 1.14-.13 1.64-.36L10 12l-2.36 2.36C7.14 14.13 6.59 14 6 14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4c0-.59-.13-1.14-.36-1.64L12 14l7 7h3v-1L9.64 7.64zM6 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-7.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5zM19 3l-6 6 2 2 7-7V3h-3z"/>
-        </svg>
-      </div>
-    </div>
-
-    <!-- EXCLUSIVE LIGHT STUDIO SECTION -->
-    <section class="light-studio-section" id="light-studio">
-      <div class="torn-edge"></div>
-
-      <!-- Header with Small Cursive "For" and Futuristic Zoom Title -->
-      <div class="studio-hero-title-wrap" id="zoom-title-wrap">
-        <span class="studio-script-for">For</span>
-        <h2 class="studio-main-heading">Photographers & Designers</h2>
-        <p class="studio-sub-caption">Creative assets, live availability, and professional studio post-production workflows.</p>
-      </div>
-
-      <!-- TWO-COLUMN DESK: LEFT FLIP CLOCK & RIGHT SPIRAL CALENDAR -->
-      <div class="studio-desk-stage">
-        
-        <!-- LEFT: DESK FLIP CLOCK & TODAY'S DATE -->
-        <div class="desk-clock-card">
-          <div>
-            <div class="desk-clock-header">
-              <div class="live-clock-badge">
-                <span class="live-clock-dot"></span> Live Studio Clock
-              </div>
-            </div>
-
-            <div class="today-date-banner">
-              <div class="today-day-name" id="today-day-name">Monday</div>
-              <div class="today-full-str" id="today-full-str">September 21, 2026</div>
-            </div>
-
-            <div class="desk-flip-display">
-              <div class="desk-flip-tile"><span class="tile-num" id="desk-hour">13</span></div>
-              <span class="tile-colon">:</span>
-              <div class="desk-flip-tile"><span class="tile-num" id="desk-min">00</span></div>
-              <span class="tile-colon">:</span>
-              <div class="desk-flip-tile"><span class="tile-num" id="desk-sec">00</span></div>
-            </div>
-          </div>
-
-          <div class="desk-clock-foot">
-            Realtime Local Time • Synchronized Live
-          </div>
-        </div>
-
-        <!-- RIGHT: REALISTIC SPIRAL DESK WEDDING CALENDAR (MONTH-BY-MONTH) -->
-        <div class="spiral-calendar-wrapper">
-          <div class="spiral-rings-track">
-            <span class="spiral-ring"></span>
-            <span class="spiral-ring"></span>
-            <span class="spiral-ring"></span>
-            <span class="spiral-ring"></span>
-            <span class="spiral-ring"></span>
-            <span class="spiral-ring"></span>
-            <span class="spiral-ring"></span>
-            <span class="spiral-ring"></span>
-          </div>
-
-          <div class="spiral-nav-bar">
-            <div>
-              <div class="spiral-month-title" id="cal-month-title">November</div>
-              <span class="spiral-year-pill" id="cal-year-pill">2026 Season</span>
-            </div>
-            <div class="flip-btn-group">
-              <button class="cal-nav-btn" id="cal-prev-btn" title="Previous Month">&larr;</button>
-              <button class="cal-nav-btn" id="cal-next-btn" title="Next Month">&rarr;</button>
-            </div>
-          </div>
-
-          <div class="calendar-sheet" id="cal-paper-sheet">
-            <div class="dates-lead-label">Auspicious Wedding Dates</div>
-
-            <div class="calendar-summary-line" id="cal-summary-line">
-              <span class="summary-month-name" id="summary-month-name">November</span>
-              <span class="summary-dash">—</span>
-              <span id="summary-dates-list">21, 24, 25, 26</span>
-            </div>
-
-            <div class="dates-chips-grid" id="cal-chips-container"></div>
-          </div>
-
-          <div class="spiral-card-footer">
-            <span>Tap any date to book instant WhatsApp priority</span>
-            <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20about%20your%20wedding%20dates" target="_blank" class="spiral-quick-book">Custom Date &rarr;</a>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Studio Grid Cards -->
-      <div class="studio-grid">
-        <div class="studio-card">
-          <div>
-            <div class="studio-card-icon">🎞️</div>
-            <h3 class="studio-card-title">Bengali Wedding PSD Sets</h3>
-            <p class="studio-card-desc">High-resolution, multilayered typography spreads and ornate traditional Bengali templates ready for album printing.</p>
-          </div>
-          <span class="studio-card-badge">PSD Templates</span>
-        </div>
-
-        <div class="studio-card">
-          <div>
-            <div class="studio-card-icon">🎨</div>
-            <h3 class="studio-card-title">Color Profiles & LUTs</h3>
-            <p class="studio-card-desc">Handcrafted DaVinci Resolve powergrades and Premiere Pro LUTs calibrated for cinematic warm skin tones.</p>
-          </div>
-          <span class="studio-card-badge">Color Science</span>
-        </div>
-
-        <div class="studio-card">
-          <div>
-            <div class="studio-card-icon">⚡</div>
-            <h3 class="studio-card-title">Lighting Masterclasses</h3>
-            <p class="studio-card-desc">Practical hands-on mentorship across West Bengal covering wireless strobe shaping and fast on-location setups.</p>
-          </div>
-          <span class="studio-card-badge">Live Workshops</span>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="studio-footer">
-    <p>© 2026 Click Nil • Indranil. Built with clean code on GitHub Pages.</p>
-  </footer>
-
-  <!-- IN-PAGE SHOWCASE MODAL -->
-  <div id="work-modal">
-    <canvas id="modal-particle-canvas"></canvas>
-
-    <div class="modal-header-bar">
-      <div class="brand-logo">
-        <span class="verified-badge" title="Verified Visual Artist">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-        </span>
-        CLICK NIL <span style="opacity: 0.4;">/</span> <span class="sub">Album Showcase</span>
-      </div>
-      <button class="neon-cross-btn" id="close-work-btn" title="Close">✕</button>
-    </div>
-
-    <div class="pictorical-header">
-      <div class="pictorical-title-wrap">
-        <h2 class="pictorical-title">PICTORICAL</h2>
-        <div class="pictorical-sub-wrap">
-          <div class="royal-needle"></div>
-          <span class="pictorical-sub">PREMIUM WEDDING ALBUM</span>
-          <div class="royal-needle"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal-content-area">
-      <div class="modal-card"><img src="wedding-1.jpg" alt="Pictorical 1"></div>
-      <div class="modal-card"><img src="wedding-2.jpg" alt="Pictorical 2"></div>
-      <div class="modal-card"><img src="wedding-3.jpg" alt="Pictorical 3"></div>
-      <div class="modal-card"><img src="wedding-4.jpg" alt="Pictorical 4"></div>
-      <div class="modal-card"><img src="wedding-5.jpg" alt="Pictorical 5"></div>
-      <div class="modal-card"><img src="wedding-6.jpg" alt="Pictorical 6"></div>
-      <div class="modal-card"><img src="wedding-7.jpg" alt="Pictorical 7"></div>
-      <div class="modal-card"><img src="wedding-8.jpg" alt="Pictorical 8"></div>
-      <div class="modal-card"><img src="wedding-9.jpg" alt="Pictorical 9"></div>
-    </div>
-  </div>
-
-  <script>
-    // 1. Live Running REC Millisecond Timecode
-    const startTime = Date.now();
-    const timerElem = document.getElementById("rec-timecode");
-
-    function updateTimecode() {
-      const elapsed = Date.now() - startTime;
-      const ms = Math.floor((elapsed % 1000) / 10).toString().padStart(2, '0');
-      const sec = Math.floor((elapsed / 1000) % 60).toString().padStart(2, '0');
-      const min = Math.floor((elapsed / (1000 * 60)) % 60).toString().padStart(2, '0');
-      const hrs = Math.floor(elapsed / (1000 * 60 * 60)).toString().padStart(2, '0');
-      timerElem.textContent = `${hrs}:${min}:${sec}:${ms}`;
-      requestAnimationFrame(updateTimecode);
-    }
-    requestAnimationFrame(updateTimecode);
-
-    // 2. Photoshop Typewriter Animation
-    const targetName = "Indranil";
-    const typewriterElement = document.getElementById("typewriter-text");
-    let charIndex = 0;
-
-    function typeChar() {
-      if (charIndex < targetName.length) {
-        typewriterElement.textContent += targetName.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeChar, 140);
-      }
-    }
-    window.addEventListener("DOMContentLoaded", () => {
-      setTimeout(typeChar, 400);
-    });
-
-    // 3. Hue Slider Adjustments
-    const hueSlider = document.getElementById("hue-picker");
-    hueSlider.addEventListener("input", (e) => {
-      document.documentElement.style.setProperty('--name-hue', `${e.target.value}deg`);
-    });
-
-    // 4. Interactive Like Button with Popup Heart
-    const likeBtn = document.getElementById('like-btn');
-    const instaCard = document.getElementById('insta-card');
-    const likeCountElem = document.getElementById('like-count');
-    let hasClicked = false;
-
-    likeBtn.addEventListener('click', () => {
-      if (!hasClicked) {
-        likeCountElem.textContent = '1.4M+';
-        hasClicked = true;
-
-        const heartPopup = document.createElement('div');
-        heartPopup.className = 'floating-heart';
-        heartPopup.textContent = '❤️';
-        instaCard.appendChild(heartPopup);
-        setTimeout(() => heartPopup.remove(), 900);
-      }
-    });
-
-    // =========================================================
-    // 5. FULL-SCREEN VELOCITY-BASED FIRE SPARKS
-    // =========================================================
-    const fireCanvas = document.getElementById('drag-fire-canvas');
-    const fireCtx = fireCanvas.getContext('2d');
-    let fullScreenSparks = [];
-
-    function resizeFireCanvas() {
-      fireCanvas.width = window.innerWidth;
-      fireCanvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeFireCanvas);
-    resizeFireCanvas();
-
-    class FullScreenSpark {
-      constructor(originX, originY, velocity) {
-        const speedMagnitude = Math.abs(velocity);
-        this.x = originX + (Math.random() - 0.5) * (speedMagnitude * 3 + 20);
-        this.y = originY + (Math.random() - 0.5) * 30;
-
-        const angle = Math.atan2(-Math.random() * 5 - 2, -velocity * 0.4 + (Math.random() - 0.5) * 6);
-        const burstSpeed = Math.random() * (speedMagnitude * 0.45 + 3) + 2;
-
-        this.vx = Math.cos(angle) * burstSpeed;
-        this.vy = Math.sin(angle) * burstSpeed;
-        this.size = Math.random() * 3.8 + 1.2;
-        this.life = 1.0;
-        this.decay = Math.random() * 0.025 + 0.018;
-
-        const flamePalette = ['#ffffff', '#fff275', '#ffc000', '#ff8800', '#ff3b00'];
-        this.color = flamePalette[Math.floor(Math.random() * flamePalette.length)];
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        this.vx *= 0.96;
-        this.vy -= 0.08;
-        this.size *= 0.97;
-        this.life -= this.decay;
-      }
-
-      draw() {
-        fireCtx.save();
-        fireCtx.globalAlpha = Math.max(0, this.life);
-        fireCtx.fillStyle = this.color;
-        fireCtx.shadowColor = '#ffae00';
-        fireCtx.shadowBlur = 12;
-        fireCtx.beginPath();
-        fireCtx.arc(this.x, this.y, Math.max(0.2, this.size), 0, Math.PI * 2);
-        fireCtx.fill();
-        fireCtx.restore();
-      }
-    }
-
-    function spawnFullScreenSparks(x, y, velocity) {
-      const speedMagnitude = Math.abs(velocity);
-      const count = Math.min(28, Math.max(2, Math.floor(speedMagnitude * 1.4)));
-      for (let i = 0; i < count; i++) {
-        fullScreenSparks.push(new FullScreenSpark(x, y, velocity));
-      }
-    }
-
-    function animateFireCanvas() {
-      fireCtx.clearRect(0, 0, fireCanvas.width, fireCanvas.height);
-      for (let i = fullScreenSparks.length - 1; i >= 0; i--) {
-        fullScreenSparks[i].update();
-        fullScreenSparks[i].draw();
-        if (fullScreenSparks[i].life <= 0) {
-          fullScreenSparks.splice(i, 1);
-        }
-      }
-      requestAnimationFrame(animateFireCanvas);
-    }
-    requestAnimationFrame(animateFireCanvas);
-
-    // =========================================================
-    // 6. TIMELINE CAROUSEL SCRUBBING & DRAGGING
-    // =========================================================
-    const track = document.getElementById('reel-track');
-    const trackWrapper = document.getElementById('reel-track-wrapper');
-    const ruler = document.getElementById('timeline-ruler');
-    const playhead = document.getElementById('playhead');
-    const scrubTime = document.getElementById('scrub-time');
-
-    let currentScroll = 0;
-    let isDragging = false;
-    let isHovering = false;
-    let lastClientX = 0;
-    const autoSpeed = 1.0;
-
-    function getHalfWidth() {
-      return track.scrollWidth / 2;
-    }
-
-    function formatTimecode(progress) {
-      const totalFrames = Math.floor(progress * 30 * 25);
-      const frames = (totalFrames % 25).toString().padStart(2, '0');
-      const seconds = Math.floor((totalFrames / 25) % 60).toString().padStart(2, '0');
-      const minutes = Math.floor(totalFrames / (25 * 60)).toString().padStart(2, '0');
-      return `00:${minutes}:${seconds}:${frames}`;
-    }
-
-    function updateCarouselPosition() {
-      const halfWidth = getHalfWidth();
-      if (halfWidth > 0) {
-        if (currentScroll >= halfWidth) {
-          currentScroll = currentScroll - halfWidth;
-        } else if (currentScroll < 0) {
-          currentScroll = halfWidth + currentScroll;
-        }
-        track.style.transform = `translate3d(-${currentScroll}px, 0, 0)`;
-
-        const progress = (currentScroll % halfWidth) / halfWidth;
-        playhead.style.left = `${progress * 100}%`;
-        scrubTime.textContent = formatTimecode(progress);
-      }
-    }
-
-    function timelineLoop() {
-      if (!isDragging && !isHovering) {
-        currentScroll += autoSpeed;
-        updateCarouselPosition();
-      }
-      requestAnimationFrame(timelineLoop);
-    }
-    requestAnimationFrame(timelineLoop);
-
-    trackWrapper.addEventListener('mouseenter', () => { isHovering = true; });
-    trackWrapper.addEventListener('mouseleave', () => { isHovering = false; });
-
-    function scrubFromEvent(e) {
-      const rect = ruler.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-      let ratio = (clientX - rect.left) / rect.width;
-      ratio = Math.max(0, Math.min(1, ratio));
-
-      const halfWidth = getHalfWidth();
-      currentScroll = ratio * halfWidth;
-      updateCarouselPosition();
-
-      const velocity = clientX - lastClientX;
-      lastClientX = clientX;
-      spawnFullScreenSparks(clientX, clientY, velocity);
-    }
-
-    ruler.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      lastClientX = e.clientX;
-      scrubFromEvent(e);
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (isDragging) {
-        scrubFromEvent(e);
-      }
-    });
-
-    window.addEventListener('mouseup', () => {
-      isDragging = false;
-    });
-
-    ruler.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      lastClientX = e.touches[0].clientX;
-      scrubFromEvent(e);
-    }, { passive: true });
-
-    window.addEventListener('touchmove', (e) => {
-      if (isDragging) {
-        scrubFromEvent(e);
-      }
-    }, { passive: true });
-
-    window.addEventListener('touchend', () => {
-      isDragging = false;
-    });
-
-    // =========================================================
-    // 7. SCISSORS CUT ANIMATION ON SCROLL
-    // =========================================================
-    const cutDivider = document.getElementById('cut-divider');
-    const cutObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          cutDivider.classList.add('cutting');
-        }
-      });
-    }, { threshold: 0.3 });
-
-    if (cutDivider) {
-      cutObserver.observe(cutDivider);
-    }
-
-    // =========================================================
-    // 8. DYNAMIC SCROLL ZOOM: "PHOTOGRAPHERS & DESIGNERS"
-    // =========================================================
-    const zoomTitle = document.getElementById('zoom-title-wrap');
-    window.addEventListener('scroll', () => {
-      if (!zoomTitle) return;
-      const rect = zoomTitle.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      if (rect.top < windowHeight && rect.bottom > 0) {
-        const centerDistance = Math.abs(rect.top + rect.height / 2 - windowHeight / 2);
-        const maxDist = windowHeight / 2;
-        const factor = Math.max(0, 1 - centerDistance / maxDist);
-        const scale = 0.88 + factor * 0.28;
-        zoomTitle.style.transform = `scale(${scale})`;
-      } else {
-        zoomTitle.style.transform = 'scale(0.88)';
-      }
-    });
-
-    // =========================================================
-    // 9. LIVE LOCAL CLOCK & TODAY'S FULL DATE
-    // =========================================================
-    const deskHour = document.getElementById('desk-hour');
-    const deskMin = document.getElementById('desk-min');
-    const deskSec = document.getElementById('desk-sec');
-    const todayDayName = document.getElementById('today-day-name');
-    const todayFullStr = document.getElementById('today-full-str');
-
-    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-    function updateDeskClock() {
-      const now = new Date();
-      deskHour.textContent = now.getHours().toString().padStart(2, '0');
-      deskMin.textContent = now.getMinutes().toString().padStart(2, '0');
-      deskSec.textContent = now.getSeconds().toString().padStart(2, '0');
-
-      todayDayName.textContent = dayNames[now.getDay()];
-      todayFullStr.textContent = `${monthNames[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
-    }
-    setInterval(updateDeskClock, 1000);
-    updateDeskClock();
-
-    // =========================================================
-    // 10. SPIRAL CALENDAR MONTH-BY-MONTH DATA & FLIP LOGIC
-    // =========================================================
-    const weddingSchedule = [
-      { month: "April", year: "2026", dates: [21], datesText: "21" },
-      { month: "May", year: "2026", dates: [3, 7, 13], datesText: "3, 7, 13" },
-      { month: "July", year: "2026", dates: [6, 12, 20, 21, 23, 24, 29, 30], datesText: "6, 12, 20, 21, 23, 24, 29, 30" },
-      { month: "August", year: "2026", dates: [2, 7], datesText: "2, 7" },
-      { month: "November", year: "2026", dates: [21, 24, 25, 26], datesText: "21, 24, 25, 26" },
-      { month: "December", year: "2026", dates: [5, 9, 11, 12, 13], datesText: "5, 9, 11, 12, 13" },
-      { month: "January", year: "2027", dates: [18, 26, 28, 29], datesText: "18, 26, 28, 29" },
-      { month: "February", year: "2027", dates: [11, 12, 16, 22, 24], datesText: "11 (Saraswati Puja), 12, 16, 22, 24" },
-      { month: "March", year: "2027", dates: [1, 9, 14], datesText: "1, 9, 14" }
-    ];
-
-    let currentMonthIndex = 4; // Starts on November 2026
-
-    const calMonthTitle = document.getElementById('cal-month-title');
-    const calYearPill = document.getElementById('cal-year-pill');
-    const summaryMonthName = document.getElementById('summary-month-name');
-    const summaryDatesList = document.getElementById('summary-dates-list');
-    const calChipsContainer = document.getElementById('cal-chips-container');
-    const calPaperSheet = document.getElementById('cal-paper-sheet');
-
-    function renderSpiralCalendarPage(index) {
-      const data = weddingSchedule[index];
-      calPaperSheet.classList.add('turning');
-
-      setTimeout(() => {
-        calMonthTitle.textContent = data.month;
-        calYearPill.textContent = `${data.year} Wedding Season`;
-        summaryMonthName.textContent = data.month;
-        summaryDatesList.textContent = data.datesText;
-
-        calChipsContainer.innerHTML = '';
-        data.dates.forEach(d => {
-          const chip = document.createElement('a');
-          chip.className = 'date-chip';
-          chip.href = `https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20book%20my%20wedding%20on%3A%20${d}%20${data.month}%20${data.year}`;
-          chip.target = '_blank';
-          chip.innerHTML = `<span class="chip-dot"></span> ${d} ${data.month}`;
-          calChipsContainer.appendChild(chip);
-        });
-
-        calPaperSheet.classList.remove('turning');
-      }, 180);
-    }
-
-    document.getElementById('cal-prev-btn').addEventListener('click', () => {
-      currentMonthIndex = (currentMonthIndex - 1 + weddingSchedule.length) % weddingSchedule.length;
-      renderSpiralCalendarPage(currentMonthIndex);
-    });
-
-    document.getElementById('cal-next-btn').addEventListener('click', () => {
-      currentMonthIndex = (currentMonthIndex + 1) % weddingSchedule.length;
-      renderSpiralCalendarPage(currentMonthIndex);
-    });
-
-    renderSpiralCalendarPage(currentMonthIndex);
-
-    // =========================================================
-    // 11. IN-PAGE SHOWCASE MODAL LOGIC
-    // =========================================================
-    const workModal = document.getElementById('work-modal');
-    const openWorkBtn = document.getElementById('open-work-btn');
-    const closeWorkBtn = document.getElementById('close-work-btn');
-    const modalCards = document.querySelectorAll('.modal-card');
-    let pulseTimer = null;
-    let modalAnimId = null;
-
-    function triggerPopPulse() {
-      modalCards.forEach((card, index) => {
-        setTimeout(() => {
-          card.classList.add('pulse-pop');
-          setTimeout(() => card.classList.remove('pulse-pop'), 750);
-        }, index * 90);
-      });
-    }
-
-    function triggerAutoGlowSweep() {
-      modalCards.forEach((card, index) => {
-        setTimeout(() => {
-          card.classList.add('auto-glowing');
-          setTimeout(() => card.classList.remove('auto-glowing'), 600);
-        }, index * 110);
-      });
-    }
-
-    openWorkBtn.addEventListener('click', () => {
-      workModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-
-      modalCards.forEach((card, idx) => {
-        card.classList.remove('popped', 'auto-glowing');
-        setTimeout(() => {
-          card.classList.add('popped');
-        }, 120 + idx * 60);
-      });
-
-      setTimeout(triggerAutoGlowSweep, 700);
-      clearInterval(pulseTimer);
-      pulseTimer = setInterval(triggerPopPulse, 7000);
-
-      // Start modal canvas loop ONLY when modal is active
-      startModalParticles();
-    });
-
-    closeWorkBtn.addEventListener('click', () => {
-      workModal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-      clearInterval(pulseTimer);
-      // Stop modal canvas loop to save mobile memory
-      if (modalAnimId) cancelAnimationFrame(modalAnimId);
-    });
-
-    // 12. Ambient Cursor Light Tracker (Desktop Only)
-    const glow = document.getElementById('cursor-glow');
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-
-    window.addEventListener('mousemove', (e) => {
-      if (window.innerWidth > 900) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        glow.style.left = mouseX + 'px';
-        glow.style.top = mouseY + 'px';
-      }
-    });
-
-    // =========================================================
-    // 13. OPTIMIZED MOBILE-FRIENDLY PARTICLE SYSTEM
-    // =========================================================
-    const mainCanvas = document.getElementById('particle-canvas');
-    const isMobileDevice = window.innerWidth <= 900;
-
-    function initBackgroundParticles(canvasElem, count) {
-      const ctx = canvasElem.getContext('2d');
-      let particles = [];
-
-      function resize() {
-        canvasElem.width = window.innerWidth;
-        canvasElem.height = window.innerHeight;
-      }
-      window.addEventListener('resize', resize);
-      resize();
-
-      class Particle {
-        constructor() { this.reset(); }
-        reset() {
-          this.x = Math.random() * canvasElem.width;
-          this.y = Math.random() * canvasElem.height;
-          this.size = Math.random() * 2.2 + 0.6;
-          this.speedY = -(Math.random() * 0.45 + 0.12);
-          this.speedX = (Math.random() - 0.5) * 0.35;
-          this.alpha = Math.random() * 0.45 + 0.15;
-          this.isGold = Math.random() > 0.6;
-        }
-        update() {
-          this.y += this.speedY;
-          this.x += this.speedX;
-          if (this.y < 0) this.y = canvasElem.height;
-          if (this.x < 0) this.x = canvasElem.width;
-          if (this.x > canvasElem.width) this.x = 0;
-        }
-        draw() {
-          let boost = 0;
-          if (!isMobileDevice) {
-            const dx = this.x - mouseX;
-            const dy = this.y - mouseY;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            boost = dist < 200 ? (1 - dist / 200) * 0.6 : 0;
-          }
-
-          if (this.isGold) {
-            ctx.fillStyle = `rgba(255, 196, 0, ${this.alpha + boost})`;
-            if (!isMobileDevice) { ctx.shadowColor = '#ffc400'; ctx.shadowBlur = 8; }
-          } else {
-            ctx.fillStyle = `rgba(0, 210, 255, ${this.alpha + boost})`;
-            if (!isMobileDevice) { ctx.shadowColor = '#00d2ff'; ctx.shadowBlur = 6; }
-          }
-
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size + (boost * 1.5), 0, Math.PI * 2);
-          ctx.fill();
-          ctx.shadowBlur = 0;
-        }
-      }
-
-      for (let i = 0; i < count; i++) {
-        particles.push(new Particle());
-      }
-
-      function animate() {
-        ctx.clearRect(0, 0, canvasElem.width, canvasElem.height);
-        particles.forEach(p => {
-          p.update();
-          p.draw();
-        });
-        requestAnimationFrame(animate);
-      }
-      requestAnimationFrame(animate);
-    }
-
-    // Run 18 particles on mobile (saves 70% CPU/GPU) vs 50 on desktop
-    initBackgroundParticles(mainCanvas, isMobileDevice ? 18 : 50);
-
-    // Modal canvas runs strictly on demand
-    const modalCanvas = document.getElementById('modal-particle-canvas');
-    function startModalParticles() {
-      const ctx = modalCanvas.getContext('2d');
-      modalCanvas.width = window.innerWidth;
-      modalCanvas.height = window.innerHeight;
-      let modalParticles = [];
-
-      for (let i = 0; i < (isMobileDevice ? 16 : 40); i++) {
-        modalParticles.push({
-          x: Math.random() * modalCanvas.width,
-          y: Math.random() * modalCanvas.height,
-          size: Math.random() * 2 + 0.6,
-          speedY: -(Math.random() * 0.4 + 0.1),
-          speedX: (Math.random() - 0.5) * 0.3,
-          isGold: Math.random() > 0.6
-        });
-      }
-
-      function loopModal() {
-        ctx.clearRect(0, 0, modalCanvas.width, modalCanvas.height);
-        modalParticles.forEach(p => {
-          p.y += p.speedY;
-          p.x += p.speedX;
-          if (p.y < 0) p.y = modalCanvas.height;
-          if (p.x < 0) p.x = modalCanvas.width;
-          if (p.x > modalCanvas.width) p.x = 0;
-
-          ctx.fillStyle = p.isGold ? 'rgba(255, 196, 0, 0.45)' : 'rgba(0, 210, 255, 0.45)';
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        });
-        modalAnimId = requestAnimationFrame(loopModal);
-      }
-      loopModal();
-    }
-  </script>
+  <!-- Ambient Cursor Glow & Canvas Dust -->
+  <div id="cursor-glow"></div>
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- FULL-SCREEN DRAG FIRE SPARKS CANVAS -->
+  <canvas id="drag-fire-canvas"></canvas>
+
+  <!-- Header with Verified Badge to the left of CLICK NIL -->
+  <header>
+    <a href="#" class="brand-logo">
+      <span class="verified-badge" title="Verified Visual Artist">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      </span>
+      CLICK NIL <span class="divider">/</span> <span class="sub">Visual Artist</span>
+    </a>
+  </header>
+
+  <!-- Main Hero Section -->
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        
+        <!-- Live Recording Badge with Real Running Timecode -->
+        <div class="hero-tag">
+          <span class="rec-dot"></span>
+          <span>REC</span>
+          <span class="rec-timer" id="rec-timecode">00:00:00:00</span>
+        </div>
+
+        <!-- Pure Crisp White "Hi, I'm" -->
+        <div class="intro-small">Hi, I’m</div>
+
+        <!-- Photoshop Transform Box -->
+        <div class="ps-bounding-box-wrap">
+          <div class="ps-marquee-border"></div>
+          
+          <!-- Transform Handles -->
+          <div class="ps-handle tl"></div>
+          <div class="ps-handle tm"></div>
+          <div class="ps-handle tr"></div>
+          <div class="ps-handle ml"></div>
+          <div class="ps-handle mr"></div>
+          <div class="ps-handle bl"></div>
+          <div class="ps-handle bm"></div>
+          <div class="ps-handle br"></div>
+
+          <!-- Big Name -->
+          <div class="big-name">
+            <span id="typewriter-text"></span><span class="ps-cursor" id="ps-cursor"></span>
+          </div>
+
+          <!-- Underline Hue Slider -->
+          <div class="underline-slider-container">
+            <input type="range" min="0" max="360" value="0" class="hue-slider" id="hue-picker" title="Adjust color mood">
+          </div>
+        </div>
+
+        <p class="hero-bio">
+          Photographer, Cinematographer, Bengali Album Designer & Video Editor. Creator of <strong>Click Nil</strong>, Founder of <strong>Bodhuboron Wedding Photography</strong>, and Educator mentoring students across West Bengal in filmmaking & album design.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="cta-row">
+          <button class="btn btn-glow" id="open-work-btn">Explore My Work</button>
+          <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20checked%20your%20website%2C%20I%20want%20to%20contact%20you" target="_blank" class="btn btn-outline">WhatsApp Me</a>
+        </div>
+      </div>
+
+      <!-- Proportional Portrait with 10s Laser Shine Sweep -->
+      <div class="photo-wrapper">
+        <div class="photo-container">
+          <img src="profile.jpg" alt="Indranil">
+
+          <div class="photo-shine-sweep"></div>
+
+          <div class="hud-element hud-bracket-tl"></div>
+          <div class="hud-element hud-bracket-br"></div>
+
+          <div class="apple-glass-pill">
+            <div class="pill-title">Indranil</div>
+            <div class="pill-followers">
+              <span class="stat-dot"></span> 50K+ Followers
+            </div>
+          </div>
+        </div>
+
+        <!-- Balanced Liquid Apple Glass Instagram Bar with SHARP REAL HEART SVG -->
+        <div class="insta-glass-card" id="insta-card">
+          <div class="insta-actions-row">
+            
+            <button class="insta-action-btn pulsing-heart" id="like-btn" title="Like">
+              <svg viewBox="0 0 24 24" style="width: 17px; height: 17px; min-width: 17px; flex-shrink: 0; display: block;">
+                <path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/>
+              </svg>
+              <span id="like-count">1.4M</span>
+            </button>
+
+            <button class="insta-action-btn" title="Comment">
+              <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+              <span>163K</span>
+            </button>
+
+            <button class="insta-action-btn" title="Repost">
+              <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+              <span>23K</span>
+            </button>
+
+            <button class="insta-action-btn" title="Direct Share">
+              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+
+            <button class="insta-action-btn" title="Save">
+              <svg viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREMIERE PRO TIMELINE & REEL SLIDER -->
+    <section class="photo-slider-section">
+      
+      <div class="pr-timeline-container">
+        <div class="pr-timeline-ruler" id="timeline-ruler">
+          
+          <div class="pr-ticks">
+            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:00</span><div class="pr-tick-line"></div></div>
+            <div class="pr-tick-mark"><div class="pr-tick-line sub"></div></div>
+            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:05</span><div class="pr-tick-line"></div></div>
+            <div class="pr-tick-mark"><div class="pr-tick-line sub"></div></div>
+            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:10</span><div class="pr-tick-line"></div></div>
+            <div class="pr-tick-mark"><div class="pr-tick-line sub"></div></div>
+            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:15</span><div class="pr-tick-line"></div></div>
+            <div class="pr-tick-mark"><div class="pr-tick-line sub"></div></div>
+            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:20</span><div class="pr-tick-line"></div></div>
+            <div class="pr-tick-mark"><div class="pr-tick-line sub"></div></div>
+            <div class="pr-tick-mark"><span class="pr-tick-time">00:00:25</span><div class="pr-tick-line"></div></div>
+          </div>
+
+          <div class="pr-playhead" id="playhead">
+            <div class="pr-scrub-indicator" id="scrub-time">00:00:00:00</div>
+            <div class="pr-playhead-head"></div>
+            <div class="pr-playhead-line"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Carousel Track -->
+      <div class="reel-track-wrapper" id="reel-track-wrapper">
+        <div class="reel-track" id="reel-track">
+
+          <!-- SET 1: Photos 1 to 9 -->
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-1.jpg" alt="Spread 1"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.8K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 842</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 148</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-2.jpg" alt="Spread 2"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.9K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 916</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 212</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-3.jpg" alt="Spread 3"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.1K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 764</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 176</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-4.jpg" alt="Spread 4"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 2.7K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 885</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 195</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-5.jpg" alt="Spread 5"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.5K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 812</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 164</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-6.jpg" alt="Spread 6"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.8K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 740</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 152</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-7.jpg" alt="Spread 7"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.4K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 935</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 220</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-8.jpg" alt="Spread 8"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.1K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 698</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 138</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-9.jpg" alt="Spread 9"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.9K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 870</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 184</span>
+            </div>
+          </div>
+
+          <!-- SET 2: Duplicate Set for Seamless Loop -->
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-1.jpg" alt="Spread 1"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.8K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 842</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 148</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-2.jpg" alt="Spread 2"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.9K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 916</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 212</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-3.jpg" alt="Spread 3"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.1K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 764</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 176</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-4.jpg" alt="Spread 4"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 2.7K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 885</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 195</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-5.jpg" alt="Spread 5"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.5K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 812</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 164</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-6.jpg" alt="Spread 6"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 3.8K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 740</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 152</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-7.jpg" alt="Spread 7"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 5.4K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 935</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 220</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-8.jpg" alt="Spread 8"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.1K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 698</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 138</span>
+            </div>
+          </div>
+
+          <div class="reel-unit">
+            <div class="reel-card"><img src="wedding-9.jpg" alt="Spread 9"></div>
+            <div class="reel-reactions-bar">
+              <span class="reel-react-item"><span class="reel-heart">❤️</span> 4.9K</span>
+              <span class="reel-react-item"><span class="reel-comment">💬</span> 870</span>
+              <span class="reel-react-item"><span class="reel-share">🔁</span> 184</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Ventures Section with balanced 2x2 Grid -->
+    <section class="ventures" id="ventures">
+      <div class="section-header">
+        <h2>What I Do</h2>
+        <p>From YouTube tech reviews to wedding cinematography, workshops & brand collaborations</p>
+      </div>
+
+      <div class="venture-grid">
+        <!-- 1. Click Nil -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">🎥</div>
+            <h3 class="venture-title">Click Nil</h3>
+            <p class="venture-desc">
+              Tech reviews, camera setups (Sony & Canon), hands-on gear tests, and tutorials for upcoming creators and cinematographers.
+            </p>
+          </div>
+          <a href="https://www.youtube.com/@Click-Nil" target="_blank" class="venture-link">Visit YouTube Channel &rarr;</a>
+        </div>
+
+        <!-- 2. Bodhuboron -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">💍</div>
+            <h3 class="venture-title">Bodhuboron</h3>
+            <p class="venture-desc">
+              Premium wedding photography & cinematic wedding films capturing authentic emotions, vibrant colors, and unforgettable moments.
+            </p>
+          </div>
+          <a href="https://www.instagram.com/bodhuboron.in/" target="_blank" class="venture-link">Book for Wedding &rarr;</a>
+        </div>
+
+        <!-- 3. Workshops & Academy -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">🎓</div>
+            <h3 class="venture-title">Workshops & Academy</h3>
+            <p class="venture-desc">
+              Mentoring students in professional Bengali wedding album design, Premiere Pro & DaVinci Resolve editing, lighting, and camera handling.
+            </p>
+          </div>
+          <a href="https://www.facebook.com/clicknilofficial/" target="_blank" class="venture-link">Join Next Workshop &rarr;</a>
+        </div>
+
+        <!-- 4. Brand Collaborations -->
+        <div class="venture-card">
+          <div>
+            <div class="venture-icon">🤝</div>
+            <h3 class="venture-title">Brand Collaborations</h3>
+            <p class="venture-desc">
+              Official gear tester, reviewer, and creative content producer for industry-leading imaging and cinema equipment brands.
+            </p>
+            <div class="brand-pills-wrap">
+              <span class="brand-tag">SONY</span>
+              <span class="brand-tag">CANON</span>
+              <span class="brand-tag">NIKON</span>
+              <span class="brand-tag">GODOX</span>
+              <span class="brand-tag">NISI</span>
+              <span class="brand-tag">SAMYANG</span>
+              <span class="brand-tag">KODAK</span>
+              <span class="brand-tag">PROGRADE</span>
+            </div>
+          </div>
+          <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20collaborate%20with%20you" target="_blank" class="venture-link">Collaborate with Me &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCISSORS CUT ANIMATION DIVIDER (Right to Left Cut with Smooth Exit) -->
+    <div class="cut-transition-wrapper" id="cut-divider">
+      <div class="cut-dashed-line"></div>
+      
+      <!-- Authentic Sharp Vector Scissors -->
+      <div class="scissors-svg-wrapper">
+        <svg viewBox="0 0 24 24">
+          <path d="M9.64 7.64c.23-.5.36-1.05.36-1.64 0-2.21-1.79-4-4-4S2 3.79 2 6s1.79 4 4 4c.59 0 1.14-.13 1.64-.36L10 12l-2.36 2.36C7.14 14.13 6.59 14 6 14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4c0-.59-.13-1.14-.36-1.64L12 14l7 7h3v-1L9.64 7.64zM6 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-7.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5zM19 3l-6 6 2 2 7-7V3h-3z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- EXCLUSIVE LIGHT STUDIO SECTION -->
+    <section class="light-studio-section" id="light-studio">
+      <div class="torn-edge"></div>
+
+      <!-- Header with Small Cursive "For" and Futuristic Zoom Title -->
+      <div class="studio-hero-title-wrap" id="zoom-title-wrap">
+        <span class="studio-script-for">For</span>
+        <h2 class="studio-main-heading">Photographers & Designers</h2>
+        <p class="studio-sub-caption">Creative assets, live availability, and professional studio post-production workflows.</p>
+      </div>
+
+      <!-- TWO-COLUMN DESK: LEFT FLIP CLOCK & RIGHT SPIRAL CALENDAR -->
+      <div class="studio-desk-stage">
+        
+        <!-- LEFT: DESK FLIP CLOCK & TODAY'S DATE -->
+        <div class="desk-clock-card">
+          <div>
+            <div class="desk-clock-header">
+              <div class="live-clock-badge">
+                <span class="live-clock-dot"></span> Live Studio Clock
+              </div>
+            </div>
+
+            <div class="today-date-banner">
+              <div class="today-day-name" id="today-day-name">Monday</div>
+              <div class="today-full-str" id="today-full-str">September 21, 2026</div>
+            </div>
+
+            <div class="desk-flip-display">
+              <div class="desk-flip-tile"><span class="tile-num" id="desk-hour">13</span></div>
+              <span class="tile-colon">:</span>
+              <div class="desk-flip-tile"><span class="tile-num" id="desk-min">00</span></div>
+              <span class="tile-colon">:</span>
+              <div class="desk-flip-tile"><span class="tile-num" id="desk-sec">00</span></div>
+            </div>
+          </div>
+
+          <div class="desk-clock-foot">
+            Realtime Local Time • Synchronized Live
+          </div>
+        </div>
+
+        <!-- RIGHT: REALISTIC SPIRAL DESK WEDDING CALENDAR (MONTH-BY-MONTH) -->
+        <div class="spiral-calendar-wrapper">
+          <div class="spiral-rings-track">
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+          </div>
+
+          <div class="spiral-nav-bar">
+            <div>
+              <div class="spiral-month-title" id="cal-month-title">November</div>
+              <span class="spiral-year-pill" id="cal-year-pill">2026 Season</span>
+            </div>
+            <div class="flip-btn-group">
+              <button class="cal-nav-btn" id="cal-prev-btn" title="Previous Month">&larr;</button>
+              <button class="cal-nav-btn" id="cal-next-btn" title="Next Month">&rarr;</button>
+            </div>
+          </div>
+
+          <div class="calendar-sheet" id="cal-paper-sheet">
+            <div class="dates-lead-label">Auspicious Wedding Dates</div>
+
+            <div class="calendar-summary-line" id="cal-summary-line">
+              <span class="summary-month-name" id="summary-month-name">November</span>
+              <span class="summary-dash">—</span>
+              <span id="summary-dates-list">21, 24, 25, 26</span>
+            </div>
+
+            <div class="dates-chips-grid" id="cal-chips-container"></div>
+          </div>
+
+          <div class="spiral-card-footer">
+            <span>Tap any date to book instant WhatsApp priority</span>
+            <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20about%20your%20wedding%20dates" target="_blank" class="spiral-quick-book">Custom Date &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Studio Grid Cards -->
+      <div class="studio-grid">
+        <div class="studio-card">
+          <div>
+            <div class="studio-card-icon">🎞️</div>
+            <h3 class="studio-card-title">Bengali Wedding PSD Sets</h3>
+            <p class="studio-card-desc">High-resolution, multilayered typography spreads and ornate traditional Bengali templates ready for album printing.</p>
+          </div>
+          <span class="studio-card-badge">PSD Templates</span>
+        </div>
+
+        <div class="studio-card">
+          <div>
+            <div class="studio-card-icon">🎨</div>
+            <h3 class="studio-card-title">Color Profiles & LUTs</h3>
+            <p class="studio-card-desc">Handcrafted DaVinci Resolve powergrades and Premiere Pro LUTs calibrated for cinematic warm skin tones.</p>
+          </div>
+          <span class="studio-card-badge">Color Science</span>
+        </div>
+
+        <div class="studio-card">
+          <div>
+            <div class="studio-card-icon">⚡</div>
+            <h3 class="studio-card-title">Lighting Masterclasses</h3>
+            <p class="studio-card-desc">Practical hands-on mentorship across West Bengal covering wireless strobe shaping and fast on-location setups.</p>
+          </div>
+          <span class="studio-card-badge">Live Workshops</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="studio-footer">
+    <p>© 2026 Click Nil • Indranil. Built with clean code on GitHub Pages.</p>
+  </footer>
+
+  <!-- IN-PAGE SHOWCASE MODAL -->
+  <div id="work-modal">
+    <canvas id="modal-particle-canvas"></canvas>
+
+    <div class="modal-header-bar">
+      <div class="brand-logo">
+        <span class="verified-badge" title="Verified Visual Artist">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </span>
+        CLICK NIL <span style="opacity: 0.4;">/</span> <span class="sub">Album Showcase</span>
+      </div>
+      <button class="neon-cross-btn" id="close-work-btn" title="Close">✕</button>
+    </div>
+
+    <div class="pictorical-header">
+      <div class="pictorical-title-wrap">
+        <h2 class="pictorical-title">PICTORICAL</h2>
+        <div class="pictorical-sub-wrap">
+          <div class="royal-needle"></div>
+          <span class="pictorical-sub">PREMIUM WEDDING ALBUM</span>
+          <div class="royal-needle"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-content-area">
+      <div class="modal-card"><img src="wedding-1.jpg" alt="Pictorical 1"></div>
+      <div class="modal-card"><img src="wedding-2.jpg" alt="Pictorical 2"></div>
+      <div class="modal-card"><img src="wedding-3.jpg" alt="Pictorical 3"></div>
+      <div class="modal-card"><img src="wedding-4.jpg" alt="Pictorical 4"></div>
+      <div class="modal-card"><img src="wedding-5.jpg" alt="Pictorical 5"></div>
+      <div class="modal-card"><img src="wedding-6.jpg" alt="Pictorical 6"></div>
+      <div class="modal-card"><img src="wedding-7.jpg" alt="Pictorical 7"></div>
+      <div class="modal-card"><img src="wedding-8.jpg" alt="Pictorical 8"></div>
+      <div class="modal-card"><img src="wedding-9.jpg" alt="Pictorical 9"></div>
+    </div>
+  </div>
+
+  <script>
+    // 1. Live Running REC Millisecond Timecode
+    const startTime = Date.now();
+    const timerElem = document.getElementById("rec-timecode");
+
+    function updateTimecode() {
+      const elapsed = Date.now() - startTime;
+      const ms = Math.floor((elapsed % 1000) / 10).toString().padStart(2, '0');
+      const sec = Math.floor((elapsed / 1000) % 60).toString().padStart(2, '0');
+      const min = Math.floor((elapsed / (1000 * 60)) % 60).toString().padStart(2, '0');
+      const hrs = Math.floor(elapsed / (1000 * 60 * 60)).toString().padStart(2, '0');
+      timerElem.textContent = `${hrs}:${min}:${sec}:${ms}`;
+      requestAnimationFrame(updateTimecode);
+    }
+    requestAnimationFrame(updateTimecode);
+
+    // 2. Photoshop Typewriter Animation
+    const targetName = "Indranil";
+    const typewriterElement = document.getElementById("typewriter-text");
+    let charIndex = 0;
+
+    function typeChar() {
+      if (charIndex < targetName.length) {
+        typewriterElement.textContent += targetName.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeChar, 140);
+      }
+    }
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(typeChar, 400);
+    });
+
+    // 3. Hue Slider Adjustments
+    const hueSlider = document.getElementById("hue-picker");
+    hueSlider.addEventListener("input", (e) => {
+      document.documentElement.style.setProperty('--name-hue', `${e.target.value}deg`);
+    });
+
+    // 4. Interactive Like Button with Popup Heart
+    const likeBtn = document.getElementById('like-btn');
+    const instaCard = document.getElementById('insta-card');
+    const likeCountElem = document.getElementById('like-count');
+    let hasClicked = false;
+
+    likeBtn.addEventListener('click', () => {
+      if (!hasClicked) {
+        likeCountElem.textContent = '1.4M+';
+        hasClicked = true;
+
+        const heartPopup = document.createElement('div');
+        heartPopup.className = 'floating-heart';
+        heartPopup.textContent = '❤️';
+        instaCard.appendChild(heartPopup);
+        setTimeout(() => heartPopup.remove(), 900);
+      }
+    });
+
+    // =========================================================
+    // 5. FULL-SCREEN VELOCITY-BASED FIRE SPARKS
+    // =========================================================
+    const fireCanvas = document.getElementById('drag-fire-canvas');
+    const fireCtx = fireCanvas.getContext('2d');
+    let fullScreenSparks = [];
+
+    function resizeFireCanvas() {
+      fireCanvas.width = window.innerWidth;
+      fireCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeFireCanvas);
+    resizeFireCanvas();
+
+    class FullScreenSpark {
+      constructor(originX, originY, velocity) {
+        const speedMagnitude = Math.abs(velocity);
+        this.x = originX + (Math.random() - 0.5) * (speedMagnitude * 3 + 20);
+        this.y = originY + (Math.random() - 0.5) * 30;
+
+        const angle = Math.atan2(-Math.random() * 5 - 2, -velocity * 0.4 + (Math.random() - 0.5) * 6);
+        const burstSpeed = Math.random() * (speedMagnitude * 0.45 + 3) + 2;
+
+        this.vx = Math.cos(angle) * burstSpeed;
+        this.vy = Math.sin(angle) * burstSpeed;
+        this.size = Math.random() * 3.8 + 1.2;
+        this.life = 1.0;
+        this.decay = Math.random() * 0.025 + 0.018;
+
+        const flamePalette = ['#ffffff', '#fff275', '#ffc000', '#ff8800', '#ff3b00'];
+        this.color = flamePalette[Math.floor(Math.random() * flamePalette.length)];
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vx *= 0.96;
+        this.vy -= 0.08;
+        this.size *= 0.97;
+        this.life -= this.decay;
+      }
+
+      draw() {
+        fireCtx.save();
+        fireCtx.globalAlpha = Math.max(0, this.life);
+        fireCtx.fillStyle = this.color;
+        fireCtx.shadowColor = '#ffae00';
+        fireCtx.shadowBlur = 12;
+        fireCtx.beginPath();
+        fireCtx.arc(this.x, this.y, Math.max(0.2, this.size), 0, Math.PI * 2);
+        fireCtx.fill();
+        fireCtx.restore();
+      }
+    }
+
+    function spawnFullScreenSparks(x, y, velocity) {
+      const speedMagnitude = Math.abs(velocity);
+      const count = Math.min(28, Math.max(2, Math.floor(speedMagnitude * 1.4)));
+      for (let i = 0; i < count; i++) {
+        fullScreenSparks.push(new FullScreenSpark(x, y, velocity));
+      }
+    }
+
+    function animateFireCanvas() {
+      fireCtx.clearRect(0, 0, fireCanvas.width, fireCanvas.height);
+      for (let i = fullScreenSparks.length - 1; i >= 0; i--) {
+        fullScreenSparks[i].update();
+        fullScreenSparks[i].draw();
+        if (fullScreenSparks[i].life <= 0) {
+          fullScreenSparks.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(animateFireCanvas);
+    }
+    requestAnimationFrame(animateFireCanvas);
+
+    // =========================================================
+    // 6. TIMELINE CAROUSEL SCRUBBING & DRAGGING
+    // =========================================================
+    const track = document.getElementById('reel-track');
+    const trackWrapper = document.getElementById('reel-track-wrapper');
+    const ruler = document.getElementById('timeline-ruler');
+    const playhead = document.getElementById('playhead');
+    const scrubTime = document.getElementById('scrub-time');
+
+    let currentScroll = 0;
+    let isDragging = false;
+    let isHovering = false;
+    let lastClientX = 0;
+    const autoSpeed = 1.0;
+
+    function getHalfWidth() {
+      return track.scrollWidth / 2;
+    }
+
+    function formatTimecode(progress) {
+      const totalFrames = Math.floor(progress * 30 * 25);
+      const frames = (totalFrames % 25).toString().padStart(2, '0');
+      const seconds = Math.floor((totalFrames / 25) % 60).toString().padStart(2, '0');
+      const minutes = Math.floor(totalFrames / (25 * 60)).toString().padStart(2, '0');
+      return `00:${minutes}:${seconds}:${frames}`;
+    }
+
+    function updateCarouselPosition() {
+      const halfWidth = getHalfWidth();
+      if (halfWidth > 0) {
+        if (currentScroll >= halfWidth) {
+          currentScroll = currentScroll - halfWidth;
+        } else if (currentScroll < 0) {
+          currentScroll = halfWidth + currentScroll;
+        }
+        track.style.transform = `translate3d(-${currentScroll}px, 0, 0)`;
+
+        const progress = (currentScroll % halfWidth) / halfWidth;
+        playhead.style.left = `${progress * 100}%`;
+        scrubTime.textContent = formatTimecode(progress);
+      }
+    }
+
+    function timelineLoop() {
+      if (!isDragging && !isHovering) {
+        currentScroll += autoSpeed;
+        updateCarouselPosition();
+      }
+      requestAnimationFrame(timelineLoop);
+    }
+    requestAnimationFrame(timelineLoop);
+
+    trackWrapper.addEventListener('mouseenter', () => { isHovering = true; });
+    trackWrapper.addEventListener('mouseleave', () => { isHovering = false; });
+
+    function scrubFromEvent(e) {
+      const rect = ruler.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      let ratio = (clientX - rect.left) / rect.width;
+      ratio = Math.max(0, Math.min(1, ratio));
+
+      const halfWidth = getHalfWidth();
+      currentScroll = ratio * halfWidth;
+      updateCarouselPosition();
+
+      const velocity = clientX - lastClientX;
+      lastClientX = clientX;
+      spawnFullScreenSparks(clientX, clientY, velocity);
+    }
+
+    ruler.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      lastClientX = e.clientX;
+      scrubFromEvent(e);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        scrubFromEvent(e);
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    ruler.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      lastClientX = e.touches[0].clientX;
+      scrubFromEvent(e);
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (isDragging) {
+        scrubFromEvent(e);
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    // =========================================================
+    // 7. SCISSORS CUT ANIMATION ON SCROLL
+    // =========================================================
+    const cutDivider = document.getElementById('cut-divider');
+    const cutObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          cutDivider.classList.add('cutting');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (cutDivider) {
+      cutObserver.observe(cutDivider);
+    }
+
+    // =========================================================
+    // 8. DYNAMIC SCROLL ZOOM: "PHOTOGRAPHERS & DESIGNERS"
+    // =========================================================
+    const zoomTitle = document.getElementById('zoom-title-wrap');
+    window.addEventListener('scroll', () => {
+      if (!zoomTitle) return;
+      const rect = zoomTitle.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (rect.top < windowHeight && rect.bottom > 0) {
+        const centerDistance = Math.abs(rect.top + rect.height / 2 - windowHeight / 2);
+        const maxDist = windowHeight / 2;
+        const factor = Math.max(0, 1 - centerDistance / maxDist);
+        const scale = 0.88 + factor * 0.28;
+        zoomTitle.style.transform = `scale(${scale})`;
+      } else {
+        zoomTitle.style.transform = 'scale(0.88)';
+      }
+    });
+
+    // =========================================================
+    // 9. LIVE LOCAL CLOCK & TODAY'S FULL DATE
+    // =========================================================
+    const deskHour = document.getElementById('desk-hour');
+    const deskMin = document.getElementById('desk-min');
+    const deskSec = document.getElementById('desk-sec');
+    const todayDayName = document.getElementById('today-day-name');
+    const todayFullStr = document.getElementById('today-full-str');
+
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    function updateDeskClock() {
+      const now = new Date();
+      deskHour.textContent = now.getHours().toString().padStart(2, '0');
+      deskMin.textContent = now.getMinutes().toString().padStart(2, '0');
+      deskSec.textContent = now.getSeconds().toString().padStart(2, '0');
+
+      todayDayName.textContent = dayNames[now.getDay()];
+      todayFullStr.textContent = `${monthNames[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+    }
+    setInterval(updateDeskClock, 1000);
+    updateDeskClock();
+
+    // =========================================================
+    // 10. SPIRAL CALENDAR MONTH-BY-MONTH DATA & FLIP LOGIC
+    // =========================================================
+    const weddingSchedule = [
+      { month: "April", year: "2026", dates: [21], datesText: "21" },
+      { month: "May", year: "2026", dates: [3, 7, 13], datesText: "3, 7, 13" },
+      { month: "July", year: "2026", dates: [6, 12, 20, 21, 23, 24, 29, 30], datesText: "6, 12, 20, 21, 23, 24, 29, 30" },
+      { month: "August", year: "2026", dates: [2, 7], datesText: "2, 7" },
+      { month: "November", year: "2026", dates: [21, 24, 25, 26], datesText: "21, 24, 25, 26" },
+      { month: "December", year: "2026", dates: [5, 9, 11, 12, 13], datesText: "5, 9, 11, 12, 13" },
+      { month: "January", year: "2027", dates: [18, 26, 28, 29], datesText: "18, 26, 28, 29" },
+      { month: "February", year: "2027", dates: [11, 12, 16, 22, 24], datesText: "11 (Saraswati Puja), 12, 16, 22, 24" },
+      { month: "March", year: "2027", dates: [1, 9, 14], datesText: "1, 9, 14" }
+    ];
+
+    let currentMonthIndex = 4; // Starts on November 2026
+
+    const calMonthTitle = document.getElementById('cal-month-title');
+    const calYearPill = document.getElementById('cal-year-pill');
+    const summaryMonthName = document.getElementById('summary-month-name');
+    const summaryDatesList = document.getElementById('summary-dates-list');
+    const calChipsContainer = document.getElementById('cal-chips-container');
+    const calPaperSheet = document.getElementById('cal-paper-sheet');
+
+    function renderSpiralCalendarPage(index) {
+      const data = weddingSchedule[index];
+      calPaperSheet.classList.add('turning');
+
+      setTimeout(() => {
+        calMonthTitle.textContent = data.month;
+        calYearPill.textContent = `${data.year} Wedding Season`;
+        summaryMonthName.textContent = data.month;
+        summaryDatesList.textContent = data.datesText;
+
+        calChipsContainer.innerHTML = '';
+        data.dates.forEach(d => {
+          const chip = document.createElement('a');
+          chip.className = 'date-chip';
+          chip.href = `https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20book%20my%20wedding%20on%3A%20${d}%20${data.month}%20${data.year}`;
+          chip.target = '_blank';
+          chip.innerHTML = `<span class="chip-dot"></span> ${d} ${data.month}`;
+          calChipsContainer.appendChild(chip);
+        });
+
+        calPaperSheet.classList.remove('turning');
+      }, 180);
+    }
+
+    document.getElementById('cal-prev-btn').addEventListener('click', () => {
+      currentMonthIndex = (currentMonthIndex - 1 + weddingSchedule.length) % weddingSchedule.length;
+      renderSpiralCalendarPage(currentMonthIndex);
+    });
+
+    document.getElementById('cal-next-btn').addEventListener('click', () => {
+      currentMonthIndex = (currentMonthIndex + 1) % weddingSchedule.length;
+      renderSpiralCalendarPage(currentMonthIndex);
+    });
+
+    renderSpiralCalendarPage(currentMonthIndex);
+
+    // =========================================================
+    // 11. IN-PAGE SHOWCASE MODAL LOGIC
+    // =========================================================
+    const workModal = document.getElementById('work-modal');
+    const openWorkBtn = document.getElementById('open-work-btn');
+    const closeWorkBtn = document.getElementById('close-work-btn');
+    const modalCards = document.querySelectorAll('.modal-card');
+    let pulseTimer = null;
+    let modalAnimId = null;
+
+    function triggerPopPulse() {
+      modalCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('pulse-pop');
+          setTimeout(() => card.classList.remove('pulse-pop'), 750);
+        }, index * 90);
+      });
+    }
+
+    function triggerAutoGlowSweep() {
+      modalCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('auto-glowing');
+          setTimeout(() => card.classList.remove('auto-glowing'), 600);
+        }, index * 110);
+      });
+    }
+
+    openWorkBtn.addEventListener('click', () => {
+      workModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      modalCards.forEach((card, idx) => {
+        card.classList.remove('popped', 'auto-glowing');
+        setTimeout(() => {
+          card.classList.add('popped');
+        }, 120 + idx * 60);
+      });
+
+      setTimeout(triggerAutoGlowSweep, 700);
+      clearInterval(pulseTimer);
+      pulseTimer = setInterval(triggerPopPulse, 7000);
+
+      // Start modal canvas loop ONLY when modal is active
+      startModalParticles();
+    });
+
+    closeWorkBtn.addEventListener('click', () => {
+      workModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      clearInterval(pulseTimer);
+      // Stop modal canvas loop to save mobile memory
+      if (modalAnimId) cancelAnimationFrame(modalAnimId);
+    });
+
+    // 12. Ambient Cursor Light Tracker (Desktop Only)
+    const glow = document.getElementById('cursor-glow');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    window.addEventListener('mousemove', (e) => {
+      if (window.innerWidth > 900) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        glow.style.left = mouseX + 'px';
+        glow.style.top = mouseY + 'px';
+      }
+    });
+
+    // =========================================================
+    // 13. OPTIMIZED MOBILE-FRIENDLY PARTICLE SYSTEM
+    // =========================================================
+    const mainCanvas = document.getElementById('particle-canvas');
+    const isMobileDevice = window.innerWidth <= 900;
+
+    function initBackgroundParticles(canvasElem, count) {
+      const ctx = canvasElem.getContext('2d');
+      let particles = [];
+
+      function resize() {
+        canvasElem.width = window.innerWidth;
+        canvasElem.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      class Particle {
+        constructor() { this.reset(); }
+        reset() {
+          this.x = Math.random() * canvasElem.width;
+          this.y = Math.random() * canvasElem.height;
+          this.size = Math.random() * 2.2 + 0.6;
+          this.speedY = -(Math.random() * 0.45 + 0.12);
+          this.speedX = (Math.random() - 0.5) * 0.35;
+          this.alpha = Math.random() * 0.45 + 0.15;
+          this.isGold = Math.random() > 0.6;
+        }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          if (this.y < 0) this.y = canvasElem.height;
+          if (this.x < 0) this.x = canvasElem.width;
+          if (this.x > canvasElem.width) this.x = 0;
+        }
+        draw() {
+          let boost = 0;
+          if (!isMobileDevice) {
+            const dx = this.x - mouseX;
+            const dy = this.y - mouseY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            boost = dist < 200 ? (1 - dist / 200) * 0.6 : 0;
+          }
+
+          if (this.isGold) {
+            ctx.fillStyle = `rgba(255, 196, 0, ${this.alpha + boost})`;
+            if (!isMobileDevice) { ctx.shadowColor = '#ffc400'; ctx.shadowBlur = 8; }
+          } else {
+            ctx.fillStyle = `rgba(0, 210, 255, ${this.alpha + boost})`;
+            if (!isMobileDevice) { ctx.shadowColor = '#00d2ff'; ctx.shadowBlur = 6; }
+          }
+
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size + (boost * 1.5), 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      }
+
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvasElem.width, canvasElem.height);
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    // Run 18 particles on mobile (saves 70% CPU/GPU) vs 50 on desktop
+    initBackgroundParticles(mainCanvas, isMobileDevice ? 18 : 50);
+
+    // Modal canvas runs strictly on demand
+    const modalCanvas = document.getElementById('modal-particle-canvas');
+    function startModalParticles() {
+      const ctx = modalCanvas.getContext('2d');
+      modalCanvas.width = window.innerWidth;
+      modalCanvas.height = window.innerHeight;
+      let modalParticles = [];
+
+      for (let i = 0; i < (isMobileDevice ? 16 : 40); i++) {
+        modalParticles.push({
+          x: Math.random() * modalCanvas.width,
+          y: Math.random() * modalCanvas.height,
+          size: Math.random() * 2 + 0.6,
+          speedY: -(Math.random() * 0.4 + 0.1),
+          speedX: (Math.random() - 0.5) * 0.3,
+          isGold: Math.random() > 0.6
+        });
+      }
+
+      function loopModal() {
+        ctx.clearRect(0, 0, modalCanvas.width, modalCanvas.height);
+        modalParticles.forEach(p => {
+          p.y += p.speedY;
+          p.x += p.speedX;
+          if (p.y < 0) p.y = modalCanvas.height;
+          if (p.x < 0) p.x = modalCanvas.width;
+          if (p.x > modalCanvas.width) p.x = 0;
+
+          ctx.fillStyle = p.isGold ? 'rgba(255, 196, 0, 0.45)' : 'rgba(0, 210, 255, 0.45)';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        modalAnimId = requestAnimationFrame(loopModal);
+      }
+      loopModal();
+    }
+  </script>
 </body>
 </html>
-v
