@@ -260,7 +260,7 @@
       cursor: pointer;
       transition: transform 0.15s ease;
     }
-    .hue-slider::-webkit-slider-thumb:h { transform: scale(1.3); }
+    .hue-slider::-webkit-slider-thumb:hover { transform: scale(1.3); }
 
     .hero-bio {
       font-size: 1.08rem;
@@ -308,13 +308,22 @@
       border-color: rgba(255, 255, 255, 0.2);
     }
 
-    /* Portrait Wrapper with 10-Second Futuristic Shine Beam */
+    /* Portrait Wrapper & Camera Dial Viewfinder Animations */
     .photo-wrapper {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+    @keyframes dialRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes dialRotateReverse {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+
     .photo-container {
       position: relative;
       width: 100%;
@@ -335,7 +344,7 @@
       border-radius: 36px;
       mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
       -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
-      transition: transform 0.5s ease;
+      transition: transform 0.2s ease;
       filter: drop-shadow(0 0 35px rgba(0, 210, 255, 0.15));
     }
     .photo-container:hover img {
@@ -1604,37 +1613,30 @@
         margin-bottom: 0.5rem;
       }
       .photo-container { 
-      max-width: 220px; 
-      border-radius: 24px;
-    }
-    .photo-container img {
-      border-radius: 24px;
-    }
-    
-    .apple-glass-pill {
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 6px 12px;
-      width: 90%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-sizing: border-box;
-    }
-    .pill-title { 
-      font-size: 0.78rem; 
-      white-space: nowrap; 
-      font-weight: 800;
-    }
-    .pill-followers { 
-      font-size: 0.65rem; 
-      white-space: nowrap; 
-      flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-    }
+        max-width: 235px; 
+        border-radius: 24px;
+      }
+      .photo-container img {
+        border-radius: 24px;
+      }
+      
+      /* Fixed 50K+ Followers pill on mobile: full visibility, no wrap, no cut-off */
+      .apple-glass-pill {
+        bottom: 10px;
+        padding: 6px 10px;
+        width: 92%;
+        box-sizing: border-box;
+      }
+      .pill-title { 
+        font-size: 0.78rem; 
+        white-space: nowrap; 
+        font-weight: 800;
+      }
+      .pill-followers { 
+        font-size: 0.65rem; 
+        white-space: nowrap; 
+        flex-shrink: 0;
+      }
 
       .insta-glass-card { 
         width: 88%; 
@@ -1803,20 +1805,44 @@
         </div>
       </div>
 
-      <!-- Proportional Portrait with 10s Laser Shine Sweep -->
+      <!-- Proportional Portrait with Rotating Camera Dial & Viewfinder Shutter -->
       <div class="photo-wrapper">
-        <div class="photo-container">
-          <img src="profile.jpg" alt="Indranil">
+        <div class="camera-dial-wrapper" id="camera-dial-box" style="position: relative; width: 100%; max-width: 440px; aspect-ratio: 4/5; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="Tap to capture photo!">
+          
+          <!-- Outer Rotating Camera Dial Ring -->
+          <div style="position: absolute; inset: -12px; border-radius: 46px; border: 2px dashed rgba(0, 210, 255, 0.35); animation: dialRotate 22s linear infinite; pointer-events: none;"></div>
+          <div style="position: absolute; inset: -22px; border-radius: 52px; border: 1px solid rgba(255, 196, 0, 0.2); animation: dialRotateReverse 35s linear infinite; pointer-events: none;"></div>
 
-          <div class="photo-shine-sweep"></div>
+          <!-- Camera Viewfinder Frame Overlay -->
+          <div style="position: absolute; inset: 12px; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 28px; pointer-events: none; z-index: 5; display: flex; flex-direction: column; justify-content: space-between; padding: 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--neon-blue); letter-spacing: 1px; text-shadow: 0 0 6px rgba(0,210,255,0.8);">
+              <span>[ AF-S ]</span>
+              <span>1/250s F1.4</span>
+              <span>ISO 100</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #ffc400;">
+              <span>+0.3EV</span>
+              <span>RAW ● L</span>
+            </div>
+          </div>
 
-          <div class="hud-element hud-bracket-tl"></div>
-          <div class="hud-element hud-bracket-br"></div>
+          <!-- Shutter Flash Overlay Effect -->
+          <div id="camera-flash" style="position: absolute; inset: 0; background: #ffffff; border-radius: 36px; opacity: 0; pointer-events: none; z-index: 10; transition: opacity 0.15s ease-out;"></div>
 
-          <div class="apple-glass-pill">
-            <div class="pill-title">Indranil</div>
-            <div class="pill-followers">
-              <span class="stat-dot"></span> 50K+ Followers
+          <!-- Main Photo Container -->
+          <div class="photo-container" style="width: 100%; height: 100%; position: relative; border-radius: 36px; overflow: hidden;">
+            <img src="profile.jpg" alt="Indranil" id="shutter-photo-target" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; border-radius: 36px; transition: transform 0.2s ease;">
+
+            <div class="photo-shine-sweep"></div>
+
+            <div class="hud-element hud-bracket-tl"></div>
+            <div class="hud-element hud-bracket-br"></div>
+
+            <div class="apple-glass-pill">
+              <div class="pill-title">Indranil</div>
+              <div class="pill-followers">
+                <span class="stat-dot"></span> 50K+ Followers
+              </div>
             </div>
           </div>
         </div>
@@ -2311,6 +2337,21 @@
       requestAnimationFrame(updateTimecode);
     }
     requestAnimationFrame(updateTimecode);
+
+    // Camera Viewfinder Shutter Click Simulation
+    const cameraBox = document.getElementById('camera-dial-box');
+    const cameraFlash = document.getElementById('camera-flash');
+    const shutterPhoto = document.getElementById('shutter-photo-target');
+
+    cameraBox.addEventListener('click', () => {
+      cameraFlash.style.opacity = '0.85';
+      shutterPhoto.style.transform = 'scale(1.04)';
+      
+      setTimeout(() => {
+        cameraFlash.style.opacity = '0';
+        shutterPhoto.style.transform = 'scale(1)';
+      }, 180);
+    });
 
     // 2. Photoshop Typewriter Animation
     const targetName = "Indranil";
