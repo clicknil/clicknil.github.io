@@ -1604,29 +1604,37 @@
         margin-bottom: 0.5rem;
       }
       .photo-container { 
-       width: 100%;
-        border-radius: 24px;
-      }
-      .photo-container img {
-        border-radius: 24px;
-      }
-      
-      /* Fixed 50K+ Followers pill on mobile: full visibility, no wrap, no cut-off */
-      .apple-glass-pill {
-        bottom: 10px;
-        padding: 6px 12px;
-        width: 94%;
-        box-sizing: border-box;
-      }
-      .pill-title { 
-        font-size: 0.82rem; 
-        white-space: nowrap; 
-      }
-      .pill-followers { 
-        font-size: 0.68rem; 
-        white-space: nowrap; 
-        flex-shrink: 0;
-      }
+      max-width: 220px; 
+      border-radius: 24px;
+    }
+    .photo-container img {
+      border-radius: 24px;
+    }
+    
+    .apple-glass-pill {
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 12px;
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    .pill-title { 
+      font-size: 0.78rem; 
+      white-space: nowrap; 
+      font-weight: 800;
+    }
+    .pill-followers { 
+      font-size: 0.65rem; 
+      white-space: nowrap; 
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
 
       .insta-glass-card { 
         width: 88%; 
