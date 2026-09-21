@@ -880,7 +880,7 @@
     }
 
     /* =========================================================
-       EXCLUSIVE LIGHT STUDIO THEME (TORN CANVASS BELOW CUT)
+       EXCLUSIVE LIGHT STUDIO THEME (TORN CANVAS BELOW CUT)
        ========================================================= */
     .light-studio-section {
       position: relative;
@@ -948,37 +948,55 @@
     }
 
     /* =========================================================
-       NEW: RETRO BOLD FLIP CLOCK (INDIA STANDARD TIME 24H)
+       TWO-COLUMN DESK: LEFT FLIP CLOCK & RIGHT SPIRAL CALENDAR
        ========================================================= */
-    .clock-area-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 2.2rem auto 3.5rem;
+    .studio-desk-stage {
+      max-width: 1180px;
+      margin: 2.5rem auto 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 2.5rem;
+      align-items: stretch;
     }
 
-    .clock-meta-badge {
-      display: inline-flex;
+    /* Left Card: Live Desk Flip Clock & Today's Date */
+    .desk-clock-card {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid #e2e8f0;
+      padding: 2.2rem;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .desk-clock-header {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 7px;
+      margin-bottom: 1rem;
+    }
+    .live-clock-badge {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.74rem;
       font-weight: 800;
       color: #0284c7;
       background: #e0f2fe;
       border: 1px solid #bae6fd;
-      padding: 4px 14px;
+      padding: 4px 12px;
       border-radius: 999px;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
-    .clock-pulse-dot {
+    .live-clock-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
       background: #0284c7;
-      box-shadow: 0 0 8px #0284c7;
       animation: clockBlink 1s infinite alternate;
     }
     @keyframes clockBlink {
@@ -986,277 +1004,280 @@
       100% { opacity: 1; }
     }
 
-    .flip-clock-board {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: #ffffff;
-      padding: 14px 22px;
-      border-radius: 20px;
-      border: 1.5px solid #e2e8f0;
-      box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 1);
+    /* Today's Full Date */
+    .today-date-banner {
+      margin: 0.5rem 0 1.5rem;
+    }
+    .today-day-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.1;
+    }
+    .today-full-str {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #64748b;
+      margin-top: 4px;
     }
 
-    .flip-unit {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .flip-card-box {
-      width: 58px;
-      height: 64px;
-      background: #090d16;
-      border-radius: 12px;
-      position: relative;
+    /* Flip Digits */
+    .desk-flip-display {
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      perspective: 300px;
+      gap: 8px;
+      background: #090d16;
+      padding: 18px 12px;
+      border-radius: 18px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4), 0 10px 25px rgba(0, 0, 0, 0.15);
+      margin-bottom: 1.2rem;
     }
-
-    .flip-number {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 2rem;
-      font-weight: 900;
-      color: #ffffff;
-      letter-spacing: -1px;
-      line-height: 1;
-      text-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
+    .desk-flip-tile {
+      width: 58px;
+      height: 66px;
+      background: #111827;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
-
-    .flip-card-box::after {
+    .desk-flip-tile::after {
       content: '';
       position: absolute;
       left: 0;
       top: 50%;
       width: 100%;
       height: 1px;
-      background: rgba(0, 0, 0, 0.6);
-      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
+      background: rgba(0, 0, 0, 0.7);
     }
-
-    .flip-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.64rem;
+    .tile-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.1rem;
       font-weight: 800;
-      color: #64748b;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      color: #ffffff;
+      line-height: 1;
+      text-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
     }
-
-    .flip-divider {
+    .tile-colon {
       font-family: 'JetBrains Mono', monospace;
       font-size: 1.8rem;
       font-weight: 900;
-      color: #0284c7;
-      margin-top: -16px;
+      color: #00d2ff;
       animation: colonPulse 1s infinite alternate;
     }
     @keyframes colonPulse {
-      0% { opacity: 0.25; }
+      0% { opacity: 0.2; }
       100% { opacity: 1; }
     }
-
-    /* Flip animation class */
-    .flipping {
-      animation: flipCard 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    @keyframes flipCard {
-      0% { transform: rotateX(0deg); }
-      50% { transform: rotateX(-90deg); }
-      100% { transform: rotateX(0deg); }
-    }
-
-    /* =========================================================
-       NEW: WILD HAVEN STYLE WEDDING DATES CALENDAR SECTION
-       ========================================================= */
-    .wedding-dates-section {
-      max-width: 1240px;
-      margin: 0 auto 5rem;
-    }
-
-    .dates-header-block {
+    .desk-clock-foot {
+      font-size: 0.8rem;
+      color: #94a3b8;
       text-align: center;
-      margin-bottom: 2.2rem;
-    }
-    .dates-badge {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.74rem;
-      font-weight: 800;
-      color: #c2410c;
-      background: #ffedd5;
-      border: 1px solid #fed7aa;
-      padding: 4px 14px;
-      border-radius: 999px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .dates-header-block h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 3.8vw, 3rem);
-      font-weight: 700;
-      color: #0f172a;
-      letter-spacing: -0.5px;
-    }
-    .dates-header-block p {
-      font-size: 0.94rem;
-      color: #64748b;
-      margin-top: 4px;
+      font-weight: 600;
     }
 
-    /* Filter buttons (Wild Haven clean minimalist style) */
-    .dates-filter-pills {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 1.6rem 0 2.2rem;
-    }
-    .filter-pill {
-      border: 1px solid #cbd5e1;
+    /* Right Card: Realistic Spiral Desk Calendar */
+    .spiral-calendar-wrapper {
+      position: relative;
       background: #ffffff;
-      color: #475569;
-      padding: 7px 16px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    .filter-pill:hover, .filter-pill.active {
-      background: #0f172a;
-      color: #ffffff;
-      border-color: #0f172a;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
-    }
-
-    /* Wild Haven Card Grid */
-    .dates-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-      gap: 1.8rem;
-    }
-
-    /* Wild Haven Card Style: Clean White, Pop on Hover/Click, Tag Pills */
-    .wild-haven-card {
-      background: #ffffff;
-      border-radius: 20px;
+      border-radius: 24px;
       border: 1px solid #e2e8f0;
-      padding: 1.8rem 1.6rem 1.5rem;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
-      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+      padding: 42px 2rem 2rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      cursor: pointer;
-      position: relative;
-    }
-    .wild-haven-card:hover, .wild-haven-card.popped-card {
-      transform: translateY(-8px) scale(1.02);
-      border-color: #f97316;
-      box-shadow: 0 20px 40px rgba(249, 115, 22, 0.14), 0 2px 8px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+      perspective: 800px;
     }
 
-    .wh-top-row {
+    /* Metallic Spiral Rings Across Top */
+    .spiral-rings-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 36px;
+      background: #f1f5f9;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 20px;
+    }
+    .spiral-ring {
+      width: 10px;
+      height: 22px;
+      background: linear-gradient(90deg, #94a3b8, #ffffff, #64748b);
+      border-radius: 999px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Calendar Flip Top Navigation */
+    .spiral-nav-bar {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 12px;
+      align-items: center;
+      margin-bottom: 1.2rem;
     }
-    .wh-month-name {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: #ea580c;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-    }
-    .wh-year-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 800;
-      background: #f1f5f9;
-      color: #475569;
-      padding: 2px 8px;
-      border-radius: 6px;
-    }
-
-    .wh-date-large {
+    .spiral-month-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.7rem;
+      font-size: 1.85rem;
       font-weight: 800;
       color: #0f172a;
       letter-spacing: -0.5px;
-      line-height: 1.2;
-      margin-bottom: 14px;
+    }
+    .spiral-year-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #ea580c;
+      background: #fff7ed;
+      border: 1px solid #ffedd5;
+      padding: 4px 10px;
+      border-radius: 8px;
     }
 
-    .wh-pills-wrap {
+    .flip-btn-group {
+      display: flex;
+      gap: 6px;
+    }
+    .cal-nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      color: #0f172a;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .cal-nav-btn:hover {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+    }
+
+    /* Calendar Sheet with Page Turn Animation */
+    .calendar-sheet {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 1.4rem;
+      border: 1px dashed #cbd5e1;
+      transform-origin: top center;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
+    }
+    .calendar-sheet.turning {
+      transform: rotateX(85deg);
+      opacity: 0;
+    }
+
+    .dates-lead-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #64748b;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dates-lead-label::before {
+      content: '📅';
+      font-size: 0.85rem;
+    }
+
+    /* Minimalist Single-Card Dates Display (e.g. November — 21, 24, 25, 26) */
+    .calendar-summary-line {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 1.2rem;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border-radius: 10px;
+      border-left: 3px solid #ea580c;
+    }
+    .summary-month-name {
+      color: #ea580c;
+      font-weight: 800;
+    }
+    .summary-dash {
+      color: #94a3b8;
+      margin: 0 4px;
+    }
+
+    /* Interactive Date Pills Grid */
+    .dates-chips-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 10px;
       margin-bottom: 1.4rem;
     }
-    .wh-tag {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 4px 9px;
-      border-radius: 6px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .wild-haven-card:hover .wh-tag {
-      border-color: #fdba74;
-      background: #fff7ed;
-      color: #ea580c;
-    }
-
-    .wh-bottom-row {
-      display: flex;
+    .date-chip {
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      padding-top: 12px;
-      border-top: 1px solid #f1f5f9;
+      gap: 6px;
+      padding: 8px 14px;
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #0f172a;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
     }
-    .wh-status {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: #16a34a;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    .date-chip:hover {
+      background: #0f172a;
+      color: #ffffff;
+      border-color: #0f172a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.15);
     }
-    .wh-status-dot {
+    .date-chip .chip-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
       background: #16a34a;
-      box-shadow: 0 0 6px #16a34a;
     }
-    .wh-cta-link {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+
+    .spiral-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
       font-size: 0.82rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .spiral-quick-book {
       font-weight: 800;
-      color: #0284c7;
+      color: #ea580c;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 4px;
       transition: gap 0.2s ease;
     }
-    .wild-haven-card:hover .wh-cta-link {
+    .spiral-quick-book:hover {
       gap: 8px;
-      color: #ea580c;
     }
 
     /* Studio Grid Cards */
@@ -1624,25 +1645,33 @@
         margin-bottom: 1rem;
       }
 
-      /* Light Studio Mobile Grid */
+      /* Light Studio Mobile Layout */
       .light-studio-section {
         padding: 3.5rem 5% 4rem;
       }
-      .flip-card-box {
-        width: 48px;
-        height: 54px;
-      }
-      .flip-number {
-        font-size: 1.6rem;
-      }
-      .flip-clock-board {
-        padding: 10px 16px;
-        gap: 8px;
-      }
-      .dates-grid {
+      .studio-desk-stage {
         grid-template-columns: 1fr;
-        gap: 1.2rem;
+        gap: 1.8rem;
+        margin: 1.8rem auto 3.5rem;
       }
+      .desk-flip-tile {
+        width: 48px;
+        height: 56px;
+      }
+      .tile-num {
+        font-size: 1.7rem;
+      }
+      .spiral-month-title {
+        font-size: 1.5rem;
+      }
+      .calendar-summary-line {
+        font-size: 1.05rem;
+      }
+      .date-chip {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+      }
+
       .studio-grid {
         grid-template-columns: 1fr;
         gap: 1.4rem;
@@ -2079,344 +2108,93 @@
         <p class="studio-sub-caption">Creative assets, live availability, and professional studio post-production workflows.</p>
       </div>
 
-      <!-- 1. RETRO BOLD FLIP CLOCK (INDIA STANDARD TIME 24H: 13:00:00) -->
-      <div class="clock-area-wrapper">
-        <div class="clock-meta-badge">
-          <span class="clock-pulse-dot"></span> Indian Standard Time (IST) • Live
+      <!-- =========================================================
+           TWO-COLUMN DESK: LEFT FLIP CLOCK & RIGHT SPIRAL CALENDAR
+           ========================================================= -->
+      <div class="studio-desk-stage">
+        
+        <!-- LEFT: DESK FLIP CLOCK & TODAY'S DATE -->
+        <div class="desk-clock-card">
+          <div>
+            <div class="desk-clock-header">
+              <div class="live-clock-badge">
+                <span class="live-clock-dot"></span> Live Studio Clock
+              </div>
+            </div>
+
+            <!-- Today's Live Date -->
+            <div class="today-date-banner">
+              <div class="today-day-name" id="today-day-name">Monday</div>
+              <div class="today-full-str" id="today-full-str">September 21, 2026</div>
+            </div>
+
+            <!-- 24H Flip Digits -->
+            <div class="desk-flip-display">
+              <div class="desk-flip-tile"><span class="tile-num" id="desk-hour">13</span></div>
+              <span class="tile-colon">:</span>
+              <div class="desk-flip-tile"><span class="tile-num" id="desk-min">00</span></div>
+              <span class="tile-colon">:</span>
+              <div class="desk-flip-tile"><span class="tile-num" id="desk-sec">00</span></div>
+            </div>
+          </div>
+
+          <div class="desk-clock-foot">
+            Realtime Local Time • Synchronized Live
+          </div>
         </div>
-        <div class="flip-clock-board">
-          <!-- Hours -->
-          <div class="flip-unit">
-            <div class="flip-card-box" id="flip-hour-box">
-              <span class="flip-number" id="clock-hour">13</span>
-            </div>
-            <span class="flip-label">Hours</span>
+
+        <!-- RIGHT: REALISTIC SPIRAL DESK WEDDING CALENDAR (MONTH-BY-MONTH) -->
+        <div class="spiral-calendar-wrapper">
+          <!-- Metallic Spiral Rings Track -->
+          <div class="spiral-rings-track">
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
+            <span class="spiral-ring"></span>
           </div>
 
-          <span class="flip-divider">:</span>
-
-          <!-- Minutes -->
-          <div class="flip-unit">
-            <div class="flip-card-box" id="flip-min-box">
-              <span class="flip-number" id="clock-min">00</span>
+          <!-- Top Flip Nav -->
+          <div class="spiral-nav-bar">
+            <div>
+              <div class="spiral-month-title" id="cal-month-title">November</div>
+              <span class="spiral-year-pill" id="cal-year-pill">2026 Season</span>
             </div>
-            <span class="flip-label">Minutes</span>
+            <div class="flip-btn-group">
+              <button class="cal-nav-btn" id="cal-prev-btn" title="Previous Month">&larr;</button>
+              <button class="cal-nav-btn" id="cal-next-btn" title="Next Month">&rarr;</button>
+            </div>
           </div>
 
-          <span class="flip-divider">:</span>
+          <!-- Flip Paper Sheet with Page-Turn Animation -->
+          <div class="calendar-sheet" id="cal-paper-sheet">
+            <div class="dates-lead-label">Auspicious Wedding Dates</div>
 
-          <!-- Seconds -->
-          <div class="flip-unit">
-            <div class="flip-card-box" id="flip-sec-box">
-              <span class="flip-number" id="clock-sec">00</span>
+            <!-- Single Minimalist Summary Line -->
+            <div class="calendar-summary-line" id="cal-summary-line">
+              <span class="summary-month-name" id="summary-month-name">November</span>
+              <span class="summary-dash">—</span>
+              <span id="summary-dates-list">21, 24, 25, 26</span>
             </div>
-            <span class="flip-label">Seconds</span>
+
+            <!-- Interactive Date Chips -->
+            <div class="dates-chips-grid" id="cal-chips-container">
+              <!-- Dynamically rendered -->
+            </div>
+          </div>
+
+          <div class="spiral-card-footer">
+            <span>Tap any date to book instant WhatsApp priority</span>
+            <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20about%20your%20wedding%20dates" target="_blank" class="spiral-quick-book">Custom Date &rarr;</a>
           </div>
         </div>
+
       </div>
 
-      <!-- 2. WILD HAVEN STYLE WEDDING CALENDAR DATES (2026 - 2027) -->
-      <div class="wedding-dates-section">
-        <div class="dates-header-block">
-          <span class="dates-badge">Sacred Wedding Dates // Save The Dates</span>
-          <h3>Auspicious Bengali Wedding Calendar</h3>
-          <p>Book your cinematic wedding shoot & album coverage before dates lock out</p>
-
-          <!-- Wild Haven Filter Tabs -->
-          <div class="dates-filter-pills">
-            <button class="filter-pill active" onclick="filterWeddingDates('all')">All Dates</button>
-            <button class="filter-pill" onclick="filterWeddingDates('baisakh')">Baisakh 2026</button>
-            <button class="filter-pill" onclick="filterWeddingDates('ashadh')">Ashadh & Shravan 2026</button>
-            <button class="filter-pill" onclick="filterWeddingDates('agrahayan')">Agrahayan 2026</button>
-            <button class="filter-pill" onclick="filterWeddingDates('y2027')">2027 Auspicious Dates</button>
-          </div>
-        </div>
-
-        <!-- Wild Haven Style Cards Grid with Click-To-Pop Elevation -->
-        <div class="dates-grid" id="wedding-dates-container">
-
-          <!-- 2026 BAISAKH & JYESHTHA -->
-          <div class="wild-haven-card" data-category="baisakh">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Baisakh • বৈশাখ</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">21 April 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">৭ বৈশাখ</span>
-              <span class="wh-tag">Auspicious</span>
-              <span class="wh-tag">Limited Slot</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Booking Open</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2021%20April%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="baisakh">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Baisakh • বৈশাখ</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">3 May 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">১৯ বৈশাখ</span>
-              <span class="wh-tag">Sunday Muhurat</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Booking Open</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%203%20May%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="baisakh">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Baisakh • বৈশাখ</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">7 May 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">২৩ বৈশাখ</span>
-              <span class="wh-tag">Sacred Day</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Booking Open</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%207%20May%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="baisakh">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Baisakh • বৈশাখ</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">13 May 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">২৯ বৈশাখ</span>
-              <span class="wh-tag">Evening Muhurat</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Booking Open</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2013%20May%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <!-- ASHADH & SHRAVAN 2026 -->
-          <div class="wild-haven-card" data-category="ashadh">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Ashadh • আষাঢ়</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">6 July 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">২১ আষাঢ়</span>
-              <span class="wh-tag">Prime Date</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Booking Open</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%206%20July%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="ashadh">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Ashadh • আষাঢ়</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">12 July 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">২৭ আষাঢ়</span>
-              <span class="wh-tag">Sunday Ritual</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Booking Open</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2012%20July%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="ashadh">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Shravan • শ্রাবণ</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">20 July 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">৩ শ্রাবণ</span>
-              <span class="wh-tag">Auspicious Lagna</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Booking Open</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2020%20July%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="ashadh">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Shravan • শ্রাবণ</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">24 July 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">৭ শ্রাবণ</span>
-              <span class="wh-tag">Evening Muhurat</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Booking Open</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2024%20July%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="ashadh">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Shravan • শ্রাবণ</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">7 August 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">২৭ শ্রাবণ</span>
-              <span class="wh-tag">Shravan Special</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Booking Open</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%207%20August%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <!-- AGRAHAYAN 2026 (WINTER WEDDINGS) -->
-          <div class="wild-haven-card" data-category="agrahayan">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Agrahayan • অগ্রহায়ণ</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">21 November 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">৪ অগ্রহায়ণ</span>
-              <span class="wh-tag">Winter Peak</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Fast Filling</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2021%20November%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="agrahayan">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Agrahayan • অগ্রহায়ণ</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">26 November 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">৯ অগ্রহায়ণ</span>
-              <span class="wh-tag">Grand Muhurat</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Fast Filling</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2026%20November%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="agrahayan">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Agrahayan • অগ্রহায়ণ</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">11 December 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">২৪ অগ্রহায়ণ</span>
-              <span class="wh-tag">Peak Winter</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Fast Filling</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2011%20December%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="agrahayan">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Agrahayan • অগ্রহায়ণ</span>
-              <span class="wh-year-badge">2026</span>
-            </div>
-            <div class="wh-date-large">13 December 2026</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">২৬ অগ্রহায়ণ</span>
-              <span class="wh-tag">Sunday Special</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Fast Filling</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2013%20December%202026" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <!-- 2027 MAGH & FALGUN -->
-          <div class="wild-haven-card" data-category="y2027">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Magh • মাঘ</span>
-              <span class="wh-year-badge">2027</span>
-            </div>
-            <div class="wh-date-large">18 January 2027</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">৩ মাঘ</span>
-              <span class="wh-tag">New Year Muhurat</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Advance Booking</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2018%20January%202027" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="y2027">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Magh • মাঘ</span>
-              <span class="wh-year-badge">2027</span>
-            </div>
-            <div class="wh-date-large">11 February 2027</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">২৭ মাঘ</span>
-              <span class="wh-tag">Saraswati Puja</span>
-              <span class="wh-tag">Sacred</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Advance Booking</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2011%20February%202027%20(Saraswati%20Puja)" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="y2027">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Falgun • ফাল্গুন</span>
-              <span class="wh-year-badge">2027</span>
-            </div>
-            <div class="wh-date-large">22 February 2027</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">৯ ফাল্গুন</span>
-              <span class="wh-tag">Spring Wedding</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Advance Booking</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2022%20February%202027" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-          <div class="wild-haven-card" data-category="y2027">
-            <div class="wh-top-row">
-              <span class="wh-month-name">Falgun • ফাল্গুন</span>
-              <span class="wh-year-badge">2027</span>
-            </div>
-            <div class="wh-date-large">14 March 2027</div>
-            <div class="wh-pills-wrap">
-              <span class="wh-tag">২৯ ফাল্গুন</span>
-              <span class="wh-tag">Sunday Special</span>
-            </div>
-            <div class="wh-bottom-row">
-              <span class="wh-status"><span class="wh-status-dot"></span> Advance Booking</span>
-              <a href="https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20inquire%20for%20wedding%20date%3A%2014%20March%202027" target="_blank" class="wh-cta-link">Book Date &rarr;</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Studio Grid Cards (Unchanged, Clean White Studio Style) -->
+      <!-- Studio Grid Cards (Clean Studio Style) -->
       <div class="studio-grid">
         <!-- Studio Card 1 -->
         <div class="studio-card">
@@ -2770,74 +2548,136 @@
     });
 
     // =========================================================
-    // 9. LIVE INDIAN STANDARD TIME (IST) FLIP CLOCK
+    // 9. LIVE LOCAL CLOCK & TODAY'S FULL DATE
     // =========================================================
-    let prevHour = '', prevMin = '', prevSec = '';
-    const hourBox = document.getElementById('flip-hour-box');
-    const minBox = document.getElementById('flip-min-box');
-    const secBox = document.getElementById('flip-sec-box');
-    const clockHour = document.getElementById('clock-hour');
-    const clockMin = document.getElementById('clock-min');
-    const clockSec = document.getElementById('clock-sec');
+    const deskHour = document.getElementById('desk-hour');
+    const deskMin = document.getElementById('desk-min');
+    const deskSec = document.getElementById('desk-sec');
+    const todayDayName = document.getElementById('today-day-name');
+    const todayFullStr = document.getElementById('today-full-str');
 
-    function updateISTFlipClock() {
-      // Create date strictly formatted to Asia/Kolkata timezone
-      const istDate = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
-      const h = istDate.getHours().toString().padStart(2, '0');
-      const m = istDate.getMinutes().toString().padStart(2, '0');
-      const s = istDate.getSeconds().toString().padStart(2, '0');
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-      if (h !== prevHour) {
-        hourBox.classList.remove('flipping');
-        void hourBox.offsetWidth; // retrigger reflow
-        hourBox.classList.add('flipping');
-        clockHour.textContent = h;
-        prevHour = h;
-      }
-      if (m !== prevMin) {
-        minBox.classList.remove('flipping');
-        void minBox.offsetWidth;
-        minBox.classList.add('flipping');
-        clockMin.textContent = m;
-        prevMin = m;
-      }
-      if (s !== prevSec) {
-        secBox.classList.remove('flipping');
-        void secBox.offsetWidth;
-        secBox.classList.add('flipping');
-        clockSec.textContent = s;
-        prevSec = s;
-      }
+    function updateDeskClock() {
+      const now = new Date();
+      deskHour.textContent = now.getHours().toString().padStart(2, '0');
+      deskMin.textContent = now.getMinutes().toString().padStart(2, '0');
+      deskSec.textContent = now.getSeconds().toString().padStart(2, '0');
+
+      todayDayName.textContent = dayNames[now.getDay()];
+      todayFullStr.textContent = `${monthNames[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
     }
-    setInterval(updateISTFlipClock, 1000);
-    updateISTFlipClock();
+    setInterval(updateDeskClock, 1000);
+    updateDeskClock();
 
     // =========================================================
-    // 10. WILD HAVEN CALENDAR FILTERING & CLICK-TO-POP
+    // 10. SPIRAL CALENDAR MONTH-BY-MONTH DATA & FLIP LOGIC
     // =========================================================
-    function filterWeddingDates(cat) {
-      const cards = document.querySelectorAll('.wild-haven-card');
-      const buttons = document.querySelectorAll('.filter-pill');
+    const weddingSchedule = [
+      {
+        month: "April",
+        year: "2026",
+        dates: [21],
+        datesText: "21"
+      },
+      {
+        month: "May",
+        year: "2026",
+        dates: [3, 7, 13],
+        datesText: "3, 7, 13"
+      },
+      {
+        month: "July",
+        year: "2026",
+        dates: [6, 12, 20, 21, 23, 24, 29, 30],
+        datesText: "6, 12, 20, 21, 23, 24, 29, 30"
+      },
+      {
+        month: "August",
+        year: "2026",
+        dates: [2, 7],
+        datesText: "2, 7"
+      },
+      {
+        month: "November",
+        year: "2026",
+        dates: [21, 24, 25, 26],
+        datesText: "21, 24, 25, 26"
+      },
+      {
+        month: "December",
+        year: "2026",
+        dates: [5, 9, 11, 12, 13],
+        datesText: "5, 9, 11, 12, 13"
+      },
+      {
+        month: "January",
+        year: "2027",
+        dates: [18, 26, 28, 29],
+        datesText: "18, 26, 28, 29"
+      },
+      {
+        month: "February",
+        year: "2027",
+        dates: [11, 12, 16, 22, 24],
+        datesText: "11 (Saraswati Puja), 12, 16, 22, 24"
+      },
+      {
+        month: "March",
+        year: "2027",
+        dates: [1, 9, 14],
+        datesText: "1, 9, 14"
+      }
+    ];
 
-      buttons.forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+    // Start on November 2026 (index 4)
+    let currentMonthIndex = 4;
 
-      cards.forEach(card => {
-        if (cat === 'all' || card.getAttribute('data-category') === cat) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+    const calMonthTitle = document.getElementById('cal-month-title');
+    const calYearPill = document.getElementById('cal-year-pill');
+    const summaryMonthName = document.getElementById('summary-month-name');
+    const summaryDatesList = document.getElementById('summary-dates-list');
+    const calChipsContainer = document.getElementById('cal-chips-container');
+    const calPaperSheet = document.getElementById('cal-paper-sheet');
+
+    function renderSpiralCalendarPage(index) {
+      const data = weddingSchedule[index];
+
+      calPaperSheet.classList.add('turning');
+
+      setTimeout(() => {
+        calMonthTitle.textContent = data.month;
+        calYearPill.textContent = `${data.year} Wedding Season`;
+        summaryMonthName.textContent = data.month;
+        summaryDatesList.textContent = data.datesText;
+
+        // Render interactive chips
+        calChipsContainer.innerHTML = '';
+        data.dates.forEach(d => {
+          const chip = document.createElement('a');
+          chip.className = 'date-chip';
+          chip.href = `https://wa.me/917908872349?text=Hello%20Indranil%2C%20I%20want%20to%20book%20my%20wedding%20on%3A%20${d}%20${data.month}%20${data.year}`;
+          chip.target = '_blank';
+          chip.innerHTML = `<span class="chip-dot"></span> ${d} ${data.month}`;
+          calChipsContainer.appendChild(chip);
+        });
+
+        calPaperSheet.classList.remove('turning');
+      }, 180);
     }
 
-    // Click to pop elevation on card
-    document.querySelectorAll('.wild-haven-card').forEach(card => {
-      card.addEventListener('click', () => {
-        document.querySelectorAll('.wild-haven-card').forEach(c => c.classList.remove('popped-card'));
-        card.classList.add('popped-card');
-      });
+    document.getElementById('cal-prev-btn').addEventListener('click', () => {
+      currentMonthIndex = (currentMonthIndex - 1 + weddingSchedule.length) % weddingSchedule.length;
+      renderSpiralCalendarPage(currentMonthIndex);
     });
+
+    document.getElementById('cal-next-btn').addEventListener('click', () => {
+      currentMonthIndex = (currentMonthIndex + 1) % weddingSchedule.length;
+      renderSpiralCalendarPage(currentMonthIndex);
+    });
+
+    renderSpiralCalendarPage(currentMonthIndex);
 
     // =========================================================
     // 11. IN-PAGE SHOWCASE MODAL LOGIC
