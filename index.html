@@ -7,7 +7,7 @@
   <meta name="description" content="Official website of Indranil — Photographer, Graphics Designer, and Content Creator.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;600;800;900&family=Space+Grotesk:wght@500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #07090e;
@@ -15,7 +15,6 @@
       --card-border: rgba(255, 255, 255, 0.08);
       --neon-blue: #00d2ff;
       --neon-gold: #ffc400;
-      --neon-purple: #a855f7;
       --rec-red: #ff2a2a;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
@@ -41,7 +40,7 @@
       width: 650px;
       height: 650px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 210, 255, 0.18) 0%, rgba(255, 196, 0, 0.1) 30%, rgba(168, 85, 247, 0.08) 55%, transparent 70%);
+      background: radial-gradient(circle, rgba(0, 210, 255, 0.18) 0%, rgba(255, 196, 0, 0.1) 30%, transparent 70%);
       pointer-events: none;
       transform: translate(-50%, -50%);
       z-index: 0;
@@ -389,9 +388,9 @@
       right: 10px;
       width: 24px;
       height: 24px;
-      border-bottom: 2px solid var(--neon-purple);
-      border-right: 2px solid var(--neon-purple);
-      filter: drop-shadow(0 0 8px var(--neon-purple));
+      border-bottom: 2px solid var(--neon-blue);
+      border-right: 2px solid var(--neon-blue);
+      filter: drop-shadow(0 0 8px var(--neon-blue));
     }
 
     /* Oval Apple Glass Pill Bar Over Photo */
@@ -725,7 +724,7 @@
     .ventures {
       position: relative;
       z-index: 1;
-      padding: 3rem 8% 4.5rem;
+      padding: 3rem 8% 4rem;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -821,109 +820,140 @@
     }
 
     /* =========================================================
-       NEW: SCISSORS CUT ANIMATION & PHOTOGRAPHERS AREA
+       SCISSORS CUT & TORN SEPARATION ANIMATION
        ========================================================= */
-    .cut-transition-container {
+    .cut-transition-wrapper {
       position: relative;
       width: 100%;
-      height: 70px;
+      height: 90px;
       overflow: visible;
       display: flex;
       align-items: center;
-      margin: 1.5rem 0 0;
+      z-index: 20;
     }
 
-    /* Animated dashed cut line appearing from right to left */
     .cut-dashed-line {
       position: absolute;
       top: 50%;
       right: 0;
       width: 0%;
       height: 2px;
-      border-top: 2.5px dashed #ffffff;
-      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
+      border-top: 2px dashed rgba(255, 255, 255, 0.85);
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.95));
       transform: translateY(-50%);
-      transition: width 1.6s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: width 3.2s cubic-bezier(0.2, 0.85, 0.35, 1);
     }
 
-    /* White Scissors Moving from Right to Left with Snapping Action */
-    .scissors-icon {
+    /* Premium Custom SVG Scissors Cutting Right to Left & Disappearing */
+    .scissors-svg-wrapper {
       position: absolute;
       top: 50%;
-      right: -40px;
+      right: -60px;
+      width: 46px;
+      height: 46px;
       transform: translateY(-50%) scaleX(-1);
-      font-size: 2.2rem;
       color: #ffffff;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(0, 210, 255, 0.8));
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 20px rgba(0, 210, 255, 0.7));
       pointer-events: none;
-      z-index: 10;
-      transition: right 1.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.2s ease;
+      z-index: 25;
+      opacity: 1;
+      transition: right 3.2s cubic-bezier(0.2, 0.85, 0.35, 1), opacity 0.5s ease 3.3s;
+    }
+    .scissors-svg-wrapper svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
     }
 
-    .cut-transition-container.cutting .cut-dashed-line {
+    .cut-transition-wrapper.cutting .cut-dashed-line {
       width: 100%;
     }
 
-    .cut-transition-container.cutting .scissors-icon {
-      right: calc(100% - 30px);
-      animation: scissorSnap 0.22s infinite ease-in-out alternate;
+    .cut-transition-wrapper.cutting .scissors-svg-wrapper {
+      right: calc(100% - 20px);
+      opacity: 0; /* Vanishes completely when finishing cut */
+      animation: scissorBladeSnip 0.32s infinite ease-in-out alternate;
     }
 
-    @keyframes scissorSnap {
+    @keyframes scissorBladeSnip {
       0% { transform: translateY(-50%) scaleX(-1) rotate(-8deg); }
-      100% { transform: translateY(-50%) scaleX(-1) rotate(14deg); }
+      100% { transform: translateY(-50%) scaleX(-1) rotate(12deg); }
     }
 
-    /* Photographers Area: Distinct Rich Navy / Cosmic Obsidian Atmosphere */
-    .photographers-arena {
+    /* =========================================================
+       EXCLUSIVE LIGHT STUDIO THEME (TORN CANVASS BELOW CUT)
+       ========================================================= */
+    .light-studio-section {
       position: relative;
-      z-index: 1;
-      padding: 4.5rem 8% 6rem;
-      background: radial-gradient(ellipse at 50% 20%, rgba(13, 27, 42, 0.85) 0%, rgba(5, 8, 14, 0.98) 75%);
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: inset 0 20px 50px rgba(0, 0, 0, 0.6);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 10;
+      background: radial-gradient(ellipse at 50% -10%, #ffffff 0%, #f1f5f9 45%, #e2e8f0 100%);
+      color: #0f172a;
+      padding: 6rem 8% 7rem;
+      box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.8);
+      border-top: 1px solid rgba(255, 255, 255, 0.6);
+      transition: all 0.8s ease;
+      overflow: hidden;
     }
 
-    .photographers-arena.revealed {
-      opacity: 1;
-      transform: translateY(0);
+    /* Torn Paper Top Border Illusion */
+    .torn-edge {
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(135deg, transparent 33.333%, rgba(255, 255, 255, 0.8) 33.333%, rgba(255, 255, 255, 0.8) 66.666%, transparent 66.666%), 
+                  linear-gradient(45deg, transparent 33.333%, rgba(255, 255, 255, 0.8) 33.333%, rgba(255, 255, 255, 0.8) 66.666%, transparent 66.666%);
+      background-size: 16px 32px;
     }
 
-    .arena-header {
+    /* Scroll Zoom Container */
+    .studio-hero-title-wrap {
       text-align: center;
-      margin-bottom: 3.5rem;
+      max-width: 1100px;
+      margin: 0 auto 4.5rem;
+      transform-origin: center center;
+      will-change: transform, opacity;
+      transition: transform 0.1s linear;
     }
-    .arena-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+
+    /* Small cursive "For" */
+    .studio-script-for {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2rem, 4.2vw, 3.4rem);
       font-weight: 700;
-      color: #00d2ff;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      display: inline-block;
-      margin-bottom: 8px;
+      color: #0284c7;
+      display: block;
+      margin-bottom: -10px;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);
     }
-    .arena-header h2 {
+
+    /* "Photographers & Designers" with Dynamic Scroll Zoom */
+    .studio-main-heading {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-size: clamp(2.4rem, 6.2vw, 5.2rem);
       font-weight: 900;
-      color: #ffffff;
-      letter-spacing: -1px;
-      text-shadow: 0 0 30px rgba(255, 255, 255, 0.35);
+      color: #090d16;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
-    .arena-header p {
-      color: #94a3b8;
-      font-size: 1.05rem;
-      margin-top: 0.6rem;
-      max-width: 640px;
+
+    .studio-sub-caption {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #475569;
+      margin-top: 1.2rem;
+      max-width: 600px;
       margin-left: auto;
       margin-right: auto;
     }
 
-    .arena-grid {
+    /* Light Theme Cards Grid */
+    .studio-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
@@ -931,80 +961,67 @@
       margin: 0 auto;
     }
 
-    .arena-card {
-      background: rgba(15, 23, 42, 0.55);
-      border: 1px solid rgba(0, 210, 255, 0.25);
-      border-radius: 20px;
-      padding: 2.2rem 1.8rem;
-      backdrop-filter: blur(16px);
-      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-      position: relative;
-      overflow: hidden;
+    .studio-card {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(15, 23, 42, 0.09);
+      border-radius: 22px;
+      padding: 2.5rem 2rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
     }
-    .arena-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, #00d2ff, #a855f7);
-      opacity: 0.6;
-      transition: opacity 0.3s ease;
+    .studio-card:hover {
+      transform: translateY(-8px);
+      background: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 20px 45px rgba(2, 132, 199, 0.16), 0 2px 8px rgba(0, 0, 0, 0.06);
     }
-    .arena-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255, 196, 0, 0.7);
-      box-shadow: 0 15px 40px rgba(0, 210, 255, 0.15), 0 0 25px rgba(255, 196, 0, 0.1);
-    }
-    .arena-card:hover::before {
-      opacity: 1;
-      background: linear-gradient(90deg, #ffc400, #00d2ff);
-    }
-
-    .arena-icon {
-      font-size: 2.4rem;
+    .studio-card-icon {
+      font-size: 2.5rem;
       margin-bottom: 1.2rem;
     }
-    .arena-title {
-      font-size: 1.35rem;
+    .studio-card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
       font-weight: 800;
-      color: #fff;
+      color: #0f172a;
       margin-bottom: 0.6rem;
+      letter-spacing: -0.5px;
     }
-    .arena-desc {
-      color: #94a3b8;
-      font-size: 0.92rem;
+    .studio-card-desc {
+      color: #475569;
+      font-size: 0.94rem;
       line-height: 1.65;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.6rem;
     }
-    .arena-badge {
+    .studio-card-badge {
       align-self: flex-start;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       font-weight: 700;
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #e2e8f0;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: #0284c7;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
     }
 
-    /* Footer */
-    footer {
+    /* Light Studio Footer */
+    .studio-footer {
       position: relative;
-      z-index: 1;
-      padding: 3rem 8%;
+      z-index: 10;
+      padding: 3.5rem 8%;
       text-align: center;
-      border-top: 1px solid var(--card-border);
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      background: #05080e;
+      border-top: 1px solid rgba(15, 23, 42, 0.1);
+      color: #64748b;
+      font-size: 0.92rem;
+      background: #e2e8f0;
     }
 
     /* =========================================================
@@ -1274,7 +1291,7 @@
       }
 
       .ventures {
-        padding: 2rem 5% 2.5rem;
+        padding: 2rem 5% 2rem;
       }
       .section-header {
         margin-bottom: 1.8rem;
@@ -1300,12 +1317,17 @@
         margin-bottom: 1rem;
       }
 
-      .arena-grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
+      /* Light Studio Mobile Grid */
+      .light-studio-section {
+        padding: 4rem 6% 4.5rem;
       }
-      .photographers-arena {
-        padding: 3rem 5% 4rem;
+      .studio-grid {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+      }
+      .studio-card {
+        padding: 1.8rem 1.5rem;
+        border-radius: 18px;
       }
 
       .reel-card { height: 185px; }
@@ -1712,54 +1734,69 @@
       </div>
     </section>
 
-    <!-- SCISSORS CUT ANIMATION DIVIDER (Right to Left Cut) -->
-    <div class="cut-transition-container" id="cut-divider">
+    <!-- SCISSORS CUT ANIMATION DIVIDER (Right to Left Cut with Smooth Exit) -->
+    <div class="cut-transition-wrapper" id="cut-divider">
       <div class="cut-dashed-line"></div>
-      <div class="scissors-icon">✂</div>
+      
+      <!-- Authentic Sharp Vector Scissors (Hides automatically after cut) -->
+      <div class="scissors-svg-wrapper">
+        <svg viewBox="0 0 24 24">
+          <path d="M9.64 7.64c.23-.5.36-1.05.36-1.64 0-2.21-1.79-4-4-4S2 3.79 2 6s1.79 4 4 4c.59 0 1.14-.13 1.64-.36L10 12l-2.36 2.36C7.14 14.13 6.59 14 6 14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4c0-.59-.13-1.14-.36-1.64L12 14l7 7h3v-1L9.64 7.64zM6 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-7.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5zM19 3l-6 6 2 2 7-7V3h-3z"/>
+        </svg>
+      </div>
     </div>
 
-    <!-- NEW: PHOTOGRAPHERS ARENA / CREATOR'S SUITE (Distinct Theme) -->
-    <section class="photographers-arena" id="photographers-arena">
-      <div class="arena-header">
-        <span class="arena-tag">// Professional Creators Suite</span>
-        <h2>Photographers Arena</h2>
-        <p>A dedicated creative workspace featuring curated optical rigs, lighting setups, and color profiles designed for modern visual storytellers.</p>
+    <!-- EXCLUSIVE LIGHT STUDIO SECTION (CONTRASTING TORN LOWER CANVAS) -->
+    <section class="light-studio-section" id="light-studio">
+      <div class="torn-edge"></div>
+
+      <!-- Header with Small Cursive "For" and Futuristic Zoom Title -->
+      <div class="studio-hero-title-wrap" id="zoom-title-wrap">
+        <span class="studio-script-for">For</span>
+        <h2 class="studio-main-heading">Photographers & Designers</h2>
+        <p class="studio-sub-caption">Creative assets, studio masterclasses, and professional post-production workflows.</p>
       </div>
 
-      <div class="arena-grid">
-        <!-- Card 1 -->
-        <div class="arena-card">
+      <!-- Studio Grid Cards -->
+      <div class="studio-grid">
+        <!-- Studio Card 1 -->
+        <div class="studio-card">
           <div>
-            <div class="arena-icon">🔍</div>
-            <h3 class="arena-title">Camera & Optics Lab</h3>
-            <p class="arena-desc">Full-frame mirrorless camera rigs, prime cine lenses, and ND filtration systems fine-tuned for high dynamic range capture.</p>
+            <div class="studio-card-icon">🎞️</div>
+            <h3 class="studio-card-title">Bengali Wedding PSD Sets</h3>
+            <p class="studio-card-desc">High-resolution, multilayered typography spreads and ornate traditional Bengali templates ready for album printing.</p>
           </div>
-          <span class="arena-badge">Sony & Canon Cine</span>
+          <span class="studio-card-badge">PSD Templates</span>
         </div>
 
-        <!-- Card 2 -->
-        <div class="arena-card">
+        <!-- Studio Card 2 -->
+        <div class="studio-card">
           <div>
-            <div class="arena-icon">💡</div>
-            <h3 class="arena-title">Lighting & Studio Craft</h3>
-            <p class="arena-desc">Mastering directional modifiers, dual-rim godox strobes, and ambient cinematic wedding lighting configurations.</p>
+            <div class="studio-card-icon">🎨</div>
+            <h3 class="studio-card-title">Color Profiles & LUTs</h3>
+            <p class="studio-card-desc">Handcrafted DaVinci Resolve powergrades and Premiere Pro LUTs calibrated for cinematic warm skin tones.</p>
           </div>
-          <span class="arena-badge">Lighting Masterclass</span>
+          <span class="studio-card-badge">Color Science</span>
         </div>
 
-        <!-- Card 3 -->
-        <div class="arena-card">
+        <!-- Studio Card 3 -->
+        <div class="studio-card">
           <div>
-            <div class="arena-icon">🎨</div>
-            <h3 class="arena-title">Color Grading & LUTs</h3>
-            <p class="arena-desc">Custom 10-bit Log conversion LUTs and Bengali wedding color presets crafted for true-to-life skin tones.</p>
+            <div class="studio-card-icon">⚡</div>
+            <h3 class="studio-card-title">Lighting Masterclasses</h3>
+            <p class="studio-card-desc">Practical hands-on mentorship across West Bengal covering wireless strobe shaping and fast on-location setups.</p>
           </div>
-          <span class="arena-badge">Creative Color Suite</span>
+          <span class="studio-card-badge">Live Workshops</span>
         </div>
       </div>
     </section>
 
   </main>
+
+  <!-- Studio Light Footer -->
+  <footer class="studio-footer">
+    <p>© 2026 Click Nil • Indranil. Built with clean code on GitHub Pages.</p>
+  </footer>
 
   <!-- IN-PAGE SHOWCASE MODAL -->
   <div id="work-modal">
@@ -1775,6 +1812,7 @@
       <button class="neon-cross-btn" id="close-work-btn" title="Close">✕</button>
     </div>
 
+    <!-- Royal Typography Header -->
     <div class="pictorical-header">
       <div class="pictorical-title-wrap">
         <h2 class="pictorical-title">PICTORICAL</h2>
@@ -1798,11 +1836,6 @@
       <div class="modal-card"><img src="wedding-9.jpg" alt="Pictorical 9"></div>
     </div>
   </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2026 Click Nil • Indranil. Built with clean code on GitHub Pages.</p>
-  </footer>
 
   <script>
     // 1. Live Running REC Millisecond Timecode
@@ -2045,25 +2078,43 @@
     // 7. SCISSORS CUT ANIMATION ON SCROLL
     // =========================================================
     const cutDivider = document.getElementById('cut-divider');
-    const photographersArena = document.getElementById('photographers-arena');
-
     const cutObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           cutDivider.classList.add('cutting');
-          setTimeout(() => {
-            photographersArena.classList.add('revealed');
-          }, 1100);
         }
       });
-    }, { threshold: 0.25 });
+    }, { threshold: 0.3 });
 
     if (cutDivider) {
       cutObserver.observe(cutDivider);
     }
 
     // =========================================================
-    // 8. IN-PAGE SHOWCASE MODAL LOGIC
+    // 8. DYNAMIC SCROLL ZOOM: "PHOTOGRAPHERS & DESIGNERS"
+    // =========================================================
+    const zoomTitle = document.getElementById('zoom-title-wrap');
+    window.addEventListener('scroll', () => {
+      if (!zoomTitle) return;
+      const rect = zoomTitle.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Calculate scroll progress through viewport
+      if (rect.top < windowHeight && rect.bottom > 0) {
+        const centerDistance = Math.abs(rect.top + rect.height / 2 - windowHeight / 2);
+        const maxDist = windowHeight / 2;
+        const factor = Math.max(0, 1 - centerDistance / maxDist);
+        
+        // Zooms smoothly from 0.88x up to 1.15x as it reaches the screen center
+        const scale = 0.88 + factor * 0.28;
+        zoomTitle.style.transform = `scale(${scale})`;
+      } else {
+        zoomTitle.style.transform = 'scale(0.88)';
+      }
+    });
+
+    // =========================================================
+    // 9. IN-PAGE SHOWCASE MODAL LOGIC
     // =========================================================
     const workModal = document.getElementById('work-modal');
     const openWorkBtn = document.getElementById('open-work-btn');
@@ -2111,7 +2162,7 @@
       clearInterval(pulseTimer);
     });
 
-    // 9. Ambient Cursor Light Tracker
+    // 10. Ambient Cursor Light Tracker
     const glow = document.getElementById('cursor-glow');
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
@@ -2123,7 +2174,7 @@
       glow.style.top = mouseY + 'px';
     });
 
-    // 10. Background & Modal Particle Systems
+    // 11. Background & Modal Particle Systems
     const mainCanvas = document.getElementById('particle-canvas');
     const modalCanvas = document.getElementById('modal-particle-canvas');
 
